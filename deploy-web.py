@@ -38,6 +38,7 @@ FILES_TO_UPLOAD = [
     "index.html",
     "adviser-bundle.js",
     "adviser-config.js",
+    "persona-runtime.json",
 ]
 
 # Subdirectories whose contents are uploaded with their original relative paths.

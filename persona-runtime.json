@@ -1,0 +1,1118 @@
+{
+  "personas": {
+    "daniel": {
+      "id": "daniel",
+      "name": "Daniel Okafor",
+      "age": 38,
+      "sex": "M",
+      "postcode": "E20 1EJ",
+      "region": "south-east-london",
+      "archetype": "Long-term UC claimant returning to work",
+      "summary": "Forklift driver, 9 months out of work after warehouse closed. Confident, ready to move, mild money worry. The default ON-TRACK Restart success story.",
+      "barriers": [
+        "Transport cost",
+        "Confidence"
+      ],
+      "barriers_count": 2,
+      "preferred_language": "English",
+      "adviser": {
+        "name": "Priya Sharma",
+        "initials": "PS",
+        "title": "Senior Restart Adviser \u00b7 Stratford",
+        "voice_key": "priya"
+      },
+      "max_navigator": {
+        "signals": {
+          "sms_reply_pct": 92,
+          "push_open_pct": 88,
+          "plan_completion_3": 3,
+          "cv_progress_pct": 90,
+          "vacancies_saved": 9,
+          "sessions_attended_3": 3,
+          "open_barriers": 0
+        },
+        "score": 95,
+        "band": "ontrack",
+        "scenario_action_id": "ontrack"
+      },
+      "trained_classifier": {
+        "p_success_pct": 62.7,
+        "intercept": -2.890788011317707,
+        "model_kind": "logistic_calibrated_isotonic"
+      },
+      "trained_survival": {
+        "curve_by_week": {
+          "1": 100.0,
+          "2": 100.0,
+          "4": 100.0,
+          "8": 94.9,
+          "12": 87.8,
+          "16": 76.3,
+          "20": 68.8,
+          "24": 59.9
+        },
+        "linear_predictor": -0.926,
+        "p10_weeks": 12,
+        "p50_weeks": 24,
+        "p90_weeks": 24,
+        "model_kind": "cox_proportional_hazards",
+        "concordance_index": 0.7003625610251624
+      },
+      "trained_transitions": {
+        "scenario_band": "ontrack",
+        "matrix": {
+          "Start": {
+            "Start": 0.010989010989010988,
+            "Progressing": 0.010989010989010988,
+            "Paused": 0.010989010989010988,
+            "Stalled": 0.010989010989010988,
+            "Regressing": 0.010989010989010988,
+            "Success": 0.010989010989010988,
+            "Failure": 0.9340659340659341
+          },
+          "Progressing": {
+            "Start": 0.0003946329913180742,
+            "Progressing": 0.9147592738752961,
+            "Paused": 0.0003946329913180742,
+            "Stalled": 0.0003946329913180742,
+            "Regressing": 0.0003946329913180742,
+            "Success": 0.0003946329913180742,
+            "Failure": 0.08326756116811365
+          },
+          "Paused": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Stalled": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Regressing": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Success": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 1.0,
+            "Failure": 0.0
+          },
+          "Failure": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 0.0,
+            "Failure": 1.0
+          }
+        },
+        "model_kind": "markov_chain_mle_smoothed"
+      },
+      "shap_contributors": [
+        {
+          "label": "Vacancies engaged",
+          "value": -0.415,
+          "polarity": "negative"
+        },
+        {
+          "label": "Action plan completion",
+          "value": -0.306,
+          "polarity": "negative"
+        },
+        {
+          "label": "region_key_south-east-london",
+          "value": -0.181,
+          "polarity": "negative"
+        },
+        {
+          "label": "prior_sector_Warehouse / logistics",
+          "value": -0.081,
+          "polarity": "negative"
+        },
+        {
+          "label": "UC duration (months)",
+          "value": -0.031,
+          "polarity": "negative"
+        },
+        {
+          "label": "SMS reply rate",
+          "value": 2.199,
+          "polarity": "positive"
+        },
+        {
+          "label": "Push open rate",
+          "value": 1.557,
+          "polarity": "positive"
+        },
+        {
+          "label": "Adviser sessions attended",
+          "value": 0.471,
+          "polarity": "positive"
+        },
+        {
+          "label": "CV progress",
+          "value": 0.198,
+          "polarity": "positive"
+        },
+        {
+          "label": "UC duration (months)",
+          "value": -0.031,
+          "polarity": "positive"
+        }
+      ],
+      "audio": {
+        "scenario_dir": "daniel",
+        "voice_customer": "daniel",
+        "voice_adviser": "priya"
+      }
+    },
+    "amara": {
+      "id": "amara",
+      "name": "Amara Adekoya",
+      "age": 34,
+      "sex": "F",
+      "postcode": "SE15 4QD",
+      "region": "south-east-london",
+      "archetype": "Returner after long caring break",
+      "summary": "Trained admin worker, out 4 years caring for her elderly mother (now in residential care). Confidence dipped, CV gap explains itself but she needs help reframing it. Childcare cost for a 6-year-old is the live barrier.",
+      "barriers": [
+        "Childcare cost",
+        "Confidence",
+        "Digital skills"
+      ],
+      "barriers_count": 3,
+      "preferred_language": "English",
+      "adviser": {
+        "name": "Priya Sharma",
+        "initials": "PS",
+        "title": "Senior Restart Adviser \u00b7 Stratford",
+        "voice_key": "priya"
+      },
+      "max_navigator": {
+        "signals": {
+          "sms_reply_pct": 55,
+          "push_open_pct": 48,
+          "plan_completion_3": 1,
+          "cv_progress_pct": 60,
+          "vacancies_saved": 2,
+          "sessions_attended_3": 2,
+          "open_barriers": 2
+        },
+        "score": 51,
+        "band": "drifting",
+        "scenario_action_id": "drifting"
+      },
+      "trained_classifier": {
+        "p_success_pct": 8.5,
+        "intercept": -2.890788011317707,
+        "model_kind": "logistic_calibrated_isotonic"
+      },
+      "trained_survival": {
+        "curve_by_week": {
+          "1": 100.0,
+          "2": 100.0,
+          "4": 100.0,
+          "8": 96.2,
+          "12": 90.8,
+          "16": 81.9,
+          "20": 75.9,
+          "24": 68.5
+        },
+        "linear_predictor": -1.231,
+        "p10_weeks": 16,
+        "p50_weeks": 24,
+        "p90_weeks": 24,
+        "model_kind": "cox_proportional_hazards",
+        "concordance_index": 0.7003625610251624
+      },
+      "trained_transitions": {
+        "scenario_band": "drifting",
+        "matrix": {
+          "Start": {
+            "Start": 0.0004302925989672977,
+            "Progressing": 0.0004302925989672977,
+            "Paused": 0.0004302925989672977,
+            "Stalled": 0.20223752151462993,
+            "Regressing": 0.0004302925989672977,
+            "Success": 0.0004302925989672977,
+            "Failure": 0.7956110154905336
+          },
+          "Progressing": {
+            "Start": 9.318796011555306e-05,
+            "Progressing": 0.45932345540956104,
+            "Paused": 0.12338085919299226,
+            "Stalled": 0.08098033734041561,
+            "Regressing": 0.12338085919299226,
+            "Success": 9.318796011555306e-05,
+            "Failure": 0.2127481129438077
+          },
+          "Paused": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Stalled": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Regressing": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Success": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 1.0,
+            "Failure": 0.0
+          },
+          "Failure": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 0.0,
+            "Failure": 1.0
+          }
+        },
+        "model_kind": "markov_chain_mle_smoothed"
+      },
+      "shap_contributors": [
+        {
+          "label": "Open barriers",
+          "value": -1.734,
+          "polarity": "negative"
+        },
+        {
+          "label": "region_key_south-east-london",
+          "value": -0.181,
+          "polarity": "negative"
+        },
+        {
+          "label": "Action plan completion",
+          "value": -0.102,
+          "polarity": "negative"
+        },
+        {
+          "label": "Vacancies engaged",
+          "value": -0.092,
+          "polarity": "negative"
+        },
+        {
+          "label": "UC duration (months)",
+          "value": -0.021,
+          "polarity": "negative"
+        },
+        {
+          "label": "SMS reply rate",
+          "value": 1.314,
+          "polarity": "positive"
+        },
+        {
+          "label": "Push open rate",
+          "value": 0.849,
+          "polarity": "positive"
+        },
+        {
+          "label": "Adviser sessions attended",
+          "value": 0.314,
+          "polarity": "positive"
+        },
+        {
+          "label": "CV progress",
+          "value": 0.132,
+          "polarity": "positive"
+        },
+        {
+          "label": "prior_sector_Admin / office",
+          "value": 0.039,
+          "polarity": "positive"
+        }
+      ],
+      "audio": {
+        "scenario_dir": "amara",
+        "voice_customer": "amara",
+        "voice_adviser": "priya"
+      }
+    },
+    "wojciech": {
+      "id": "wojciech",
+      "name": "Wojciech Nowak",
+      "age": 52,
+      "sex": "M",
+      "postcode": "NW10 5BT",
+      "region": "north-london",
+      "archetype": "Older worker \u00b7 ESOL \u00b7 construction redundancy",
+      "summary": "Polish-speaking site supervisor, 28 years on UK construction sites, made redundant when the firm folded. Reads English well, prefers to speak Polish for nuance. Wants supervisor-level work, not entry. Wife works part-time.",
+      "barriers": [
+        "English language",
+        "Digital skills"
+      ],
+      "barriers_count": 2,
+      "preferred_language": "Polish",
+      "adviser": {
+        "name": "Priya Sharma",
+        "initials": "PS",
+        "title": "Senior Restart Adviser \u00b7 Stratford",
+        "voice_key": "priya"
+      },
+      "max_navigator": {
+        "signals": {
+          "sms_reply_pct": 84,
+          "push_open_pct": 78,
+          "plan_completion_3": 3,
+          "cv_progress_pct": 88,
+          "vacancies_saved": 7,
+          "sessions_attended_3": 3,
+          "open_barriers": 1
+        },
+        "score": 89,
+        "band": "ontrack",
+        "scenario_action_id": "ontrack"
+      },
+      "trained_classifier": {
+        "p_success_pct": 28.8,
+        "intercept": -2.890788011317707,
+        "model_kind": "logistic_calibrated_isotonic"
+      },
+      "trained_survival": {
+        "curve_by_week": {
+          "1": 100.0,
+          "2": 100.0,
+          "4": 100.0,
+          "8": 96.3,
+          "12": 91.0,
+          "16": 82.2,
+          "20": 76.3,
+          "24": 69.0
+        },
+        "linear_predictor": -1.249,
+        "p10_weeks": 16,
+        "p50_weeks": 24,
+        "p90_weeks": 24,
+        "model_kind": "cox_proportional_hazards",
+        "concordance_index": 0.7003625610251624
+      },
+      "trained_transitions": {
+        "scenario_band": "ontrack",
+        "matrix": {
+          "Start": {
+            "Start": 0.010989010989010988,
+            "Progressing": 0.010989010989010988,
+            "Paused": 0.010989010989010988,
+            "Stalled": 0.010989010989010988,
+            "Regressing": 0.010989010989010988,
+            "Success": 0.010989010989010988,
+            "Failure": 0.9340659340659341
+          },
+          "Progressing": {
+            "Start": 0.0003946329913180742,
+            "Progressing": 0.9147592738752961,
+            "Paused": 0.0003946329913180742,
+            "Stalled": 0.0003946329913180742,
+            "Regressing": 0.0003946329913180742,
+            "Success": 0.0003946329913180742,
+            "Failure": 0.08326756116811365
+          },
+          "Paused": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Stalled": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Regressing": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Success": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 1.0,
+            "Failure": 0.0
+          },
+          "Failure": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 0.0,
+            "Failure": 1.0
+          }
+        },
+        "model_kind": "markov_chain_mle_smoothed"
+      },
+      "shap_contributors": [
+        {
+          "label": "Open barriers",
+          "value": -0.867,
+          "polarity": "negative"
+        },
+        {
+          "label": "Vacancies engaged",
+          "value": -0.323,
+          "polarity": "negative"
+        },
+        {
+          "label": "Action plan completion",
+          "value": -0.306,
+          "polarity": "negative"
+        },
+        {
+          "label": "prior_sector_Construction",
+          "value": -0.264,
+          "polarity": "negative"
+        },
+        {
+          "label": "Low digital skills",
+          "value": -0.188,
+          "polarity": "negative"
+        },
+        {
+          "label": "SMS reply rate",
+          "value": 2.007,
+          "polarity": "positive"
+        },
+        {
+          "label": "Push open rate",
+          "value": 1.38,
+          "polarity": "positive"
+        },
+        {
+          "label": "Adviser sessions attended",
+          "value": 0.471,
+          "polarity": "positive"
+        },
+        {
+          "label": "CV progress",
+          "value": 0.194,
+          "polarity": "positive"
+        },
+        {
+          "label": "UC duration (months)",
+          "value": -0.024,
+          "polarity": "positive"
+        }
+      ],
+      "audio": {
+        "scenario_dir": "wojciech",
+        "voice_customer": "wojciech",
+        "voice_adviser": "priya"
+      }
+    },
+    "tomasz": {
+      "id": "tomasz",
+      "name": "Tomasz Iwanski",
+      "age": 27,
+      "sex": "M",
+      "postcode": "S60 2QP",
+      "region": "south-yorkshire",
+      "archetype": "Young man \u00b7 mental-health-led drift",
+      "summary": "Bright, articulate, last job was warehouse picker 11 months ago. Anxiety and sleep have got worse since being out of work. Lives alone. Has not been opening the app or replying to texts for 3 weeks.",
+      "barriers": [
+        "Mental health",
+        "Confidence",
+        "Digital skills"
+      ],
+      "barriers_count": 3,
+      "preferred_language": "English",
+      "adviser": {
+        "name": "Hannah Brennan",
+        "initials": "HB",
+        "title": "Senior Restart Adviser \u00b7 Rotherham",
+        "voice_key": "hannah"
+      },
+      "max_navigator": {
+        "signals": {
+          "sms_reply_pct": 28,
+          "push_open_pct": 22,
+          "plan_completion_3": 0,
+          "cv_progress_pct": 35,
+          "vacancies_saved": 1,
+          "sessions_attended_3": 1,
+          "open_barriers": 3
+        },
+        "score": 23,
+        "band": "atrisk",
+        "scenario_action_id": "atrisk"
+      },
+      "trained_classifier": {
+        "p_success_pct": 1.1,
+        "intercept": -2.890788011317707,
+        "model_kind": "logistic_calibrated_isotonic"
+      },
+      "trained_survival": {
+        "curve_by_week": {
+          "1": 100.0,
+          "2": 100.0,
+          "4": 100.0,
+          "8": 96.5,
+          "12": 91.6,
+          "16": 83.4,
+          "20": 77.8,
+          "24": 70.8
+        },
+        "linear_predictor": -1.322,
+        "p10_weeks": 16,
+        "p50_weeks": 24,
+        "p90_weeks": 24,
+        "model_kind": "cox_proportional_hazards",
+        "concordance_index": 0.7003625610251624
+      },
+      "trained_transitions": {
+        "scenario_band": "atrisk",
+        "matrix": {
+          "Start": {
+            "Start": 0.00010344470880314471,
+            "Progressing": 0.00010344470880314471,
+            "Paused": 0.00010344470880314471,
+            "Stalled": 0.18330402399917245,
+            "Regressing": 0.00010344470880314471,
+            "Success": 0.00010344470880314471,
+            "Failure": 0.8161787524568118
+          },
+          "Progressing": {
+            "Start": 3.344817205739706e-05,
+            "Progressing": 0.20232799277519484,
+            "Paused": 0.1662708632973208,
+            "Stalled": 0.11780446198615246,
+            "Regressing": 0.11124862026290264,
+            "Success": 3.344817205739706e-05,
+            "Failure": 0.40228116533431446
+          },
+          "Paused": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Stalled": {
+            "Start": 0.0006293266205160478,
+            "Progressing": 0.0006293266205160478,
+            "Paused": 0.0006293266205160478,
+            "Stalled": 0.0006293266205160478,
+            "Regressing": 0.9962240402769037,
+            "Success": 0.0006293266205160478,
+            "Failure": 0.0006293266205160478
+          },
+          "Regressing": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Success": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 1.0,
+            "Failure": 0.0
+          },
+          "Failure": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 0.0,
+            "Failure": 1.0
+          }
+        },
+        "model_kind": "markov_chain_mle_smoothed"
+      },
+      "shap_contributors": [
+        {
+          "label": "Open barriers",
+          "value": -2.601,
+          "polarity": "negative"
+        },
+        {
+          "label": "region_key_south-yorkshire",
+          "value": -0.146,
+          "polarity": "negative"
+        },
+        {
+          "label": "prior_sector_Warehouse / logistics",
+          "value": -0.081,
+          "polarity": "negative"
+        },
+        {
+          "label": "Vacancies engaged",
+          "value": -0.046,
+          "polarity": "negative"
+        },
+        {
+          "label": "UC duration (months)",
+          "value": -0.038,
+          "polarity": "negative"
+        },
+        {
+          "label": "SMS reply rate",
+          "value": 0.669,
+          "polarity": "positive"
+        },
+        {
+          "label": "Push open rate",
+          "value": 0.389,
+          "polarity": "positive"
+        },
+        {
+          "label": "Adviser sessions attended",
+          "value": 0.157,
+          "polarity": "positive"
+        },
+        {
+          "label": "CV progress",
+          "value": 0.077,
+          "polarity": "positive"
+        },
+        {
+          "label": "UC duration (months)",
+          "value": -0.038,
+          "polarity": "positive"
+        }
+      ],
+      "audio": {
+        "scenario_dir": "tomasz",
+        "voice_customer": "tomasz",
+        "voice_adviser": "hannah"
+      }
+    },
+    "fadumo": {
+      "id": "fadumo",
+      "name": "Fadumo Hassan",
+      "age": 31,
+      "sex": "F",
+      "postcode": "CF24 4RU",
+      "region": "wales",
+      "archetype": "Refugee \u00b7 resettled \u00b7 Restart with REP overlap",
+      "summary": "Somali, granted refugee status 14 months ago. Was a primary school teacher in Mogadishu. UK qualifications partly recognised. Husband and 2 children. Lives in Cardiff Bay. Wants to teach again but needs UK QTS or an alternative path.",
+      "barriers": [
+        "English language",
+        "Housing instability",
+        "Childcare cost"
+      ],
+      "barriers_count": 3,
+      "preferred_language": "Somali",
+      "adviser": {
+        "name": "Eleri Davies",
+        "initials": "ED",
+        "title": "Senior Restart Adviser \u00b7 Cardiff",
+        "voice_key": "eleri"
+      },
+      "max_navigator": {
+        "signals": {
+          "sms_reply_pct": 58,
+          "push_open_pct": 52,
+          "plan_completion_3": 2,
+          "cv_progress_pct": 66,
+          "vacancies_saved": 3,
+          "sessions_attended_3": 2,
+          "open_barriers": 2
+        },
+        "score": 59,
+        "band": "drifting",
+        "scenario_action_id": "drifting"
+      },
+      "trained_classifier": {
+        "p_success_pct": 7.2,
+        "intercept": -2.890788011317707,
+        "model_kind": "logistic_calibrated_isotonic"
+      },
+      "trained_survival": {
+        "curve_by_week": {
+          "1": 100.0,
+          "2": 100.0,
+          "4": 100.0,
+          "8": 96.4,
+          "12": 91.2,
+          "16": 82.6,
+          "20": 76.8,
+          "24": 69.6
+        },
+        "linear_predictor": -1.272,
+        "p10_weeks": 16,
+        "p50_weeks": 24,
+        "p90_weeks": 24,
+        "model_kind": "cox_proportional_hazards",
+        "concordance_index": 0.7003625610251624
+      },
+      "trained_transitions": {
+        "scenario_band": "drifting",
+        "matrix": {
+          "Start": {
+            "Start": 0.0004302925989672977,
+            "Progressing": 0.0004302925989672977,
+            "Paused": 0.0004302925989672977,
+            "Stalled": 0.20223752151462993,
+            "Regressing": 0.0004302925989672977,
+            "Success": 0.0004302925989672977,
+            "Failure": 0.7956110154905336
+          },
+          "Progressing": {
+            "Start": 9.318796011555306e-05,
+            "Progressing": 0.45932345540956104,
+            "Paused": 0.12338085919299226,
+            "Stalled": 0.08098033734041561,
+            "Regressing": 0.12338085919299226,
+            "Success": 9.318796011555306e-05,
+            "Failure": 0.2127481129438077
+          },
+          "Paused": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Stalled": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Regressing": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Success": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 1.0,
+            "Failure": 0.0
+          },
+          "Failure": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 0.0,
+            "Failure": 1.0
+          }
+        },
+        "model_kind": "markov_chain_mle_smoothed"
+      },
+      "shap_contributors": [
+        {
+          "label": "Open barriers",
+          "value": -1.734,
+          "polarity": "negative"
+        },
+        {
+          "label": "Action plan completion",
+          "value": -0.204,
+          "polarity": "negative"
+        },
+        {
+          "label": "region_key_wales",
+          "value": -0.169,
+          "polarity": "negative"
+        },
+        {
+          "label": "prior_sector_Care / health",
+          "value": -0.155,
+          "polarity": "negative"
+        },
+        {
+          "label": "Vacancies engaged",
+          "value": -0.138,
+          "polarity": "negative"
+        },
+        {
+          "label": "SMS reply rate",
+          "value": 1.386,
+          "polarity": "positive"
+        },
+        {
+          "label": "Push open rate",
+          "value": 0.92,
+          "polarity": "positive"
+        },
+        {
+          "label": "Adviser sessions attended",
+          "value": 0.314,
+          "polarity": "positive"
+        },
+        {
+          "label": "CV progress",
+          "value": 0.145,
+          "polarity": "positive"
+        },
+        {
+          "label": "UC duration (months)",
+          "value": -0.027,
+          "polarity": "positive"
+        }
+      ],
+      "audio": {
+        "scenario_dir": "fadumo",
+        "voice_customer": "fadumo",
+        "voice_adviser": "eleri"
+      }
+    },
+    "mark": {
+      "id": "mark",
+      "name": "Mark Wright",
+      "age": 58,
+      "sex": "M",
+      "postcode": "NG7 5JL",
+      "region": "derbyshire-notts",
+      "archetype": "Older worker \u00b7 ex-offender \u00b7 second-chance hire",
+      "summary": "Former HGV driver, 19 months out of work since release. Lives with brother. Lost licence after conviction but eligible to reapply. Frustrated, motivated, low patience for hoops. Has not done anything online for years.",
+      "barriers": [
+        "Criminal record",
+        "Digital skills",
+        "Transport cost"
+      ],
+      "barriers_count": 3,
+      "preferred_language": "English",
+      "adviser": {
+        "name": "Karen Mensah",
+        "initials": "KM",
+        "title": "Senior Restart Adviser \u00b7 Nottingham",
+        "voice_key": "karen"
+      },
+      "max_navigator": {
+        "signals": {
+          "sms_reply_pct": 75,
+          "push_open_pct": 70,
+          "plan_completion_3": 3,
+          "cv_progress_pct": 80,
+          "vacancies_saved": 6,
+          "sessions_attended_3": 3,
+          "open_barriers": 1
+        },
+        "score": 85,
+        "band": "ontrack",
+        "scenario_action_id": "ontrack"
+      },
+      "trained_classifier": {
+        "p_success_pct": 23.3,
+        "intercept": -2.890788011317707,
+        "model_kind": "logistic_calibrated_isotonic"
+      },
+      "trained_survival": {
+        "curve_by_week": {
+          "1": 100.0,
+          "2": 100.0,
+          "4": 100.0,
+          "8": 97.7,
+          "12": 94.4,
+          "16": 88.8,
+          "20": 84.9,
+          "24": 79.9
+        },
+        "linear_predictor": -1.751,
+        "p10_weeks": 16,
+        "p50_weeks": 24,
+        "p90_weeks": 24,
+        "model_kind": "cox_proportional_hazards",
+        "concordance_index": 0.7003625610251624
+      },
+      "trained_transitions": {
+        "scenario_band": "ontrack",
+        "matrix": {
+          "Start": {
+            "Start": 0.010989010989010988,
+            "Progressing": 0.010989010989010988,
+            "Paused": 0.010989010989010988,
+            "Stalled": 0.010989010989010988,
+            "Regressing": 0.010989010989010988,
+            "Success": 0.010989010989010988,
+            "Failure": 0.9340659340659341
+          },
+          "Progressing": {
+            "Start": 0.0003946329913180742,
+            "Progressing": 0.9147592738752961,
+            "Paused": 0.0003946329913180742,
+            "Stalled": 0.0003946329913180742,
+            "Regressing": 0.0003946329913180742,
+            "Success": 0.0003946329913180742,
+            "Failure": 0.08326756116811365
+          },
+          "Paused": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Stalled": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Regressing": {
+            "Start": 0.14285714285714285,
+            "Progressing": 0.14285714285714285,
+            "Paused": 0.14285714285714285,
+            "Stalled": 0.14285714285714285,
+            "Regressing": 0.14285714285714285,
+            "Success": 0.14285714285714285,
+            "Failure": 0.14285714285714285
+          },
+          "Success": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 1.0,
+            "Failure": 0.0
+          },
+          "Failure": {
+            "Start": 0.0,
+            "Progressing": 0.0,
+            "Paused": 0.0,
+            "Stalled": 0.0,
+            "Regressing": 0.0,
+            "Success": 0.0,
+            "Failure": 1.0
+          }
+        },
+        "model_kind": "markov_chain_mle_smoothed"
+      },
+      "shap_contributors": [
+        {
+          "label": "Open barriers",
+          "value": -0.867,
+          "polarity": "negative"
+        },
+        {
+          "label": "Action plan completion",
+          "value": -0.306,
+          "polarity": "negative"
+        },
+        {
+          "label": "Vacancies engaged",
+          "value": -0.277,
+          "polarity": "negative"
+        },
+        {
+          "label": "region_key_derbyshire-notts",
+          "value": -0.248,
+          "polarity": "negative"
+        },
+        {
+          "label": "Low digital skills",
+          "value": -0.188,
+          "polarity": "negative"
+        },
+        {
+          "label": "SMS reply rate",
+          "value": 1.792,
+          "polarity": "positive"
+        },
+        {
+          "label": "Push open rate",
+          "value": 1.238,
+          "polarity": "positive"
+        },
+        {
+          "label": "Adviser sessions attended",
+          "value": 0.471,
+          "polarity": "positive"
+        },
+        {
+          "label": "CV progress",
+          "value": 0.176,
+          "polarity": "positive"
+        },
+        {
+          "label": "prior_sector_Driving",
+          "value": -0.029,
+          "polarity": "positive"
+        }
+      ],
+      "audio": {
+        "scenario_dir": "mark",
+        "voice_customer": "mark",
+        "voice_adviser": "karen"
+      }
+    }
+  }
+}

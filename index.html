@@ -1801,7 +1801,9 @@ let callLineHandle = null;
 
 async function openScenarioCall(){
   if(callOpen) return;
-  const scenarioKey = sessionStorage.getItem('routerSeed') || 'ontrack';
+  // Prefer the persona-specific folder if persona-runtime is loaded.
+  const personaFolder = window.CALL_FOLDER_OVERRIDE || sessionStorage.getItem('personaId') || 'daniel';
+  const scenarioKey = personaFolder;
   let timeline;
   try{
     const r = await fetch('audio/'+scenarioKey+'/timeline.json?cb='+Date.now());
@@ -1815,20 +1817,30 @@ async function openScenarioCall(){
   const ov = document.getElementById('callOverlay');
   ov.setAttribute('aria-hidden','false');
   ov.classList.add('show');
-  const meta = CALL_SCENARIO_META[scenarioKey];
-  document.getElementById('callMeta').textContent = meta.kind + ' · PRIYA SHARMA · MAXIMUS RESTART';
-  document.getElementById('callSub').textContent = meta.sub;
-  document.getElementById('callScenario').textContent = meta.scenarioLabel;
-  document.getElementById('callStatus').textContent = meta.kind==='PHONE' ? 'connecting…' : 'in person · transcript live';
+  const persona = (window.ACTIVE_PERSONA) || { name:'Daniel Okafor', adviser:{ name:'Priya Sharma', initials:'PS', title:'Senior Restart Adviser · Stratford'} };
+  const adviser = persona.adviser;
+  const isInPerson = scenarioKey === 'amara' || scenarioKey === 'wojciech';
+  document.getElementById('callMeta').textContent = (isInPerson ? 'IN-PERSON' : 'CALL') + ' · ' + adviser.name.toUpperCase() + ' · MAXIMUS RESTART';
+  document.getElementById('callSub').textContent = adviser.title;
+  // Find adviser avatar div and patch
+  const avatarEl = document.querySelector('.call-avatar');
+  if(avatarEl) avatarEl.textContent = adviser.initials || 'A';
+  const nameEl = document.querySelector('.call-name');
+  if(nameEl) nameEl.textContent = adviser.name;
+  document.getElementById('callScenario').textContent = (persona.archetype || 'RESTART CUSTOMER').toUpperCase();
+  document.getElementById('callStatus').textContent = isInPerson ? 'in person · transcript live' : 'connecting…';
 
-  // Build hidden caption bubbles
+  // Build hidden caption bubbles. Map adviser/customer speakers to the persona's names.
   const wrap = document.getElementById('callCaptions'); wrap.innerHTML='';
   timeline.lines.forEach(ln=>{
     const div = document.createElement('div');
-    div.className = 'call-line ' + ln.speaker;
+    // Speakers are 'adviser' or 'customer' in the new timeline format
+    const speakerKey = (ln.speaker === 'adviser') ? 'priya' : 'daniel';
+    div.className = 'call-line ' + speakerKey;
     div.dataset.start = ln.start_ms;
     div.dataset.dur = ln.duration_ms;
-    div.innerHTML = '<div class="who">'+(ln.speaker==='priya'?'PRIYA':'DANIEL')+'</div>'+ln.text;
+    const speakerName = ln.speaker === 'adviser' ? adviser.name.toUpperCase() : persona.name.toUpperCase();
+    div.innerHTML = '<div class="who">'+speakerName+'</div>'+ln.text;
     wrap.appendChild(div);
   });
 
@@ -1838,7 +1850,7 @@ async function openScenarioCall(){
   audio.muted = false;
   audio.currentTime = 0;
   audio.play().then(()=>{
-    document.getElementById('callStatus').textContent = meta.kind==='PHONE' ? 'on call · '+meta.tagline : meta.tagline;
+    document.getElementById('callStatus').textContent = isInPerson ? `in person · ${persona.name}` : `on call · ${persona.name} × ${adviser.name}`;
   }).catch(err=>{
     document.getElementById('callStatus').textContent = 'tap anywhere to play (autoplay blocked)';
     ov.addEventListener('click', function once(){ ov.removeEventListener('click', once); audio.play(); }, {once:true});
@@ -2159,10 +2171,24 @@ function openPersonaPicker(){
   ov.classList.add('show');
 }
 
-function pickPersona(personaId){
+async function pickPersona(personaId){
   const p = PERSONA_LIBRARY.find(x=>x.id===personaId) || PERSONA_LIBRARY[0];
   sessionStorage.setItem('personaId', p.id);
   sessionStorage.setItem('routerSeed', PERSONA_SCENARIO_MAP[p.band] || 'ontrack');
+  // Load the trained-model runtime bundle (Cox + classifier + transitions per persona).
+  try{
+    if(!window.PERSONA_RUNTIME){
+      const r = await fetch('persona-runtime.json?cb='+Date.now());
+      if(r.ok) window.PERSONA_RUNTIME = await r.json();
+    }
+    const bundle = window.PERSONA_RUNTIME && window.PERSONA_RUNTIME.personas[personaId];
+    if(bundle){
+      window.ACTIVE_PERSONA = bundle;
+      applyPersonaRuntimeOverrides(bundle);
+    }
+  }catch(e){
+    console.warn('[persona] could not load runtime bundle', e);
+  }
   const ov = document.getElementById('personaOverlay');
   ov.classList.add('fading');
   setTimeout(()=>{
@@ -2170,6 +2196,68 @@ function pickPersona(personaId){
     ov.setAttribute('aria-hidden','true');
     startMatchAnim();
   }, 400);
+}
+
+/**
+ * Apply the trained-model runtime values to the sim's state.
+ * Overrides Max Navigator inputs, SHAP, survival profiles, voice config.
+ * Falls back to scenario-band defaults if anything is missing.
+ */
+function applyPersonaRuntimeOverrides(bundle){
+  if(!bundle) return;
+  const nav = bundle.max_navigator;
+  const surv = bundle.trained_survival;
+  // 1. Max Navigator scenario inputs
+  const band = nav.scenario_action_id;  // 'ontrack' / 'drifting' / 'atrisk'
+  if(typeof ROUTER_SCENARIOS !== 'undefined' && ROUTER_SCENARIOS[band]){
+    ROUTER_SCENARIOS[band].inputs = {
+      smsReply: nav.signals.sms_reply_pct,
+      pushOpen: nav.signals.push_open_pct,
+      planProgress: nav.signals.plan_completion_3,
+      cvProgress: nav.signals.cv_progress_pct,
+      savedJobs: nav.signals.vacancies_saved,
+      attendance: nav.signals.sessions_attended_3,
+      barriers: nav.signals.open_barriers,
+    };
+  }
+  // 2. SHAP contributors (Max Navigator overlay) - use top mixed pos/neg
+  if(typeof ROUTER_SHAP !== 'undefined'){
+    const shaped = (bundle.shap_contributors || []).slice(0, 5).map(c=>({
+      label: c.label,
+      val: +(c.value * 20).toFixed(1),  // amplify for visual bar
+      polarity: c.polarity,
+    }));
+    ROUTER_SHAP[band] = shaped.length ? shaped : ROUTER_SHAP[band];
+  }
+  // 3. Survival profile (used by openSurvivalOverlay)
+  if(typeof SURVIVAL_PROFILES !== 'undefined'){
+    SURVIVAL_PROFILES[band] = {
+      weeklyHazard: 0.05 + Math.max(0, (100 - nav.score)/1000),  // rough conversion for the chart curve
+      p10: surv.p10_weeks,
+      p50: surv.p50_weeks,
+      p90: surv.p90_weeks,
+      label: `${bundle.name.toUpperCase()} × ${bundle.adviser.name.toUpperCase()} · TRAINED COX MODEL`,
+      curveByWeek: surv.curve_by_week,   // {1:..,2:..,4:..,8:..,12:..,16:..,20:..,24:..}
+    };
+  }
+  // 4. SHAP seeds for the survival overlay
+  if(typeof window !== 'undefined'){
+    window.SURVIVAL_SHAP_OVERRIDE = bundle.shap_contributors.map(c=>({
+      label: c.label, val: +(c.value * 20).toFixed(1), polarity: c.polarity,
+    }));
+  }
+  // 5. Audio config
+  if(typeof CALL_SCENARIO_META !== 'undefined'){
+    CALL_SCENARIO_META[band] = {
+      kind: bundle.audio.scenario_dir === 'amara' || bundle.audio.scenario_dir === 'wojciech' ? 'IN-PERSON' : 'PHONE',
+      tagline: `${bundle.name} × ${bundle.adviser.name}`,
+      sub: bundle.adviser.title,
+      scenarioLabel: `${band.toUpperCase()} · ${bundle.archetype.toUpperCase()}`,
+    };
+  }
+  // 6. Live-call overlay - persona-specific scenario folder + adviser avatar
+  window.CALL_FOLDER_OVERRIDE = bundle.audio.scenario_dir;
+  window.ADVISER_OVERRIDE = bundle.adviser;
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -2682,15 +2770,38 @@ function drawSurvivalChart(weeklyHazard){
     ctx.globalAlpha = 1;
   }
   plotCurve(0.045, 'rgba(255,255,255,0.5)', 0.65); // cohort baseline
-  plotCurve(weeklyHazard, '#00ff88', 1.0);
-  // Marker dots for this customer
-  ctx.fillStyle = '#00ff88';
-  weeks.forEach((w,i)=>{
-    const s = Math.pow(1-weeklyHazard, w);
-    const x = 40 + (W-50) * i/(weeks.length-1);
-    const y = H - (s * H * 0.95) - 12;
-    ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2); ctx.fill();
-  });
+
+  // Use the trained Cox curve if the persona-runtime provided one.
+  const persona = window.ACTIVE_PERSONA;
+  const realCurve = persona && persona.trained_survival && persona.trained_survival.curve_by_week;
+  if(realCurve){
+    ctx.strokeStyle = '#00ff88';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    weeks.forEach((w,i)=>{
+      const s = (realCurve[String(w)] != null ? realCurve[String(w)] : 100) / 100;
+      const x = 40 + (W-50) * i/(weeks.length-1);
+      const y = H - (s * H * 0.95) - 12;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+    ctx.fillStyle = '#00ff88';
+    weeks.forEach((w,i)=>{
+      const s = (realCurve[String(w)] != null ? realCurve[String(w)] : 100) / 100;
+      const x = 40 + (W-50) * i/(weeks.length-1);
+      const y = H - (s * H * 0.95) - 12;
+      ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2); ctx.fill();
+    });
+  } else {
+    plotCurve(weeklyHazard, '#00ff88', 1.0);
+    ctx.fillStyle = '#00ff88';
+    weeks.forEach((w,i)=>{
+      const s = Math.pow(1-weeklyHazard, w);
+      const x = 40 + (W-50) * i/(weeks.length-1);
+      const y = H - (s * H * 0.95) - 12;
+      ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2); ctx.fill();
+    });
+  }
 }
 
 function renderSurvivalShap(seed){
@@ -2720,7 +2831,10 @@ function renderSurvivalShap(seed){
       {label:"Age 27 · returner-friendly", val:+1.5, polarity:"pos"},
     ],
   };
-  const items = seeds[seed] || seeds.ontrack;
+  // Persona override beats scenario-band default
+  const items = (window.SURVIVAL_SHAP_OVERRIDE && window.SURVIVAL_SHAP_OVERRIDE.length)
+    ? window.SURVIVAL_SHAP_OVERRIDE.slice(0,5)
+    : (seeds[seed] || seeds.ontrack);
   items.forEach(it=>{
     const row=document.createElement('div'); row.className='shap-row';
     const cls = it.polarity==='pos' ? 'pos' : 'neg';

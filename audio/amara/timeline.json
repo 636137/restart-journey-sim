@@ -1,0 +1,92 @@
+{
+  "scenario": "amara",
+  "label": "AMARA \u00d7 PRIYA \u00b7 DRIFTING \u00b7 in-person re-engagement",
+  "framing": "Amara Adekoya, 34, returner after caring break. Childcare cost is real; CV anxiety. Priya in person.",
+  "voice_customer": "amara",
+  "voice_adviser": "priya",
+  "total_ms": 62103,
+  "gap_ms": 350,
+  "lines": [
+    {
+      "i": 1,
+      "speaker": "adviser",
+      "voice_key": "priya",
+      "text": "Amara, lovely to see you. Sit down. The system flagged that your text replies have dropped off this week. I'd rather get you in than guess what's going on.",
+      "file": "line_01_adviser_priya.mp3",
+      "duration_ms": 9287,
+      "start_ms": 0
+    },
+    {
+      "i": 2,
+      "speaker": "customer",
+      "voice_key": "amara",
+      "text": "Sorry. I know I've been quiet. The bus fare keeps adding up and I'm not sure I'm getting anywhere.",
+      "file": "line_02_customer_amara.mp3",
+      "duration_ms": 5804,
+      "start_ms": 9637
+    },
+    {
+      "i": 3,
+      "speaker": "adviser",
+      "voice_key": "priya",
+      "text": "Right. Two things. I'm putting a thirty-pound travel voucher on your account today. That covers a fortnight, no questions, no paperwork.",
+      "file": "line_03_adviser_priya.mp3",
+      "duration_ms": 8312,
+      "start_ms": 15791
+    },
+    {
+      "i": 4,
+      "speaker": "customer",
+      "voice_key": "amara",
+      "text": "Honestly that helps more than you think.",
+      "file": "line_04_customer_amara.mp3",
+      "duration_ms": 2136,
+      "start_ms": 24453
+    },
+    {
+      "i": 5,
+      "speaker": "adviser",
+      "voice_key": "priya",
+      "text": "Second, your CV. You've rewritten it three times and lost your voice in it. We're going back to the original draft and I'll tidy it up myself. You sign it off. Twenty minutes, before you leave today.",
+      "file": "line_05_adviser_priya.mp3",
+      "duration_ms": 11099,
+      "start_ms": 26939
+    },
+    {
+      "i": 6,
+      "speaker": "customer",
+      "voice_key": "amara",
+      "text": "That actually sounds better than starting again.",
+      "file": "line_06_customer_amara.mp3",
+      "duration_ms": 2321,
+      "start_ms": 38388
+    },
+    {
+      "i": 7,
+      "speaker": "adviser",
+      "voice_key": "priya",
+      "text": "Last thing. The four years caring for your mum isn't a gap. It is leadership and reliability and being the calm in a crisis. Employers will see it that way if we frame it that way.",
+      "file": "line_07_adviser_priya.mp3",
+      "duration_ms": 10913,
+      "start_ms": 41059
+    },
+    {
+      "i": 8,
+      "speaker": "customer",
+      "voice_key": "amara",
+      "text": "Thanks Priya. I was starting to think I was the problem.",
+      "file": "line_08_customer_amara.mp3",
+      "duration_ms": 2925,
+      "start_ms": 52322
+    },
+    {
+      "i": 9,
+      "speaker": "adviser",
+      "voice_key": "priya",
+      "text": "You are not the problem. The plan was a bit too busy. We're going to make it smaller and you and I will keep going.",
+      "file": "line_09_adviser_priya.mp3",
+      "duration_ms": 6501,
+      "start_ms": 55597
+    }
+  ]
+}

@@ -1,61 +1,125 @@
 {
-  "voices": {
-    "priya": "gfpev90Eo7TGmJoNjWyd",
-    "daniel": "zOzKXdLgsgWMld5cH9Be"
-  },
   "model_id": "eleven_multilingual_v2",
+  "voices": {
+    "daniel":    "zOzKXdLgsgWMld5cH9Be",
+    "amara":     "1YfmfuouRyRwVbpAZP7R",
+    "wojciech":  "lXm1kmwVy5VrkAlCMz5B",
+    "tomasz":    "Q2AxzVplKbaj5rJp4P15",
+    "fadumo":    "nRQT5qZlz63KgulRymWq",
+    "mark":      "PmyzgD79S1p0rdLGPZBg",
+    "priya":     "gfpev90Eo7TGmJoNjWyd",
+    "hannah":    "dVoi15NNDJligFBwnVO0",
+    "eleri":     "73fZMjboCm1aBVyxTbBp",
+    "karen":     "zevfjUXwId4847X0EYl5"
+  },
   "scenarios": {
-    "ontrack": {
-      "label": "ON TRACK · weekly check-in call",
-      "framing": "Phone call. Priya leads, Daniel is engaged and confident. Light-touch, surfaces a stretch goal.",
+    "daniel": {
+      "label": "DANIEL × PRIYA · ON TRACK · weekly check-in call",
+      "framing": "Daniel Okafor, 38, ex-warehouse, ON-TRACK. Confident, ready. Priya does the Tuesday check-in.",
+      "voice_customer": "daniel",
+      "voice_adviser":  "priya",
       "lines": [
-        { "speaker": "priya",  "text": "Hi Daniel, it's Priya. Just my Tuesday check-in, are you alright to talk for two minutes?" },
-        { "speaker": "daniel", "text": "Yeah, fine. Just on my way back from the gym." },
-        { "speaker": "priya",  "text": "Brilliant. Right, your numbers are properly strong. Top quartile in your cohort. CV is signed off, you've saved nine vacancies, and the Level 2 course is locked in for the first of July." },
-        { "speaker": "daniel", "text": "Yeah it's been alright, actually. I feel like I'm getting somewhere." },
-        { "speaker": "priya",  "text": "I want to push you a little. Sundown Logistics is your match-of-the-week, but there's a Senior Warehouse Operative slot at Bow Distribution. Three grand more, same commute. Want me to send it across?" },
-        { "speaker": "daniel", "text": "Senior, though? I haven't done senior before." },
-        { "speaker": "priya",  "text": "You have, you just didn't call it that. Two years team-leading at Hackney was supervising six people. I'll pull it out on the CV and send you the link tonight." },
-        { "speaker": "daniel", "text": "Alright. Yeah, send it. Worst case I learn something at the interview." },
-        { "speaker": "priya",  "text": "That's exactly the right attitude. Same time next Tuesday, and well done this week Daniel, properly well done." }
+        { "speaker": "adviser",  "text": "Hi Daniel, it's Priya. Just my Tuesday check-in, are you alright to talk for two minutes?" },
+        { "speaker": "customer", "text": "Yeah, fine. Just on my way back from the gym." },
+        { "speaker": "adviser",  "text": "Brilliant. Right, your numbers are properly strong. Top quartile in your cohort. CV is signed off, you've saved nine vacancies, and the Level 2 course is locked in for the first of July." },
+        { "speaker": "customer", "text": "Yeah it's been alright, actually. I feel like I'm getting somewhere." },
+        { "speaker": "adviser",  "text": "I want to push you a little. Sundown Logistics is your match-of-the-week, but there's a Senior Warehouse Operative slot at Bow Distribution. Three grand more, same commute. Want me to send it across?" },
+        { "speaker": "customer", "text": "Senior, though? I haven't done senior before." },
+        { "speaker": "adviser",  "text": "You have, you just didn't call it that. Two years team-leading at Hackney was supervising six people. I'll pull it out on the CV and send you the link tonight." },
+        { "speaker": "customer", "text": "Alright. Yeah, send it. Worst case I learn something at the interview." },
+        { "speaker": "adviser",  "text": "That's exactly the right attitude. Same time next Tuesday, and well done this week Daniel, properly well done." }
       ]
     },
-    "drifting": {
-      "label": "DRIFTING · in-person re-engagement",
-      "framing": "In person at the Stratford office. Daniel is quieter than usual, transport money is tight, confidence dipped. Priya is warm but practical.",
+    "amara": {
+      "label": "AMARA × PRIYA · DRIFTING · in-person re-engagement",
+      "framing": "Amara Adekoya, 34, returner after caring break. Childcare cost is real; CV anxiety. Priya in person.",
+      "voice_customer": "amara",
+      "voice_adviser":  "priya",
       "lines": [
-        { "speaker": "priya",  "text": "Daniel, thanks for coming in. Sit down, do you want a tea or anything?" },
-        { "speaker": "daniel", "text": "Nah, I'm alright thanks. Sorry I've been a bit quiet on the texts." },
-        { "speaker": "priya",  "text": "No need to apologise. The system flagged that your replies dropped off, and I'd rather get you in than guess what's going on. What's been happening?" },
-        { "speaker": "daniel", "text": "Honestly, the bus fare to get here adds up. And I rewrote that CV three times and I'm not sure it sounds like me anymore." },
-        { "speaker": "priya",  "text": "Right. Two things, then. I'm putting twenty pounds on a travel voucher today, that covers a fortnight of buses, no questions, no paperwork." },
-        { "speaker": "daniel", "text": "Seriously? That'd actually help a lot." },
-        { "speaker": "priya",  "text": "Yes seriously. Second thing, we're going back to the original CV. Your words, your warehouse experience, no clever language. I'll do the tidy up myself, you sign it off. Twenty minutes now, before you leave." },
-        { "speaker": "daniel", "text": "Yeah, alright. That sounds better than starting again." },
-        { "speaker": "priya",  "text": "And I'm pausing the daily app notifications for a week. They were too much. We'll go back to one text a week from me, just the important stuff." },
-        { "speaker": "daniel", "text": "Thanks Priya. I was starting to think I was the problem." },
-        { "speaker": "priya",  "text": "You are not the problem. The plan was a bit too busy, that's on me. Let's reset it together, right now." }
+        { "speaker": "adviser",  "text": "Amara, lovely to see you. Sit down. The system flagged that your text replies have dropped off this week. I'd rather get you in than guess what's going on." },
+        { "speaker": "customer", "text": "Sorry. I know I've been quiet. The bus fare keeps adding up and I'm not sure I'm getting anywhere." },
+        { "speaker": "adviser",  "text": "Right. Two things. I'm putting a thirty-pound travel voucher on your account today. That covers a fortnight, no questions, no paperwork." },
+        { "speaker": "customer", "text": "Honestly that helps more than you think." },
+        { "speaker": "adviser",  "text": "Second, your CV. You've rewritten it three times and lost your voice in it. We're going back to the original draft and I'll tidy it up myself. You sign it off. Twenty minutes, before you leave today." },
+        { "speaker": "customer", "text": "That actually sounds better than starting again." },
+        { "speaker": "adviser",  "text": "Last thing. The four years caring for your mum isn't a gap. It is leadership and reliability and being the calm in a crisis. Employers will see it that way if we frame it that way." },
+        { "speaker": "customer", "text": "Thanks Priya. I was starting to think I was the problem." },
+        { "speaker": "adviser",  "text": "You are not the problem. The plan was a bit too busy. We're going to make it smaller and you and I will keep going." }
       ]
     },
-    "atrisk": {
-      "label": "AT RISK · same-day call, warm referral",
-      "framing": "Phone call early afternoon. Daniel is overwhelmed, sleep has gone, money worry. Priya stays calm, slows down, warm-refers to Access to Work Mental Health.",
+    "wojciech": {
+      "label": "WOJCIECH × PRIYA · ON TRACK · with Polish translator",
+      "framing": "Wojciech, 52, Polish-speaking site supervisor, ON-TRACK. Live translator on the call. Wants supervisor-level work.",
+      "voice_customer": "wojciech",
+      "voice_adviser":  "priya",
       "lines": [
-        { "speaker": "priya",  "text": "Daniel, it's Priya. I know we weren't scheduled today but I wanted to hear your voice. Have you got a minute?" },
-        { "speaker": "daniel", "text": "Yeah. Sorry, I haven't been picking up much this week." },
-        { "speaker": "priya",  "text": "It's alright. How are you actually doing, not the work bit, just generally?" },
-        { "speaker": "daniel", "text": "Not great if I'm honest. I'm not sleeping. The interview stuff has been spinning in my head and I keep thinking I'm going to mess it up and end up back where I was." },
-        { "speaker": "priya",  "text": "Thank you for telling me. That takes guts to say out loud, and none of what you just described means you're failing. It means you're carrying a lot." },
-        { "speaker": "daniel", "text": "Feels like I'm letting everyone down though." },
-        { "speaker": "priya",  "text": "You are not letting anyone down. Here's what we do today. First, I'm pausing the job-match notifications for two weeks. No more new ones popping up. We're not adding pressure." },
-        { "speaker": "daniel", "text": "Okay, yeah, that would help." },
-        { "speaker": "priya",  "text": "Second, there's a Maximus service called Access to Work Mental Health Support. It's free, confidential, and a specialist will talk you through the sleep and anxiety side, separately from me. I'd like to refer you today, with your permission." },
-        { "speaker": "daniel", "text": "It's free, yeah? I haven't got money for therapy." },
-        { "speaker": "priya",  "text": "Completely free, run by the same team I'm in. Nine months of support if you want it, you can stop whenever. Shall I make the call this afternoon?" },
-        { "speaker": "daniel", "text": "Yeah. Yeah, do it. Thanks Priya." },
-        { "speaker": "priya",  "text": "Last thing. I'm coming off the auto-plan and writing you a smaller one. Three things this week, not ten. We slow it down, we keep the door open, and we keep going. Alright?" },
-        { "speaker": "daniel", "text": "Alright. Thanks for ringing." },
-        { "speaker": "priya",  "text": "Always. I'll text you when the referral is in. Get some food and try to sleep tonight, Daniel. We've got this." }
+        { "speaker": "adviser",  "text": "Wojciech, hello. Our translator is on the line so please speak in Polish if it's easier. I'll get the English version through my earpiece." },
+        { "speaker": "customer", "text": "Thank you Priya. That helps. My English is fine for everyday, but for the supervisor interview I would like to be sure I am saying exactly what I mean." },
+        { "speaker": "adviser",  "text": "Sensible. So, Brent Park Developments. Site Supervisor, twenty-eight days from now. They've shortlisted you. Twenty-eight years on UK sites and a Polish-English fluent supervisor is genuinely rare for them." },
+        { "speaker": "customer", "text": "I am ready for this. I want to ask them about safety procedures and the team they have currently. I will not just answer their questions, I will ask my own." },
+        { "speaker": "adviser",  "text": "Good, that's exactly the move. One thing. Your CSCS Gold Card top-up has been approved this morning. Free to you. The certificate will arrive by Friday." },
+        { "speaker": "customer", "text": "Excellent. With the Gold Card the salary band shifts up." },
+        { "speaker": "adviser",  "text": "It does. And travel costs for the interview are covered. The translator will join the interview as well, on the speaker, if you want one for that day. Many candidates say yes for the safety questions specifically." },
+        { "speaker": "customer", "text": "Yes please. Let us add the translator. I would rather be precise than fast." }
+      ]
+    },
+    "tomasz": {
+      "label": "TOMASZ × HANNAH · AT-RISK · same-day welfare call",
+      "framing": "Tomasz, 27, AT-RISK with mental health barriers. Hannah Brennan calls same-day. Warm, slow, no pressure.",
+      "voice_customer": "tomasz",
+      "voice_adviser":  "hannah",
+      "lines": [
+        { "speaker": "adviser",  "text": "Tomasz, it's Hannah. I know we weren't scheduled today but I wanted to hear your voice. Have you got a minute?" },
+        { "speaker": "customer", "text": "Yeah. Sorry, I haven't been picking up much this week." },
+        { "speaker": "adviser",  "text": "It's alright. How are you actually doing, not the work bit, just generally?" },
+        { "speaker": "customer", "text": "Not great if I'm honest. I'm not sleeping. The interview stuff has been spinning in my head and I keep thinking I'm going to mess it up and end up back where I was." },
+        { "speaker": "adviser",  "text": "Thank you for telling me. That takes guts to say out loud, and none of what you just described means you're failing. It means you're carrying a lot." },
+        { "speaker": "customer", "text": "Feels like I'm letting everyone down though." },
+        { "speaker": "adviser",  "text": "You are not letting anyone down. Here's what we do today. First, I'm pausing the job-match notifications for two weeks. No more new ones popping up. We're not adding pressure." },
+        { "speaker": "customer", "text": "Okay, yeah, that would help." },
+        { "speaker": "adviser",  "text": "Second, there's a Maximus service called Access to Work Mental Health Support. It's free, confidential, and a specialist will talk you through the sleep and anxiety side, separately from me. I'd like to refer you today, with your permission." },
+        { "speaker": "customer", "text": "It's free, yeah? I haven't got money for therapy." },
+        { "speaker": "adviser",  "text": "Completely free, run by the same team I'm in. Nine months of support if you want it, you can stop whenever. Shall I make the call this afternoon?" },
+        { "speaker": "customer", "text": "Yeah. Yeah, do it. Thanks Hannah." },
+        { "speaker": "adviser",  "text": "Last thing. I'm coming off the auto-plan and writing you a smaller one. Three things this week, not ten. We slow it down, we keep the door open, and we keep going. Alright?" },
+        { "speaker": "customer", "text": "Alright. Thanks for ringing." },
+        { "speaker": "adviser",  "text": "Always. I'll text you when the referral is in. Get some food and try to sleep tonight, Tomasz. We've got this." }
+      ]
+    },
+    "fadumo": {
+      "label": "FADUMO × ELERI · DRIFTING · QTS pathway conversation",
+      "framing": "Fadumo, 31, Somali-speaking refugee, was a teacher in Mogadishu. Eleri (Welsh adviser) lays out the UK QTS path and short-term income.",
+      "voice_customer": "fadumo",
+      "voice_adviser":  "eleri",
+      "lines": [
+        { "speaker": "adviser",  "text": "Fadumo, it's Eleri. The translator is on the call. Today I want to talk through two paths for you. A teaching assistant role we can start next month, and the longer route to UK Qualified Teacher Status." },
+        { "speaker": "customer", "text": "Thank you. I am ready. I worry that taking a teaching assistant job means I am stepping back from being a teacher." },
+        { "speaker": "adviser",  "text": "It's a fair worry. Let me be honest with you. UK QTS for an internationally trained teacher takes twelve to eighteen months. The teaching assistant role is paid work in a school, your foot in the door, and your hours count toward the QTS school experience requirement." },
+        { "speaker": "customer", "text": "So it is not a step back. It is the first step." },
+        { "speaker": "adviser",  "text": "Exactly. Riverside Primary in Cardiff have shortlisted you. They know you were a primary teacher in Mogadishu. The head teacher specifically asked for your CV." },
+        { "speaker": "customer", "text": "That is very encouraging." },
+        { "speaker": "adviser",  "text": "Now the practical side. The Adult Skills Fund will pay for your English for Academic Purposes course, which you'll need before the QTS application. No cost to you. The travel pass for school placement weeks is also covered." },
+        { "speaker": "customer", "text": "And for childcare for the youngest two during the days I am at school?" },
+        { "speaker": "adviser",  "text": "I asked the same. Restart has a childcare grant of forty pounds per child per day for the placement weeks. We will set that up this week. The translator will help you fill in the forms today if you would like." },
+        { "speaker": "customer", "text": "Yes please. Today is good. Thank you Eleri." }
+      ]
+    },
+    "mark": {
+      "label": "MARK × KAREN · ON TRACK · HGV reapplication and Ban-the-Box hire",
+      "framing": "Mark, 58, ex-offender, former HGV driver. Karen Mensah is direct, no hoops, lays out the Ban-the-Box pathway and HGV licence reapplication.",
+      "voice_customer": "mark",
+      "voice_adviser":  "karen",
+      "lines": [
+        { "speaker": "adviser",  "text": "Mark, it's Karen. Quick one for you. Bardon Aggregates have come back. They want you for the yard role with the HGV class C when your licence is reinstated. Twelve-month contract." },
+        { "speaker": "customer", "text": "They know about my conviction?" },
+        { "speaker": "adviser",  "text": "They do. Bardon is a Ban-the-Box employer. Your conviction was on the application. They've already taken the decision. The yard supervisor is named Ravi, he wants to meet you next Tuesday." },
+        { "speaker": "customer", "text": "Right. And the licence?" },
+        { "speaker": "adviser",  "text": "DVLA have your reapplication. Class C medical is booked for Thursday at the Lincoln Centre. Restart pays for it. After the medical it's about six weeks for the licence to come back." },
+        { "speaker": "customer", "text": "So I take the yard work first, then I'm back on HGV when the licence is back. That's the deal." },
+        { "speaker": "adviser",  "text": "That's exactly the deal. The yard is forty hours, twenty-six thousand a year. When you move to HGV in six weeks the rate goes up to thirty-one. Bardon have agreed it in writing." },
+        { "speaker": "customer", "text": "Good. Send me the appointment details for Tuesday and I will be there. None of the run-around." },
+        { "speaker": "adviser",  "text": "No run-around. Email is in your inbox. One last thing. Universal Credit tapers off as your wages come in, not all at once. We'll do the better-off-in-work numbers with you before the Bardon start date. So you know." },
+        { "speaker": "customer", "text": "Sensible. Thanks Karen. I'll see you Tuesday." }
       ]
     }
   }

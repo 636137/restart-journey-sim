@@ -23,25 +23,25 @@ if not API_KEY:
     sys.exit("ELEVENLABS_API_KEY not set")
 
 cfg = json.loads(SCRIPTS.read_text())
-VOICES = cfg["voices"]
+VOICES = cfg["voices"]  # speaker_key -> voice_id
 MODEL_ID = cfg["model_id"]
 GAP_MS = 350
 
 
-def voice_settings(speaker):
-    # Slightly different settings: Priya warmer/steadier, Daniel a touch more natural variance
-    if speaker == "priya":
+def voice_settings(role):
+    # role is 'adviser' (warm, calm) or 'customer' (more naturalistic variance)
+    if role == "adviser":
         return {"stability": 0.55, "similarity_boost": 0.8, "style": 0.25, "use_speaker_boost": True}
     return {"stability": 0.50, "similarity_boost": 0.75, "style": 0.30, "use_speaker_boost": True}
 
 
-def tts(text, voice_id, speaker, out_path):
+def tts(text, voice_id, role, out_path):
     req = urllib.request.Request(
         f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}",
         data=json.dumps({
             "text": text,
             "model_id": MODEL_ID,
-            "voice_settings": voice_settings(speaker),
+            "voice_settings": voice_settings(role),
         }).encode(),
         headers={
             "xi-api-key": API_KEY,
@@ -95,20 +95,24 @@ def main():
         line_paths = []
         timeline = []
         cumulative_ms = 0
+        customer_voice_key = scenario["voice_customer"]
+        adviser_voice_key  = scenario["voice_adviser"]
         print(f"\n=== {scenario_key} :: {scenario['label']} ===")
         for i, line in enumerate(scenario["lines"], start=1):
-            speaker = line["speaker"]
-            vid = VOICES[speaker]
-            path = out_dir / f"line_{i:02d}_{speaker}.mp3"
+            role = line["speaker"]  # 'adviser' or 'customer'
+            voice_key = adviser_voice_key if role == "adviser" else customer_voice_key
+            vid = VOICES[voice_key]
+            path = out_dir / f"line_{i:02d}_{role}_{voice_key}.mp3"
             if path.exists() and path.stat().st_size > 1000:
                 print(f"  [skip] {path.name}")
             else:
-                size = tts(line["text"], vid, speaker, path)
+                size = tts(line["text"], vid, role, path)
                 print(f"  [gen]  {path.name}  {size:,} bytes")
             dur = probe_duration_ms(path)
             timeline.append({
                 "i": i,
-                "speaker": speaker,
+                "speaker": role,
+                "voice_key": voice_key,
                 "text": line["text"],
                 "file": path.name,
                 "duration_ms": dur,
@@ -125,6 +129,8 @@ def main():
             "scenario": scenario_key,
             "label": scenario["label"],
             "framing": scenario["framing"],
+            "voice_customer": customer_voice_key,
+            "voice_adviser": adviser_voice_key,
             "total_ms": full_dur,
             "gap_ms": GAP_MS,
             "lines": timeline,
