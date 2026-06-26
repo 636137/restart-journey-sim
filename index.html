@@ -223,6 +223,20 @@ body {
 .training-graph { grid-column:1/3; }
 .training-graph-wrap { position:relative; height:280px; }
 .training-graph-wrap canvas { width:100%; height:100%; display:block; border-radius:10px; background:radial-gradient(ellipse at center, rgba(0,255,136,0.06), transparent 70%); }
+.training-halo-panel { position:absolute; top:8px; right:8px; width:260px; max-height:96%; background:rgba(0,15,10,0.92); border:1px solid rgba(0,255,136,0.4); border-radius:10px; padding:8px 10px; flex-direction:column; gap:6px; backdrop-filter:blur(3px); z-index:5; }
+.training-halo-panel .halo-head { display:flex; flex-direction:column; gap:3px; position:relative; padding:2px 22px 8px 4px; border-bottom:1px solid rgba(0,255,136,0.15); }
+.training-halo-panel .halo-title { font-size:11px; letter-spacing:1.4px; color:#00ff88; font-weight:700; }
+.training-halo-panel .halo-sub { font-size:9.5px; color:rgba(0,255,136,0.55); letter-spacing:1px; }
+.training-halo-panel .halo-close { position:absolute; top:-2px; right:-4px; background:transparent; border:none; color:#00ff88; font-size:18px; cursor:pointer; padding:2px 6px; }
+.training-halo-panel .halo-close:hover { color:#ccffe5; }
+.training-halo-panel .halo-list { display:flex; flex-direction:column; gap:1px; overflow-y:auto; max-height:200px; padding-right:2px; }
+.training-halo-panel .halo-list::-webkit-scrollbar { width:4px; }
+.training-halo-panel .halo-list::-webkit-scrollbar-thumb { background:rgba(0,255,136,0.25); border-radius:2px; }
+.training-halo-panel .halo-row { display:grid; grid-template-columns:1fr auto; column-gap:8px; row-gap:1px; padding:5px 4px; border-bottom:1px solid rgba(0,255,136,0.06); font-size:11px; }
+.training-halo-panel .halo-row:last-child { border-bottom:none; }
+.training-halo-panel .halo-primary { color:#ccffe5; font-weight:600; grid-column:1; }
+.training-halo-panel .halo-tertiary { color:#00ff88; font-size:10px; grid-column:2; align-self:center; font-variant-numeric:tabular-nums; }
+.training-halo-panel .halo-secondary { color:rgba(0,255,136,0.65); font-size:10px; grid-column:1/3; font-style:italic; }
 .training-log { font-size:11.5px; color:rgba(0,255,136,0.8); max-height:96px; overflow:hidden; margin-top:8px; line-height:1.55; }
 .training-log .line { opacity:0; animation: matchFadeIn .4s forwards; }
 
@@ -704,7 +718,10 @@ body {
       </div>
       <div class="training-card training-graph">
         <h4>JOURNEY GRAPH · NODE EMBEDDINGS <span style="color:rgba(0,255,136,0.55);" id="trainingNodeCount">computing…</span></h4>
-        <div class="training-graph-wrap"><canvas id="trainingGraph"></canvas></div>
+        <div class="training-graph-wrap">
+          <canvas id="trainingGraph"></canvas>
+          <div id="trainingHaloPanel" class="training-halo-panel" style="display:none;"></div>
+        </div>
         <div class="training-log" id="trainingLog"></div>
       </div>
     </div>
@@ -2012,6 +2029,215 @@ function trainingStreamLog(raw){
   });
 }
 
+// Cached neighbour data per persona for the three clickable axes.
+const EXPERT_CASELOAD = {
+  daniel: { adviser:'Priya Sharma', items:[
+    {n:'Naomi B.',    a:'Returner · NHS admin',        p:'P(success) 81%'},
+    {n:'Jamal R.',    a:'Long-term UC · warehouse',    p:'P(success) 74%'},
+    {n:'Bilal H.',    a:'Confidence rebuilding',       p:'P(success) 68%'},
+    {n:'Reece D.',    a:'Forklift returner',           p:'P(success) 79%'},
+    {n:'Tia F.',      a:'Care · NHS pipeline',         p:'P(success) 86%'},
+    {n:'Aaron M.',    a:'Stratford logistics',         p:'P(success) 71%'},
+    {n:'Sade O.',     a:'Hospitality switcher',        p:'P(success) 64%'},
+    {n:'Marcus K.',   a:'Long-term UC · logistics',    p:'P(success) 70%'},
+    {n:'Lola A.',     a:'Returner · 3 yrs',            p:'P(success) 67%'},
+    {n:'Theo P.',     a:'Forklift advanced ticket',    p:'P(success) 82%'},
+    {n:'Faye M.',     a:'CV rebuild · Stratford',      p:'P(success) 75%'},
+    {n:'Kai W.',      a:'Apprenticeship pivot',        p:'P(success) 69%'},
+  ]},
+  amara: { adviser:'Aisha Khatun', items:[
+    {n:'Chantelle B.',a:'Caring break · 6 yrs',         p:'P(success) 65%'},
+    {n:'Sade O.',     a:'Returner · NHS pipeline',     p:'P(success) 74%'},
+    {n:'Maria H.',    a:'Childcare cost barrier',      p:'P(success) 58%'},
+    {n:'Halima A.',   a:'Single parent · Lewisham',    p:'P(success) 63%'},
+    {n:'Tracy J.',    a:'NHS GP admin returner',       p:'P(success) 78%'},
+    {n:'Joy E.',      a:'Returner · school hours',     p:'P(success) 72%'},
+    {n:'Demi P.',     a:'CV reframing · 4-yr gap',     p:'P(success) 67%'},
+    {n:'Ruth L.',     a:'Health-admin pipeline',       p:'P(success) 76%'},
+    {n:'Tamika E.',   a:'Returner · digital skills',   p:'P(success) 60%'},
+    {n:'Folake A.',   a:'Care · GP admin · SE15',      p:'P(success) 71%'},
+    {n:'Megan S.',    a:'NHS receptionist · returner', p:'P(success) 73%'},
+    {n:'Yvonne D.',   a:'Childcare grant fast-track',  p:'P(success) 64%'},
+  ]},
+  wojciech: { adviser:'Tomasz Kowalski', items:[
+    {n:'Krzysztof M.',a:'Polish · construction',        p:'P(success) 78%'},
+    {n:'Pawel S.',    a:'Site supervisor · NW10',      p:'P(success) 81%'},
+    {n:'Marek L.',    a:'Polish ESOL · plumber',       p:'P(success) 69%'},
+    {n:'Andrzej W.',  a:'Ealing construction',         p:'P(success) 76%'},
+    {n:'Tomasz J.',   a:'CSCS Gold Card · supervisor', p:'P(success) 84%'},
+    {n:'Piotr R.',    a:'Brent Park network',          p:'P(success) 72%'},
+    {n:'Stanislaw N.',a:'Older worker · Polish',        p:'P(success) 67%'},
+    {n:'Kasia Z.',    a:'Polish · admin pivot',         p:'P(success) 63%'},
+    {n:'Jakub T.',    a:'Construction · UK 12 yrs',    p:'P(success) 75%'},
+    {n:'Aleksander G.',a:'Site manager candidate',     p:'P(success) 79%'},
+    {n:'Hubert D.',   a:'Polish · safety officer',     p:'P(success) 73%'},
+    {n:'Witold M.',   a:'Older worker · 30 yrs UK',     p:'P(success) 70%'},
+  ]},
+  tomasz: { adviser:'Hannah Brennan', items:[
+    {n:'Liam P.',     a:'AT-RISK · MH barrier',         p:'P(success) 35%'},
+    {n:'Connor R.',   a:'Anxiety · sleep barrier',     p:'P(success) 41%'},
+    {n:'Joshua M.',   a:'Stalled · 3 mo no contact',   p:'P(success) 28%'},
+    {n:'Aiden B.',    a:'Sheffield warehouse',         p:'P(success) 47%'},
+    {n:'Damian K.',   a:'Same-day welfare protocol',   p:'P(success) 39%'},
+    {n:'Sean L.',     a:'AT-RISK · isolation',         p:'P(success) 32%'},
+    {n:'Ryan F.',     a:'ATW MH referral · live',      p:'P(success) 52%'},
+    {n:'Callum W.',   a:'Plan reset · 3 tasks/wk',     p:'P(success) 44%'},
+    {n:'Tom H.',      a:'Rotherham · warehouse',       p:'P(success) 36%'},
+    {n:'Junior O.',   a:'MH-led drift · 11 mo UC',     p:'P(success) 30%'},
+    {n:'Dylan G.',    a:'Re-engagement · pending',     p:'P(success) 38%'},
+    {n:'Kai N.',      a:'Push paused · 14 days',       p:'P(success) 42%'},
+  ]},
+  fadumo: { adviser:'Eleri Davies', items:[
+    {n:'Ayan J.',     a:'Somali teacher · QTS path',    p:'P(success) 78%'},
+    {n:'Mariam Y.',   a:'Refugee · primary teacher',   p:'P(success) 72%'},
+    {n:'Khadija O.',  a:'EAP course · enrolled',       p:'P(success) 75%'},
+    {n:'Rahma A.',    a:'Welsh schools placement',     p:'P(success) 81%'},
+    {n:'Layla K.',    a:'Cardiff Bay · TA role',       p:'P(success) 69%'},
+    {n:'Bushra N.',   a:'Refugee · QTS year 2',        p:'P(success) 83%'},
+    {n:'Hodan S.',    a:'Childcare grant active',      p:'P(success) 64%'},
+    {n:'Sumaya M.',   a:'School-hours admin',          p:'P(success) 71%'},
+    {n:'Anisa F.',    a:'REP overlap · refugee',        p:'P(success) 68%'},
+    {n:'Idil R.',     a:'Welsh language · A2',         p:'P(success) 76%'},
+    {n:'Hawa B.',     a:'Riverside Primary network',   p:'P(success) 79%'},
+    {n:'Nasrin A.',   a:'Adult Skills Fund · funded',  p:'P(success) 70%'},
+  ]},
+  mark: { adviser:'Karen Mensah', items:[
+    {n:'Lee P.',      a:'Ex-offender · HGV pending',    p:'P(success) 72%'},
+    {n:'Tony W.',     a:'Ban-the-Box · yard role',     p:'P(success) 68%'},
+    {n:'Steve M.',    a:'Class C reapplication',       p:'P(success) 75%'},
+    {n:'Phil R.',     a:'Older worker · 50+ UC 2yr',   p:'P(success) 63%'},
+    {n:'Gary B.',     a:'Bardon Aggregates pipeline',  p:'P(success) 81%'},
+    {n:'Dave K.',     a:'Driving · agency to perm',    p:'P(success) 70%'},
+    {n:'Pete C.',     a:'Forklift cert · funded',      p:'P(success) 65%'},
+    {n:'Mick S.',     a:'East Mids logistics broker',  p:'P(success) 74%'},
+    {n:'Brian L.',    a:'Ex-offender · post-release',  p:'P(success) 60%'},
+    {n:'Roger H.',    a:'HGV C+E aspirant',            p:'P(success) 78%'},
+    {n:'Vince N.',    a:'Nottingham yard network',     p:'P(success) 67%'},
+    {n:'Frank D.',    a:'Older worker · UC taper',     p:'P(success) 62%'},
+  ]},
+};
+
+const SIMILAR_JOURNEYS = {
+  daniel: [
+    {label:'Marcus K. · placed Sundown',     p:'sustained 6mo'},
+    {label:'Theo P. · placed forklift adv',  p:'sustained 4mo'},
+    {label:'Aaron M. · in-progress',         p:'placed · 2mo'},
+    {label:'Reece D. · in-progress',         p:'placed · 4mo'},
+    {label:'Kai W. · apprenticeship',        p:'placed · 1mo'},
+    {label:'Jamal R. · onboarding',          p:'placed · 3wk'},
+    {label:'Theo W. · sustained',            p:'sustained 8mo'},
+    {label:'Marcus J. · sustained',          p:'sustained 6mo'},
+    {label:'Femi L. · in-progress',          p:'placed · 5mo'},
+    {label:'Ryan O. · sustained',            p:'sustained 7mo'},
+    {label:'Joshua C. · placed',             p:'placed · 4mo'},
+    {label:'Tom H. · placed',                p:'placed · 2mo'},
+    {label:'Bilal F. · sustained',           p:'sustained 9mo'},
+    {label:'Aiden P. · in-progress',         p:'placed · 1mo'},
+    {label:'Dylan T. · sustained',           p:'sustained 6mo'},
+    {label:'Junior S. · placed',             p:'placed · 3mo'},
+    {label:'Callum K. · in-progress',        p:'placed · 2mo'},
+    {label:'Aaron B. · sustained',           p:'sustained 5mo'},
+  ],
+  amara: [
+    {label:'Halima A. · school-hours admin', p:'placed · 3mo'},
+    {label:'Joy E. · GP receptionist',       p:'placed · 5mo'},
+    {label:'Tracy J. · NHS admin · in-progress', p:'placed · 1mo'},
+    {label:'Demi P. · re-engaged in-person', p:'placed · 2mo'},
+    {label:'Chantelle B. · returner',        p:'placed · 4mo'},
+    {label:'Ruth L. · health admin',         p:'placed · 6mo'},
+    {label:'Maria H. · withdrawn',           p:'withdrawn · 2mo'},
+    {label:'Tamika E. · in-progress',        p:'placed · 1mo'},
+    {label:'Sade O. · sustained',            p:'sustained 6mo'},
+    {label:'Yvonne D. · school admin',       p:'placed · 4mo'},
+    {label:'Folake A. · in-progress',        p:'placed · 2mo'},
+    {label:'Megan S. · NHS receptionist',    p:'placed · 5mo'},
+    {label:'Naomi B. · sustained',           p:'sustained 7mo'},
+    {label:'Faye M. · returner · placed',    p:'placed · 3mo'},
+    {label:'Tia F. · sustained',             p:'sustained 8mo'},
+    {label:'Megan T. · in-progress',         p:'placed · 2mo'},
+  ],
+  wojciech: [
+    {label:'Krzysztof M. · supervisor placed', p:'sustained 7mo'},
+    {label:'Pawel S. · site supervisor',     p:'sustained 5mo'},
+    {label:'Andrzej W. · placed Ealing',     p:'placed · 4mo'},
+    {label:'Tomasz J. · CSCS Gold · placed', p:'sustained 6mo'},
+    {label:'Piotr R. · in-progress',         p:'placed · 1mo'},
+    {label:'Marek L. · placed plumber',      p:'placed · 5mo'},
+    {label:'Stanislaw N. · sustained',       p:'sustained 9mo'},
+    {label:'Aleksander G. · interview',      p:'in interview'},
+    {label:'Hubert D. · safety officer',     p:'placed · 3mo'},
+    {label:'Jakub T. · construction',        p:'sustained 4mo'},
+    {label:'Witold M. · older worker placed',p:'sustained 8mo'},
+    {label:'Kasia Z. · admin pivot',         p:'placed · 2mo'},
+    {label:'Adrian P. · supervisor',         p:'sustained 6mo'},
+    {label:'Maciej F. · placed warehouse',   p:'placed · 3mo'},
+    {label:'Filip W. · in-progress',         p:'placed · 1mo'},
+  ],
+  tomasz: [
+    {label:'Liam P. · ATW MH support',       p:'paused · MH'},
+    {label:'Joshua M. · withdrawn',          p:'withdrawn · 5mo'},
+    {label:'Connor R. · re-engaging',        p:'re-engaging'},
+    {label:'Aiden B. · in-person reset',     p:'stalled · 3mo'},
+    {label:'Damian K. · same-day call',      p:'paused · push off'},
+    {label:'Ryan F. · MH referred',          p:'paused · MH'},
+    {label:'Tom H. · re-engaging',           p:'re-engaging'},
+    {label:'Sean L. · isolation',            p:'paused'},
+    {label:'Callum W. · plan reset',         p:'re-engaging'},
+    {label:'Junior O. · stalled',            p:'stalled · 4mo'},
+    {label:'Dylan G. · push paused',         p:'paused'},
+    {label:'Kai N. · in-person needed',      p:'stalled'},
+    {label:'Marcus L. · MH referred · ATW',  p:'paused · MH'},
+    {label:'Peter R. · stalled',             p:'stalled · 6mo'},
+    {label:'Mike B. · re-engaging',          p:'re-engaging'},
+  ],
+  fadumo: [
+    {label:'Ayan J. · TA placed · QTS y2',   p:'placed · 5mo'},
+    {label:'Mariam Y. · primary TA',         p:'placed · 4mo'},
+    {label:'Khadija O. · EAP enrolled',      p:'in EAP'},
+    {label:'Rahma A. · placement weeks',     p:'in placement'},
+    {label:'Layla K. · TA · sustained',      p:'sustained 6mo'},
+    {label:'Bushra N. · QTS y2',             p:'in QTS'},
+    {label:'Hodan S. · childcare grant',     p:'in placement'},
+    {label:'Sumaya M. · school-hours admin', p:'placed · 3mo'},
+    {label:'Anisa F. · REP refugee',         p:'placed · 2mo'},
+    {label:'Idil R. · Welsh A2 cert',        p:'in EAP'},
+    {label:'Hawa B. · Riverside placement',  p:'in placement'},
+    {label:'Nasrin A. · funded course',      p:'in EAP'},
+    {label:'Sahra D. · TA · sustained',      p:'sustained 7mo'},
+    {label:'Wais M. · placed · admin',       p:'placed · 4mo'},
+    {label:'Awo G. · interview',             p:'in interview'},
+  ],
+  mark: [
+    {label:'Lee P. · HGV reinstated',        p:'placed · 1mo'},
+    {label:'Tony W. · Bardon yard role',     p:'placed · 4mo'},
+    {label:'Steve M. · Class C medical',     p:'in medical'},
+    {label:'Gary B. · HGV reapplied',        p:'sustained 6mo'},
+    {label:'Dave K. · driving · perm',       p:'placed · 5mo'},
+    {label:'Phil R. · in-progress',          p:'placed · 2mo'},
+    {label:'Pete C. · forklift cert',        p:'in training'},
+    {label:'Mick S. · East Mids placed',     p:'placed · 3mo'},
+    {label:'Brian L. · withdrawn',           p:'withdrawn · 3mo'},
+    {label:'Roger H. · HGV C+E in-progress', p:'in training'},
+    {label:'Vince N. · Nottingham yard',     p:'placed · 2mo'},
+    {label:'Frank D. · UC taper · placed',   p:'placed · 4mo'},
+    {label:'Bob J. · sustained',             p:'sustained 8mo'},
+    {label:'Kev S. · Ban-the-Box placed',    p:'placed · 6mo'},
+    {label:'Will P. · in-progress',          p:'placed · 1mo'},
+    {label:'Dean F. · HGV C+E · sustained',  p:'sustained 7mo'},
+  ],
+};
+
+const SIMILAR_CUSTOMERS = {
+  daniel:   ['Marcus K.','Aaron M.','Reece D.','Jamal R.','Kai W.','Theo P.','Junior O.','Femi L.','Joshua C.','Bilal F.','Aaron B.','Tom H.','Ryan O.','Aiden P.','Callum K.'],
+  amara:    ['Halima A.','Joy E.','Tracy J.','Demi P.','Chantelle B.','Ruth L.','Maria H.','Tamika E.','Sade O.','Yvonne D.','Folake A.','Megan S.','Naomi B.','Faye M.','Tia F.'],
+  wojciech: ['Krzysztof M.','Pawel S.','Andrzej W.','Tomasz J.','Piotr R.','Marek L.','Stanislaw N.','Aleksander G.','Hubert D.','Jakub T.','Witold M.','Kasia Z.','Adrian P.','Maciej F.','Filip W.'],
+  tomasz:   ['Liam P.','Joshua M.','Connor R.','Aiden B.','Damian K.','Ryan F.','Tom H.','Sean L.','Callum W.','Junior O.','Dylan G.','Kai N.','Marcus L.','Peter R.','Mike B.'],
+  fadumo:   ['Ayan J.','Mariam Y.','Khadija O.','Rahma A.','Layla K.','Bushra N.','Hodan S.','Sumaya M.','Anisa F.','Idil R.','Hawa B.','Nasrin A.','Sahra D.','Wais M.','Awo G.'],
+  mark:     ['Lee P.','Tony W.','Steve M.','Gary B.','Dave K.','Phil R.','Pete C.','Mick S.','Brian L.','Roger H.','Vince N.','Frank D.','Bob J.','Kev S.','Will P.'],
+};
+
+let trainingNodeState = { customer:null, expert:null, journey:null, halo:null, haloKind:null };
+
 function trainingNodeGraph(raw){
   const canvas = document.getElementById('trainingGraph');
   const dpr = Math.max(1, window.devicePixelRatio||1);
@@ -2023,7 +2249,6 @@ function trainingNodeGraph(raw){
   sz();
   const ctx = canvas.getContext('2d');
   const W = ()=>canvas.clientWidth, H = ()=>canvas.clientHeight;
-  // Seeded RNG for repeatable layout per session
   let seed = 1337;
   function rnd(){ seed=(seed*9301+49297)%233280; return seed/233280; }
 
@@ -2032,11 +2257,16 @@ function trainingNodeGraph(raw){
   for(let i=0;i<NUM;i++){
     nodes.push({ x: rnd()*0.92+0.04, y: rnd()*0.86+0.07, r: 1.6 + rnd()*1.8, alpha: 0.18 + rnd()*0.25 });
   }
-  // Pinned highlight nodes
-  const customer = { x:0.20, y:0.55, r:7, label:'DANIEL', sub:'CUSTOMER', color:'#00ff88' };
-  const expert   = { x:0.80, y:0.30, r:7, label:'PRIYA',  sub:'EXPERT',   color:'#ccffe5' };
-  const journey  = { x:0.50, y:0.74, r:8, label:'THIS JOURNEY', sub:'outcome='+raw.sustainabilityPct+'%', color:'#ffffff' };
-  document.getElementById('trainingNodeCount').textContent = 'N='+(NUM+3)+' · 3 PINNED';
+  // Persona-aware pinned-node labels
+  const personaId = sessionStorage.getItem('personaId') || 'daniel';
+  const active = window.ACTIVE_PERSONA;
+  const custName = active ? active.name.split(' ')[0].toUpperCase() : 'DANIEL';
+  const expName  = active ? active.adviser.name.split(' ')[0].toUpperCase() : 'PRIYA';
+  const customer = { x:0.20, y:0.55, r:8, label:custName, sub:'CUSTOMER · click to expand', color:'#00ff88', kind:'customer' };
+  const expert   = { x:0.80, y:0.30, r:8, label:expName,  sub:'EXPERT · click to expand',   color:'#ccffe5', kind:'expert' };
+  const journey  = { x:0.50, y:0.74, r:9, label:'THIS JOURNEY', sub:'outcome='+raw.sustainabilityPct+'% · click to expand', color:'#ffffff', kind:'journey' };
+  trainingNodeState = { customer, expert, journey, halo:null, haloKind:null };
+  document.getElementById('trainingNodeCount').textContent = 'N='+(NUM+3)+' · 3 PINNED · click any';
 
   let pulse = 0;
   function frame(){
@@ -2057,12 +2287,33 @@ function trainingNodeGraph(raw){
     edge(customer, expert);
     edge(customer, journey);
     edge(expert, journey);
-    // pulse ring on journey
+    // Halo: render expanded similar nodes around the clicked pinned node.
+    if(trainingNodeState.halo && trainingNodeState.haloKind){
+      const anchor = trainingNodeState[trainingNodeState.haloKind];
+      const haloColor = trainingNodeState.haloKind==='expert' ? '#ccffe5' : (trainingNodeState.haloKind==='journey' ? '#ffffff' : '#00ff88');
+      trainingNodeState.halo.forEach((h, idx)=>{
+        const x = h.x * W(), y = h.y * H();
+        ctx.strokeStyle = 'rgba(0,255,136,0.30)';
+        ctx.lineWidth = 0.9;
+        ctx.beginPath(); ctx.moveTo(anchor.x*W(), anchor.y*H()); ctx.lineTo(x, y); ctx.stroke();
+        // node
+        ctx.fillStyle = haloColor;
+        ctx.globalAlpha = 0.85;
+        ctx.beginPath(); ctx.arc(x, y, 3.2, 0, Math.PI*2); ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+    }
+    // pulse ring on the journey node (subtle)
     const pr = 12 + Math.sin(pulse)*4 + (1+Math.sin(pulse*0.7))*6;
     ctx.strokeStyle='rgba(0,255,136,0.55)'; ctx.lineWidth=1.2;
     ctx.beginPath(); ctx.arc(journey.x*W(), journey.y*H(), pr, 0, Math.PI*2); ctx.stroke();
     // pinned nodes
     function pin(n){
+      // outer halo ring when this kind is expanded
+      if(trainingNodeState.haloKind === n.kind){
+        ctx.strokeStyle = '#00ff88'; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(n.x*W(), n.y*H(), n.r+5, 0, Math.PI*2); ctx.stroke();
+      }
       ctx.fillStyle = n.color; ctx.beginPath(); ctx.arc(n.x*W(), n.y*H(), n.r, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = '#00ff88'; ctx.font = '11px monospace';
       ctx.fillText(n.label, n.x*W()+n.r+6, n.y*H()+3);
@@ -2075,6 +2326,86 @@ function trainingNodeGraph(raw){
   if(trainingRAF) cancelAnimationFrame(trainingRAF);
   frame();
   window.addEventListener('resize', sz);
+
+  // ---- Click handler: hit-test against the three pinned nodes ----
+  canvas.style.cursor = 'pointer';
+  canvas.onclick = (ev)=>{
+    const rect = canvas.getBoundingClientRect();
+    const x = ev.clientX - rect.left, y = ev.clientY - rect.top;
+    const Wpx = canvas.clientWidth, Hpx = canvas.clientHeight;
+    const hit = [customer, expert, journey].find(n=>{
+      const dx = n.x*Wpx - x, dy = n.y*Hpx - y;
+      return Math.sqrt(dx*dx + dy*dy) < n.r + 14;
+    });
+    if(!hit){
+      // Click outside the pinned nodes collapses the halo.
+      trainingNodeState.halo = null;
+      trainingNodeState.haloKind = null;
+      hideTrainingHaloPanel();
+      return;
+    }
+    expandNodeHalo(hit.kind);
+  };
+}
+
+function expandNodeHalo(kind){
+  const personaId = sessionStorage.getItem('personaId') || 'daniel';
+  const anchor = trainingNodeState[kind];
+  if(!anchor) return;
+  // Position the halo of related dots around the anchor in a ring + a few stragglers
+  const N = 14;
+  const halo = [];
+  for(let i=0;i<N;i++){
+    const angle = (i / N) * Math.PI * 2 + (Math.random()-0.5)*0.18;
+    const radius = 0.12 + Math.random()*0.08;
+    halo.push({
+      x: Math.max(0.04, Math.min(0.96, anchor.x + Math.cos(angle)*radius)),
+      y: Math.max(0.06, Math.min(0.94, anchor.y + Math.sin(angle)*radius)),
+    });
+  }
+  trainingNodeState.halo = halo;
+  trainingNodeState.haloKind = kind;
+  showTrainingHaloPanel(kind, personaId);
+}
+
+function showTrainingHaloPanel(kind, personaId){
+  const panel = document.getElementById('trainingHaloPanel');
+  if(!panel) return;
+  let title, subtitle, items;
+  if(kind === 'expert'){
+    const bundle = EXPERT_CASELOAD[personaId] || EXPERT_CASELOAD.daniel;
+    title = bundle.adviser + ' · current caseload';
+    subtitle = '12 other live customers under this adviser · not in the demo pool';
+    items = bundle.items.map(it=>({primary:it.n, secondary:it.a, tertiary:it.p}));
+  } else if(kind === 'journey'){
+    const bundle = SIMILAR_JOURNEYS[personaId] || SIMILAR_JOURNEYS.daniel;
+    title = 'Similar journeys · nearest-neighbour in embedding space';
+    subtitle = bundle.length + ' historical journeys closest to this one · outcome shown';
+    items = bundle.map(it=>({primary:it.label, secondary:it.p, tertiary:''}));
+  } else { // customer
+    const ids = SIMILAR_CUSTOMERS[personaId] || SIMILAR_CUSTOMERS.daniel;
+    const active = window.ACTIVE_PERSONA;
+    const archetype = active ? active.archetype : 'similar profile';
+    title = 'Similar customers · same archetype';
+    subtitle = ids.length + ' active customers with the same barrier & sector profile';
+    items = ids.map(n=>({primary:n, secondary:archetype, tertiary:''}));
+  }
+  panel.innerHTML = `
+    <div class="halo-head"><div class="halo-title">${title}</div><div class="halo-sub">${subtitle}</div><button class="halo-close" id="haloCloseBtn">×</button></div>
+    <div class="halo-list">
+      ${items.map(it=>`<div class="halo-row"><span class="halo-primary">${it.primary}</span><span class="halo-secondary">${it.secondary}</span><span class="halo-tertiary">${it.tertiary||''}</span></div>`).join('')}
+    </div>`;
+  panel.style.display = 'flex';
+  const closeBtn = document.getElementById('haloCloseBtn');
+  if(closeBtn) closeBtn.onclick = ()=>{
+    trainingNodeState.halo = null; trainingNodeState.haloKind = null;
+    hideTrainingHaloPanel();
+  };
+}
+
+function hideTrainingHaloPanel(){
+  const panel = document.getElementById('trainingHaloPanel');
+  if(panel) panel.style.display = 'none';
 }
 let trainingRAF = null;
 let trainingRainTimer = null;
@@ -2118,6 +2449,8 @@ function closeTrainingUpdate(){
   ov.classList.add('fading');
   if(trainingRainTimer){ clearInterval(trainingRainTimer); trainingRainTimer=null; }
   if(trainingRAF){ cancelAnimationFrame(trainingRAF); trainingRAF=null; }
+  if(typeof hideTrainingHaloPanel === 'function') hideTrainingHaloPanel();
+  if(typeof trainingNodeState !== 'undefined'){ trainingNodeState.halo = null; trainingNodeState.haloKind = null; }
   setTimeout(()=>{
     ov.classList.remove('show'); ov.classList.remove('fading');
     ov.setAttribute('aria-hidden','true');
