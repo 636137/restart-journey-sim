@@ -365,8 +365,8 @@ def upsert_dataset(user_arn, table):
     )
     try:
         qs.describe_data_set(AwsAccountId=ACCOUNT, DataSetId=ds_id)
-        qs.update_data_set(**{k:v for k,v in body.items() if k!="Permissions"})
-        log(f"updated dataset {ds_id}")
+        log(f"dataset {ds_id} already exists - skipping update to preserve SPICE capacity")
+        return ds_id
     except qs.exceptions.ResourceNotFoundException:
         qs.create_data_set(**body)
         log(f"created dataset {ds_id}")
@@ -391,7 +391,47 @@ def render_dashboard_definition(name, dataset_ids):
     pass  # see deploy() for inlined dashboards
 
 
-def upsert_dashboard(user_arn, dashboard_id, name, definition):
+def upsert_theme(user_arn):
+    from dashboards import THEME_ID, THEME_NAME, THEME_CONFIG
+    try:
+        qs.describe_theme(AwsAccountId=ACCOUNT, ThemeId=THEME_ID)
+        qs.update_theme(
+            AwsAccountId=ACCOUNT,
+            ThemeId=THEME_ID,
+            Name=THEME_NAME,
+            BaseThemeId="MIDNIGHT",
+            Configuration=THEME_CONFIG,
+        )
+        log(f"updated theme {THEME_ID}")
+    except qs.exceptions.ResourceNotFoundException:
+        qs.create_theme(
+            AwsAccountId=ACCOUNT,
+            ThemeId=THEME_ID,
+            Name=THEME_NAME,
+            BaseThemeId="MIDNIGHT",
+            Configuration=THEME_CONFIG,
+            Permissions=[{
+                "Principal": user_arn,
+                "Actions": [
+                    "quicksight:DescribeTheme",
+                    "quicksight:ListThemeVersions",
+                    "quicksight:DescribeThemeAlias",
+                    "quicksight:ListThemeAliases",
+                    "quicksight:UpdateTheme",
+                    "quicksight:UpdateThemeAlias",
+                    "quicksight:UpdateThemePermissions",
+                    "quicksight:DeleteTheme",
+                    "quicksight:DeleteThemeAlias",
+                    "quicksight:CreateThemeAlias",
+                    "quicksight:DescribeThemePermissions",
+                ],
+            }],
+        )
+        log(f"created theme {THEME_ID}")
+    return f"arn:aws:quicksight:{REGION}:{ACCOUNT}:theme/{THEME_ID}"
+
+
+def upsert_dashboard(user_arn, dashboard_id, name, definition, theme_arn=None):
     body = dict(
         AwsAccountId=ACCOUNT,
         DashboardId=dashboard_id,
@@ -411,9 +451,14 @@ def upsert_dashboard(user_arn, dashboard_id, name, definition):
             ],
         }],
     )
+    if theme_arn:
+        body["ThemeArn"] = theme_arn
     try:
         qs.describe_dashboard(AwsAccountId=ACCOUNT, DashboardId=dashboard_id)
-        qs.update_dashboard(AwsAccountId=ACCOUNT, DashboardId=dashboard_id, Name=name, Definition=definition)
+        update_kwargs = dict(AwsAccountId=ACCOUNT, DashboardId=dashboard_id, Name=name, Definition=definition)
+        if theme_arn:
+            update_kwargs["ThemeArn"] = theme_arn
+        qs.update_dashboard(**update_kwargs)
         log(f"updated dashboard {dashboard_id}")
     except qs.exceptions.ResourceNotFoundException:
         qs.create_dashboard(**body)
@@ -425,125 +470,25 @@ def _ds_arn(dsid):
 
 
 def build_dashboards(user_arn, dataset_ids):
-    """Three dashboards with KPI + bar visuals.
-    All KPI fields are numeric columns; all bar Y fields are numeric.
-    For 'count of records' style KPIs, use a numeric column that exists everywhere
-    (e.g. age in customers, score in router_scores, days_to_placement in journeys)."""
-
-    def kpi_visual(vid, ds_id, label, num_field, agg="SUM"):
-        return {"KPIVisual": {
-            "VisualId": vid,
-            "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":label}},
-            "ChartConfiguration": {
-                "FieldWells": {
-                    "TargetValues": [],
-                    "Values": [{"NumericalMeasureField": {
-                        "FieldId": f"{vid}-val",
-                        "Column": {"DataSetIdentifier": ds_id, "ColumnName": num_field},
-                        "AggregationFunction": {"SimpleNumericalAggregation": agg},
-                    }}],
-                    "TrendGroups": [],
-                },
-            },
-        }}
-
-    def bar_count_visual(vid, ds_id, title, x_field):
-        """Bar chart of count(records) grouped by a categorical field."""
-        return {"BarChartVisual": {
-            "VisualId": vid,
-            "Title":{"Visibility":"VISIBLE","FormatText":{"PlainText":title}},
-            "ChartConfiguration": {
-                "FieldWells": {"BarChartAggregatedFieldWells": {
-                    "Category":[{"CategoricalDimensionField":{"FieldId":f"{vid}-x","Column":{"DataSetIdentifier":ds_id,"ColumnName":x_field}}}],
-                    "Values":[{"CategoricalMeasureField":{
-                        "FieldId":f"{vid}-y",
-                        "Column":{"DataSetIdentifier":ds_id,"ColumnName":x_field},
-                        "AggregationFunction":"COUNT",
-                    }}],
-                    "Colors":[],
-                }},
-                "Orientation":"VERTICAL",
-            },
-        }}
-
-    def bar_num_visual(vid, ds_id, title, x_field, y_field, agg="AVERAGE"):
-        return {"BarChartVisual": {
-            "VisualId": vid,
-            "Title":{"Visibility":"VISIBLE","FormatText":{"PlainText":title}},
-            "ChartConfiguration": {
-                "FieldWells": {"BarChartAggregatedFieldWells": {
-                    "Category":[{"CategoricalDimensionField":{"FieldId":f"{vid}-x","Column":{"DataSetIdentifier":ds_id,"ColumnName":x_field}}}],
-                    "Values":[{"NumericalMeasureField":{"FieldId":f"{vid}-y","Column":{"DataSetIdentifier":ds_id,"ColumnName":y_field},"AggregationFunction":{"SimpleNumericalAggregation":agg}}}],
-                    "Colors":[],
-                }},
-                "Orientation":"VERTICAL",
-            },
-        }}
-
-    DASHBOARDS = [
-        ("dash-executive", "Restart · Executive Overview", [
-            # (visual_id, kind, ds, args)
-            ("v1", "kpi-count", "journeys", "Total journeys", "sustainability_pct", "COUNT"),
-            ("v2", "kpi",       "outcomes_kpis", "Avg days to placement", "avg_days_to_placement", "AVERAGE"),
-            ("v3", "kpi",       "outcomes_kpis", "Placement rate %", "placement_rate_pct", "AVERAGE"),
-            ("v4", "kpi",       "outcomes_kpis", "Avg sustainability %", "avg_sustainability_pct", "AVERAGE"),
-            ("b1", "bar-count", "journeys", "Journeys by region", "region_key"),
-            ("b2", "bar-count", "journeys", "Outcomes mix", "outcome"),
-            ("b3", "bar-num",   "outcomes_kpis", "Avg sustainability by region", "region_key", "avg_sustainability_pct", "AVERAGE"),
-            ("b4", "bar-count", "journeys", "Scenario band mix", "scenario_band"),
-        ]),
-        ("dash-adviser", "Adviser Performance", [
-            ("v1", "kpi-count", "advisers", "Active advisers", "caseload_current", "COUNT"),
-            ("v2", "kpi",       "advisers", "Avg customer satisfaction", "customer_satisfaction", "AVERAGE"),
-            ("v3", "kpi",       "advisers", "Avg caseload", "caseload_current", "AVERAGE"),
-            ("v4", "kpi",       "advisers", "Avg tenure (years)", "years_at_maximus", "AVERAGE"),
-            ("b1", "bar-num",   "outcomes_kpis", "Total placements by region", "region_key", "placements", "SUM"),
-            ("b2", "bar-num",   "outcomes_kpis", "Avg days-to-placement by region", "region_key", "avg_days_to_placement", "AVERAGE"),
-            ("b3", "bar-count", "advisers", "Advisers by region", "region_key"),
-            ("b4", "bar-num",   "advisers", "Avg caseload by region", "region_key", "caseload_current", "AVERAGE"),
-        ]),
-        ("dash-customer", "Customer Outcomes", [
-            ("v1", "kpi-count", "customers", "Customers", "age", "COUNT"),
-            ("v2", "kpi",       "router_scores", "Avg Max Router score", "score", "AVERAGE"),
-            ("v3", "kpi",       "customers", "Avg age", "age", "AVERAGE"),
-            ("v4", "kpi",       "customers", "Avg UC months at start", "uc_months_at_start", "AVERAGE"),
-            ("b1", "bar-count", "router_scores", "Router scenario bands", "band"),
-            ("b2", "bar-num",   "journeys", "Avg open barriers by scenario", "scenario_band", "open_barriers", "AVERAGE"),
-            ("b3", "bar-count", "customers", "Customers by region", "region_key"),
-            ("b4", "bar-num",   "journeys", "Avg sustainability % by scenario", "scenario_band", "sustainability_pct", "AVERAGE"),
-        ]),
+    """Polished three-dashboard build via the dashboards module."""
+    from dashboards import executive_definition, adviser_definition, customer_definition
+    theme_arn = upsert_theme(user_arn)
+    DASH = [
+        ("dash-executive", "Restart · Executive Overview", executive_definition(ACCOUNT, REGION)),
+        ("dash-adviser",   "Restart · Adviser Performance", adviser_definition(ACCOUNT, REGION)),
+        ("dash-customer",  "Restart · Customer Outcomes", customer_definition(ACCOUNT, REGION)),
     ]
-
-    for dash_id, name, items in DASHBOARDS:
-        used_ds = sorted({i[2] for i in items})
-        identifiers = [{"DataSetArn": _ds_arn(f"ds-{ds.replace('_','-')}"), "Identifier": ds} for ds in used_ds]
-        visuals = []
-        for it in items:
-            vid, kind, ds = it[0], it[1], it[2]
-            if kind == "kpi":
-                _, _, _, label, field, agg = it
-                visuals.append(kpi_visual(vid, ds, label, field, agg))
-            elif kind == "kpi-count":
-                _, _, _, label, field, agg = it
-                visuals.append(kpi_visual(vid, ds, label, field, agg))
-            elif kind == "bar-count":
-                _, _, _, title, x = it
-                visuals.append(bar_count_visual(vid, ds, title, x))
-            elif kind == "bar-num":
-                _, _, _, title, x, y, agg = it
-                visuals.append(bar_num_visual(vid, ds, title, x, y, agg))
-        sheet = {"SheetId":"sheet-1", "Name":"Overview", "Visuals": visuals}
-        definition = {"DataSetIdentifierDeclarations": identifiers, "Sheets": [sheet]}
-        # Delete the failed dashboard first so create fresh
+    for dash_id, name, definition in DASH:
         try:
             existing = qs.describe_dashboard(AwsAccountId=ACCOUNT, DashboardId=dash_id)["Dashboard"]
-            if existing.get("Version",{}).get("Status") == "CREATION_FAILED":
+            if existing.get("Version",{}).get("Status") in ("CREATION_FAILED","UPDATE_FAILED"):
                 qs.delete_dashboard(AwsAccountId=ACCOUNT, DashboardId=dash_id)
                 log(f"deleted failed dashboard {dash_id}")
                 time.sleep(2)
         except qs.exceptions.ResourceNotFoundException:
             pass
-        upsert_dashboard(user_arn, dash_id, name, definition)
+        upsert_dashboard(user_arn, dash_id, name, definition, theme_arn=theme_arn)
+    return
 
 
 def upsert_topic(user_arn, datasets):
