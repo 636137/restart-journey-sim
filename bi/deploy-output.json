@@ -1,0 +1,26 @@
+{
+  "account": "348425780214",
+  "region": "us-west-2",
+  "bucket": "restart-bi-348425780214-us-west-2",
+  "athena_results_bucket": "restart-bi-athena-348425780214-us-west-2",
+  "glue_db": "restart_bi",
+  "athena_workgroup": "restart-bi",
+  "row_counts": {
+    "customers": 10287,
+    "advisers": 247,
+    "journeys": 10287,
+    "journey_stages": 122615,
+    "router_scores": 16310,
+    "outcomes_kpis": 2199
+  },
+  "quicksight_data_source": "restart-bi-athena",
+  "quicksight_datasets": [
+    "ds-customers",
+    "ds-advisers",
+    "ds-journeys",
+    "ds-journey-stages",
+    "ds-router-scores",
+    "ds-outcomes-kpis"
+  ],
+  "quicksight_console": "https://us-west-2.quicksight.aws.amazon.com/sn/start"
+}
