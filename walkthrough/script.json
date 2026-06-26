@@ -1,0 +1,26 @@
+{
+  "voice_id": "c3QefzBhE1Cx4Yl23IV3",
+  "voice_name": "Natural British Female - Young Corporate Narration",
+  "model_id": "eleven_multilingual_v2",
+  "voice_settings": { "stability": 0.62, "similarity_boost": 0.72, "style": 0.12, "use_speaker_boost": true },
+  "segments": [
+    { "id": "s00_intro", "text": "This is the Restart Scheme companion app, delivered by Maximus U-K on behalf of the Department for Work and Pensions. Let's walk through one customer's full journey back to work, from referral to their very first day on the job." },
+    { "id": "s01_home", "text": "We start on the customer's phone. Daniel has three things from the scheme: his Messages, his Mail, and the Restart app itself. On the right, a journey rail lets us fire each real touchpoint, one at a time." },
+    { "id": "s02_referral_notif", "text": "Step one. Within forty-eight hours of his referral, Daniel gets a warm welcome text. Notice the banner slides in just like a real iPhone notification. Let's tap it to open the conversation." },
+    { "id": "s03_referral_sms", "text": "His adviser introduces herself, with no pressure and at his pace. Daniel can reply using a quick tap, or type his own message. Let's tap, yes, book it." },
+    { "id": "s04_referral_reply", "text": "Watch the typing indicator, then a genuine, encouraging reply. Every message is two-way, so the journey always feels human." },
+    { "id": "s05_diagnostic", "text": "Step two. His first appointment is booked by text, with options to confirm or rearrange. This is the diagnostic, where skills, goals and any barriers are talked through together." },
+    { "id": "s06_actionplan_email", "text": "Step three moves to email. After the diagnostic, Daniel's adviser sends a personalised action plan. Let's open it." },
+    { "id": "s07_actionplan_read", "text": "Here's his goal, this week's three steps, and a clear action box. Travel costs and work clothing are covered, and he can reply to confirm he's happy, right from the email." },
+    { "id": "s08_skills_push", "text": "Step four. Now the Restart app itself sends a push. His C-V is ready, and a fully-funded Level Two course has been matched to local demand. Let's open the app." },
+    { "id": "s09_restart_app", "text": "This is the heart of the experience. A progress bar tracks his journey to work, and every touchpoint is laid out as a timeline, so Daniel can always see how far he's come and what's next." },
+    { "id": "s10_jobmatch", "text": "Step five, the moment it all builds towards. A vacancy, a ninety-two percent match to his skills and his travel area. A warehouse role, twenty-five thousand four hundred pounds. One tap to apply." },
+    { "id": "s11_apply", "text": "He applies in a single tap, and his adviser is notified instantly. No forms, no friction." },
+    { "id": "s12_interview", "text": "Step six. The employer wants to meet him. By text, his adviser confirms the interview, shares prep notes, and covers his travel. He can even request a prep call." },
+    { "id": "s13_offer_email", "text": "Step seven. The offer email. Let's open the best message in the whole journey." },
+    { "id": "s14_offer_read", "text": "Daniel got the job. The offer, the salary, his start date, and crucially, a plain-English explanation that he'll be better off in work as Universal Credit tapers. He accepts with one reply." },
+    { "id": "s15_insupport", "text": "Step eight. His first shift is done, but support doesn't stop. The scheme checks in weekly for six months, helping him settle, and progress." },
+    { "id": "s16_progress_full", "text": "And there it is. The progress bar reaches one hundred percent. Every stage complete, every channel, SMS, email, and app, working together as one journey." },
+    { "id": "s17_reset", "text": "Finally, the whole journey can be reset and replayed in seconds, perfect for a demo. That's the Maximus Restart experience: human, joined-up, and built to get people back to work. Thanks for watching." }
+  ]
+}

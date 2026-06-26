@@ -1,0 +1,17 @@
+{
+  "name": "restart-sim-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/agent-client.js --bundle --format=iife --global-name=RestartAdviser --target=es2020 --outfile=../adviser-bundle.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-agentcore": "^3.901.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.901.0",
+    "puppeteer": "^25.2.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  }
+}

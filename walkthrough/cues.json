@@ -1,0 +1,77 @@
+{
+  "cues": [
+    {
+      "id": "s00_intro",
+      "offset": 0.912
+    },
+    {
+      "id": "s01_home",
+      "offset": 13.894
+    },
+    {
+      "id": "s02_referral_notif",
+      "offset": 25.863
+    },
+    {
+      "id": "s03_referral_sms",
+      "offset": 38.554
+    },
+    {
+      "id": "s04_referral_reply",
+      "offset": 48.195
+    },
+    {
+      "id": "s05_diagnostic",
+      "offset": 58.48
+    },
+    {
+      "id": "s06_actionplan_email",
+      "offset": 70.947
+    },
+    {
+      "id": "s07_actionplan_read",
+      "offset": 80.115
+    },
+    {
+      "id": "s08_skills_push",
+      "offset": 90.726
+    },
+    {
+      "id": "s09_restart_app",
+      "offset": 100.933
+    },
+    {
+      "id": "s10_jobmatch",
+      "offset": 113.218
+    },
+    {
+      "id": "s11_apply",
+      "offset": 124.856
+    },
+    {
+      "id": "s12_interview",
+      "offset": 132.549
+    },
+    {
+      "id": "s13_offer_email",
+      "offset": 143.257
+    },
+    {
+      "id": "s14_offer_read",
+      "offset": 150.668
+    },
+    {
+      "id": "s15_insupport",
+      "offset": 163.044
+    },
+    {
+      "id": "s16_progress_full",
+      "offset": 171.946
+    },
+    {
+      "id": "s17_reset",
+      "offset": 183.164
+    }
+  ],
+  "totalWall": 195.666
+}

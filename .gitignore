@@ -1,0 +1,38 @@
+# build artefacts
+agent/build-source.zip
+agent/deploy-output.json
+web-deploy-output.json
+
+# secrets / per-account config
+adviser-config.js
+
+# node
+web/node_modules/
+web/test-browser.mjs
+web/test-browser.mjs.bak
+web/test-live.mjs
+web/test-live.mjs.bak
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# OS
+.DS_Store
+*.swp
+
+# state
+/tmp/restart-state.json
+
+# stray screenshot helpers
+shot-*.png
+shot-driver.html
+_shot_*.html
+
+# walkthrough recorder (separate side-project; large artefacts)
+walkthrough/node_modules/
+walkthrough/audio/
+walkthrough/video/
+walkthrough/*.mp4
+walkthrough/package-lock.json
