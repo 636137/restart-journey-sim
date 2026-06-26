@@ -237,6 +237,26 @@ body {
 .training-halo-panel .halo-primary { color:#ccffe5; font-weight:600; grid-column:1; }
 .training-halo-panel .halo-tertiary { color:#00ff88; font-size:10px; grid-column:2; align-self:center; font-variant-numeric:tabular-nums; }
 .training-halo-panel .halo-secondary { color:rgba(0,255,136,0.65); font-size:10px; grid-column:1/3; font-style:italic; }
+.training-halo-panel .halo-row.clickable { cursor:pointer; transition:background .12s; }
+.training-halo-panel .halo-row.clickable:hover { background:rgba(0,255,136,0.08); }
+.training-halo-panel .halo-corr { display:flex; flex-direction:column; gap:3px; margin-top:5px; padding-top:5px; border-top:1px solid rgba(0,255,136,0.12); }
+.training-halo-panel .halo-corr-bar { width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px; overflow:hidden; }
+.training-halo-panel .halo-corr-fill { height:100%; transition:width .5s ease-out; }
+.training-halo-panel .halo-corr-num { font-size:10px; font-weight:700; letter-spacing:1px; font-variant-numeric:tabular-nums; }
+.training-halo-panel .halo-corr-num.pos { color:#00ff88; }
+.training-halo-panel .halo-corr-num.neg { color:#ff5e5e; }
+
+.halo-detail-panel { position:absolute; bottom:8px; left:8px; right:8px; max-height:60%; background:rgba(0,15,10,0.96); border:1px solid rgba(0,255,136,0.6); border-radius:10px; padding:10px 12px; display:flex; flex-direction:column; gap:6px; backdrop-filter:blur(4px); z-index:6; box-shadow:0 4px 18px rgba(0,255,136,0.15); }
+.halo-detail-panel .hd-head { display:flex; justify-content:space-between; align-items:center; padding-bottom:6px; border-bottom:1px solid rgba(0,255,136,0.2); }
+.halo-detail-panel .hd-title { font-size:12px; letter-spacing:1.5px; color:#ccffe5; font-weight:700; }
+.halo-detail-panel .hd-close { background:transparent; border:none; color:#00ff88; font-size:20px; cursor:pointer; padding:0 6px; }
+.halo-detail-panel .hd-body { display:grid; grid-template-columns:1fr 1fr; column-gap:14px; row-gap:5px; overflow-y:auto; font-size:11px; padding-top:4px; }
+.halo-detail-panel .hd-section { display:flex; flex-direction:column; gap:1px; }
+.halo-detail-panel .hd-section.hd-reasons { grid-column:1/3; }
+.halo-detail-panel .hd-k { color:rgba(0,255,136,0.55); font-size:9.5px; letter-spacing:1.2px; }
+.halo-detail-panel .hd-v { color:#ccffe5; }
+.halo-detail-panel .hd-num { color:#00ff88; font-variant-numeric:tabular-nums; font-weight:600; }
+.halo-detail-panel .hd-tag { display:inline-block; padding:1px 6px; margin:1px 3px 1px 0; border-radius:8px; font-size:10px; background:rgba(0,255,136,0.1); color:#ccffe5; border:1px solid rgba(0,255,136,0.25); }
 .training-log { font-size:11.5px; color:rgba(0,255,136,0.8); max-height:96px; overflow:hidden; margin-top:8px; line-height:1.55; }
 .training-log .line { opacity:0; animation: matchFadeIn .4s forwards; }
 
@@ -721,6 +741,7 @@ body {
         <div class="training-graph-wrap">
           <canvas id="trainingGraph"></canvas>
           <div id="trainingHaloPanel" class="training-halo-panel" style="display:none;"></div>
+          <div id="haloDetail" class="halo-detail-panel" style="display:none;"></div>
         </div>
         <div class="training-log" id="trainingLog"></div>
       </div>
@@ -2368,39 +2389,164 @@ function expandNodeHalo(kind){
   showTrainingHaloPanel(kind, personaId);
 }
 
-function showTrainingHaloPanel(kind, personaId){
+async function ensureGraphNeighboursLoaded(){
+  if(window.GRAPH_NEIGHBOURS) return;
+  try{
+    const r = await fetch('graph-neighbours.json?cb='+Date.now());
+    if(r.ok) window.GRAPH_NEIGHBOURS = await r.json();
+  }catch(e){ console.warn('[graph] could not load graph-neighbours.json', e); }
+}
+
+async function showTrainingHaloPanel(kind, personaId){
   const panel = document.getElementById('trainingHaloPanel');
   if(!panel) return;
-  let title, subtitle, items;
-  if(kind === 'expert'){
-    const bundle = EXPERT_CASELOAD[personaId] || EXPERT_CASELOAD.daniel;
-    title = bundle.adviser + ' · current caseload';
-    subtitle = '12 other live customers under this adviser · not in the demo pool';
-    items = bundle.items.map(it=>({primary:it.n, secondary:it.a, tertiary:it.p}));
-  } else if(kind === 'journey'){
-    const bundle = SIMILAR_JOURNEYS[personaId] || SIMILAR_JOURNEYS.daniel;
-    title = 'Similar journeys · nearest-neighbour in embedding space';
-    subtitle = bundle.length + ' historical journeys closest to this one · outcome shown';
-    items = bundle.map(it=>({primary:it.label, secondary:it.p, tertiary:''}));
-  } else { // customer
-    const ids = SIMILAR_CUSTOMERS[personaId] || SIMILAR_CUSTOMERS.daniel;
-    const active = window.ACTIVE_PERSONA;
-    const archetype = active ? active.archetype : 'similar profile';
-    title = 'Similar customers · same archetype';
-    subtitle = ids.length + ' active customers with the same barrier & sector profile';
-    items = ids.map(n=>({primary:n, secondary:archetype, tertiary:''}));
+  await ensureGraphNeighboursLoaded();
+  const real = window.GRAPH_NEIGHBOURS && window.GRAPH_NEIGHBOURS.personas[personaId];
+
+  let title, subtitle, items, correlation;
+  if(real){
+    // ---- REAL DATA from graph-neighbours.json ----
+    if(kind === 'expert'){
+      const bundle = real.expert_caseload;
+      title = bundle.title;
+      subtitle = bundle.correlation.interpretation;
+      correlation = bundle.correlation;
+      items = bundle.items.map(it=>({
+        primary: it.name + ' · ' + it.age,
+        secondary: `${it.sector} · ${it.region}`,
+        tertiary: `${it.p_success_pct}%`,
+        clickData: it,
+        clickKind: 'caseload',
+      }));
+    } else if(kind === 'journey'){
+      const bundle = real.similar_journeys;
+      title = bundle.title;
+      subtitle = bundle.correlation.interpretation;
+      correlation = bundle.correlation;
+      items = bundle.items.map(it=>({
+        primary: it.name + ' · sim ' + it.similarity_pct + '%',
+        secondary: `${it.outcome} · ${it.journey_state}`,
+        tertiary: it.days_to_placement != null ? `${it.days_to_placement}d` : '—',
+        clickData: it,
+        clickKind: 'journey',
+      }));
+    } else {
+      const bundle = real.similar_customers;
+      title = bundle.title;
+      subtitle = bundle.correlation.interpretation;
+      correlation = bundle.correlation;
+      items = bundle.items.map(it=>({
+        primary: it.name + ' · sim ' + it.similarity_pct + '%',
+        secondary: `${it.sector} · ${it.region}`,
+        tertiary: `b=${it.barriers_count}`,
+        clickData: it,
+        clickKind: 'customer',
+      }));
+    }
+  } else {
+    // Fallback (graph-neighbours.json couldn't load) -- use hand-typed lists
+    if(kind === 'expert'){
+      const bundle = EXPERT_CASELOAD[personaId] || EXPERT_CASELOAD.daniel;
+      title = bundle.adviser + ' · current caseload';
+      subtitle = '12 other live customers';
+      items = bundle.items.map(it=>({primary:it.n, secondary:it.a, tertiary:it.p}));
+    } else if(kind === 'journey'){
+      const bundle = SIMILAR_JOURNEYS[personaId] || SIMILAR_JOURNEYS.daniel;
+      title = 'Similar journeys';
+      subtitle = 'fallback list';
+      items = bundle.map(it=>({primary:it.label, secondary:it.p, tertiary:''}));
+    } else {
+      const ids = SIMILAR_CUSTOMERS[personaId] || SIMILAR_CUSTOMERS.daniel;
+      const active = window.ACTIVE_PERSONA;
+      title = 'Similar customers';
+      subtitle = 'fallback list';
+      items = ids.map(n=>({primary:n, secondary:active ? active.archetype : '', tertiary:''}));
+    }
   }
+
+  // Correlation header
+  const corrHtml = correlation ? `
+    <div class="halo-corr">
+      <div class="halo-corr-bar"><div class="halo-corr-fill" style="width:${Math.min(100, Math.abs(correlation.lift_pct))}%; background:${correlation.lift_pct>=0?'#00ff88':'#ff5e5e'};"></div></div>
+      <div class="halo-corr-num ${correlation.lift_pct>=0?'pos':'neg'}">${correlation.lift_pct>=0?'+':''}${correlation.lift_pct.toFixed(1)}% lift vs network</div>
+    </div>` : '';
+
   panel.innerHTML = `
-    <div class="halo-head"><div class="halo-title">${title}</div><div class="halo-sub">${subtitle}</div><button class="halo-close" id="haloCloseBtn">×</button></div>
-    <div class="halo-list">
-      ${items.map(it=>`<div class="halo-row"><span class="halo-primary">${it.primary}</span><span class="halo-secondary">${it.secondary}</span><span class="halo-tertiary">${it.tertiary||''}</span></div>`).join('')}
-    </div>`;
+    <div class="halo-head">
+      <div class="halo-title">${title}</div>
+      <div class="halo-sub">${subtitle}</div>
+      ${corrHtml}
+      <button class="halo-close" id="haloCloseBtn">×</button>
+    </div>
+    <div class="halo-list" id="haloList"></div>`;
+  // Append rows with click handlers
+  const list = panel.querySelector('#haloList');
+  items.forEach((it, idx)=>{
+    const row = document.createElement('div');
+    row.className = 'halo-row clickable';
+    row.dataset.idx = idx;
+    row.innerHTML = `
+      <span class="halo-primary">${it.primary}</span>
+      <span class="halo-tertiary">${it.tertiary || ''}</span>
+      <span class="halo-secondary">${it.secondary}</span>
+    `;
+    row.onclick = ()=>openHaloDetail(it);
+    list.appendChild(row);
+  });
   panel.style.display = 'flex';
   const closeBtn = document.getElementById('haloCloseBtn');
   if(closeBtn) closeBtn.onclick = ()=>{
     trainingNodeState.halo = null; trainingNodeState.haloKind = null;
     hideTrainingHaloPanel();
   };
+}
+
+function openHaloDetail(it){
+  const detail = document.getElementById('haloDetail');
+  if(!detail) return;
+  const d = it.clickData || {};
+  const kind = it.clickKind || 'entity';
+  let body = '';
+  if(kind === 'caseload' || kind === 'customer'){
+    const barriers = (d.barriers || []).filter(Boolean);
+    body = `
+      <div class="hd-section"><span class="hd-k">CUSTOMER</span><span class="hd-v">${d.name}${d.age ? ' · '+d.age : ''}</span></div>
+      <div class="hd-section"><span class="hd-k">REGION</span><span class="hd-v">${d.region || '—'} · ${d.postcode||''}</span></div>
+      <div class="hd-section"><span class="hd-k">SECTOR</span><span class="hd-v">${d.sector || '—'}</span></div>
+      <div class="hd-section"><span class="hd-k">BARRIERS</span><span class="hd-v">${barriers.length ? barriers.join(', ') : '—'}</span></div>
+      <div class="hd-section"><span class="hd-k">UC DURATION</span><span class="hd-v">${d.uc_months_at_start || '—'} months</span></div>
+      <div class="hd-section"><span class="hd-k">DIGITAL</span><span class="hd-v">${d.digital_skills || '—'}</span></div>
+      ${d.p_success_pct != null ? `<div class="hd-section"><span class="hd-k">P(SUCCESS)</span><span class="hd-v hd-num">${d.p_success_pct}%</span></div>` : ''}
+      ${d.journey_state ? `<div class="hd-section"><span class="hd-k">STATE</span><span class="hd-v">${d.journey_state}</span></div>` : ''}
+      ${d.scenario_band ? `<div class="hd-section"><span class="hd-k">MAX NAV BAND</span><span class="hd-v">${d.scenario_band.toUpperCase()}</span></div>` : ''}
+      ${d.outcome ? `<div class="hd-section"><span class="hd-k">OUTCOME</span><span class="hd-v">${d.outcome}</span></div>` : ''}
+      ${d.similarity_pct != null ? `<div class="hd-section"><span class="hd-k">SIMILARITY</span><span class="hd-v hd-num">${d.similarity_pct}%</span></div>` : ''}
+      ${d.reasons && d.reasons.length ? `<div class="hd-section hd-reasons"><span class="hd-k">WHY SIMILAR</span><span class="hd-v">${d.reasons.map(r=>'<span class=hd-tag>'+r+'</span>').join('')}</span></div>` : ''}
+    `;
+  } else if(kind === 'journey'){
+    body = `
+      <div class="hd-section"><span class="hd-k">CUSTOMER</span><span class="hd-v">${d.name}</span></div>
+      <div class="hd-section"><span class="hd-k">SIMILARITY</span><span class="hd-v hd-num">${d.similarity_pct}%</span></div>
+      <div class="hd-section"><span class="hd-k">REGION</span><span class="hd-v">${d.region || '—'}</span></div>
+      <div class="hd-section"><span class="hd-k">SECTOR</span><span class="hd-v">${d.sector || '—'}</span></div>
+      <div class="hd-section"><span class="hd-k">OUTCOME</span><span class="hd-v">${d.outcome || '—'}</span></div>
+      <div class="hd-section"><span class="hd-k">STATE</span><span class="hd-v">${d.journey_state || '—'}</span></div>
+      <div class="hd-section"><span class="hd-k">CURRENT STAGE</span><span class="hd-v">${d.current_stage || '—'}</span></div>
+      <div class="hd-section"><span class="hd-k">DAYS TO PLACEMENT</span><span class="hd-v hd-num">${d.days_to_placement != null ? d.days_to_placement : '—'}</span></div>
+      <div class="hd-section"><span class="hd-k">SUSTAINABILITY</span><span class="hd-v hd-num">${d.sustainability_pct != null ? d.sustainability_pct+'%' : '—'}</span></div>
+      <div class="hd-section"><span class="hd-k">P(SUCCESS)</span><span class="hd-v hd-num">${d.p_success_pct != null ? d.p_success_pct+'%' : '—'}</span></div>
+      <div class="hd-section"><span class="hd-k">MAX NAV BAND</span><span class="hd-v">${(d.scenario_band||'').toUpperCase()}</span></div>
+    `;
+  }
+  detail.innerHTML = `
+    <div class="hd-head">
+      <span class="hd-title">${it.primary}</span>
+      <button class="hd-close" id="hdCloseBtn">×</button>
+    </div>
+    <div class="hd-body">${body}</div>`;
+  detail.style.display = 'flex';
+  const closeBtn = document.getElementById('hdCloseBtn');
+  if(closeBtn) closeBtn.onclick = ()=>detail.style.display='none';
 }
 
 function hideTrainingHaloPanel(){

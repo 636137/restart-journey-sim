@@ -1,0 +1,5044 @@
+{
+  "meta": {
+    "n_customers": 10287,
+    "n_advisers": 247,
+    "n_journeys": 10287,
+    "network_sustained_rate": 0.1511
+  },
+  "personas": {
+    "daniel": {
+      "demo_adviser_name": "Priya Sharma",
+      "demo_adviser_id": "ADV-0147",
+      "expert_caseload": {
+        "title": "Priya Sharma \u00b7 current live caseload (12 of 47)",
+        "items": [
+          {
+            "customer_id": "CUS-02647",
+            "name": "Yusuf A.",
+            "age": 34,
+            "region": "south-east-london",
+            "postcode": "SE10",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Criminal record"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "High",
+            "uc_months_at_start": 31,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "skills",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 32
+          },
+          {
+            "customer_id": "CUS-01778",
+            "name": "Yvonne S.",
+            "age": 24,
+            "region": "south-east-london",
+            "postcode": "E13",
+            "sector": "Retail",
+            "barriers": [],
+            "barriers_count": 0,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 10,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 31.9,
+            "days_to_placement": 94,
+            "sustainability_pct": 72
+          },
+          {
+            "customer_id": "CUS-07310",
+            "name": "Ibrahim E.",
+            "age": 40,
+            "region": "south-east-london",
+            "postcode": "E3",
+            "sector": "Admin / office",
+            "barriers": [
+              "Childcare cost"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "High",
+            "uc_months_at_start": 18,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "offer",
+            "p_success_pct": 67.2,
+            "days_to_placement": 43,
+            "sustainability_pct": 79
+          },
+          {
+            "customer_id": "CUS-09144",
+            "name": "Halima K.",
+            "age": 43,
+            "region": "south-east-london",
+            "postcode": "SE15",
+            "sector": "Driving",
+            "barriers": [
+              "Physical health",
+              "Confidence"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 36,
+            "scenario_band": "drifting",
+            "journey_state": "Stalled",
+            "outcome": "Ongoing",
+            "current_stage": "actionplan",
+            "p_success_pct": 27.6,
+            "days_to_placement": 0,
+            "sustainability_pct": 73
+          },
+          {
+            "customer_id": "CUS-04417",
+            "name": "Callum A.",
+            "age": 33,
+            "region": "south-east-london",
+            "postcode": "E15",
+            "sector": "Other",
+            "barriers": [
+              "English language",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "High",
+            "uc_months_at_start": 36,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "offer",
+            "p_success_pct": 0.0,
+            "days_to_placement": 153,
+            "sustainability_pct": 23
+          },
+          {
+            "customer_id": "CUS-03917",
+            "name": "Tracy M.",
+            "age": 32,
+            "region": "south-east-london",
+            "postcode": "E2",
+            "sector": "Retail",
+            "barriers": [
+              "Confidence",
+              "Caring responsibilities",
+              "Mental health"
+            ],
+            "barriers_count": 3,
+            "digital_skills": "High",
+            "uc_months_at_start": 40,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Withdrawn",
+            "current_stage": "skills",
+            "p_success_pct": 0.0,
+            "days_to_placement": 152,
+            "sustainability_pct": 32
+          },
+          {
+            "customer_id": "CUS-04112",
+            "name": "Ashley E.",
+            "age": 39,
+            "region": "south-east-london",
+            "postcode": "SE15",
+            "sector": "Driving",
+            "barriers": [
+              "Housing instability",
+              "Criminal record"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "High",
+            "uc_months_at_start": 24,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 27.6,
+            "days_to_placement": 85,
+            "sustainability_pct": 62
+          },
+          {
+            "customer_id": "CUS-01455",
+            "name": "Halima D.",
+            "age": 45,
+            "region": "south-east-london",
+            "postcode": "E3",
+            "sector": "Hospitality",
+            "barriers": [
+              "Mental health"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Low",
+            "uc_months_at_start": 7,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "interview",
+            "p_success_pct": 0.0,
+            "days_to_placement": 126,
+            "sustainability_pct": 30
+          },
+          {
+            "customer_id": "CUS-05665",
+            "name": "Megan A.",
+            "age": 44,
+            "region": "south-east-london",
+            "postcode": "SE10",
+            "sector": "Construction",
+            "barriers": [
+              "Digital skills",
+              "Housing instability",
+              "Mental health"
+            ],
+            "barriers_count": 3,
+            "digital_skills": "Low",
+            "uc_months_at_start": 9,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "jobmatch",
+            "p_success_pct": 0.0,
+            "days_to_placement": 179,
+            "sustainability_pct": 47
+          },
+          {
+            "customer_id": "CUS-01372",
+            "name": "Damian B.",
+            "age": 38,
+            "region": "south-east-london",
+            "postcode": "SE15",
+            "sector": "Driving",
+            "barriers": [],
+            "barriers_count": 0,
+            "digital_skills": "High",
+            "uc_months_at_start": 9,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "interview",
+            "p_success_pct": 54.3,
+            "days_to_placement": 38,
+            "sustainability_pct": 76
+          },
+          {
+            "customer_id": "CUS-05075",
+            "name": "Yvonne W.",
+            "age": 37,
+            "region": "south-east-london",
+            "postcode": "E20",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Caring responsibilities",
+              "Criminal record"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 14,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "offer",
+            "p_success_pct": 0.0,
+            "days_to_placement": 106,
+            "sustainability_pct": 48
+          },
+          {
+            "customer_id": "CUS-08904",
+            "name": "Ashley A.",
+            "age": 33,
+            "region": "south-east-london",
+            "postcode": "SE10",
+            "sector": "Hospitality",
+            "barriers": [
+              "English language",
+              "Mental health"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 40,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "skills",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 36
+          }
+        ],
+        "correlation": {
+          "adviser_sustained_rate_pct": 17.0,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": 12.7,
+          "interpretation": "This adviser's sustained-placement rate is 17.0% vs the network median of 15.1% \u2014 +12.7% relative lift."
+        }
+      },
+      "similar_journeys": {
+        "title": "16 nearest journeys in engagement-signal space",
+        "items": [
+          {
+            "journey_id": "JNY-09701",
+            "name": "Connor P.",
+            "similarity_pct": 42.6,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 89,
+            "days_to_placement": 51,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "interview",
+            "region": "south-east-london",
+            "sector": "Construction",
+            "p_success_pct": 51.6
+          },
+          {
+            "journey_id": "JNY-06795",
+            "name": "Kai A.",
+            "similarity_pct": 36.0,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 79,
+            "days_to_placement": 37,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-east-london",
+            "sector": "Retail",
+            "p_success_pct": 57.4
+          },
+          {
+            "journey_id": "JNY-09742",
+            "name": "Ashley B.",
+            "similarity_pct": 31.6,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 85,
+            "days_to_placement": 40,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-east-london",
+            "sector": "Retail",
+            "p_success_pct": 60.3
+          },
+          {
+            "journey_id": "JNY-09172",
+            "name": "Yusuf D.",
+            "similarity_pct": 29.9,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 85,
+            "days_to_placement": 42,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-east-london",
+            "sector": "Hospitality",
+            "p_success_pct": 54.3
+          },
+          {
+            "journey_id": "JNY-08915",
+            "name": "Olu I.",
+            "similarity_pct": 27.0,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 80,
+            "days_to_placement": 35,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "jobmatch",
+            "region": "derbyshire-notts",
+            "sector": "Construction",
+            "p_success_pct": 51.6
+          },
+          {
+            "journey_id": "JNY-00429",
+            "name": "Ryan A.",
+            "similarity_pct": 26.2,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 86,
+            "days_to_placement": 42,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-east-london",
+            "sector": "Hospitality",
+            "p_success_pct": 60.3
+          },
+          {
+            "journey_id": "JNY-00777",
+            "name": "Mohammed K.",
+            "similarity_pct": 25.1,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 80,
+            "days_to_placement": 30,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-yorkshire",
+            "sector": "Cleaning / facilities",
+            "p_success_pct": 57.4
+          },
+          {
+            "journey_id": "JNY-09554",
+            "name": "Joy C.",
+            "similarity_pct": 19.6,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 85,
+            "days_to_placement": 64,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "offer",
+            "region": "south-east-london",
+            "sector": "Retail",
+            "p_success_pct": 54.3
+          },
+          {
+            "journey_id": "JNY-03784",
+            "name": "Ruth M.",
+            "similarity_pct": 18.1,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 87,
+            "days_to_placement": 44,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-east-london",
+            "sector": "Cleaning / facilities",
+            "p_success_pct": 60.3
+          },
+          {
+            "journey_id": "JNY-03574",
+            "name": "Joy B.",
+            "similarity_pct": 16.7,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 74,
+            "days_to_placement": 44,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "derbyshire-notts",
+            "sector": "Warehouse / logistics",
+            "p_success_pct": 60.3
+          },
+          {
+            "journey_id": "JNY-02137",
+            "name": "Demi R.",
+            "similarity_pct": 14.7,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 74,
+            "days_to_placement": 38,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "north-london",
+            "sector": "Construction",
+            "p_success_pct": 55.5
+          },
+          {
+            "journey_id": "JNY-03514",
+            "name": "Marcus C.",
+            "similarity_pct": 11.6,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 83,
+            "days_to_placement": 34,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "interview",
+            "region": "wales",
+            "sector": "Construction",
+            "p_success_pct": 54.3
+          },
+          {
+            "journey_id": "JNY-01697",
+            "name": "Aaron K.",
+            "similarity_pct": 7.5,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 88,
+            "days_to_placement": 57,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "wales",
+            "sector": "Retail",
+            "p_success_pct": 60.3
+          },
+          {
+            "journey_id": "JNY-02624",
+            "name": "Ashley M.",
+            "similarity_pct": 6.3,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 88,
+            "days_to_placement": 38,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "jobmatch",
+            "region": "wales",
+            "sector": "Cleaning / facilities",
+            "p_success_pct": 59.1
+          },
+          {
+            "journey_id": "JNY-02220",
+            "name": "Folake A.",
+            "similarity_pct": 0.4,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 77,
+            "days_to_placement": 42,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "wales",
+            "sector": "Other",
+            "p_success_pct": 59.1
+          },
+          {
+            "journey_id": "JNY-00221",
+            "name": "Bilal A.",
+            "similarity_pct": 0,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 81,
+            "days_to_placement": 47,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "south-yorkshire",
+            "sector": "Hospitality",
+            "p_success_pct": 60.3
+          }
+        ],
+        "correlation": {
+          "nn_sustained_rate_pct": 62.5,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": 313.7,
+          "interpretation": "Journeys most similar to this one historically reach 'Sustained 6mo+' at 62.5%, vs network 15.1% \u2014 +313.7% lift."
+        }
+      },
+      "similar_customers": {
+        "title": "15 customers with the closest feature profile",
+        "items": [
+          {
+            "customer_id": "CUS-02626",
+            "name": "Joel H.",
+            "age": 38,
+            "region": "south-east-london",
+            "postcode": "E6",
+            "sector": "Retail",
+            "barriers": [
+              "Confidence",
+              "Mental health",
+              "Criminal record"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 42.3,
+            "reasons": [
+              "same region",
+              "shares barrier: Confidence",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-03420",
+            "name": "Faye K.",
+            "age": 39,
+            "region": "south-east-london",
+            "postcode": "E2",
+            "sector": "Manufacturing",
+            "barriers": [
+              "Criminal record",
+              "Confidence"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 42.3,
+            "reasons": [
+              "same region",
+              "shares barrier: Confidence",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-08610",
+            "name": "Kelly P.",
+            "age": 38,
+            "region": "wales",
+            "postcode": "CF10",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Criminal record",
+              "Mental health"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "Low",
+            "similarity_pct": 42.3,
+            "reasons": [
+              "same sector (Warehouse / logistics)",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-00501",
+            "name": "Kwame W.",
+            "age": 38,
+            "region": "derbyshire-notts",
+            "postcode": "S81",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Transport cost",
+              "Physical health"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "Low",
+            "similarity_pct": 42.3,
+            "reasons": [
+              "shares barrier: Transport cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-08152",
+            "name": "Kwame M.",
+            "age": 38,
+            "region": "south-yorkshire",
+            "postcode": "DN1",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Caring responsibilities",
+              "Confidence"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 10,
+            "digital_skills": "Medium",
+            "similarity_pct": 42.3,
+            "reasons": [
+              "shares barrier: Confidence",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-03617",
+            "name": "Callum A.",
+            "age": 37,
+            "region": "south-east-london",
+            "postcode": "E20",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Confidence",
+              "Mental health"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 18.4,
+            "reasons": [
+              "same sector (Warehouse / logistics)",
+              "same region",
+              "shares barrier: Confidence"
+            ]
+          },
+          {
+            "customer_id": "CUS-01715",
+            "name": "Tracy J.",
+            "age": 37,
+            "region": "south-east-london",
+            "postcode": "E13",
+            "sector": "Security",
+            "barriers": [
+              "Confidence",
+              "Housing instability",
+              "Criminal record"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 18.4,
+            "reasons": [
+              "same region",
+              "shares barrier: Confidence",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-08579",
+            "name": "Sean R.",
+            "age": 39,
+            "region": "wales",
+            "postcode": "SA1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Housing instability",
+              "Physical health"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "High",
+            "similarity_pct": 18.4,
+            "reasons": [
+              "same sector (Warehouse / logistics)",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-05100",
+            "name": "Tamika T.",
+            "age": 37,
+            "region": "south-yorkshire",
+            "postcode": "S60",
+            "sector": "Driving",
+            "barriers": [
+              "Physical health",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 18.4,
+            "reasons": [
+              "shares barrier: Transport cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-09373",
+            "name": "Ashley W.",
+            "age": 37,
+            "region": "south-east-london",
+            "postcode": "SE15",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Digital skills"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 10,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "same sector (Warehouse / logistics)",
+              "same region",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-01468",
+            "name": "Daniel J.",
+            "age": 37,
+            "region": "south-east-london",
+            "postcode": "SE1",
+            "sector": "Care / health",
+            "barriers": [
+              "Physical health",
+              "Confidence",
+              "Criminal record"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 10,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "same region",
+              "shares barrier: Confidence",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-01353",
+            "name": "Ryan M.",
+            "age": 38,
+            "region": "wales",
+            "postcode": "NP20",
+            "sector": "Retail",
+            "barriers": [
+              "Physical health",
+              "Confidence",
+              "Digital skills"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 10,
+            "digital_skills": "Low",
+            "similarity_pct": 0,
+            "reasons": [
+              "shares barrier: Confidence",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-01494",
+            "name": "Kwame P.",
+            "age": 38,
+            "region": "south-east-london",
+            "postcode": "E2",
+            "sector": "Care / health",
+            "barriers": [
+              "Criminal record"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 8,
+            "digital_skills": "Low",
+            "similarity_pct": 0,
+            "reasons": [
+              "same region",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-03965",
+            "name": "Chantelle S.",
+            "age": 39,
+            "region": "south-east-london",
+            "postcode": "SE1",
+            "sector": "Construction",
+            "barriers": [
+              "Physical health",
+              "Housing instability"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 10,
+            "digital_skills": "High",
+            "similarity_pct": 0,
+            "reasons": [
+              "same region",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-08202",
+            "name": "Theo O.",
+            "age": 39,
+            "region": "north-london",
+            "postcode": "N1",
+            "sector": "Driving",
+            "barriers": [
+              "Transport cost"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 9,
+            "digital_skills": "High",
+            "similarity_pct": 0,
+            "reasons": [
+              "shares barrier: Transport cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          }
+        ],
+        "correlation": {
+          "cohort_sustained_rate_pct": 26.7,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": 76.5,
+          "interpretation": "This profile's cohort sustains at 26.7% vs network 15.1% \u2014 +76.5% relative lift."
+        }
+      }
+    },
+    "amara": {
+      "demo_adviser_name": "Aisha Khatun",
+      "demo_adviser_id": "ADV-0169",
+      "expert_caseload": {
+        "title": "Aisha Khatun \u00b7 current live caseload (12 of 35)",
+        "items": [
+          {
+            "customer_id": "CUS-04921",
+            "name": "Sarah I.",
+            "age": 49,
+            "region": "south-east-london",
+            "postcode": "E20",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Caring responsibilities",
+              "Confidence"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "High",
+            "uc_months_at_start": 14,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "nudgeFirstDay",
+            "p_success_pct": 0.0,
+            "days_to_placement": 135,
+            "sustainability_pct": 56
+          },
+          {
+            "customer_id": "CUS-04763",
+            "name": "Joy B.",
+            "age": 38,
+            "region": "south-east-london",
+            "postcode": "SE1",
+            "sector": "Care / health",
+            "barriers": [
+              "Criminal record",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "High",
+            "uc_months_at_start": 32,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Withdrawn",
+            "current_stage": "jobmatch",
+            "p_success_pct": 0.0,
+            "days_to_placement": 205,
+            "sustainability_pct": 39
+          },
+          {
+            "customer_id": "CUS-09807",
+            "name": "Demi M.",
+            "age": 44,
+            "region": "south-east-london",
+            "postcode": "SE1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Caring responsibilities"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 7,
+            "scenario_band": "atrisk",
+            "journey_state": "Stalled",
+            "outcome": "Ongoing",
+            "current_stage": "skills",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 26
+          },
+          {
+            "customer_id": "CUS-07529",
+            "name": "Sophie M.",
+            "age": 44,
+            "region": "south-east-london",
+            "postcode": "E13",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Caring responsibilities",
+              "Confidence"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 15,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "interview",
+            "p_success_pct": 0.0,
+            "days_to_placement": 174,
+            "sustainability_pct": 41
+          },
+          {
+            "customer_id": "CUS-08432",
+            "name": "Mohammed K.",
+            "age": 36,
+            "region": "south-east-london",
+            "postcode": "SE15",
+            "sector": "Manufacturing",
+            "barriers": [
+              "Physical health",
+              "Confidence"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 13,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 27.6,
+            "days_to_placement": 83,
+            "sustainability_pct": 65
+          },
+          {
+            "customer_id": "CUS-06556",
+            "name": "Olu A.",
+            "age": 30,
+            "region": "south-east-london",
+            "postcode": "E2",
+            "sector": "Warehouse / logistics",
+            "barriers": [],
+            "barriers_count": 0,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 34,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 60.3,
+            "days_to_placement": 38,
+            "sustainability_pct": 80
+          },
+          {
+            "customer_id": "CUS-00476",
+            "name": "Kai J.",
+            "age": 38,
+            "region": "south-east-london",
+            "postcode": "SE10",
+            "sector": "Care / health",
+            "barriers": [],
+            "barriers_count": 0,
+            "digital_skills": "High",
+            "uc_months_at_start": 25,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "jobmatch",
+            "p_success_pct": 53.4,
+            "days_to_placement": 38,
+            "sustainability_pct": 88
+          },
+          {
+            "customer_id": "CUS-04433",
+            "name": "Kelly A.",
+            "age": 34,
+            "region": "south-east-london",
+            "postcode": "E13",
+            "sector": "Admin / office",
+            "barriers": [
+              "Digital skills"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 21,
+            "scenario_band": "drifting",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "routerCheck",
+            "p_success_pct": 32.3,
+            "days_to_placement": 0,
+            "sustainability_pct": 50
+          },
+          {
+            "customer_id": "CUS-07675",
+            "name": "Lola W.",
+            "age": 37,
+            "region": "south-east-london",
+            "postcode": "E13",
+            "sector": "Hospitality",
+            "barriers": [
+              "Transport cost",
+              "English language"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 24,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "jobmatch",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 44
+          },
+          {
+            "customer_id": "CUS-09310",
+            "name": "Callum B.",
+            "age": 44,
+            "region": "south-east-london",
+            "postcode": "E6",
+            "sector": "Manufacturing",
+            "barriers": [
+              "English language",
+              "Childcare cost"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "High",
+            "uc_months_at_start": 48,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 27.6,
+            "days_to_placement": 110,
+            "sustainability_pct": 66
+          },
+          {
+            "customer_id": "CUS-10056",
+            "name": "Joshua M.",
+            "age": 37,
+            "region": "south-east-london",
+            "postcode": "E20",
+            "sector": "Other",
+            "barriers": [
+              "Childcare cost"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "High",
+            "uc_months_at_start": 29,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Withdrawn",
+            "current_stage": "skills",
+            "p_success_pct": 0.0,
+            "days_to_placement": 139,
+            "sustainability_pct": 38
+          },
+          {
+            "customer_id": "CUS-02129",
+            "name": "Nasir B.",
+            "age": 56,
+            "region": "south-east-london",
+            "postcode": "SE10",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Physical health",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "High",
+            "uc_months_at_start": 49,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Placed - dropped",
+            "current_stage": "referral",
+            "p_success_pct": 0.0,
+            "days_to_placement": 160,
+            "sustainability_pct": 32
+          }
+        ],
+        "correlation": {
+          "adviser_sustained_rate_pct": 25.7,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": 70.2,
+          "interpretation": "This adviser's sustained-placement rate is 25.7% vs the network median of 15.1% \u2014 +70.2% relative lift."
+        }
+      },
+      "similar_journeys": {
+        "title": "16 nearest journeys in engagement-signal space",
+        "items": [
+          {
+            "journey_id": "JNY-05102",
+            "name": "Tamika M.",
+            "similarity_pct": 47.1,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 64,
+            "days_to_placement": 102,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "south-east-london",
+            "sector": "Admin / office",
+            "p_success_pct": 26.4
+          },
+          {
+            "journey_id": "JNY-06485",
+            "name": "Callum A.",
+            "similarity_pct": 26.8,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 65,
+            "days_to_placement": 96,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "derbyshire-notts",
+            "sector": "Warehouse / logistics",
+            "p_success_pct": 28.0
+          },
+          {
+            "journey_id": "JNY-00988",
+            "name": "Priya I.",
+            "similarity_pct": 26.4,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 65,
+            "days_to_placement": 107,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "jobmatch",
+            "region": "wales",
+            "sector": "Care / health",
+            "p_success_pct": 29.1
+          },
+          {
+            "journey_id": "JNY-05645",
+            "name": "Yvonne M.",
+            "similarity_pct": 21.3,
+            "outcome": "Ongoing",
+            "sustainability_pct": 69,
+            "days_to_placement": 0,
+            "scenario_band": "drifting",
+            "journey_state": "Paused",
+            "current_stage": "skills",
+            "region": "derbyshire-notts",
+            "sector": "Care / health",
+            "p_success_pct": 26.4
+          },
+          {
+            "journey_id": "JNY-10184",
+            "name": "Yusuf B.",
+            "similarity_pct": 19.9,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 58,
+            "days_to_placement": 99,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "north-london",
+            "sector": "Retail",
+            "p_success_pct": 32.3
+          },
+          {
+            "journey_id": "JNY-04464",
+            "name": "Kai C.",
+            "similarity_pct": 9.4,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 63,
+            "days_to_placement": 91,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "offer",
+            "region": "wales",
+            "sector": "Care / health",
+            "p_success_pct": 27.9
+          },
+          {
+            "journey_id": "JNY-08735",
+            "name": "Joel H.",
+            "similarity_pct": 9.4,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 63,
+            "days_to_placement": 58,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "interview",
+            "region": "south-east-london",
+            "sector": "Construction",
+            "p_success_pct": 26.4
+          },
+          {
+            "journey_id": "JNY-05509",
+            "name": "Ibrahim O.",
+            "similarity_pct": 8.9,
+            "outcome": "Ongoing",
+            "sustainability_pct": 52,
+            "days_to_placement": 0,
+            "scenario_band": "drifting",
+            "journey_state": "Paused",
+            "current_stage": "skills",
+            "region": "north-london",
+            "sector": "Other",
+            "p_success_pct": 33.5
+          },
+          {
+            "journey_id": "JNY-09985",
+            "name": "Tyrese A.",
+            "similarity_pct": 8.6,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 56,
+            "days_to_placement": 85,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-east-london",
+            "sector": "Care / health",
+            "p_success_pct": 31.4
+          },
+          {
+            "journey_id": "JNY-06293",
+            "name": "Jamal K.",
+            "similarity_pct": 6.2,
+            "outcome": "Placed - dropped",
+            "sustainability_pct": 59,
+            "days_to_placement": 73,
+            "scenario_band": "drifting",
+            "journey_state": "Failure",
+            "current_stage": "diagnostic",
+            "region": "south-east-london",
+            "sector": "Driving",
+            "p_success_pct": 29.5
+          },
+          {
+            "journey_id": "JNY-08871",
+            "name": "Damian R.",
+            "similarity_pct": 6.1,
+            "outcome": "Ongoing",
+            "sustainability_pct": 65,
+            "days_to_placement": 0,
+            "scenario_band": "drifting",
+            "journey_state": "Stalled",
+            "current_stage": "diagnostic",
+            "region": "wales",
+            "sector": "Construction",
+            "p_success_pct": 26.4
+          },
+          {
+            "journey_id": "JNY-08569",
+            "name": "Joy O.",
+            "similarity_pct": 5.6,
+            "outcome": "Placed - dropped",
+            "sustainability_pct": 54,
+            "days_to_placement": 58,
+            "scenario_band": "drifting",
+            "journey_state": "Failure",
+            "current_stage": "skills",
+            "region": "wales",
+            "sector": "Care / health",
+            "p_success_pct": 27.9
+          },
+          {
+            "journey_id": "JNY-06979",
+            "name": "Kelly E.",
+            "similarity_pct": 5.4,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 68,
+            "days_to_placement": 107,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "derbyshire-notts",
+            "sector": "Warehouse / logistics",
+            "p_success_pct": 27.9
+          },
+          {
+            "journey_id": "JNY-00146",
+            "name": "Marcus R.",
+            "similarity_pct": 3.1,
+            "outcome": "Ongoing",
+            "sustainability_pct": 49,
+            "days_to_placement": 0,
+            "scenario_band": "drifting",
+            "journey_state": "Regressing",
+            "current_stage": "skills",
+            "region": "south-east-london",
+            "sector": "Hospitality",
+            "p_success_pct": 30.5
+          },
+          {
+            "journey_id": "JNY-09063",
+            "name": "Priya P.",
+            "similarity_pct": 2.2,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 54,
+            "days_to_placement": 99,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-east-london",
+            "sector": "Construction",
+            "p_success_pct": 30.2
+          },
+          {
+            "journey_id": "JNY-06620",
+            "name": "Faye B.",
+            "similarity_pct": 0,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 68,
+            "days_to_placement": 119,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "wales",
+            "sector": "Cleaning / facilities",
+            "p_success_pct": 27.6
+          }
+        ],
+        "correlation": {
+          "nn_sustained_rate_pct": 37.5,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": 148.2,
+          "interpretation": "Journeys most similar to this one historically reach 'Sustained 6mo+' at 37.5%, vs network 15.1% \u2014 +148.2% lift."
+        }
+      },
+      "similar_customers": {
+        "title": "15 customers with the closest feature profile",
+        "items": [
+          {
+            "customer_id": "CUS-05184",
+            "name": "Bibi O.",
+            "age": 34,
+            "region": "south-east-london",
+            "postcode": "SE10",
+            "sector": "Care / health",
+            "barriers": [
+              "Digital skills",
+              "Physical health"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 6,
+            "digital_skills": "Medium",
+            "similarity_pct": 66.7,
+            "reasons": [
+              "same region",
+              "shares barrier: Digital skills",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-01662",
+            "name": "Yusuf O.",
+            "age": 33,
+            "region": "south-east-london",
+            "postcode": "E13",
+            "sector": "Driving",
+            "barriers": [
+              "Childcare cost",
+              "English language"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 6,
+            "digital_skills": "Medium",
+            "similarity_pct": 42.3,
+            "reasons": [
+              "same region",
+              "shares barrier: Childcare cost",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-05793",
+            "name": "Reece O.",
+            "age": 35,
+            "region": "south-east-london",
+            "postcode": "SE10",
+            "sector": "Driving",
+            "barriers": [
+              "Mental health",
+              "Childcare cost"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 7,
+            "digital_skills": "Medium",
+            "similarity_pct": 42.3,
+            "reasons": [
+              "same region",
+              "shares barrier: Childcare cost",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-03079",
+            "name": "Kai A.",
+            "age": 34,
+            "region": "south-east-london",
+            "postcode": "E6",
+            "sector": "Construction",
+            "barriers": [
+              "Mental health",
+              "English language",
+              "Physical health"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 7,
+            "digital_skills": "High",
+            "similarity_pct": 42.3,
+            "reasons": [
+              "same region",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-00418",
+            "name": "Joy B.",
+            "age": 35,
+            "region": "south-east-london",
+            "postcode": "SE1",
+            "sector": "Construction",
+            "barriers": [
+              "English language",
+              "Housing instability"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 7,
+            "digital_skills": "Medium",
+            "similarity_pct": 33.3,
+            "reasons": [
+              "same region",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-04820",
+            "name": "Ruth A.",
+            "age": 34,
+            "region": "derbyshire-notts",
+            "postcode": "DE22",
+            "sector": "Driving",
+            "barriers": [
+              "English language",
+              "Digital skills"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 25.5,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-06713",
+            "name": "Connor M.",
+            "age": 33,
+            "region": "south-east-london",
+            "postcode": "SE15",
+            "sector": "Care / health",
+            "barriers": [
+              "Confidence",
+              "Childcare cost",
+              "Physical health",
+              "Criminal record"
+            ],
+            "barriers_count": 4,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 18.4,
+            "reasons": [
+              "same region",
+              "shares barriers: Confidence, Childcare cost",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-02324",
+            "name": "Joel M.",
+            "age": 32,
+            "region": "north-london",
+            "postcode": "HA9",
+            "sector": "Driving",
+            "barriers": [
+              "English language",
+              "Childcare cost"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 7,
+            "digital_skills": "Medium",
+            "similarity_pct": 18.4,
+            "reasons": [
+              "shares barrier: Childcare cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-02365",
+            "name": "Sean T.",
+            "age": 34,
+            "region": "derbyshire-notts",
+            "postcode": "NG7",
+            "sector": "Manufacturing",
+            "barriers": [
+              "Digital skills"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 7,
+            "digital_skills": "High",
+            "similarity_pct": 18.4,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-03448",
+            "name": "Marcus C.",
+            "age": 33,
+            "region": "south-yorkshire",
+            "postcode": "LS9",
+            "sector": "Hospitality",
+            "barriers": [
+              "English language",
+              "Childcare cost"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 8,
+            "digital_skills": "High",
+            "similarity_pct": 11.8,
+            "reasons": [
+              "shares barrier: Childcare cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-00196",
+            "name": "Sophie A.",
+            "age": 34,
+            "region": "wales",
+            "postcode": "LL11",
+            "sector": "Security",
+            "barriers": [
+              "Confidence"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 5.7,
+            "reasons": [
+              "shares barrier: Confidence",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-01893",
+            "name": "Joel I.",
+            "age": 34,
+            "region": "south-east-london",
+            "postcode": "E6",
+            "sector": "Security",
+            "barriers": [
+              "Criminal record"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 5.7,
+            "reasons": [
+              "same region",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-08866",
+            "name": "Liam M.",
+            "age": 32,
+            "region": "south-east-london",
+            "postcode": "E6",
+            "sector": "Retail",
+            "barriers": [
+              "Physical health",
+              "Transport cost",
+              "Confidence"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 8,
+            "digital_skills": "Low",
+            "similarity_pct": 0,
+            "reasons": [
+              "same region",
+              "shares barrier: Confidence",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-02961",
+            "name": "Damian O.",
+            "age": 35,
+            "region": "derbyshire-notts",
+            "postcode": "NG1",
+            "sector": "Driving",
+            "barriers": [
+              "Digital skills"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-03728",
+            "name": "Callum T.",
+            "age": 34,
+            "region": "south-yorkshire",
+            "postcode": "S6",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Caring responsibilities",
+              "Transport cost",
+              "Digital skills"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          }
+        ],
+        "correlation": {
+          "cohort_sustained_rate_pct": 6.7,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": -55.9,
+          "interpretation": "This profile's cohort sustains at 6.7% vs network 15.1% \u2014 -55.9% relative lift."
+        }
+      }
+    },
+    "wojciech": {
+      "demo_adviser_name": "Tomasz Kowalski",
+      "demo_adviser_id": "ADV-0191",
+      "expert_caseload": {
+        "title": "Tomasz Kowalski \u00b7 current live caseload (12 of 33)",
+        "items": [
+          {
+            "customer_id": "CUS-09330",
+            "name": "Folake B.",
+            "age": 40,
+            "region": "north-london",
+            "postcode": "HA9",
+            "sector": "Hospitality",
+            "barriers": [
+              "Criminal record"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 29,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "skills",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 28
+          },
+          {
+            "customer_id": "CUS-01972",
+            "name": "Tamika D.",
+            "age": 47,
+            "region": "north-london",
+            "postcode": "NW1",
+            "sector": "Retail",
+            "barriers": [
+              "Confidence",
+              "Criminal record",
+              "Physical health",
+              "Digital skills"
+            ],
+            "barriers_count": 4,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 17,
+            "scenario_band": "atrisk",
+            "journey_state": "Stalled",
+            "outcome": "Ongoing",
+            "current_stage": "diagnostic",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 49
+          },
+          {
+            "customer_id": "CUS-06511",
+            "name": "Yusuf H.",
+            "age": 50,
+            "region": "north-london",
+            "postcode": "NW3",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Housing instability",
+              "Physical health",
+              "Childcare cost"
+            ],
+            "barriers_count": 3,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 17,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Withdrawn",
+            "current_stage": "actionplan",
+            "p_success_pct": 0.0,
+            "days_to_placement": 189,
+            "sustainability_pct": 33
+          },
+          {
+            "customer_id": "CUS-08187",
+            "name": "Olu M.",
+            "age": 31,
+            "region": "north-london",
+            "postcode": "NW3",
+            "sector": "Driving",
+            "barriers": [
+              "Childcare cost"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "High",
+            "uc_months_at_start": 14,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "offer",
+            "p_success_pct": 60.7,
+            "days_to_placement": 66,
+            "sustainability_pct": 78
+          },
+          {
+            "customer_id": "CUS-05724",
+            "name": "Junior O.",
+            "age": 21,
+            "region": "north-london",
+            "postcode": "NW3",
+            "sector": "Driving",
+            "barriers": [
+              "Caring responsibilities"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 26,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 33.0,
+            "days_to_placement": 80,
+            "sustainability_pct": 65
+          },
+          {
+            "customer_id": "CUS-00594",
+            "name": "Dylan E.",
+            "age": 27,
+            "region": "north-london",
+            "postcode": "N17",
+            "sector": "Driving",
+            "barriers": [
+              "Mental health"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 13,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "skills",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 39
+          },
+          {
+            "customer_id": "CUS-06717",
+            "name": "Kelly B.",
+            "age": 34,
+            "region": "north-london",
+            "postcode": "N17",
+            "sector": "Warehouse / logistics",
+            "barriers": [],
+            "barriers_count": 0,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 42,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "jobmatch",
+            "p_success_pct": 28.4,
+            "days_to_placement": 80,
+            "sustainability_pct": 70
+          },
+          {
+            "customer_id": "CUS-08342",
+            "name": "Marcus I.",
+            "age": 43,
+            "region": "north-london",
+            "postcode": "N17",
+            "sector": "Driving",
+            "barriers": [],
+            "barriers_count": 0,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 45,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 60.3,
+            "days_to_placement": 43,
+            "sustainability_pct": 79
+          },
+          {
+            "customer_id": "CUS-02895",
+            "name": "Olu H.",
+            "age": 38,
+            "region": "north-london",
+            "postcode": "HA1",
+            "sector": "Care / health",
+            "barriers": [
+              "Transport cost"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Low",
+            "uc_months_at_start": 34,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "jobmatch",
+            "p_success_pct": 0.0,
+            "days_to_placement": 106,
+            "sustainability_pct": 41
+          },
+          {
+            "customer_id": "CUS-02473",
+            "name": "Aaron A.",
+            "age": 38,
+            "region": "north-london",
+            "postcode": "N17",
+            "sector": "Admin / office",
+            "barriers": [
+              "Housing instability",
+              "Criminal record",
+              "Caring responsibilities"
+            ],
+            "barriers_count": 3,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 33,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Placed - dropped",
+            "current_stage": "diagnostic",
+            "p_success_pct": 0.0,
+            "days_to_placement": 148,
+            "sustainability_pct": 48
+          },
+          {
+            "customer_id": "CUS-01013",
+            "name": "Dylan O.",
+            "age": 52,
+            "region": "north-london",
+            "postcode": "NW3",
+            "sector": "Retail",
+            "barriers": [
+              "Physical health"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "High",
+            "uc_months_at_start": 24,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 29.5,
+            "days_to_placement": 91,
+            "sustainability_pct": 69
+          },
+          {
+            "customer_id": "CUS-05374",
+            "name": "Sarah W.",
+            "age": 35,
+            "region": "north-london",
+            "postcode": "NW1",
+            "sector": "Hospitality",
+            "barriers": [
+              "English language",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "High",
+            "uc_months_at_start": 20,
+            "scenario_band": "drifting",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "jobmatch",
+            "p_success_pct": 27.9,
+            "days_to_placement": 0,
+            "sustainability_pct": 76
+          }
+        ],
+        "correlation": {
+          "adviser_sustained_rate_pct": 15.2,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": 0.3,
+          "interpretation": "This adviser's sustained-placement rate is 15.2% vs the network median of 15.1% \u2014 +0.3% relative lift."
+        }
+      },
+      "similar_journeys": {
+        "title": "16 nearest journeys in engagement-signal space",
+        "items": [
+          {
+            "journey_id": "JNY-04859",
+            "name": "Ashley P.",
+            "similarity_pct": 34.3,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 78,
+            "days_to_placement": 57,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "jobmatch",
+            "region": "derbyshire-notts",
+            "sector": "Care / health",
+            "p_success_pct": 53.4
+          },
+          {
+            "journey_id": "JNY-09747",
+            "name": "Sean H.",
+            "similarity_pct": 32.5,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 86,
+            "days_to_placement": 49,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "derbyshire-notts",
+            "sector": "Care / health",
+            "p_success_pct": 51.6
+          },
+          {
+            "journey_id": "JNY-08805",
+            "name": "Tyrese J.",
+            "similarity_pct": 31.8,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 80,
+            "days_to_placement": 53,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "offer",
+            "region": "wales",
+            "sector": "Driving",
+            "p_success_pct": 56.1
+          },
+          {
+            "journey_id": "JNY-10198",
+            "name": "Kai O.",
+            "similarity_pct": 28.2,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 81,
+            "days_to_placement": 41,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "south-east-london",
+            "sector": "Construction",
+            "p_success_pct": 51.6
+          },
+          {
+            "journey_id": "JNY-10028",
+            "name": "Maria K.",
+            "similarity_pct": 21.3,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 83,
+            "days_to_placement": 33,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "offer",
+            "region": "south-yorkshire",
+            "sector": "Driving",
+            "p_success_pct": 56.1
+          },
+          {
+            "journey_id": "JNY-09842",
+            "name": "Naomi M.",
+            "similarity_pct": 18.8,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 85,
+            "days_to_placement": 57,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "interview",
+            "region": "south-east-london",
+            "sector": "Care / health",
+            "p_success_pct": 45.2
+          },
+          {
+            "journey_id": "JNY-05119",
+            "name": "Tia B.",
+            "similarity_pct": 16.6,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 81,
+            "days_to_placement": 46,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-east-london",
+            "sector": "Other",
+            "p_success_pct": 54.3
+          },
+          {
+            "journey_id": "JNY-05401",
+            "name": "Reece B.",
+            "similarity_pct": 12.7,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 80,
+            "days_to_placement": 39,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-east-london",
+            "sector": "Care / health",
+            "p_success_pct": 51.6
+          },
+          {
+            "journey_id": "JNY-09720",
+            "name": "Folake K.",
+            "similarity_pct": 9.4,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 83,
+            "days_to_placement": 35,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "north-london",
+            "sector": "Retail",
+            "p_success_pct": 56.2
+          },
+          {
+            "journey_id": "JNY-08679",
+            "name": "Halima O.",
+            "similarity_pct": 6.0,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 76,
+            "days_to_placement": 42,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "derbyshire-notts",
+            "sector": "Other",
+            "p_success_pct": 39.3
+          },
+          {
+            "journey_id": "JNY-00060",
+            "name": "Sean I.",
+            "similarity_pct": 4.0,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 76,
+            "days_to_placement": 40,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "wales",
+            "sector": "Security",
+            "p_success_pct": 56.1
+          },
+          {
+            "journey_id": "JNY-07602",
+            "name": "Junior E.",
+            "similarity_pct": 3.3,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 90,
+            "days_to_placement": 59,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "offer",
+            "region": "south-east-london",
+            "sector": "Hospitality",
+            "p_success_pct": 48.9
+          },
+          {
+            "journey_id": "JNY-09813",
+            "name": "Faye K.",
+            "similarity_pct": 0.9,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 90,
+            "days_to_placement": 39,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "derbyshire-notts",
+            "sector": "Hospitality",
+            "p_success_pct": 48.9
+          },
+          {
+            "journey_id": "JNY-07780",
+            "name": "Aiden A.",
+            "similarity_pct": 0.4,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 95,
+            "days_to_placement": 54,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-yorkshire",
+            "sector": "Other",
+            "p_success_pct": 56.1
+          },
+          {
+            "journey_id": "JNY-09294",
+            "name": "Joshua B.",
+            "similarity_pct": 0.0,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 82,
+            "days_to_placement": 38,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "jobmatch",
+            "region": "south-east-london",
+            "sector": "Security",
+            "p_success_pct": 57.4
+          },
+          {
+            "journey_id": "JNY-01620",
+            "name": "Ruth O.",
+            "similarity_pct": 0,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 81,
+            "days_to_placement": 40,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "interview",
+            "region": "derbyshire-notts",
+            "sector": "Hospitality",
+            "p_success_pct": 47.0
+          }
+        ],
+        "correlation": {
+          "nn_sustained_rate_pct": 43.8,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": 189.6,
+          "interpretation": "Journeys most similar to this one historically reach 'Sustained 6mo+' at 43.8%, vs network 15.1% \u2014 +189.6% lift."
+        }
+      },
+      "similar_customers": {
+        "title": "15 customers with the closest feature profile",
+        "items": [
+          {
+            "customer_id": "CUS-04852",
+            "name": "Kai W.",
+            "age": 53,
+            "region": "south-yorkshire",
+            "postcode": "WF1",
+            "sector": "Construction",
+            "barriers": [
+              "Transport cost"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 7,
+            "digital_skills": "Medium",
+            "similarity_pct": 45.2,
+            "reasons": [
+              "same sector (Construction)",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-02166",
+            "name": "Kelly A.",
+            "age": 51,
+            "region": "derbyshire-notts",
+            "postcode": "DE1",
+            "sector": "Driving",
+            "barriers": [
+              "Housing instability",
+              "Digital skills"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 45.2,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-07437",
+            "name": "Yusuf I.",
+            "age": 53,
+            "region": "derbyshire-notts",
+            "postcode": "S81",
+            "sector": "Admin / office",
+            "barriers": [
+              "Digital skills"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 36.8,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-09805",
+            "name": "Demi M.",
+            "age": 52,
+            "region": "derbyshire-notts",
+            "postcode": "NG18",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Caring responsibilities",
+              "Digital skills"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "Low",
+            "similarity_pct": 36.8,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-01794",
+            "name": "Priya L.",
+            "age": 52,
+            "region": "north-london",
+            "postcode": "N1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Caring responsibilities",
+              "Housing instability"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "High",
+            "similarity_pct": 22.5,
+            "reasons": [
+              "same region",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-09514",
+            "name": "Priya R.",
+            "age": 52,
+            "region": "derbyshire-notts",
+            "postcode": "DE1",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Digital skills",
+              "Confidence",
+              "Transport cost",
+              "Caring responsibilities"
+            ],
+            "barriers_count": 4,
+            "uc_months_at_start": 7,
+            "digital_skills": "High",
+            "similarity_pct": 22.5,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-05237",
+            "name": "Aisha A.",
+            "age": 50,
+            "region": "wales",
+            "postcode": "SA1",
+            "sector": "Construction",
+            "barriers": [
+              "Mental health"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 16.3,
+            "reasons": [
+              "same sector (Construction)",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-03291",
+            "name": "Naomi H.",
+            "age": 51,
+            "region": "north-london",
+            "postcode": "HA9",
+            "sector": "Manufacturing",
+            "barriers": [
+              "Criminal record"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 16.3,
+            "reasons": [
+              "same region",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-05936",
+            "name": "Joel B.",
+            "age": 52,
+            "region": "derbyshire-notts",
+            "postcode": "NG7",
+            "sector": "Retail",
+            "barriers": [
+              "Childcare cost",
+              "English language",
+              "Confidence"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 16.3,
+            "reasons": [
+              "shares barrier: English language",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-06950",
+            "name": "Leah M.",
+            "age": 51,
+            "region": "north-london",
+            "postcode": "NW1",
+            "sector": "Admin / office",
+            "barriers": [],
+            "barriers_count": 0,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 10.6,
+            "reasons": [
+              "same region",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-04886",
+            "name": "Tom O.",
+            "age": 50,
+            "region": "north-london",
+            "postcode": "NW1",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Confidence",
+              "Digital skills"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 5.1,
+            "reasons": [
+              "same region",
+              "shares barrier: Digital skills",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-00761",
+            "name": "Connor C.",
+            "age": 50,
+            "region": "south-east-london",
+            "postcode": "SE1",
+            "sector": "Other",
+            "barriers": [
+              "English language",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 5.1,
+            "reasons": [
+              "shares barrier: English language",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-05095",
+            "name": "Sade A.",
+            "age": 50,
+            "region": "south-east-london",
+            "postcode": "SE1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Transport cost",
+              "English language"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 5.1,
+            "reasons": [
+              "shares barrier: English language",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-08204",
+            "name": "Leah B.",
+            "age": 52,
+            "region": "wales",
+            "postcode": "LL57",
+            "sector": "Retail",
+            "barriers": [
+              "Housing instability",
+              "Mental health",
+              "Digital skills",
+              "Transport cost"
+            ],
+            "barriers_count": 4,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 5.1,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-03052",
+            "name": "Tracy I.",
+            "age": 50,
+            "region": "south-yorkshire",
+            "postcode": "DN4",
+            "sector": "Construction",
+            "barriers": [
+              "Caring responsibilities"
+            ],
+            "barriers_count": 1,
+            "uc_months_at_start": 9,
+            "digital_skills": "Low",
+            "similarity_pct": 0,
+            "reasons": [
+              "same sector (Construction)",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          }
+        ],
+        "correlation": {
+          "cohort_sustained_rate_pct": 6.7,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": -55.9,
+          "interpretation": "This profile's cohort sustains at 6.7% vs network 15.1% \u2014 -55.9% relative lift."
+        }
+      }
+    },
+    "tomasz": {
+      "demo_adviser_name": "Hannah Brennan",
+      "demo_adviser_id": "ADV-0217",
+      "expert_caseload": {
+        "title": "Hannah Brennan \u00b7 current live caseload (12 of 40)",
+        "items": [
+          {
+            "customer_id": "CUS-07966",
+            "name": "Connor O.",
+            "age": 40,
+            "region": "south-yorkshire",
+            "postcode": "S6",
+            "sector": "Security",
+            "barriers": [
+              "Housing instability",
+              "Criminal record"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 52,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Placed - dropped",
+            "current_stage": "jobmatch",
+            "p_success_pct": 0.0,
+            "days_to_placement": 166,
+            "sustainability_pct": 39
+          },
+          {
+            "customer_id": "CUS-03800",
+            "name": "Joel R.",
+            "age": 44,
+            "region": "south-yorkshire",
+            "postcode": "S1",
+            "sector": "Admin / office",
+            "barriers": [
+              "Physical health",
+              "Confidence"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 27,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Withdrawn",
+            "current_stage": "diagnostic",
+            "p_success_pct": 0.0,
+            "days_to_placement": 160,
+            "sustainability_pct": 36
+          },
+          {
+            "customer_id": "CUS-04320",
+            "name": "Ruth B.",
+            "age": 57,
+            "region": "south-yorkshire",
+            "postcode": "LS9",
+            "sector": "Warehouse / logistics",
+            "barriers": [],
+            "barriers_count": 0,
+            "digital_skills": "Low",
+            "uc_months_at_start": 30,
+            "scenario_band": "atrisk",
+            "journey_state": "Stalled",
+            "outcome": "Ongoing",
+            "current_stage": "diagnostic",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 39
+          },
+          {
+            "customer_id": "CUS-03729",
+            "name": "Theo K.",
+            "age": 33,
+            "region": "south-yorkshire",
+            "postcode": "LS9",
+            "sector": "Retail",
+            "barriers": [
+              "Childcare cost",
+              "Physical health"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 13,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 27.6,
+            "days_to_placement": 94,
+            "sustainability_pct": 59
+          },
+          {
+            "customer_id": "CUS-01290",
+            "name": "Yvonne O.",
+            "age": 36,
+            "region": "south-yorkshire",
+            "postcode": "S10",
+            "sector": "Driving",
+            "barriers": [
+              "Digital skills",
+              "Mental health",
+              "Confidence",
+              "Physical health"
+            ],
+            "barriers_count": 4,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 18,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "jobmatch",
+            "p_success_pct": 0.0,
+            "days_to_placement": 143,
+            "sustainability_pct": 55
+          },
+          {
+            "customer_id": "CUS-05226",
+            "name": "Sophie M.",
+            "age": 28,
+            "region": "south-yorkshire",
+            "postcode": "S60",
+            "sector": "Security",
+            "barriers": [
+              "Transport cost",
+              "Confidence"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "High",
+            "uc_months_at_start": 33,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 27.6,
+            "days_to_placement": 82,
+            "sustainability_pct": 65
+          },
+          {
+            "customer_id": "CUS-05732",
+            "name": "Liam D.",
+            "age": 43,
+            "region": "south-yorkshire",
+            "postcode": "S60",
+            "sector": "Care / health",
+            "barriers": [],
+            "barriers_count": 0,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 21,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Withdrawn",
+            "current_stage": "skills",
+            "p_success_pct": 0.0,
+            "days_to_placement": 147,
+            "sustainability_pct": 46
+          },
+          {
+            "customer_id": "CUS-05837",
+            "name": "Folake A.",
+            "age": 38,
+            "region": "south-yorkshire",
+            "postcode": "DN1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Mental health",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 25,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "interview",
+            "p_success_pct": 0.0,
+            "days_to_placement": 177,
+            "sustainability_pct": 35
+          },
+          {
+            "customer_id": "CUS-02341",
+            "name": "Leah O.",
+            "age": 36,
+            "region": "south-yorkshire",
+            "postcode": "WF1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Criminal record",
+              "Childcare cost",
+              "Physical health"
+            ],
+            "barriers_count": 3,
+            "digital_skills": "Low",
+            "uc_months_at_start": 14,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "jobmatch",
+            "p_success_pct": 0.0,
+            "days_to_placement": 143,
+            "sustainability_pct": 42
+          },
+          {
+            "customer_id": "CUS-08450",
+            "name": "Ibrahim A.",
+            "age": 27,
+            "region": "south-yorkshire",
+            "postcode": "S10",
+            "sector": "Security",
+            "barriers": [],
+            "barriers_count": 0,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 39,
+            "scenario_band": "drifting",
+            "journey_state": "Stalled",
+            "outcome": "Ongoing",
+            "current_stage": "skills",
+            "p_success_pct": 32.7,
+            "days_to_placement": 0,
+            "sustainability_pct": 63
+          },
+          {
+            "customer_id": "CUS-07684",
+            "name": "Ellie K.",
+            "age": 45,
+            "region": "south-yorkshire",
+            "postcode": "S6",
+            "sector": "Admin / office",
+            "barriers": [
+              "English language"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 27,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "routerCheck",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 38
+          },
+          {
+            "customer_id": "CUS-08079",
+            "name": "Reece T.",
+            "age": 25,
+            "region": "south-yorkshire",
+            "postcode": "DN1",
+            "sector": "Security",
+            "barriers": [
+              "Housing instability"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 16,
+            "scenario_band": "drifting",
+            "journey_state": "Failure",
+            "outcome": "Placed - dropped",
+            "current_stage": "referral",
+            "p_success_pct": 32.7,
+            "days_to_placement": 87,
+            "sustainability_pct": 67
+          }
+        ],
+        "correlation": {
+          "adviser_sustained_rate_pct": 27.5,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": 82.0,
+          "interpretation": "This adviser's sustained-placement rate is 27.5% vs the network median of 15.1% \u2014 +82.0% relative lift."
+        }
+      },
+      "similar_journeys": {
+        "title": "16 nearest journeys in engagement-signal space",
+        "items": [
+          {
+            "journey_id": "JNY-03933",
+            "name": "Tracy A.",
+            "similarity_pct": 56.2,
+            "outcome": "Withdrawn",
+            "sustainability_pct": 33,
+            "days_to_placement": 130,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "current_stage": "skills",
+            "region": "south-east-london",
+            "sector": "Construction",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-01819",
+            "name": "Joel O.",
+            "similarity_pct": 56.2,
+            "outcome": "Ongoing",
+            "sustainability_pct": 39,
+            "days_to_placement": 0,
+            "scenario_band": "atrisk",
+            "journey_state": "Paused",
+            "current_stage": "actionplan",
+            "region": "south-yorkshire",
+            "sector": "Care / health",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-00049",
+            "name": "Connor P.",
+            "similarity_pct": 52.9,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 31,
+            "days_to_placement": 142,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "current_stage": "jobmatch",
+            "region": "south-east-london",
+            "sector": "Driving",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-06073",
+            "name": "Tom K.",
+            "similarity_pct": 46.3,
+            "outcome": "Ongoing",
+            "sustainability_pct": 21,
+            "days_to_placement": 0,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "current_stage": "skills",
+            "region": "south-east-london",
+            "sector": "Retail",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-01976",
+            "name": "Joy E.",
+            "similarity_pct": 22.9,
+            "outcome": "Ongoing",
+            "sustainability_pct": 48,
+            "days_to_placement": 0,
+            "scenario_band": "atrisk",
+            "journey_state": "Stalled",
+            "current_stage": "actionplan",
+            "region": "wales",
+            "sector": "Driving",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-08305",
+            "name": "Tia M.",
+            "similarity_pct": 12.2,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 35,
+            "days_to_placement": 160,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "current_stage": "jobmatch",
+            "region": "south-east-london",
+            "sector": "Retail",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-05320",
+            "name": "Naomi E.",
+            "similarity_pct": 11.3,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 36,
+            "days_to_placement": 207,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "north-london",
+            "sector": "Care / health",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-10139",
+            "name": "Olu W.",
+            "similarity_pct": 11.2,
+            "outcome": "Withdrawn",
+            "sustainability_pct": 23,
+            "days_to_placement": 163,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "current_stage": "diagnostic",
+            "region": "wales",
+            "sector": "Driving",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-01175",
+            "name": "Faye B.",
+            "similarity_pct": 8.4,
+            "outcome": "Placed - dropped",
+            "sustainability_pct": 51,
+            "days_to_placement": 182,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "current_stage": "referral",
+            "region": "north-london",
+            "sector": "Warehouse / logistics",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-07752",
+            "name": "Amina L.",
+            "similarity_pct": 4.5,
+            "outcome": "Ongoing",
+            "sustainability_pct": 40,
+            "days_to_placement": 0,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "current_stage": "jobmatch",
+            "region": "south-yorkshire",
+            "sector": "Cleaning / facilities",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-09611",
+            "name": "Yusuf M.",
+            "similarity_pct": 4.3,
+            "outcome": "Withdrawn",
+            "sustainability_pct": 57,
+            "days_to_placement": 171,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "current_stage": "referral",
+            "region": "north-london",
+            "sector": "Retail",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-01961",
+            "name": "Reece W.",
+            "similarity_pct": 4.0,
+            "outcome": "Ongoing",
+            "sustainability_pct": 46,
+            "days_to_placement": 0,
+            "scenario_band": "atrisk",
+            "journey_state": "Stalled",
+            "current_stage": "skills",
+            "region": "south-yorkshire",
+            "sector": "Hospitality",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-01762",
+            "name": "Tracy A.",
+            "similarity_pct": 3.1,
+            "outcome": "Placed - dropped",
+            "sustainability_pct": 40,
+            "days_to_placement": 149,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "current_stage": "referral",
+            "region": "south-east-london",
+            "sector": "Construction",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-02991",
+            "name": "Reece M.",
+            "similarity_pct": 2.9,
+            "outcome": "Ongoing",
+            "sustainability_pct": 33,
+            "days_to_placement": 0,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "current_stage": "routerCheck",
+            "region": "derbyshire-notts",
+            "sector": "Retail",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-03663",
+            "name": "Tamika H.",
+            "similarity_pct": 0.7,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 37,
+            "days_to_placement": 108,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "current_stage": "interview",
+            "region": "derbyshire-notts",
+            "sector": "Warehouse / logistics",
+            "p_success_pct": 0.0
+          },
+          {
+            "journey_id": "JNY-00778",
+            "name": "Nasir P.",
+            "similarity_pct": 0,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 18,
+            "days_to_placement": 169,
+            "scenario_band": "atrisk",
+            "journey_state": "Progressing",
+            "current_stage": "interview",
+            "region": "south-east-london",
+            "sector": "Hospitality",
+            "p_success_pct": 0.0
+          }
+        ],
+        "correlation": {
+          "nn_sustained_rate_pct": 0.0,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": -100.0,
+          "interpretation": "Journeys most similar to this one historically reach 'Sustained 6mo+' at 0.0%, vs network 15.1% \u2014 -100.0% lift."
+        }
+      },
+      "similar_customers": {
+        "title": "15 customers with the closest feature profile",
+        "items": [
+          {
+            "customer_id": "CUS-01415",
+            "name": "Sade M.",
+            "age": 27,
+            "region": "south-yorkshire",
+            "postcode": "S6",
+            "sector": "Other",
+            "barriers": [
+              "Digital skills",
+              "Housing instability",
+              "Confidence"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 11,
+            "digital_skills": "Medium",
+            "similarity_pct": 100.0,
+            "reasons": [
+              "same region",
+              "shares barriers: Confidence, Digital skills",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-00528",
+            "name": "Sophie P.",
+            "age": 27,
+            "region": "wales",
+            "postcode": "NP19",
+            "sector": "Hospitality",
+            "barriers": [
+              "Mental health",
+              "Digital skills"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 11,
+            "digital_skills": "Medium",
+            "similarity_pct": 29.3,
+            "reasons": [
+              "shares barriers: Digital skills, Mental health",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-09045",
+            "name": "Reece M.",
+            "age": 27,
+            "region": "north-london",
+            "postcode": "N1",
+            "sector": "Manufacturing",
+            "barriers": [
+              "Criminal record",
+              "Confidence"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 11,
+            "digital_skills": "Medium",
+            "similarity_pct": 29.3,
+            "reasons": [
+              "shares barrier: Confidence",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-04591",
+            "name": "Connor K.",
+            "age": 28,
+            "region": "south-east-london",
+            "postcode": "E6",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Childcare cost",
+              "Confidence",
+              "Mental health"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 12,
+            "digital_skills": "Low",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "same sector (Warehouse / logistics)",
+              "shares barriers: Confidence, Mental health",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-07912",
+            "name": "Tia B.",
+            "age": 26,
+            "region": "north-london",
+            "postcode": "N1",
+            "sector": "Retail",
+            "barriers": [
+              "Mental health",
+              "Digital skills",
+              "Physical health",
+              "Caring responsibilities"
+            ],
+            "barriers_count": 4,
+            "uc_months_at_start": 12,
+            "digital_skills": "Medium",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "shares barriers: Digital skills, Mental health",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-09469",
+            "name": "Joel L.",
+            "age": 28,
+            "region": "north-london",
+            "postcode": "UB1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Caring responsibilities",
+              "Childcare cost"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 11,
+            "digital_skills": "Medium",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "same sector (Warehouse / logistics)",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-01332",
+            "name": "Ryan B.",
+            "age": 27,
+            "region": "south-yorkshire",
+            "postcode": "S1",
+            "sector": "Manufacturing",
+            "barriers": [
+              "English language",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 12,
+            "digital_skills": "Medium",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "same region",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-04223",
+            "name": "Joy D.",
+            "age": 28,
+            "region": "wales",
+            "postcode": "CF10",
+            "sector": "Retail",
+            "barriers": [
+              "Digital skills",
+              "Physical health"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 11,
+            "digital_skills": "Medium",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-08406",
+            "name": "Tia S.",
+            "age": 26,
+            "region": "north-london",
+            "postcode": "N17",
+            "sector": "Construction",
+            "barriers": [
+              "Confidence",
+              "Transport cost",
+              "Criminal record"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 12,
+            "digital_skills": "High",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "shares barrier: Confidence",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-08463",
+            "name": "Jamal K.",
+            "age": 28,
+            "region": "derbyshire-notts",
+            "postcode": "S40",
+            "sector": "Care / health",
+            "barriers": [
+              "Criminal record",
+              "Confidence",
+              "Caring responsibilities"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 10,
+            "digital_skills": "Low",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "shares barrier: Confidence",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-00015",
+            "name": "Kai K.",
+            "age": 27,
+            "region": "south-yorkshire",
+            "postcode": "WF1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Confidence",
+              "Mental health"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 10,
+            "digital_skills": "High",
+            "similarity_pct": 0,
+            "reasons": [
+              "same sector (Warehouse / logistics)",
+              "same region",
+              "shares barriers: Confidence, Mental health"
+            ]
+          },
+          {
+            "customer_id": "CUS-08247",
+            "name": "Ruth P.",
+            "age": 26,
+            "region": "south-yorkshire",
+            "postcode": "S1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "English language",
+              "Digital skills",
+              "Caring responsibilities",
+              "Confidence"
+            ],
+            "barriers_count": 4,
+            "uc_months_at_start": 10,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "same sector (Warehouse / logistics)",
+              "same region",
+              "shares barriers: Confidence, Digital skills"
+            ]
+          },
+          {
+            "customer_id": "CUS-03169",
+            "name": "Aiden H.",
+            "age": 27,
+            "region": "north-london",
+            "postcode": "NW10",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Mental health",
+              "Childcare cost",
+              "English language"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 13,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "same sector (Warehouse / logistics)",
+              "shares barrier: Mental health",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-06404",
+            "name": "Yusuf I.",
+            "age": 28,
+            "region": "south-east-london",
+            "postcode": "E3",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Digital skills",
+              "Childcare cost"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 12,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "same sector (Warehouse / logistics)",
+              "shares barrier: Digital skills",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-04222",
+            "name": "Ashley T.",
+            "age": 28,
+            "region": "south-yorkshire",
+            "postcode": "LS9",
+            "sector": "Care / health",
+            "barriers": [
+              "Housing instability",
+              "Mental health"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 10,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "same region",
+              "shares barrier: Mental health",
+              "age within 5 yrs"
+            ]
+          }
+        ],
+        "correlation": {
+          "cohort_sustained_rate_pct": 0.0,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": -100.0,
+          "interpretation": "This profile's cohort sustains at 0.0% vs network 15.1% \u2014 -100.0% relative lift."
+        }
+      }
+    },
+    "fadumo": {
+      "demo_adviser_name": "Eleri Davies",
+      "demo_adviser_id": "ADV-0079",
+      "expert_caseload": {
+        "title": "Eleri Davies \u00b7 current live caseload (12 of 37)",
+        "items": [
+          {
+            "customer_id": "CUS-05064",
+            "name": "Faye C.",
+            "age": 43,
+            "region": "wales",
+            "postcode": "LL57",
+            "sector": "Admin / office",
+            "barriers": [
+              "Digital skills"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 12,
+            "scenario_band": "drifting",
+            "journey_state": "Failure",
+            "outcome": "Placed - dropped",
+            "current_stage": "jobmatch",
+            "p_success_pct": 39.9,
+            "days_to_placement": 67,
+            "sustainability_pct": 51
+          },
+          {
+            "customer_id": "CUS-07947",
+            "name": "Priya H.",
+            "age": 46,
+            "region": "wales",
+            "postcode": "NP20",
+            "sector": "Other",
+            "barriers": [
+              "Mental health",
+              "Confidence",
+              "Digital skills"
+            ],
+            "barriers_count": 3,
+            "digital_skills": "High",
+            "uc_months_at_start": 29,
+            "scenario_band": "atrisk",
+            "journey_state": "Paused",
+            "outcome": "Ongoing",
+            "current_stage": "skills",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 39
+          },
+          {
+            "customer_id": "CUS-09746",
+            "name": "Ellie W.",
+            "age": 27,
+            "region": "wales",
+            "postcode": "NP19",
+            "sector": "Driving",
+            "barriers": [
+              "Transport cost"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 18,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Placed - dropped",
+            "current_stage": "referral",
+            "p_success_pct": 0.0,
+            "days_to_placement": 100,
+            "sustainability_pct": 21
+          },
+          {
+            "customer_id": "CUS-03209",
+            "name": "Reece T.",
+            "age": 56,
+            "region": "wales",
+            "postcode": "NP20",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Digital skills",
+              "Childcare cost"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 20,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "skills",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 39
+          },
+          {
+            "customer_id": "CUS-09177",
+            "name": "Priya D.",
+            "age": 30,
+            "region": "wales",
+            "postcode": "NP20",
+            "sector": "Admin / office",
+            "barriers": [
+              "Criminal record",
+              "Physical health"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "High",
+            "uc_months_at_start": 12,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 56.1,
+            "days_to_placement": 31,
+            "sustainability_pct": 83
+          },
+          {
+            "customer_id": "CUS-00958",
+            "name": "Halima O.",
+            "age": 35,
+            "region": "wales",
+            "postcode": "LL11",
+            "sector": "Hospitality",
+            "barriers": [
+              "Childcare cost",
+              "English language"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 23,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Sanctioned referral",
+            "current_stage": "diagnostic",
+            "p_success_pct": 0.0,
+            "days_to_placement": 120,
+            "sustainability_pct": 44
+          },
+          {
+            "customer_id": "CUS-10145",
+            "name": "Liam W.",
+            "age": 42,
+            "region": "wales",
+            "postcode": "CF10",
+            "sector": "Hospitality",
+            "barriers": [
+              "Confidence"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 16,
+            "scenario_band": "drifting",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "routerCheck",
+            "p_success_pct": 27.9,
+            "days_to_placement": 0,
+            "sustainability_pct": 67
+          },
+          {
+            "customer_id": "CUS-00381",
+            "name": "Aiden J.",
+            "age": 31,
+            "region": "wales",
+            "postcode": "NP19",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Childcare cost"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "High",
+            "uc_months_at_start": 35,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Withdrawn",
+            "current_stage": "actionplan",
+            "p_success_pct": 0.0,
+            "days_to_placement": 128,
+            "sustainability_pct": 57
+          },
+          {
+            "customer_id": "CUS-08314",
+            "name": "Lola A.",
+            "age": 35,
+            "region": "wales",
+            "postcode": "CF24",
+            "sector": "Construction",
+            "barriers": [
+              "Mental health"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "High",
+            "uc_months_at_start": 51,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "offer",
+            "p_success_pct": 60.3,
+            "days_to_placement": 36,
+            "sustainability_pct": 86
+          },
+          {
+            "customer_id": "CUS-07178",
+            "name": "Joshua W.",
+            "age": 53,
+            "region": "wales",
+            "postcode": "LL11",
+            "sector": "Care / health",
+            "barriers": [
+              "English language",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 17,
+            "scenario_band": "atrisk",
+            "journey_state": "Stalled",
+            "outcome": "Ongoing",
+            "current_stage": "diagnostic",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 35
+          },
+          {
+            "customer_id": "CUS-03610",
+            "name": "Callum O.",
+            "age": 52,
+            "region": "wales",
+            "postcode": "LL57",
+            "sector": "Retail",
+            "barriers": [
+              "Caring responsibilities"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "High",
+            "uc_months_at_start": 26,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 32.5,
+            "days_to_placement": 79,
+            "sustainability_pct": 55
+          },
+          {
+            "customer_id": "CUS-07149",
+            "name": "Sean H.",
+            "age": 25,
+            "region": "wales",
+            "postcode": "LL57",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Caring responsibilities",
+              "Criminal record"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Low",
+            "uc_months_at_start": 42,
+            "scenario_band": "atrisk",
+            "journey_state": "Stalled",
+            "outcome": "Ongoing",
+            "current_stage": "diagnostic",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 49
+          }
+        ],
+        "correlation": {
+          "adviser_sustained_rate_pct": 13.5,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": -10.5,
+          "interpretation": "This adviser's sustained-placement rate is 13.5% vs the network median of 15.1% \u2014 -10.5% relative lift."
+        }
+      },
+      "similar_journeys": {
+        "title": "16 nearest journeys in engagement-signal space",
+        "items": [
+          {
+            "journey_id": "JNY-03313",
+            "name": "Ashley D.",
+            "similarity_pct": 29.9,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 60,
+            "days_to_placement": 89,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "derbyshire-notts",
+            "sector": "Warehouse / logistics",
+            "p_success_pct": 27.6
+          },
+          {
+            "journey_id": "JNY-08855",
+            "name": "Maria C.",
+            "similarity_pct": 19.3,
+            "outcome": "Ongoing",
+            "sustainability_pct": 75,
+            "days_to_placement": 0,
+            "scenario_band": "drifting",
+            "journey_state": "Stalled",
+            "current_stage": "actionplan",
+            "region": "north-london",
+            "sector": "Care / health",
+            "p_success_pct": 29.8
+          },
+          {
+            "journey_id": "JNY-01450",
+            "name": "Ruth C.",
+            "similarity_pct": 17.4,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 59,
+            "days_to_placement": 70,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "north-london",
+            "sector": "Hospitality",
+            "p_success_pct": 31.4
+          },
+          {
+            "journey_id": "JNY-07076",
+            "name": "Femi B.",
+            "similarity_pct": 12.9,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 64,
+            "days_to_placement": 66,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "wales",
+            "sector": "Driving",
+            "p_success_pct": 34.5
+          },
+          {
+            "journey_id": "JNY-07613",
+            "name": "Tyrese O.",
+            "similarity_pct": 10.7,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 72,
+            "days_to_placement": 83,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "derbyshire-notts",
+            "sector": "Construction",
+            "p_success_pct": 27.9
+          },
+          {
+            "journey_id": "JNY-05226",
+            "name": "Sophie M.",
+            "similarity_pct": 8.3,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 65,
+            "days_to_placement": 82,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-yorkshire",
+            "sector": "Security",
+            "p_success_pct": 27.6
+          },
+          {
+            "journey_id": "JNY-07763",
+            "name": "Ibrahim B.",
+            "similarity_pct": 7.7,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 59,
+            "days_to_placement": 107,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "wales",
+            "sector": "Cleaning / facilities",
+            "p_success_pct": 29.7
+          },
+          {
+            "journey_id": "JNY-06950",
+            "name": "Leah M.",
+            "similarity_pct": 7.4,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 74,
+            "days_to_placement": 67,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "north-london",
+            "sector": "Admin / office",
+            "p_success_pct": 34.5
+          },
+          {
+            "journey_id": "JNY-09980",
+            "name": "Maria W.",
+            "similarity_pct": 6.8,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 61,
+            "days_to_placement": 93,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "wales",
+            "sector": "Warehouse / logistics",
+            "p_success_pct": 27.9
+          },
+          {
+            "journey_id": "JNY-08066",
+            "name": "Junior C.",
+            "similarity_pct": 4.7,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 65,
+            "days_to_placement": 77,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "derbyshire-notts",
+            "sector": "Hospitality",
+            "p_success_pct": 27.9
+          },
+          {
+            "journey_id": "JNY-07642",
+            "name": "Tracy T.",
+            "similarity_pct": 4.2,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 66,
+            "days_to_placement": 122,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "offer",
+            "region": "south-east-london",
+            "sector": "Construction",
+            "p_success_pct": 26.4
+          },
+          {
+            "journey_id": "JNY-07551",
+            "name": "Ruth P.",
+            "similarity_pct": 4.0,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 67,
+            "days_to_placement": 70,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "offer",
+            "region": "south-east-london",
+            "sector": "Care / health",
+            "p_success_pct": 31.4
+          },
+          {
+            "journey_id": "JNY-07711",
+            "name": "Yvonne J.",
+            "similarity_pct": 3.6,
+            "outcome": "Ongoing",
+            "sustainability_pct": 67,
+            "days_to_placement": 0,
+            "scenario_band": "drifting",
+            "journey_state": "Paused",
+            "current_stage": "actionplan",
+            "region": "wales",
+            "sector": "Admin / office",
+            "p_success_pct": 27.9
+          },
+          {
+            "journey_id": "JNY-03958",
+            "name": "Ruth S.",
+            "similarity_pct": 1.4,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 61,
+            "days_to_placement": 82,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "wales",
+            "sector": "Retail",
+            "p_success_pct": 32.3
+          },
+          {
+            "journey_id": "JNY-00707",
+            "name": "Kai C.",
+            "similarity_pct": 0.8,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 62,
+            "days_to_placement": 86,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-east-london",
+            "sector": "Driving",
+            "p_success_pct": 27.6
+          },
+          {
+            "journey_id": "JNY-04832",
+            "name": "Olu A.",
+            "similarity_pct": 0,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 55,
+            "days_to_placement": 95,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "derbyshire-notts",
+            "sector": "Warehouse / logistics",
+            "p_success_pct": 27.9
+          }
+        ],
+        "correlation": {
+          "nn_sustained_rate_pct": 43.8,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": 189.6,
+          "interpretation": "Journeys most similar to this one historically reach 'Sustained 6mo+' at 43.8%, vs network 15.1% \u2014 +189.6% lift."
+        }
+      },
+      "similar_customers": {
+        "title": "15 customers with the closest feature profile",
+        "items": [
+          {
+            "customer_id": "CUS-05120",
+            "name": "Bibi S.",
+            "age": 31,
+            "region": "north-london",
+            "postcode": "N1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "English language",
+              "Physical health",
+              "Housing instability"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 7,
+            "digital_skills": "Medium",
+            "similarity_pct": 55.3,
+            "reasons": [
+              "shares barriers: English language, Housing instability",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-03463",
+            "name": "Liam P.",
+            "age": 31,
+            "region": "south-east-london",
+            "postcode": "E20",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Physical health",
+              "Confidence",
+              "English language"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 55.3,
+            "reasons": [
+              "shares barrier: English language",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-05701",
+            "name": "Kwame A.",
+            "age": 31,
+            "region": "south-east-london",
+            "postcode": "SE15",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Mental health",
+              "Transport cost",
+              "Childcare cost"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 55.3,
+            "reasons": [
+              "shares barrier: Childcare cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-08760",
+            "name": "Sean B.",
+            "age": 31,
+            "region": "wales",
+            "postcode": "LL11",
+            "sector": "Manufacturing",
+            "barriers": [
+              "Mental health",
+              "Confidence"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 55.3,
+            "reasons": [
+              "same region",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-00275",
+            "name": "Tracy A.",
+            "age": 30,
+            "region": "derbyshire-notts",
+            "postcode": "NG18",
+            "sector": "Care / health",
+            "barriers": [
+              "Digital skills",
+              "Mental health",
+              "Housing instability"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 9,
+            "digital_skills": "Medium",
+            "similarity_pct": 36.8,
+            "reasons": [
+              "same sector (Care / health)",
+              "shares barrier: Housing instability",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-06342",
+            "name": "Tamika B.",
+            "age": 32,
+            "region": "wales",
+            "postcode": "SA1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Housing instability",
+              "English language",
+              "Confidence"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 8,
+            "digital_skills": "Low",
+            "similarity_pct": 36.8,
+            "reasons": [
+              "same region",
+              "shares barriers: English language, Housing instability",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-00161",
+            "name": "Maria T.",
+            "age": 31,
+            "region": "derbyshire-notts",
+            "postcode": "DE22",
+            "sector": "Care / health",
+            "barriers": [
+              "Criminal record",
+              "Confidence",
+              "Mental health"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 9,
+            "digital_skills": "High",
+            "similarity_pct": 36.8,
+            "reasons": [
+              "same sector (Care / health)",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-02418",
+            "name": "Kai W.",
+            "age": 31,
+            "region": "wales",
+            "postcode": "CF24",
+            "sector": "Retail",
+            "barriers": [
+              "Confidence",
+              "Transport cost",
+              "Housing instability"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 7,
+            "digital_skills": "High",
+            "similarity_pct": 36.8,
+            "reasons": [
+              "same region",
+              "shares barrier: Housing instability",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-08645",
+            "name": "Sade O.",
+            "age": 31,
+            "region": "south-east-london",
+            "postcode": "SE15",
+            "sector": "Driving",
+            "barriers": [
+              "Housing instability",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 7,
+            "digital_skills": "Medium",
+            "similarity_pct": 36.8,
+            "reasons": [
+              "shares barrier: Housing instability",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-06180",
+            "name": "Damian R.",
+            "age": 30,
+            "region": "wales",
+            "postcode": "LL11",
+            "sector": "Care / health",
+            "barriers": [
+              "Confidence",
+              "Caring responsibilities",
+              "English language"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 9,
+            "digital_skills": "High",
+            "similarity_pct": 22.5,
+            "reasons": [
+              "same sector (Care / health)",
+              "same region",
+              "shares barrier: English language"
+            ]
+          },
+          {
+            "customer_id": "CUS-02324",
+            "name": "Joel M.",
+            "age": 32,
+            "region": "north-london",
+            "postcode": "HA9",
+            "sector": "Driving",
+            "barriers": [
+              "English language",
+              "Childcare cost"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 7,
+            "digital_skills": "Medium",
+            "similarity_pct": 22.5,
+            "reasons": [
+              "shares barriers: English language, Childcare cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-04542",
+            "name": "Naomi A.",
+            "age": 30,
+            "region": "derbyshire-notts",
+            "postcode": "NG1",
+            "sector": "Care / health",
+            "barriers": [
+              "Confidence",
+              "Mental health"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 7,
+            "digital_skills": "Medium",
+            "similarity_pct": 22.5,
+            "reasons": [
+              "same sector (Care / health)",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-08805",
+            "name": "Tyrese J.",
+            "age": 31,
+            "region": "wales",
+            "postcode": "SA1",
+            "sector": "Driving",
+            "barriers": [
+              "Confidence",
+              "English language"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "High",
+            "similarity_pct": 22.5,
+            "reasons": [
+              "same region",
+              "shares barrier: English language",
+              "age within 5 yrs"
+            ]
+          },
+          {
+            "customer_id": "CUS-08531",
+            "name": "Joel A.",
+            "age": 32,
+            "region": "north-london",
+            "postcode": "NW3",
+            "sector": "Care / health",
+            "barriers": [
+              "Transport cost",
+              "Mental health"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 9,
+            "digital_skills": "High",
+            "similarity_pct": 10.6,
+            "reasons": [
+              "same sector (Care / health)",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-06713",
+            "name": "Connor M.",
+            "age": 33,
+            "region": "south-east-london",
+            "postcode": "SE15",
+            "sector": "Care / health",
+            "barriers": [
+              "Confidence",
+              "Childcare cost",
+              "Physical health",
+              "Criminal record"
+            ],
+            "barriers_count": 4,
+            "uc_months_at_start": 8,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "same sector (Care / health)",
+              "shares barrier: Childcare cost",
+              "age within 5 yrs"
+            ]
+          }
+        ],
+        "correlation": {
+          "cohort_sustained_rate_pct": 13.3,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": -11.7,
+          "interpretation": "This profile's cohort sustains at 13.3% vs network 15.1% \u2014 -11.7% relative lift."
+        }
+      }
+    },
+    "mark": {
+      "demo_adviser_name": "Karen Mensah",
+      "demo_adviser_id": "ADV-0056",
+      "expert_caseload": {
+        "title": "Karen Mensah \u00b7 current live caseload (12 of 38)",
+        "items": [
+          {
+            "customer_id": "CUS-06137",
+            "name": "Liam O.",
+            "age": 38,
+            "region": "derbyshire-notts",
+            "postcode": "DE22",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Physical health",
+              "Mental health"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "High",
+            "uc_months_at_start": 26,
+            "scenario_band": "atrisk",
+            "journey_state": "Stalled",
+            "outcome": "Ongoing",
+            "current_stage": "actionplan",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 44
+          },
+          {
+            "customer_id": "CUS-09725",
+            "name": "Demi A.",
+            "age": 41,
+            "region": "derbyshire-notts",
+            "postcode": "NG7",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Physical health",
+              "Digital skills"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "High",
+            "uc_months_at_start": 8,
+            "scenario_band": "atrisk",
+            "journey_state": "Stalled",
+            "outcome": "Ongoing",
+            "current_stage": "actionplan",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 33
+          },
+          {
+            "customer_id": "CUS-09533",
+            "name": "Bibi T.",
+            "age": 43,
+            "region": "derbyshire-notts",
+            "postcode": "NG7",
+            "sector": "Retail",
+            "barriers": [
+              "Criminal record"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "High",
+            "uc_months_at_start": 49,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Placed - dropped",
+            "current_stage": "jobmatch",
+            "p_success_pct": 0.0,
+            "days_to_placement": 149,
+            "sustainability_pct": 31
+          },
+          {
+            "customer_id": "CUS-09199",
+            "name": "Kai P.",
+            "age": 50,
+            "region": "derbyshire-notts",
+            "postcode": "DE1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Mental health"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 23,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Placed - dropped",
+            "current_stage": "referral",
+            "p_success_pct": 0.0,
+            "days_to_placement": 124,
+            "sustainability_pct": 44
+          },
+          {
+            "customer_id": "CUS-01879",
+            "name": "Femi A.",
+            "age": 51,
+            "region": "derbyshire-notts",
+            "postcode": "S81",
+            "sector": "Driving",
+            "barriers": [
+              "Confidence",
+              "Housing instability",
+              "Mental health"
+            ],
+            "barriers_count": 3,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 51,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Placed - dropped",
+            "current_stage": "referral",
+            "p_success_pct": 0.0,
+            "days_to_placement": 198,
+            "sustainability_pct": 39
+          },
+          {
+            "customer_id": "CUS-03474",
+            "name": "Aisha B.",
+            "age": 42,
+            "region": "derbyshire-notts",
+            "postcode": "NG1",
+            "sector": "Hospitality",
+            "barriers": [
+              "Digital skills",
+              "Mental health",
+              "Confidence"
+            ],
+            "barriers_count": 3,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 19,
+            "scenario_band": "drifting",
+            "journey_state": "Success",
+            "outcome": "Sustained 6mo+",
+            "current_stage": "insupport",
+            "p_success_pct": 21.2,
+            "days_to_placement": 107,
+            "sustainability_pct": 55
+          },
+          {
+            "customer_id": "CUS-02497",
+            "name": "Aaron M.",
+            "age": 39,
+            "region": "derbyshire-notts",
+            "postcode": "DE1",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Housing instability"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Low",
+            "uc_months_at_start": 34,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "outcome": "Placed - in progress",
+            "current_stage": "jobmatch",
+            "p_success_pct": 31.4,
+            "days_to_placement": 82,
+            "sustainability_pct": 76
+          },
+          {
+            "customer_id": "CUS-05248",
+            "name": "Liam M.",
+            "age": 37,
+            "region": "derbyshire-notts",
+            "postcode": "NG18",
+            "sector": "Admin / office",
+            "barriers": [
+              "Mental health"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 18,
+            "scenario_band": "atrisk",
+            "journey_state": "Failure",
+            "outcome": "Placed - dropped",
+            "current_stage": "actionplan",
+            "p_success_pct": 0.0,
+            "days_to_placement": 220,
+            "sustainability_pct": 34
+          },
+          {
+            "customer_id": "CUS-09219",
+            "name": "Kelly W.",
+            "age": 45,
+            "region": "derbyshire-notts",
+            "postcode": "S40",
+            "sector": "Hospitality",
+            "barriers": [
+              "Housing instability"
+            ],
+            "barriers_count": 1,
+            "digital_skills": "Low",
+            "uc_months_at_start": 31,
+            "scenario_band": "drifting",
+            "journey_state": "Failure",
+            "outcome": "Placed - dropped",
+            "current_stage": "diagnostic",
+            "p_success_pct": 27.6,
+            "days_to_placement": 80,
+            "sustainability_pct": 60
+          },
+          {
+            "customer_id": "CUS-00659",
+            "name": "Sophie M.",
+            "age": 33,
+            "region": "derbyshire-notts",
+            "postcode": "NG18",
+            "sector": "Security",
+            "barriers": [
+              "Caring responsibilities",
+              "Mental health",
+              "Childcare cost"
+            ],
+            "barriers_count": 3,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 38,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "skills",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 37
+          },
+          {
+            "customer_id": "CUS-04826",
+            "name": "Femi O.",
+            "age": 50,
+            "region": "derbyshire-notts",
+            "postcode": "S81",
+            "sector": "Care / health",
+            "barriers": [
+              "Housing instability",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 34,
+            "scenario_band": "atrisk",
+            "journey_state": "Paused",
+            "outcome": "Ongoing",
+            "current_stage": "actionplan",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 23
+          },
+          {
+            "customer_id": "CUS-08658",
+            "name": "Olu M.",
+            "age": 42,
+            "region": "derbyshire-notts",
+            "postcode": "S40",
+            "sector": "Hospitality",
+            "barriers": [
+              "Criminal record",
+              "English language",
+              "Physical health",
+              "Confidence"
+            ],
+            "barriers_count": 4,
+            "digital_skills": "Medium",
+            "uc_months_at_start": 19,
+            "scenario_band": "atrisk",
+            "journey_state": "Regressing",
+            "outcome": "Ongoing",
+            "current_stage": "jobmatch",
+            "p_success_pct": 0.0,
+            "days_to_placement": 0,
+            "sustainability_pct": 51
+          }
+        ],
+        "correlation": {
+          "adviser_sustained_rate_pct": 7.9,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": -47.7,
+          "interpretation": "This adviser's sustained-placement rate is 7.9% vs the network median of 15.1% \u2014 -47.7% relative lift."
+        }
+      },
+      "similar_journeys": {
+        "title": "16 nearest journeys in engagement-signal space",
+        "items": [
+          {
+            "journey_id": "JNY-09471",
+            "name": "Reece I.",
+            "similarity_pct": 17.8,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 83,
+            "days_to_placement": 50,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "derbyshire-notts",
+            "sector": "Retail",
+            "p_success_pct": 45.0
+          },
+          {
+            "journey_id": "JNY-01185",
+            "name": "Chantelle O.",
+            "similarity_pct": 17.6,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 85,
+            "days_to_placement": 35,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "wales",
+            "sector": "Warehouse / logistics",
+            "p_success_pct": 48.9
+          },
+          {
+            "journey_id": "JNY-08755",
+            "name": "Ruth P.",
+            "similarity_pct": 16.9,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 81,
+            "days_to_placement": 35,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "wales",
+            "sector": "Driving",
+            "p_success_pct": 51.5
+          },
+          {
+            "journey_id": "JNY-03996",
+            "name": "Aisha H.",
+            "similarity_pct": 14.2,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 85,
+            "days_to_placement": 41,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "south-east-london",
+            "sector": "Retail",
+            "p_success_pct": 45.0
+          },
+          {
+            "journey_id": "JNY-08945",
+            "name": "Aaron W.",
+            "similarity_pct": 12.9,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 73,
+            "days_to_placement": 50,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-east-london",
+            "sector": "Driving",
+            "p_success_pct": 54.3
+          },
+          {
+            "journey_id": "JNY-07730",
+            "name": "Yvonne H.",
+            "similarity_pct": 8.8,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 77,
+            "days_to_placement": 41,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "north-london",
+            "sector": "Warehouse / logistics",
+            "p_success_pct": 51.6
+          },
+          {
+            "journey_id": "JNY-00913",
+            "name": "Femi O.",
+            "similarity_pct": 8.5,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 80,
+            "days_to_placement": 35,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "jobmatch",
+            "region": "south-east-london",
+            "sector": "Driving",
+            "p_success_pct": 51.6
+          },
+          {
+            "journey_id": "JNY-04630",
+            "name": "Faye O.",
+            "similarity_pct": 5.9,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 89,
+            "days_to_placement": 51,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "north-london",
+            "sector": "Hospitality",
+            "p_success_pct": 54.3
+          },
+          {
+            "journey_id": "JNY-06129",
+            "name": "Yusuf K.",
+            "similarity_pct": 5.5,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 51,
+            "days_to_placement": 104,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "offer",
+            "region": "south-yorkshire",
+            "sector": "Construction",
+            "p_success_pct": 27.9
+          },
+          {
+            "journey_id": "JNY-05179",
+            "name": "Priya R.",
+            "similarity_pct": 3.4,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 80,
+            "days_to_placement": 44,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "north-london",
+            "sector": "Hospitality",
+            "p_success_pct": 48.9
+          },
+          {
+            "journey_id": "JNY-10151",
+            "name": "Ellie O.",
+            "similarity_pct": 2.8,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 77,
+            "days_to_placement": 34,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-yorkshire",
+            "sector": "Hospitality",
+            "p_success_pct": 48.9
+          },
+          {
+            "journey_id": "JNY-09755",
+            "name": "Ashley L.",
+            "similarity_pct": 1.7,
+            "outcome": "Sustained 6mo+",
+            "sustainability_pct": 85,
+            "days_to_placement": 44,
+            "scenario_band": "ontrack",
+            "journey_state": "Success",
+            "current_stage": "insupport",
+            "region": "south-yorkshire",
+            "sector": "Retail",
+            "p_success_pct": 46.7
+          },
+          {
+            "journey_id": "JNY-02548",
+            "name": "Ellie H.",
+            "similarity_pct": 1.3,
+            "outcome": "Ongoing",
+            "sustainability_pct": 64,
+            "days_to_placement": 0,
+            "scenario_band": "drifting",
+            "journey_state": "Regressing",
+            "current_stage": "jobmatch",
+            "region": "north-london",
+            "sector": "Security",
+            "p_success_pct": 31.8
+          },
+          {
+            "journey_id": "JNY-03031",
+            "name": "Sarah B.",
+            "similarity_pct": 0.5,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 88,
+            "days_to_placement": 44,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "offer",
+            "region": "derbyshire-notts",
+            "sector": "Warehouse / logistics",
+            "p_success_pct": 49.7
+          },
+          {
+            "journey_id": "JNY-05397",
+            "name": "Reece M.",
+            "similarity_pct": 0.3,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 58,
+            "days_to_placement": 75,
+            "scenario_band": "drifting",
+            "journey_state": "Progressing",
+            "current_stage": "interview",
+            "region": "south-yorkshire",
+            "sector": "Retail",
+            "p_success_pct": 45.0
+          },
+          {
+            "journey_id": "JNY-08679",
+            "name": "Halima O.",
+            "similarity_pct": 0,
+            "outcome": "Placed - in progress",
+            "sustainability_pct": 76,
+            "days_to_placement": 42,
+            "scenario_band": "ontrack",
+            "journey_state": "Progressing",
+            "current_stage": "nudgeFirstDay",
+            "region": "derbyshire-notts",
+            "sector": "Other",
+            "p_success_pct": 39.3
+          }
+        ],
+        "correlation": {
+          "nn_sustained_rate_pct": 50.0,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": 231.0,
+          "interpretation": "Journeys most similar to this one historically reach 'Sustained 6mo+' at 50.0%, vs network 15.1% \u2014 +231.0% lift."
+        }
+      },
+      "similar_customers": {
+        "title": "15 customers with the closest feature profile",
+        "items": [
+          {
+            "customer_id": "CUS-04780",
+            "name": "Kwame O.",
+            "age": 58,
+            "region": "south-yorkshire",
+            "postcode": "S10",
+            "sector": "Retail",
+            "barriers": [
+              "Transport cost",
+              "Mental health",
+              "Digital skills"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 19,
+            "digital_skills": "Medium",
+            "similarity_pct": 50.0,
+            "reasons": [
+              "shares barriers: Transport cost, Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-08297",
+            "name": "Faye P.",
+            "age": 58,
+            "region": "north-london",
+            "postcode": "NW1",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Housing instability",
+              "Criminal record",
+              "Digital skills",
+              "Confidence"
+            ],
+            "barriers_count": 4,
+            "uc_months_at_start": 19,
+            "digital_skills": "Medium",
+            "similarity_pct": 29.3,
+            "reasons": [
+              "shares barriers: Digital skills, Criminal record",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-01110",
+            "name": "Theo M.",
+            "age": 59,
+            "region": "south-yorkshire",
+            "postcode": "WF1",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Childcare cost",
+              "Housing instability",
+              "Digital skills"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 19,
+            "digital_skills": "Medium",
+            "similarity_pct": 29.3,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-00864",
+            "name": "Junior M.",
+            "age": 57,
+            "region": "south-east-london",
+            "postcode": "SE10",
+            "sector": "Driving",
+            "barriers": [
+              "English language",
+              "Caring responsibilities"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 20,
+            "digital_skills": "Low",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "same sector (Driving)",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-02349",
+            "name": "Joel E.",
+            "age": 57,
+            "region": "south-east-london",
+            "postcode": "E2",
+            "sector": "Construction",
+            "barriers": [
+              "Digital skills",
+              "Transport cost"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 19,
+            "digital_skills": "Medium",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "shares barriers: Digital skills, Transport cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-00711",
+            "name": "Kwame B.",
+            "age": 59,
+            "region": "south-east-london",
+            "postcode": "E2",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Confidence",
+              "Housing instability",
+              "Digital skills"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 19,
+            "digital_skills": "Medium",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-04345",
+            "name": "Faye A.",
+            "age": 58,
+            "region": "south-east-london",
+            "postcode": "E6",
+            "sector": "Security",
+            "barriers": [
+              "Mental health",
+              "Digital skills"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 20,
+            "digital_skills": "Medium",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-04661",
+            "name": "Junior A.",
+            "age": 58,
+            "region": "north-london",
+            "postcode": "N17",
+            "sector": "Hospitality",
+            "barriers": [
+              "Physical health",
+              "Housing instability",
+              "Confidence",
+              "Digital skills"
+            ],
+            "barriers_count": 4,
+            "uc_months_at_start": 19,
+            "digital_skills": "High",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "shares barrier: Digital skills",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-06541",
+            "name": "Megan O.",
+            "age": 57,
+            "region": "south-east-london",
+            "postcode": "E15",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Mental health",
+              "Housing instability",
+              "Transport cost"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 20,
+            "digital_skills": "Medium",
+            "similarity_pct": 13.4,
+            "reasons": [
+              "shares barrier: Transport cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-04199",
+            "name": "Bibi K.",
+            "age": 58,
+            "region": "wales",
+            "postcode": "LL11",
+            "sector": "Retail",
+            "barriers": [
+              "Transport cost",
+              "Housing instability",
+              "Digital skills",
+              "Caring responsibilities"
+            ],
+            "barriers_count": 4,
+            "uc_months_at_start": 20,
+            "digital_skills": "High",
+            "similarity_pct": 0,
+            "reasons": [
+              "shares barriers: Digital skills, Transport cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-04338",
+            "name": "Yusuf S.",
+            "age": 57,
+            "region": "south-east-london",
+            "postcode": "E6",
+            "sector": "Retail",
+            "barriers": [
+              "Digital skills",
+              "Transport cost",
+              "Physical health"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 20,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "shares barriers: Digital skills, Transport cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-02642",
+            "name": "Tracy O.",
+            "age": 60,
+            "region": "south-east-london",
+            "postcode": "E20",
+            "sector": "Security",
+            "barriers": [
+              "Confidence",
+              "Physical health",
+              "Transport cost"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 19,
+            "digital_skills": "Low",
+            "similarity_pct": 0,
+            "reasons": [
+              "shares barrier: Transport cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-03460",
+            "name": "Sean H.",
+            "age": 59,
+            "region": "south-east-london",
+            "postcode": "E15",
+            "sector": "Warehouse / logistics",
+            "barriers": [
+              "Mental health",
+              "Criminal record"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 20,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "shares barrier: Criminal record",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-03540",
+            "name": "Reece J.",
+            "age": 58,
+            "region": "south-east-london",
+            "postcode": "SE10",
+            "sector": "Retail",
+            "barriers": [
+              "Transport cost",
+              "Mental health"
+            ],
+            "barriers_count": 2,
+            "uc_months_at_start": 18,
+            "digital_skills": "High",
+            "similarity_pct": 0,
+            "reasons": [
+              "shares barrier: Transport cost",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          },
+          {
+            "customer_id": "CUS-05138",
+            "name": "Sean W.",
+            "age": 59,
+            "region": "derbyshire-notts",
+            "postcode": "NG18",
+            "sector": "Cleaning / facilities",
+            "barriers": [
+              "Mental health",
+              "English language",
+              "Physical health"
+            ],
+            "barriers_count": 3,
+            "uc_months_at_start": 18,
+            "digital_skills": "Medium",
+            "similarity_pct": 0,
+            "reasons": [
+              "same region",
+              "age within 5 yrs",
+              "similar UC duration"
+            ]
+          }
+        ],
+        "correlation": {
+          "cohort_sustained_rate_pct": 6.7,
+          "network_sustained_rate_pct": 15.1,
+          "lift_pct": -55.9,
+          "interpretation": "This profile's cohort sustains at 6.7% vs network 15.1% \u2014 -55.9% relative lift."
+        }
+      }
+    }
+  }
+}
