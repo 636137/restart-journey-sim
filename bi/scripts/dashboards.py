@@ -83,7 +83,8 @@ def _identifiers(account, region, tables):
     ]
 
 
-def _kpi(vid, ds, label, col, agg="SUM", suffix="", color="#5B2D8E", trend_col=None):
+def _kpi(vid, ds, label, col, agg="SUM", suffix="", color="#5B2D8E", trend_col=None, subtitle=None, conditional=None):
+    """conditional = {'good':>=, 'warn':>=, 'risk':<} thresholds for primary value color."""
     val = {"NumericalMeasureField": {
         "FieldId": f"{vid}-val",
         "Column": {"DataSetIdentifier": ds, "ColumnName": col},
@@ -99,6 +100,7 @@ def _kpi(vid, ds, label, col, agg="SUM", suffix="", color="#5B2D8E", trend_col=N
     visual = {"KPIVisual": {
         "VisualId": vid,
         "Title": {"Visibility": "VISIBLE", "FormatText": {"PlainText": label}},
+        "Subtitle": {"Visibility": "VISIBLE", "FormatText": {"PlainText": subtitle or ""}},
         "ChartConfiguration": {
             "FieldWells": {
                 "Values": [val],
@@ -109,6 +111,10 @@ def _kpi(vid, ds, label, col, agg="SUM", suffix="", color="#5B2D8E", trend_col=N
                 "PrimaryValueDisplayType": "ACTUAL",
                 "Sparkline": {"Type": "LINE", "Visibility": "VISIBLE", "Color": color} if trend_col else None,
                 "VisualLayoutOptions": {"StandardLayout": {"Type": "VERTICAL"}},
+                "PrimaryValueFontConfiguration": {
+                    "FontColor": color,
+                    "FontWeight": {"Name": "BOLD"},
+                },
             },
         },
     }}
@@ -321,15 +327,15 @@ def _text(vid, html):
 def executive_definition(account, region):
     tables = ["journeys","outcomes_kpis","customers","router_scores","advisers"]
     visuals = [
-        _kpi("k1", "journeys", "Total journeys", "sustainability_pct", "COUNT", color="#5B2D8E"),
-        _kpi("k2", "outcomes_kpis", "Avg days to placement", "avg_days_to_placement", "AVERAGE", color="#00A39A"),
-        _kpi("k3", "outcomes_kpis", "Placement rate %", "placement_rate_pct", "AVERAGE", color="#42206A"),
-        _kpi("k4", "outcomes_kpis", "Avg sustainability %", "avg_sustainability_pct", "AVERAGE", color="#007E77"),
-        _donut("d1", "journeys", "Outcomes mix", "outcome"),
-        _bar_count("b1", "journeys", "Journeys by region (most active first)", "region_key"),
-        _line_over_time("l1", "journeys", "Placements over time", "started_date", "journey_id", "COUNT"),
-        _heatmap("h1", "outcomes_kpis", "Avg sustainability % by region × month", "region_key", "month", "avg_sustainability_pct"),
-        _donut("d2", "journeys", "Max Router scenario mix", "scenario_band"),
+        _kpi("k1", "journeys", "Total journeys", "sustainability_pct", "COUNT", color="#5B2D8E", subtitle="Active across 5 UK regions", trend_col="started_date"),
+        _kpi("k2", "outcomes_kpis", "Avg days to placement", "avg_days_to_placement", "AVERAGE", color="#00A39A", subtitle="Cohort median: 92 days"),
+        _kpi("k3", "outcomes_kpis", "Placement rate %", "placement_rate_pct", "AVERAGE", color="#42206A", subtitle="Target: 68%"),
+        _kpi("k4", "outcomes_kpis", "Avg sustainability %", "avg_sustainability_pct", "AVERAGE", color="#007E77", subtitle="6-month in-work retention"),
+        _donut("d1", "journeys", "Outcomes mix · journeys by final status", "outcome"),
+        _bar_count("b1", "journeys", "Journeys by delivery region", "region_key"),
+        _line_over_time("l1", "journeys", "Monthly journey starts · trend", "started_date", "journey_id", "COUNT"),
+        _heatmap("h1", "outcomes_kpis", "Sustainability % heatmap · region × month", "region_key", "month", "avg_sustainability_pct"),
+        _donut("d2", "journeys", "Max Router scenario band distribution", "scenario_band"),
     ]
     return _wrap(account, region, tables, visuals)
 
@@ -337,15 +343,15 @@ def executive_definition(account, region):
 def adviser_definition(account, region):
     tables = ["advisers","outcomes_kpis","journeys"]
     visuals = [
-        _kpi("k1", "advisers", "Active advisers", "caseload_current", "COUNT", color="#5B2D8E"),
-        _kpi("k2", "advisers", "Avg customer satisfaction", "customer_satisfaction", "AVERAGE", color="#00A39A"),
-        _kpi("k3", "advisers", "Avg caseload", "caseload_current", "AVERAGE", color="#42206A"),
-        _kpi("k4", "advisers", "Avg tenure (yrs)", "years_at_maximus", "AVERAGE", color="#007E77"),
-        _table_top("t1", "outcomes_kpis", "Top advisers by placements", "adviser_id", "placements", "SUM", limit=12),
-        _bar_num("b1", "outcomes_kpis", "Avg sustainability % by region", "region_key", "avg_sustainability_pct", "AVERAGE", "HORIZONTAL"),
-        _bar_num("b2", "outcomes_kpis", "Avg days to placement by region", "region_key", "avg_days_to_placement", "AVERAGE", "HORIZONTAL"),
-        _scatter("s1", "advisers", "Adviser satisfaction vs caseload", "caseload_current", "customer_satisfaction"),
-        _bar_count("b3", "advisers", "Advisers by region", "region_key"),
+        _kpi("k1", "advisers", "Active advisers", "caseload_current", "COUNT", color="#5B2D8E", subtitle="Across 5 regions"),
+        _kpi("k2", "advisers", "Customer satisfaction", "customer_satisfaction", "AVERAGE", color="#00A39A", subtitle="Out of 5.00"),
+        _kpi("k3", "advisers", "Avg caseload", "caseload_current", "AVERAGE", color="#42206A", subtitle="Target: 50"),
+        _kpi("k4", "advisers", "Avg tenure", "years_at_maximus", "AVERAGE", color="#007E77", subtitle="Years at Maximus"),
+        _table_top("t1", "outcomes_kpis", "Top 12 advisers · total placements", "adviser_id", "placements", "SUM", limit=12),
+        _bar_num("b1", "outcomes_kpis", "Sustainability % by region · 6mo retention", "region_key", "avg_sustainability_pct", "AVERAGE", "HORIZONTAL"),
+        _bar_num("b2", "outcomes_kpis", "Days-to-placement by region · lower is better", "region_key", "avg_days_to_placement", "AVERAGE", "HORIZONTAL"),
+        _scatter("s1", "advisers", "Adviser satisfaction × caseload · spot overloaded advisers", "caseload_current", "customer_satisfaction"),
+        _bar_count("b3", "advisers", "Adviser headcount by region", "region_key"),
     ]
     return _wrap(account, region, tables, visuals)
 
@@ -353,16 +359,16 @@ def adviser_definition(account, region):
 def customer_definition(account, region):
     tables = ["customers","journeys","journey_stages","router_scores","advisers"]
     visuals = [
-        _kpi("k1", "customers", "Customers", "age", "COUNT", color="#5B2D8E"),
-        _kpi("k2", "router_scores", "Avg Max Router score", "score", "AVERAGE", color="#00A39A"),
-        _kpi("k3", "customers", "Avg age", "age", "AVERAGE", color="#42206A"),
-        _kpi("k4", "customers", "Avg UC months at start", "uc_months_at_start", "AVERAGE", color="#007E77"),
-        _funnel("f1", "journey_stages", "Journey funnel (12-stage)", "stage_key"),
-        _donut("d1", "router_scores", "Max Router scenario bands", "band"),
-        _gauge("g1", "router_scores", "Network-wide Max Router score", "score", "AVERAGE"),
-        _bar_count("b1", "customers", "Customers by region", "region_key"),
-        _bar_num("b2", "journeys", "Avg sustainability % by scenario band", "scenario_band", "sustainability_pct", "AVERAGE"),
-        _bar_num("b3", "journeys", "Avg open barriers by scenario band", "scenario_band", "open_barriers", "AVERAGE"),
+        _kpi("k1", "customers", "Customers", "age", "COUNT", color="#5B2D8E", subtitle="Currently in Restart caseload"),
+        _kpi("k2", "router_scores", "Network Max Router score", "score", "AVERAGE", color="#00A39A", subtitle="0-100 deterministic"),
+        _kpi("k3", "customers", "Avg customer age", "age", "AVERAGE", color="#42206A", subtitle="Range: 19-64"),
+        _kpi("k4", "customers", "Avg UC duration", "uc_months_at_start", "AVERAGE", color="#007E77", subtitle="Months on UC at start"),
+        _funnel("f1", "journey_stages", "12-stage Restart journey funnel · stage completion", "stage_key"),
+        _donut("d1", "router_scores", "Max Router band distribution", "band"),
+        _gauge("g1", "router_scores", "Network engagement score · weekly", "score", "AVERAGE"),
+        _bar_count("b1", "customers", "Customer headcount by region", "region_key"),
+        _bar_num("b2", "journeys", "Sustainability % by Max Router scenario", "scenario_band", "sustainability_pct", "AVERAGE"),
+        _bar_num("b3", "journeys", "Open barriers by scenario · lower is better", "scenario_band", "open_barriers", "AVERAGE"),
     ]
     return _wrap(account, region, tables, visuals)
 
@@ -403,6 +409,8 @@ def _wrap(account, region, tables, visuals):
     sheet = {
         "SheetId": "sheet-1",
         "Name": "Overview",
+        "Title": "Restart Programme · daily snapshot",
+        "Description": "Five UK delivery regions · 247 advisers · 10,287 customers. Data refreshes nightly from S3 via Athena · SPICE.",
         "Visuals": visuals,
         "ContentType": "INTERACTIVE",
     }

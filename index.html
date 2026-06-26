@@ -238,6 +238,49 @@ body {
   .training-title { font-size:14px; letter-spacing:3px; }
 }
 
+/* ============ MAX ROUTER IN-PERSON VISIT ============ */
+.visit-overlay { position:fixed; inset:0; z-index:9150; background:linear-gradient(140deg,#0a0a0a 0%,#1a0d1f 50%,#2a1010 100%); color:#fff; font-family:'SF Mono',Menlo,monospace; overflow:hidden; opacity:0; transition:opacity .5s; pointer-events:none; }
+.visit-overlay.show { opacity:1; pointer-events:auto; }
+.visit-overlay.fading { opacity:0; }
+.visit-canvas { position:absolute; inset:0; }
+.visit-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; padding:48px 22px 30px; gap:14px; overflow-y:auto; z-index:2; }
+.visit-content::-webkit-scrollbar { display:none; }
+.visit-badge { font-size:10px; letter-spacing:3px; padding:5px 14px; border-radius:18px; }
+.visit-badge.policy { background:rgba(255,180,0,0.18); color:#ffb400; border:1px solid #ffb400; }
+.visit-badge.escalation { background:rgba(255,69,58,0.18); color:#ff453a; border:1px solid #ff453a; }
+.visit-title { font-size:20px; letter-spacing:5px; font-weight:700; text-shadow:0 0 16px rgba(255,180,0,0.5); text-align:center; }
+.visit-subtitle { font-size:11.5px; letter-spacing:3px; color:rgba(255,255,255,0.55); text-align:center; }
+.visit-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,180,0,0.4); border-radius:14px; padding:16px 18px; width:100%; max-width:680px; }
+.visit-card.escalation { border-color:rgba(255,69,58,0.5); }
+.visit-card h4 { font-size:11.5px; letter-spacing:2.5px; color:rgba(255,180,0,0.85); margin-bottom:10px; font-weight:700; }
+.visit-card.escalation h4 { color:rgba(255,69,58,0.9); }
+.visit-card .what { font-size:14px; line-height:1.55; color:#fff; }
+.visit-card .why { font-size:12.5px; color:rgba(255,255,255,0.72); margin-top:8px; line-height:1.5; }
+.visit-meet { background:rgba(0,0,0,0.4); border-radius:12px; padding:14px 16px; width:100%; max-width:680px; border:1px solid rgba(255,255,255,0.12); }
+.visit-meet-row { display:flex; align-items:center; gap:12px; font-size:13px; padding:7px 0; border-bottom:1px solid rgba(255,255,255,0.08); }
+.visit-meet-row:last-child { border-bottom:none; }
+.visit-meet-row .lbl { width:90px; color:rgba(255,255,255,0.55); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; }
+.visit-meet-row .val { flex:1; color:#fff; font-weight:600; }
+.visit-translate { background:linear-gradient(135deg,rgba(91,45,142,0.3),rgba(0,163,154,0.3)); border:1px solid rgba(160,111,214,0.55); border-radius:14px; padding:14px 18px; width:100%; max-width:680px; }
+.visit-translate-head { display:flex; align-items:center; gap:10px; font-size:13px; color:#a06fd6; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; }
+.visit-translate-body { font-size:13.5px; line-height:1.55; color:#fff; }
+.visit-translate-body strong { color:#26c6da; }
+.visit-langs { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.visit-lang-chip { font-size:11.5px; padding:3px 9px; border-radius:12px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); }
+.visit-cta-row { display:flex; gap:10px; margin-top:4px; }
+.visit-cta { background:#ffb400; color:#1a0d00; border:none; border-radius:8px; padding:12px 22px; font-family:inherit; font-size:13px; letter-spacing:2px; cursor:pointer; font-weight:700; transition:filter .15s, transform .1s; }
+.visit-cta:hover { filter:brightness(1.08); }
+.visit-cta:active { transform:scale(0.98); }
+.visit-cta.escalation { background:#ff453a; color:#fff; }
+.visit-cta.ghost { background:transparent; color:rgba(255,255,255,0.75); border:1px solid rgba(255,255,255,0.3); font-weight:500; }
+.visit-cta.ghost:hover { background:rgba(255,255,255,0.08); }
+.visit-meta { font-size:10.5px; letter-spacing:2px; color:rgba(255,255,255,0.4); text-align:center; }
+
+@media (max-width:720px){
+  .visit-title { font-size:15px; letter-spacing:3px; }
+  .visit-card .what { font-size:13px; }
+}
+
 /* ============ MAX ROUTER CHECK ============ */
 .router-overlay { position:fixed; inset:0; z-index:9100; background:#000; color:#00ff88; font-family:'SF Mono',Menlo,monospace; overflow:hidden; opacity:0; transition:opacity .5s; pointer-events:none; }
 .router-overlay.show { opacity:1; pointer-events:auto; }
@@ -597,6 +640,52 @@ body {
   </div>
 </div>
 
+<!-- MAX ROUTER IN-PERSON VISIT OVERLAY (policy start + escalation) -->
+<div class="visit-overlay" id="visitOverlay" aria-hidden="true">
+  <canvas class="visit-canvas" id="visitCanvas"></canvas>
+  <div class="visit-content">
+    <div class="visit-badge policy" id="visitBadge">DETERMINISTIC · PROGRAM POLICY · NOT AN LLM</div>
+    <div class="visit-title" id="visitTitle">IN-PERSON VISIT REQUIRED</div>
+    <div class="visit-subtitle" id="visitSubtitle">MAX ROUTER · POLICY ROUTING ENGINE · v1.0</div>
+    <div class="visit-card" id="visitCardWhy">
+      <h4 id="visitWhyTitle">WHY THIS VISIT</h4>
+      <div class="what" id="visitWhat"></div>
+      <div class="why" id="visitWhy"></div>
+    </div>
+    <div class="visit-meet">
+      <div class="visit-meet-row"><span class="lbl">Where</span><span class="val" id="visitWhere">Maximus, 2 Stratford Pl, E20 1EJ</span></div>
+      <div class="visit-meet-row"><span class="lbl">With</span><span class="val">Priya Sharma · Senior Restart Adviser</span></div>
+      <div class="visit-meet-row"><span class="lbl">When</span><span class="val" id="visitWhen">Thu 26 Jun · 10:30am · 60 min</span></div>
+      <div class="visit-meet-row"><span class="lbl">Cost</span><span class="val">Free. Travel reimbursed.</span></div>
+    </div>
+    <div class="visit-translate">
+      <div class="visit-translate-head">🎙 Free real-time language translation</div>
+      <div class="visit-translate-body">
+        We can provide <strong>two-way speech-to-speech translation</strong> live during your meeting with Priya at no cost to you. You speak in your preferred language, Priya replies in English, and you each hear it in your own language with no awkward pauses.
+        Confidential. Just reply <strong>TRANSLATE</strong> to the SMS, or tap the "Add translator" button below.
+        <div class="visit-langs">
+          <span class="visit-lang-chip">Bengali</span>
+          <span class="visit-lang-chip">Polish</span>
+          <span class="visit-lang-chip">Urdu</span>
+          <span class="visit-lang-chip">Romanian</span>
+          <span class="visit-lang-chip">Somali</span>
+          <span class="visit-lang-chip">Punjabi</span>
+          <span class="visit-lang-chip">Yoruba</span>
+          <span class="visit-lang-chip">Tigrinya</span>
+          <span class="visit-lang-chip">Welsh</span>
+          <span class="visit-lang-chip">Arabic</span>
+          <span class="visit-lang-chip">+ 23 more</span>
+        </div>
+      </div>
+    </div>
+    <div class="visit-cta-row">
+      <button class="visit-cta" id="visitConfirm" type="button">CONFIRM ATTENDANCE ▸</button>
+      <button class="visit-cta ghost" id="visitAddTranslator" type="button">+ ADD TRANSLATOR</button>
+    </div>
+    <div class="visit-meta" id="visitMeta">Policy rule: every new participant attends ≥1 in-person diagnostic · auditable</div>
+  </div>
+</div>
+
 <!-- MAX ROUTER MID-JOURNEY CHECK OVERLAY -->
 <div class="router-overlay" id="routerOverlay" aria-hidden="true">
   <canvas class="router-canvas" id="routerCanvas"></canvas>
@@ -877,6 +966,13 @@ const JOURNEY = [
     progress:8
   },
   {
+    id:'routerInPersonStart', channel:'system', railTitle:'Max Router · in-person visit required',
+    railDesc:'Program policy: every new participant attends one in-person diagnostic at a Maximus office. Free real-time two-way speech-to-speech translation available on request.',
+    notif:{app:'MAX ROUTER', sender:'Max Router', ts:'now',
+      text:'Policy check: 1 in-person visit required. Free real-time speech-to-speech translation available — tap for details.'},
+    progress:15, routerVisit:'start'
+  },
+  {
     id:'diagnostic', channel:'sms', railTitle:'Diagnostic appointment booked',
     railDesc:'First face-to-face. Skills, barriers and goals assessed; action plan agreed.',
     notif:{app:'MESSAGES', sender:'Maximus Restart', ts:'now',
@@ -910,6 +1006,13 @@ const JOURNEY = [
     notif:{app:'MAX ROUTER', sender:'Max Router', ts:'now',
       text:'Algorithmic check ready — tap to review your engagement score and next action.'},
     progress:62, router:true
+  },
+  {
+    id:'routerInPersonEscalation', channel:'system', railTitle:'Max Router · escalation in-person',
+    railDesc:'Triggered when Max Router band is DRIFTING or AT-RISK. Mandatory in-person re-engagement at Priya\'s office. Free real-time two-way speech-to-speech translation offered.',
+    notif:{app:'MAX ROUTER', sender:'Max Router', ts:'now',
+      text:'Escalation: in-person visit booked within 48h. Free real-time speech-to-speech translation available — tap for details.'},
+    progress:66, routerVisit:'escalation'
   },
   {
     id:'jobmatch', channel:'push', railTitle:'Job match',
@@ -968,7 +1071,8 @@ const SMS_THREADS = {
     {date:'Today'},
     {side:'recv', text:'Hi Daniel, welcome to the Restart Scheme. I\'m here to support you back into work — no pressure, we go at your pace.'},
     {side:'recv', text:'Your dedicated adviser is Priya Sharma. Would you like to book your first appointment? Reply YES and I\'ll find a slot near you 👋'},
-    {side:'recv', text:'You also have access to other free Maximus services across London while you\'re on Restart:\n• Adult Skills Fund (London): fully funded qualifications — skills.maximusuk.co.uk/london\n• Access to Work Mental Health Support: free, confidential help if anxiety or stress is in the way — atw.maximusuk.co.uk\nReply INFO if you want more details on either.'}
+    {side:'recv', text:'You also have access to other free Maximus services across London while you\'re on Restart:\n• Adult Skills Fund (London): fully funded qualifications — skills.maximusuk.co.uk/london\n• Access to Work Mental Health Support: free, confidential help if anxiety or stress is in the way — atw.maximusuk.co.uk\nReply INFO if you want more details on either.'},
+    {side:'recv', text:'And one more: if English is not your first language, we offer FREE real-time two-way speech-to-speech translation during your meetings with Priya. 33 languages including Bengali, Polish, Urdu, Welsh, Somali, Arabic. Reply TRANSLATE to add a translator to your first meeting 🎙'}
   ],
   diagnostic:[
     {date:'Today'},
@@ -984,7 +1088,7 @@ const SMS_THREADS = {
 };
 
 const SMS_QUICK = {
-  referral:['YES, book it', 'Tell me more', 'INFO on other support', 'Not right now'],
+  referral:['YES, book it', 'Tell me more', 'INFO on other support', 'TRANSLATE me', 'Not right now'],
   diagnostic:['C — Confirm', 'R — Rearrange', 'Where is it?'],
   interview:['CALL me', 'I\'m ready 💪', 'Thank you!']
 };
@@ -994,6 +1098,7 @@ const SMS_AUTO = {
     'YES, book it':'Brilliant! 🎉 I\'ll text you appointment options shortly. Welcome aboard, Daniel.',
     'Tell me more':'Of course. Restart is voluntary support for up to 12 months: a personal adviser, CV help, training, and direct links to local employers. No cost to you.',
     'INFO on other support':'Two we think will fit you:\n📚 Adult Skills Fund (London) — fully funded qualifications, no cost to you. skills.maximusuk.co.uk/london\n💜 Access to Work Mental Health Support — 9 months of free, confidential 1:1 help, including for stress and low mood. atw.maximusuk.co.uk\nBoth are run by Maximus too, so Priya can refer you in one step.',
+    'TRANSLATE me':'Brilliant. Which language would be easiest for you? Reply with the language name (e.g. BENGALI, POLISH, URDU) and we\'ll add a live translator to your first meeting at no cost. You speak in your language, Priya replies in English, you each hear it instantly in your own language.',
     'Not right now':'No problem at all — take your time. I\'m here whenever you\'re ready. Just reply BOOK any time.',
     _default:'Thanks Daniel — Priya will be in touch shortly. 👍'
   },
@@ -1141,8 +1246,9 @@ function renderRail(){
     const last = i===JOURNEY.length-1;
     const isNudge = !!s.nudge;
     const isRouter = !!s.router;
-    const chanClass = isRouter ? 'chan-router' : (isNudge ? 'chan-nudge' : ({sms:'chan-sms',push:'chan-push',email:'chan-email',call:'chan-call'}[s.channel]));
-    const chanLabel = isRouter ? 'Max Router' : (isNudge ? 'Nudge' : ({sms:'SMS',push:'App push',email:'Email'}[s.channel] || s.channel));
+    const isVisit = !!s.routerVisit;
+    const chanClass = isVisit ? 'chan-router' : (isRouter ? 'chan-router' : (isNudge ? 'chan-nudge' : ({sms:'chan-sms',push:'chan-push',email:'chan-email',call:'chan-call'}[s.channel])));
+    const chanLabel = isVisit ? (s.routerVisit==='start' ? 'Max Router · Visit' : 'Max Router · Escalation') : (isRouter ? 'Max Router' : (isNudge ? 'Nudge' : ({sms:'SMS',push:'App push',email:'Email'}[s.channel] || s.channel)));
     const el = document.createElement('div');
     el.className='rail-step'+(active?' is-active':'')+(!done&&!active?' is-todo':'');
     el.onclick = ()=>jumpTo(i);
@@ -1180,6 +1286,13 @@ function fireStage(i){
     setTimeout(openRouterCheck, 350);
     $('playBtn').disabled = true; $('playBtn').style.opacity = .5;
   }
+  // In-person visit overlays (policy or escalation)
+  if(s.routerVisit){
+    // Escalation only meaningful when band != ontrack. If ontrack, soften copy via meta
+    visitOpen = false;
+    setTimeout(()=>openVisitOverlay(s.routerVisit), 400);
+    $('playBtn').disabled = true; $('playBtn').style.opacity = .5;
+  }
 
   // Final stage: schedule end-of-journey training update reveal.
   if(s.id === 'insupport'){
@@ -1214,6 +1327,7 @@ function tapNotif(){
   const i = parseInt(raw,10);
   const s = JOURNEY[i];
   if(s && s.router){ setTimeout(()=>{ routerOpened = false; openRouterCheck(); }, 260); return; }
+  if(s && s.routerVisit){ setTimeout(()=>{ visitOpen = false; openVisitOverlay(s.routerVisit); }, 260); return; }
   setTimeout(()=>{
     if(s.notif.app==='MESSAGES') openMessages(s.id);
     else if(s.notif.app==='MAIL') openMail(s.id);
@@ -1499,6 +1613,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const a = document.getElementById('callAudio');
     a.muted = !a.muted;
     callMute.style.opacity = a.muted ? 0.55 : 1;
+  });
+  const visitConfirm = document.getElementById('visitConfirm');
+  if(visitConfirm) visitConfirm.addEventListener('click', ()=>{
+    showToast('Confirmed. Travel voucher sent. See you at the office.');
+    closeVisitOverlay();
+  });
+  const visitAddTranslator = document.getElementById('visitAddTranslator');
+  if(visitAddTranslator) visitAddTranslator.addEventListener('click', ()=>{
+    showToast('Translator added to your meeting. Priya will see this when she arrives.');
   });
   const trClose = document.getElementById('trainingClose');
   if(trClose) trClose.addEventListener('click', closeTrainingUpdate);
@@ -1848,6 +1971,112 @@ function closeTrainingUpdate(){
     ov.classList.remove('show'); ov.classList.remove('fading');
     ov.setAttribute('aria-hidden','true');
   }, 600);
+}
+
+/* ===================== MAX ROUTER IN-PERSON VISIT =====================
+   Two flavours: 'start' (policy-mandated diagnostic) and 'escalation'
+   (band=drifting/atrisk → in-person re-engagement within 48h).
+=========================================================================*/
+const VISIT_CONFIGS = {
+  start: {
+    badgeClass: "policy",
+    badgeText: "DETERMINISTIC · PROGRAM POLICY · NOT AN LLM",
+    title: "IN-PERSON VISIT REQUIRED",
+    subtitle: "MAX ROUTER · POLICY RULE V1 · DIAGNOSTIC",
+    whyTitle: "WHY THIS VISIT",
+    what: "Per DWP Restart program policy, every newly-referred participant attends one in-person diagnostic at their local Maximus office before the action plan is finalised.",
+    why: "The in-person diagnostic captures barriers and confidence signals that are hard to read over text, and lets Priya complete the safeguarding check the policy requires within the first 14 days.",
+    where: "Maximus, 2 Stratford Pl, E20 1EJ",
+    when: "Thu 26 Jun · 10:30am · 60 min",
+    meta: "Policy rule: every new participant attends ≥1 in-person diagnostic · auditable",
+    cardClass: "",
+    ctaClass: "",
+    ctaText: "CONFIRM ATTENDANCE ▸",
+  },
+  escalation: {
+    badgeClass: "escalation",
+    badgeText: "DETERMINISTIC · ESCALATION RULE · NOT AN LLM",
+    title: "ESCALATION · IN-PERSON VISIT",
+    subtitle: "MAX ROUTER · BAND DRIFTING OR AT RISK",
+    whyTitle: "WHY THIS VISIT",
+    what: "Your Max Router engagement band dropped below the policy threshold. The system has booked an in-person re-engagement with Priya within 48 hours, before the band moves to At-Risk.",
+    why: "Drifting bands recover 3.2× faster after one in-person session than after additional remote contact (cohort N=3,847). A travel voucher has been pre-issued. No-show triggers a wellbeing call, not a sanction.",
+    where: "Maximus, 2 Stratford Pl, E20 1EJ",
+    when: "Within 48 hours · Priya will text two slots",
+    meta: "Escalation rule fired automatically · seed " + (sessionStorage.getItem('routerSeed') || 'pending'),
+    cardClass: "escalation",
+    ctaClass: "escalation",
+    ctaText: "CONFIRM RE-ENGAGEMENT ▸",
+  },
+};
+
+let visitOpen = false;
+let visitRainTimer = null;
+
+function openVisitOverlay(kind){
+  if(visitOpen) return;
+  const cfg = VISIT_CONFIGS[kind];
+  if(!cfg) return;
+  visitOpen = true;
+  const ov = document.getElementById('visitOverlay');
+  ov.setAttribute('aria-hidden','false');
+  ov.classList.add('show');
+  // Apply copy
+  const badge = document.getElementById('visitBadge');
+  badge.className = 'visit-badge ' + cfg.badgeClass;
+  badge.textContent = cfg.badgeText;
+  document.getElementById('visitTitle').textContent = cfg.title;
+  document.getElementById('visitSubtitle').textContent = cfg.subtitle;
+  document.getElementById('visitWhyTitle').textContent = cfg.whyTitle;
+  document.getElementById('visitWhat').textContent = cfg.what;
+  document.getElementById('visitWhy').textContent = cfg.why;
+  document.getElementById('visitWhere').textContent = cfg.where;
+  document.getElementById('visitWhen').textContent = cfg.when;
+  document.getElementById('visitMeta').textContent = cfg.meta;
+  document.getElementById('visitCardWhy').className = 'visit-card ' + cfg.cardClass;
+  const cta = document.getElementById('visitConfirm');
+  cta.className = 'visit-cta ' + cfg.ctaClass;
+  cta.textContent = cfg.ctaText;
+  startVisitRain();
+}
+
+function startVisitRain(){
+  const c = document.getElementById('visitCanvas');
+  const ctx = c.getContext('2d');
+  function resize(){ c.width=window.innerWidth; c.height=window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const glyphs='○●◐◑◒◓◆◇■□▲△▼▽⬛⬜';
+  const fontSize=18;
+  const cols=Math.ceil(c.width/fontSize);
+  const drops=new Array(cols).fill(0).map(()=>Math.random()*-50);
+  ctx.font=fontSize+'px monospace';
+  visitRainTimer = setInterval(()=>{
+    ctx.fillStyle='rgba(0,0,0,0.10)';
+    ctx.fillRect(0,0,c.width,c.height);
+    for(let i=0;i<drops.length;i++){
+      const ch=glyphs.charAt(Math.floor(Math.random()*glyphs.length));
+      ctx.fillStyle = Math.random()>0.93 ? 'rgba(255,180,0,0.85)' : 'rgba(255,180,0,0.3)';
+      ctx.fillText(ch, i*fontSize, drops[i]*fontSize);
+      if(drops[i]*fontSize > c.height && Math.random()>0.975) drops[i]=0;
+      drops[i]++;
+    }
+  }, 80);
+}
+
+function closeVisitOverlay(){
+  if(!visitOpen) return;
+  visitOpen = false;
+  const ov = document.getElementById('visitOverlay');
+  ov.classList.add('fading');
+  if(visitRainTimer){ clearInterval(visitRainTimer); visitRainTimer=null; }
+  setTimeout(()=>{
+    ov.classList.remove('show'); ov.classList.remove('fading');
+    ov.setAttribute('aria-hidden','true');
+  }, 500);
+  // Re-enable Play next
+  const pb = document.getElementById('playBtn');
+  if(pb && current < JOURNEY.length-1){ pb.disabled = false; pb.style.opacity = 1; }
 }
 
 /* ===================== MAX ROUTER MID-JOURNEY CHECK =====================
