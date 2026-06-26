@@ -157,6 +157,51 @@ body {
 .typing-dot:nth-child(2){animation-delay:.22s;} .typing-dot:nth-child(3){animation-delay:.44s;}
 @keyframes typingPulse { 0%,60%,100%{transform:scale(1);opacity:.45;} 30%{transform:scale(1.35);opacity:1;} }
 
+/* ============ MAX ROUTER TRAINING UPDATE (end-of-journey) ============ */
+.training-overlay { position:fixed; inset:0; z-index:9200; background:#000; color:#00ff88; font-family:'SF Mono',Menlo,monospace; overflow:hidden; opacity:0; transition:opacity .6s; pointer-events:none; }
+.training-overlay.show { opacity:1; pointer-events:auto; }
+.training-overlay.fading { opacity:0; }
+.training-canvas { position:absolute; inset:0; }
+.training-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; padding:40px 18px 24px; gap:14px; overflow-y:auto; z-index:2; }
+.training-content::-webkit-scrollbar { display:none; }
+.training-head { display:flex; flex-direction:column; align-items:center; gap:5px; }
+.training-badge { font-size:10px; letter-spacing:3px; padding:5px 12px; border:1px solid rgba(0,255,136,0.55); border-radius:20px; background:rgba(0,255,136,0.08); color:#00ff88; }
+.training-title { font-size:18px; letter-spacing:6px; font-weight:600; text-shadow:0 0 12px rgba(0,255,136,0.6); }
+.training-subtitle { font-size:11px; letter-spacing:3px; color:rgba(0,255,136,0.55); }
+.training-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:980px; width:100%; }
+.training-card { background:rgba(0,0,0,0.55); border:1px solid rgba(0,255,136,0.3); border-radius:14px; padding:14px 16px; backdrop-filter:blur(2px); }
+.training-card h4 { font-size:11px; letter-spacing:2px; color:rgba(0,255,136,0.7); margin-bottom:10px; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+.training-raw { display:grid; grid-template-columns:1fr auto; gap:7px 12px; font-size:13px; }
+.training-raw .lbl { color:rgba(0,255,136,0.85); }
+.training-raw .v { color:#fff; text-align:right; font-variant-numeric:tabular-nums; }
+.training-raw .v.big { color:#00ff88; font-weight:700; }
+
+.training-cohort { display:flex; flex-direction:column; gap:9px; font-size:12px; }
+.training-row { display:flex; flex-direction:column; gap:3px; }
+.training-row-head { display:flex; justify-content:space-between; color:rgba(0,255,136,0.85); }
+.training-row-head .pct { color:#00ff88; font-weight:700; }
+.training-bar { position:relative; height:7px; background:rgba(0,255,136,0.08); border-radius:4px; overflow:hidden; }
+.training-bar .fill { position:absolute; left:0; top:0; bottom:0; background:linear-gradient(90deg, rgba(0,255,136,0.4), #00ff88); border-radius:4px; width:0%; transition:width 1.2s cubic-bezier(.2,.8,.2,1); }
+.training-bar .median { position:absolute; top:-3px; bottom:-3px; width:2px; background:#fff; opacity:0.55; }
+
+.training-graph { grid-column:1/3; }
+.training-graph-wrap { position:relative; height:280px; }
+.training-graph-wrap canvas { width:100%; height:100%; display:block; border-radius:10px; background:radial-gradient(ellipse at center, rgba(0,255,136,0.06), transparent 70%); }
+.training-log { font-size:11.5px; color:rgba(0,255,136,0.8); max-height:96px; overflow:hidden; margin-top:8px; line-height:1.55; }
+.training-log .line { opacity:0; animation: matchFadeIn .4s forwards; }
+
+.training-cta-row { display:flex; gap:10px; margin-top:6px; }
+.training-cta { background:transparent; border:1px solid #00ff88; color:#00ff88; border-radius:8px; padding:10px 22px; font-family:inherit; font-size:13px; letter-spacing:2px; cursor:pointer; transition:background .15s,color .15s; }
+.training-cta.primary { background:#00ff88; color:#000; font-weight:700; }
+.training-cta:hover { background:#00ff88; color:#000; }
+.training-meta { font-size:10.5px; letter-spacing:2px; color:rgba(0,255,136,0.45); text-align:center; }
+
+@media (max-width:720px){
+  .training-grid { grid-template-columns:1fr; }
+  .training-graph { grid-column:1/2; }
+  .training-title { font-size:14px; letter-spacing:3px; }
+}
+
 /* ============ MAX ROUTER CHECK ============ */
 .router-overlay { position:fixed; inset:0; z-index:9100; background:#000; color:#00ff88; font-family:'SF Mono',Menlo,monospace; overflow:hidden; opacity:0; transition:opacity .5s; pointer-events:none; }
 .router-overlay.show { opacity:1; pointer-events:auto; }
@@ -461,6 +506,38 @@ body {
     <div class="match-cta-row" id="matchCtaRow">
       <button class="match-cta" type="button" id="matchBegin">BEGIN JOURNEY ▸</button>
     </div>
+  </div>
+</div>
+
+<!-- MAX ROUTER TRAINING UPDATE OVERLAY (post-journey) -->
+<div class="training-overlay" id="trainingOverlay" aria-hidden="true">
+  <canvas class="training-canvas" id="trainingCanvas"></canvas>
+  <div class="training-content">
+    <div class="training-head">
+      <div class="training-badge">DETERMINISTIC · TRAINING UPDATE · NOT AN LLM</div>
+      <div class="training-title">MAX ROUTER · v1.0 → v1.0.1</div>
+      <div class="training-subtitle">JOURNEY COMPLETE · INTEGRATING ANALYTICS INTO ROUTING WEIGHTS</div>
+    </div>
+    <div class="training-grid">
+      <div class="training-card">
+        <h4>THIS JOURNEY · RAW NUMBERS <span style="color:#00ff88;">DANIEL · PRIYA</span></h4>
+        <div class="training-raw" id="trainingRaw"></div>
+      </div>
+      <div class="training-card">
+        <h4>COHORT COMPARISON <span style="color:rgba(0,255,136,0.55);">N=3,847 · STRATFORD 2026</span></h4>
+        <div class="training-cohort" id="trainingCohort"></div>
+      </div>
+      <div class="training-card training-graph">
+        <h4>JOURNEY GRAPH · NODE EMBEDDINGS <span style="color:rgba(0,255,136,0.55);" id="trainingNodeCount">computing…</span></h4>
+        <div class="training-graph-wrap"><canvas id="trainingGraph"></canvas></div>
+        <div class="training-log" id="trainingLog"></div>
+      </div>
+    </div>
+    <div class="training-cta-row">
+      <button class="training-cta primary" type="button" id="trainingClose">CLOSE ▸</button>
+      <button class="training-cta" type="button" id="trainingRestart">REPLAY JOURNEY</button>
+    </div>
+    <div class="training-meta">Model v1.0.1 · weight delta applied · auditable · provenance hash: <span id="trainingHash"></span></div>
   </div>
 </div>
 
@@ -1038,6 +1115,12 @@ function fireStage(i){
     $('playBtn').disabled = true; $('playBtn').style.opacity = .5;
   }
 
+  // Final stage: schedule end-of-journey training update reveal.
+  if(s.id === 'insupport'){
+    trainingOpened = false;
+    setTimeout(openTrainingUpdate, 4200);
+  }
+
   // build banner
   const icon = ICONS[s.channel] || ICONS.system;
   $('notifIcon').style.background = icon.bg;
@@ -1336,12 +1419,242 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const ack = document.getElementById('routerAck');
   if(ack) ack.addEventListener('click', ()=>{
     closeRouterCheck();
-    // re-enable the play button so the demo can continue
     const pb = document.getElementById('playBtn');
     if(pb && current < JOURNEY.length-1){ pb.disabled = false; pb.style.opacity = 1; }
     renderRail();
   });
+  const trClose = document.getElementById('trainingClose');
+  if(trClose) trClose.addEventListener('click', closeTrainingUpdate);
+  const trReplay = document.getElementById('trainingRestart');
+  if(trReplay) trReplay.addEventListener('click', ()=>{
+    closeTrainingUpdate();
+    setTimeout(()=>{ resetJourney(); }, 700);
+  });
 });
+
+/* ===================== MAX ROUTER TRAINING UPDATE (end-of-journey) =====================
+   Deterministic post-journey analytics + cohort comparison + node-graph reveal.
+   Fires after stage 12 (insupport) completes. Same Matrix look.
+   No LLM. Numbers are computed from journey state + the mid-journey scenario.
+=========================================================================*/
+const COHORT_MEDIAN = {
+  daysToPlacement: 92,
+  sessionsAttended: 9,
+  vacanciesSaved: 6,
+  interviewsToOffer: 3.4,
+  cvIterations: 2,
+  sustainabilityPct: 64,
+};
+
+function trainingComputeRaw(){
+  // Scenario chosen mid-journey colours the trailing numbers a bit.
+  const scenarioKey = sessionStorage.getItem('routerSeed') || 'ontrack';
+  const profiles = {
+    ontrack:  { daysToPlacement:38, sessionsAttended:8, vacanciesSaved:9, interviewsToOffer:2, cvIterations:2, sustainabilityPct:88 },
+    drifting: { daysToPlacement:64, sessionsAttended:7, vacanciesSaved:5, interviewsToOffer:3, cvIterations:3, sustainabilityPct:71 },
+    atrisk:   { daysToPlacement:79, sessionsAttended:6, vacanciesSaved:3, interviewsToOffer:4, cvIterations:4, sustainabilityPct:58 },
+  };
+  return { scenario:scenarioKey, ...profiles[scenarioKey] };
+}
+
+function trainingPercentile(value, median, biggerIsBetter){
+  // Cheap, deterministic, monotonic stand-in for a real percentile rank.
+  const ratio = value / median;
+  let pct;
+  if(biggerIsBetter){
+    pct = ratio >= 1 ? 50 + Math.min(48, (ratio-1)*70) : Math.max(2, 50 - (1-ratio)*70);
+  } else {
+    pct = ratio <= 1 ? 50 + Math.min(48, (1-ratio)*70) : Math.max(2, 50 - (ratio-1)*70);
+  }
+  return Math.round(pct);
+}
+
+function trainingRender(){
+  const raw = trainingComputeRaw();
+  const rawWrap = document.getElementById('trainingRaw'); rawWrap.innerHTML='';
+  const rows = [
+    ['Days from referral to placement', raw.daysToPlacement + ' days', true],
+    ['Adviser sessions attended', raw.sessionsAttended + ' / 9', false],
+    ['Vacancies saved or viewed', String(raw.vacanciesSaved), false],
+    ['Interviews-to-offer ratio', raw.interviewsToOffer + ' : 1', false],
+    ['CV iterations to final version', String(raw.cvIterations), false],
+    ['Sustainability projection (6 mo)', raw.sustainabilityPct + '%', true],
+    ['Final outcome', 'Placed · Warehouse Team Member', true],
+  ];
+  rows.forEach(([lbl,val,big])=>{
+    const a=document.createElement('div'); a.className='lbl'; a.textContent=lbl;
+    const b=document.createElement('div'); b.className='v'+(big?' big':''); b.textContent=val;
+    rawWrap.appendChild(a); rawWrap.appendChild(b);
+  });
+
+  // Cohort bars
+  const cWrap = document.getElementById('trainingCohort'); cWrap.innerHTML='';
+  const cohortRows = [
+    { label:'Days to placement',          v:raw.daysToPlacement,   med:COHORT_MEDIAN.daysToPlacement,   biggerBetter:false, fmt:v=>v+' d' },
+    { label:'Sessions attended',          v:raw.sessionsAttended,  med:COHORT_MEDIAN.sessionsAttended,  biggerBetter:true,  fmt:v=>String(v) },
+    { label:'Vacancies engaged',          v:raw.vacanciesSaved,    med:COHORT_MEDIAN.vacanciesSaved,    biggerBetter:true,  fmt:v=>String(v) },
+    { label:'Interviews-to-offer',        v:raw.interviewsToOffer, med:COHORT_MEDIAN.interviewsToOffer, biggerBetter:false, fmt:v=>v+':1' },
+    { label:'CV iterations',              v:raw.cvIterations,      med:COHORT_MEDIAN.cvIterations,      biggerBetter:false, fmt:v=>String(v) },
+    { label:'Sustainability projection',  v:raw.sustainabilityPct, med:COHORT_MEDIAN.sustainabilityPct, biggerBetter:true,  fmt:v=>v+'%' },
+  ];
+  cohortRows.forEach((r,idx)=>{
+    const pct = trainingPercentile(r.v, r.med, r.biggerBetter);
+    const row=document.createElement('div'); row.className='training-row';
+    row.innerHTML =
+      '<div class="training-row-head">' +
+        '<span>'+r.label+' · this <b style="color:#fff">'+r.fmt(r.v)+'</b> · median '+r.fmt(r.med)+'</span>' +
+        '<span class="pct">p'+pct+'</span>' +
+      '</div>' +
+      '<div class="training-bar"><div class="fill" data-pct="'+pct+'"></div><div class="median" style="left:50%;"></div></div>';
+    cWrap.appendChild(row);
+  });
+  // Stagger the bar fills
+  setTimeout(()=>{
+    cWrap.querySelectorAll('.fill').forEach((el,i)=>{
+      setTimeout(()=>{ el.style.width = el.dataset.pct + '%'; }, i*180);
+    });
+  }, 500);
+
+  trainingNodeGraph(raw);
+  trainingStreamLog(raw);
+  document.getElementById('trainingHash').textContent = trainingHash(raw);
+}
+
+function trainingHash(raw){
+  // Stable short hash so demo viewers see something deterministic.
+  const s = JSON.stringify(raw);
+  let h=0; for(let i=0;i<s.length;i++){ h = ((h<<5)-h) + s.charCodeAt(i); h|=0; }
+  return 'sha256:'+((h>>>0).toString(16).padStart(8,'0')) + Math.abs(h*17).toString(16).slice(0,8);
+}
+
+function trainingStreamLog(raw){
+  const log = document.getElementById('trainingLog'); log.innerHTML='';
+  const lines = [
+    'reading 247 journey records · adviser=priya-sharma · cohort=stratford-restart-2026',
+    'feature: stratford-warehouse-restart-veteran → +0.04 routing weight',
+    'feature: priya/long-term-uc-claimant pairing → +0.06 pairing affinity',
+    'feature: nudge-night-before-interview → +0.02 conversion lift (n=412)',
+    'feature: max-router-scenario='+raw.scenario+' → updated band threshold ±0.5',
+    'committing weight delta v1.0 → v1.0.1 · '+trainingHash(raw),
+  ];
+  lines.forEach((t,i)=>{
+    const el = document.createElement('div'); el.className='line'; el.style.animationDelay=(0.6+i*0.45)+'s';
+    el.textContent = '› '+t;
+    log.appendChild(el);
+  });
+}
+
+function trainingNodeGraph(raw){
+  const canvas = document.getElementById('trainingGraph');
+  const dpr = Math.max(1, window.devicePixelRatio||1);
+  function sz(){
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    canvas.width = w*dpr; canvas.height = h*dpr;
+    canvas.getContext('2d').scale(dpr,dpr);
+  }
+  sz();
+  const ctx = canvas.getContext('2d');
+  const W = ()=>canvas.clientWidth, H = ()=>canvas.clientHeight;
+  // Seeded RNG for repeatable layout per session
+  let seed = 1337;
+  function rnd(){ seed=(seed*9301+49297)%233280; return seed/233280; }
+
+  const NUM = 80;
+  const nodes = [];
+  for(let i=0;i<NUM;i++){
+    nodes.push({ x: rnd()*0.92+0.04, y: rnd()*0.86+0.07, r: 1.6 + rnd()*1.8, alpha: 0.18 + rnd()*0.25 });
+  }
+  // Pinned highlight nodes
+  const customer = { x:0.20, y:0.55, r:7, label:'DANIEL', sub:'CUSTOMER', color:'#00ff88' };
+  const expert   = { x:0.80, y:0.30, r:7, label:'PRIYA',  sub:'EXPERT',   color:'#ccffe5' };
+  const journey  = { x:0.50, y:0.74, r:8, label:'THIS JOURNEY', sub:'outcome='+raw.sustainabilityPct+'%', color:'#ffffff' };
+  document.getElementById('trainingNodeCount').textContent = 'N='+(NUM+3)+' · 3 PINNED';
+
+  let pulse = 0;
+  function frame(){
+    pulse += 0.02;
+    ctx.clearRect(0,0,W(),H());
+    // background nodes
+    ctx.fillStyle='rgba(0,255,136,0.5)';
+    nodes.forEach(n=>{
+      ctx.globalAlpha = n.alpha;
+      ctx.beginPath(); ctx.arc(n.x*W(), n.y*H(), n.r, 0, Math.PI*2); ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    // edges between the three pinned
+    function edge(a,b){
+      ctx.strokeStyle='rgba(0,255,136,0.55)'; ctx.lineWidth=1.2;
+      ctx.beginPath(); ctx.moveTo(a.x*W(), a.y*H()); ctx.lineTo(b.x*W(), b.y*H()); ctx.stroke();
+    }
+    edge(customer, expert);
+    edge(customer, journey);
+    edge(expert, journey);
+    // pulse ring on journey
+    const pr = 12 + Math.sin(pulse)*4 + (1+Math.sin(pulse*0.7))*6;
+    ctx.strokeStyle='rgba(0,255,136,0.55)'; ctx.lineWidth=1.2;
+    ctx.beginPath(); ctx.arc(journey.x*W(), journey.y*H(), pr, 0, Math.PI*2); ctx.stroke();
+    // pinned nodes
+    function pin(n){
+      ctx.fillStyle = n.color; ctx.beginPath(); ctx.arc(n.x*W(), n.y*H(), n.r, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#00ff88'; ctx.font = '11px monospace';
+      ctx.fillText(n.label, n.x*W()+n.r+6, n.y*H()+3);
+      ctx.fillStyle='rgba(0,255,136,0.6)'; ctx.font = '10px monospace';
+      ctx.fillText(n.sub, n.x*W()+n.r+6, n.y*H()+15);
+    }
+    pin(customer); pin(expert); pin(journey);
+    trainingRAF = requestAnimationFrame(frame);
+  }
+  if(trainingRAF) cancelAnimationFrame(trainingRAF);
+  frame();
+  window.addEventListener('resize', sz);
+}
+let trainingRAF = null;
+let trainingRainTimer = null;
+
+function trainingStartRain(){
+  const c = document.getElementById('trainingCanvas');
+  const ctx = c.getContext('2d');
+  function resize(){ c.width=window.innerWidth; c.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  const glyphs='0123456789ABCDEFΔΣ∇∂φλψω→×';
+  const fontSize=14;
+  const cols=Math.ceil(c.width/fontSize);
+  const drops=new Array(cols).fill(0).map(()=>Math.random()*-50);
+  ctx.font=fontSize+'px monospace';
+  trainingRainTimer = setInterval(()=>{
+    ctx.fillStyle='rgba(0,0,0,0.09)';
+    ctx.fillRect(0,0,c.width,c.height);
+    for(let i=0;i<drops.length;i++){
+      const ch=glyphs.charAt(Math.floor(Math.random()*glyphs.length));
+      ctx.fillStyle = Math.random()>0.96 ? '#ccffe5' : 'rgba(0,255,136,0.40)';
+      ctx.fillText(ch, i*fontSize, drops[i]*fontSize);
+      if(drops[i]*fontSize > c.height && Math.random()>0.975) drops[i]=0;
+      drops[i]++;
+    }
+  }, 65);
+}
+
+let trainingOpened = false;
+function openTrainingUpdate(){
+  if(trainingOpened) return;
+  trainingOpened = true;
+  const ov = document.getElementById('trainingOverlay');
+  ov.setAttribute('aria-hidden','false');
+  ov.classList.add('show');
+  trainingStartRain();
+  setTimeout(trainingRender, 350);
+}
+
+function closeTrainingUpdate(){
+  const ov = document.getElementById('trainingOverlay');
+  ov.classList.add('fading');
+  if(trainingRainTimer){ clearInterval(trainingRainTimer); trainingRainTimer=null; }
+  if(trainingRAF){ cancelAnimationFrame(trainingRAF); trainingRAF=null; }
+  setTimeout(()=>{
+    ov.classList.remove('show'); ov.classList.remove('fading');
+    ov.setAttribute('aria-hidden','true');
+  }, 600);
+}
 
 /* ===================== MAX ROUTER MID-JOURNEY CHECK =====================
    Deterministic, rule-based engagement score. Not an LLM call.
