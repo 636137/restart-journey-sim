@@ -135,7 +135,8 @@ def ensure_glue_db():
 
 
 def upsert_glue_table(table_name, csv_path):
-    columns = infer_columns(csv_path)
+    # OpenCSV SerDe returns every field as string; cast happens later in QuickSight.
+    columns = [{"Name": c["Name"], "Type": "string"} for c in infer_columns(csv_path)]
     location = f"s3://{BUCKET}/{table_name}/"
     table_input = {
         "Name": table_name,
@@ -151,7 +152,11 @@ def upsert_glue_table(table_name, csv_path):
             },
         },
         "TableType": "EXTERNAL_TABLE",
-        "Parameters": {"classification": "csv", "skip.header.line.count": "1"},
+        "Parameters": {
+            "classification": "csv",
+            "skip.header.line.count": "1",
+            "use.null.for.invalid.data": "true",
+        },
     }
     try:
         glue.create_table(DatabaseName=DB, TableInput=table_input)
@@ -304,20 +309,43 @@ def ensure_athena_data_source(user_arn):
 
 def upsert_dataset(user_arn, table):
     ds_id = f"ds-{table.replace('_','-')}"
+    # Glue stores every column as string (OpenCSV SerDe), so QuickSight
+    # InputColumns must declare STRING here. Numeric/date casts happen via
+    # LogicalTableMap cast operations below.
+    inferred = infer_columns(DATA/f"{table}.csv")
     physical = {
         "RelationalTable": {
             "DataSourceArn": f"arn:aws:quicksight:{REGION}:{ACCOUNT}:datasource/{DS_ATHENA}",
             "Catalog": "AwsDataCatalog",
             "Schema": DB,
             "Name": table,
-            "InputColumns": [{"Name": c["Name"], "Type": _qs_type(c["Type"])} for c in infer_columns(DATA/f"{table}.csv")],
+            "InputColumns": [{"Name": c["Name"], "Type": "STRING"} for c in inferred],
         }
     }
+    cast_columns = []
+    for c in inferred:
+        if c["Type"] in ("bigint","int","double","date"):
+            cast_columns.append({
+                "ColumnName": c["Name"],
+                "NewColumnType": _qs_type(c["Type"]),
+                "Format": "yyyy-MM-dd" if c["Type"] == "date" else None,
+            })
+    # Strip None entries
+    cast_columns = [{k:v for k,v in cc.items() if v is not None} for cc in cast_columns]
+    logical_table_id = f"lt-{table.replace('_','-')}"
+    logical_tables = {logical_table_id: {
+        "Alias": table,
+        "DataTransforms": [
+            {"CastColumnTypeOperation": cc} for cc in cast_columns
+        ] if cast_columns else [],
+        "Source": {"PhysicalTableId": f"pt-{table.replace('_','-')}"},
+    }}
     body = dict(
         AwsAccountId=ACCOUNT,
         DataSetId=ds_id,
         Name=table,
         PhysicalTableMap={f"pt-{table.replace('_','-')}": physical},
+        LogicalTableMap=logical_tables,
         ImportMode="SPICE",
         Permissions=[{
             "Principal": user_arn,
