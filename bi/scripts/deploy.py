@@ -397,30 +397,48 @@ def _ds_arn(dsid):
 
 
 def build_dashboards(user_arn, dataset_ids):
-    """Three dashboards: Executive, Adviser Performance, Customer Outcomes.
-    Each uses a minimal QuickSight AnalysisDefinition with a couple of KPI + bar visuals.
-    Heavy authoring is intended to happen in the console; this gives a polished starting point."""
-    def kpi_visual(vid, ds_id, label, agg_field, agg="SUM"):
-        return {
-            "KPIVisual": {
-                "VisualId": vid,
-                "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":label}},
-                "ChartConfiguration": {
-                    "FieldWells": {
-                        "TargetValues": [],
-                        "Values": [{"NumericalMeasureField": {
-                            "FieldId": f"{vid}-val",
-                            "Column": {"DataSetIdentifier": ds_id, "ColumnName": agg_field},
-                            "AggregationFunction": {"SimpleNumericalAggregation": agg},
-                        }}],
-                        "TrendGroups": [],
-                    },
-                    "KPIOptions": {"Sparkline": {"Type":"LINE","Visibility":"VISIBLE"}, "VisualLayoutOptions":{"StandardLayout":{"Type":"CLASSIC"}}},
-                },
-            }
-        }
+    """Three dashboards with KPI + bar visuals.
+    All KPI fields are numeric columns; all bar Y fields are numeric.
+    For 'count of records' style KPIs, use a numeric column that exists everywhere
+    (e.g. age in customers, score in router_scores, days_to_placement in journeys)."""
 
-    def bar_visual(vid, ds_id, title, x_field, y_field, agg="SUM"):
+    def kpi_visual(vid, ds_id, label, num_field, agg="SUM"):
+        return {"KPIVisual": {
+            "VisualId": vid,
+            "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":label}},
+            "ChartConfiguration": {
+                "FieldWells": {
+                    "TargetValues": [],
+                    "Values": [{"NumericalMeasureField": {
+                        "FieldId": f"{vid}-val",
+                        "Column": {"DataSetIdentifier": ds_id, "ColumnName": num_field},
+                        "AggregationFunction": {"SimpleNumericalAggregation": agg},
+                    }}],
+                    "TrendGroups": [],
+                },
+            },
+        }}
+
+    def bar_count_visual(vid, ds_id, title, x_field):
+        """Bar chart of count(records) grouped by a categorical field."""
+        return {"BarChartVisual": {
+            "VisualId": vid,
+            "Title":{"Visibility":"VISIBLE","FormatText":{"PlainText":title}},
+            "ChartConfiguration": {
+                "FieldWells": {"BarChartAggregatedFieldWells": {
+                    "Category":[{"CategoricalDimensionField":{"FieldId":f"{vid}-x","Column":{"DataSetIdentifier":ds_id,"ColumnName":x_field}}}],
+                    "Values":[{"CategoricalMeasureField":{
+                        "FieldId":f"{vid}-y",
+                        "Column":{"DataSetIdentifier":ds_id,"ColumnName":x_field},
+                        "AggregationFunction":"COUNT",
+                    }}],
+                    "Colors":[],
+                }},
+                "Orientation":"VERTICAL",
+            },
+        }}
+
+    def bar_num_visual(vid, ds_id, title, x_field, y_field, agg="AVERAGE"):
         return {"BarChartVisual": {
             "VisualId": vid,
             "Title":{"Visibility":"VISIBLE","FormatText":{"PlainText":title}},
@@ -435,56 +453,68 @@ def build_dashboards(user_arn, dataset_ids):
         }}
 
     DASHBOARDS = [
-        ("dash-executive", "Restart · Executive Overview",
-         "journeys", "outcomes_kpis", [
-            ("v1", "Total journeys",       "journeys",        "journeys",       "COUNT"),
-            ("v2", "Avg days to placement","outcomes_kpis",   "avg_days_to_placement","AVERAGE"),
-            ("v3", "Placement rate %",     "outcomes_kpis",   "placement_rate_pct","AVERAGE"),
-            ("v4", "Avg sustainability %", "outcomes_kpis",   "avg_sustainability_pct","AVERAGE"),
-         ], [
-            ("b1", "Journeys by region",       "journeys",      "region_key", "journey_id",   "COUNT"),
-            ("b2", "Outcomes mix",              "journeys",      "outcome",    "journey_id",   "COUNT"),
-         ]),
-        ("dash-adviser", "Adviser Performance",
-         "outcomes_kpis", "advisers", [
-            ("v1", "Active advisers",      "advisers",       "adviser_id",      "COUNT"),
-            ("v2", "Avg customer-sat",     "advisers",       "customer_satisfaction","AVERAGE"),
-            ("v3", "Avg caseload",         "advisers",       "caseload_current","AVERAGE"),
-         ], [
-            ("b1", "Placements by adviser (top)", "outcomes_kpis","adviser_id", "placements", "SUM"),
-            ("b2", "Avg sustainability by region","outcomes_kpis","region_key", "avg_sustainability_pct","AVERAGE"),
-         ]),
-        ("dash-customer", "Customer Outcomes",
-         "router_scores", "customers", [
-            ("v1", "Customers",            "customers",      "customer_id",     "COUNT"),
-            ("v2", "Avg Max Router score", "router_scores",  "score",           "AVERAGE"),
-            ("v3", "At-risk share",        "router_scores",  "score",           "COUNT"),
-         ], [
-            ("b1", "Scenario bands",          "router_scores", "band",           "router_score_id","COUNT"),
-            ("b2", "Barriers vs band",        "journeys",      "scenario_band",  "open_barriers","AVERAGE"),
-         ]),
+        ("dash-executive", "Restart · Executive Overview", [
+            # (visual_id, kind, ds, args)
+            ("v1", "kpi-count", "journeys", "Total journeys", "sustainability_pct", "COUNT"),
+            ("v2", "kpi",       "outcomes_kpis", "Avg days to placement", "avg_days_to_placement", "AVERAGE"),
+            ("v3", "kpi",       "outcomes_kpis", "Placement rate %", "placement_rate_pct", "AVERAGE"),
+            ("v4", "kpi",       "outcomes_kpis", "Avg sustainability %", "avg_sustainability_pct", "AVERAGE"),
+            ("b1", "bar-count", "journeys", "Journeys by region", "region_key"),
+            ("b2", "bar-count", "journeys", "Outcomes mix", "outcome"),
+            ("b3", "bar-num",   "outcomes_kpis", "Avg sustainability by region", "region_key", "avg_sustainability_pct", "AVERAGE"),
+            ("b4", "bar-count", "journeys", "Scenario band mix", "scenario_band"),
+        ]),
+        ("dash-adviser", "Adviser Performance", [
+            ("v1", "kpi-count", "advisers", "Active advisers", "caseload_current", "COUNT"),
+            ("v2", "kpi",       "advisers", "Avg customer satisfaction", "customer_satisfaction", "AVERAGE"),
+            ("v3", "kpi",       "advisers", "Avg caseload", "caseload_current", "AVERAGE"),
+            ("v4", "kpi",       "advisers", "Avg tenure (years)", "years_at_maximus", "AVERAGE"),
+            ("b1", "bar-num",   "outcomes_kpis", "Total placements by region", "region_key", "placements", "SUM"),
+            ("b2", "bar-num",   "outcomes_kpis", "Avg days-to-placement by region", "region_key", "avg_days_to_placement", "AVERAGE"),
+            ("b3", "bar-count", "advisers", "Advisers by region", "region_key"),
+            ("b4", "bar-num",   "advisers", "Avg caseload by region", "region_key", "caseload_current", "AVERAGE"),
+        ]),
+        ("dash-customer", "Customer Outcomes", [
+            ("v1", "kpi-count", "customers", "Customers", "age", "COUNT"),
+            ("v2", "kpi",       "router_scores", "Avg Max Router score", "score", "AVERAGE"),
+            ("v3", "kpi",       "customers", "Avg age", "age", "AVERAGE"),
+            ("v4", "kpi",       "customers", "Avg UC months at start", "uc_months_at_start", "AVERAGE"),
+            ("b1", "bar-count", "router_scores", "Router scenario bands", "band"),
+            ("b2", "bar-num",   "journeys", "Avg open barriers by scenario", "scenario_band", "open_barriers", "AVERAGE"),
+            ("b3", "bar-count", "customers", "Customers by region", "region_key"),
+            ("b4", "bar-num",   "journeys", "Avg sustainability % by scenario", "scenario_band", "sustainability_pct", "AVERAGE"),
+        ]),
     ]
 
-    for dash_id, name, ds_main, ds_extra, kpis, bars in DASHBOARDS:
-        used_ids = list({ds_main, ds_extra} | {b[2] for b in bars})
-        identifiers = []
-        for ds in used_ids:
-            ds_id = f"ds-{ds.replace('_','-')}"
-            identifiers.append({"DataSetArn": _ds_arn(ds_id), "Identifier": ds})
+    for dash_id, name, items in DASHBOARDS:
+        used_ds = sorted({i[2] for i in items})
+        identifiers = [{"DataSetArn": _ds_arn(f"ds-{ds.replace('_','-')}"), "Identifier": ds} for ds in used_ds]
         visuals = []
-        for vid, label, ds_, field, agg in kpis:
-            visuals.append(kpi_visual(vid, ds_, label, field, agg))
-        for vid, title, ds_, x, y, agg in bars:
-            visuals.append(bar_visual(vid, ds_, title, x, y, agg))
-        sheet = {
-            "SheetId": "sheet-1",
-            "Name": "Overview",
-            "Visuals": visuals,
-        }
-        definition = {
-            "DataSetIdentifierDeclarations": identifiers,
-            "Sheets": [sheet],
-        }
+        for it in items:
+            vid, kind, ds = it[0], it[1], it[2]
+            if kind == "kpi":
+                _, _, _, label, field, agg = it
+                visuals.append(kpi_visual(vid, ds, label, field, agg))
+            elif kind == "kpi-count":
+                _, _, _, label, field, agg = it
+                visuals.append(kpi_visual(vid, ds, label, field, agg))
+            elif kind == "bar-count":
+                _, _, _, title, x = it
+                visuals.append(bar_count_visual(vid, ds, title, x))
+            elif kind == "bar-num":
+                _, _, _, title, x, y, agg = it
+                visuals.append(bar_num_visual(vid, ds, title, x, y, agg))
+        sheet = {"SheetId":"sheet-1", "Name":"Overview", "Visuals": visuals}
+        definition = {"DataSetIdentifierDeclarations": identifiers, "Sheets": [sheet]}
+        # Delete the failed dashboard first so create fresh
+        try:
+            existing = qs.describe_dashboard(AwsAccountId=ACCOUNT, DashboardId=dash_id)["Dashboard"]
+            if existing.get("Version",{}).get("Status") == "CREATION_FAILED":
+                qs.delete_dashboard(AwsAccountId=ACCOUNT, DashboardId=dash_id)
+                log(f"deleted failed dashboard {dash_id}")
+                time.sleep(2)
+        except qs.exceptions.ResourceNotFoundException:
+            pass
         upsert_dashboard(user_arn, dash_id, name, definition)
 
 
