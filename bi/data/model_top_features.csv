@@ -1,0 +1,47 @@
+model,feature,value,abs_value,polarity
+success_classifier,sms_reply_pct,0.023897779952776164,0.023897779952776164,positive
+success_classifier,push_open_pct,0.017692490819757926,0.017692490819757926,positive
+success_classifier,plan_completion_3,-0.10192510277664786,0.10192510277664786,negative
+success_classifier,cv_progress_pct,0.002199902153841444,0.002199902153841444,positive
+success_classifier,vacancies_saved,-0.04614738160103799,0.04614738160103799,negative
+success_classifier,sessions_attended_3,0.156886497946503,0.156886497946503,positive
+success_classifier,open_barriers,-0.8669740196969702,0.8669740196969702,negative
+success_classifier,disability_flag,0.0,0.0,positive
+success_classifier,digital_low,-0.18760809938389328,0.18760809938389328,negative
+success_classifier,digital_high,0.0975669698391993,0.0975669698391993,positive
+success_classifier,uc_months_at_start,-0.003434677962494654,0.003434677962494654,negative
+success_classifier,region_key_derbyshire-notts,-0.24845437276280197,0.24845437276280197,negative
+success_classifier,region_key_north-london,-0.0936908066950474,0.0936908066950474,negative
+success_classifier,region_key_south-east-london,-0.1814783009127888,0.1814783009127888,negative
+success_classifier,region_key_south-yorkshire,-0.14597551374509896,0.14597551374509896,negative
+success_classifier,region_key_wales,-0.16896126434778933,0.16896126434778933,negative
+success_classifier,prior_sector_Admin / office,0.03873177200453688,0.03873177200453688,positive
+success_classifier,prior_sector_Care / health,-0.15530067513092258,0.15530067513092258,negative
+success_classifier,prior_sector_Cleaning / facilities,-0.0716700427136103,0.0716700427136103,negative
+success_classifier,prior_sector_Construction,-0.2640738500245894,0.2640738500245894,negative
+success_classifier,prior_sector_Driving,-0.028779333581740552,0.028779333581740552,negative
+success_classifier,prior_sector_Hospitality,-0.16392276334202133,0.16392276334202133,negative
+success_classifier,prior_sector_Manufacturing,-0.028431841897059634,0.028431841897059634,negative
+success_classifier,prior_sector_Other,-0.21163388826564988,0.21163388826564988,negative
+success_classifier,prior_sector_Retail,0.0018552114731827303,0.0018552114731827303,positive
+success_classifier,prior_sector_Security,0.1252939776772623,0.1252939776772623,positive
+success_classifier,prior_sector_Warehouse / logistics,-0.08062882466424967,0.08062882466424967,negative
+survival_cox,barriers_count,-0.3939212015690272,0.3939212015690272,negative
+survival_cox,uc_months_at_start,-0.00812795003920027,0.00812795003920027,negative
+survival_cox,digital_low,-0.4625214134296247,0.4625214134296247,negative
+survival_cox,region_north-london,0.01446494460362254,0.01446494460362254,positive
+survival_cox,region_south-yorkshire,0.013473692648356433,0.013473692648356433,positive
+survival_cox,region_derbyshire-notts,0.0473085952907986,0.0473085952907986,positive
+survival_cox,region_wales,-0.024926784460466214,0.024926784460466214,negative
+survival_cox,sector_warehouse_logistics,-0.06455204100382514,0.06455204100382514,negative
+survival_cox,sector_retail,-0.03335108685823815,0.03335108685823815,negative
+survival_cox,sector_hospitality,0.04027566581754395,0.04027566581754395,positive
+survival_cox,sector_construction,0.04387789486500315,0.04387789486500315,positive
+matcher_lightgbm,fit_score,980.0,980.0,positive
+matcher_lightgbm,sector_affinity,949.0,949.0,positive
+matcher_lightgbm,barrier_affinity,596.0,596.0,positive
+matcher_lightgbm,language_match,19.0,19.0,positive
+matcher_lightgbm,region_match,0.0,0.0,positive
+matcher_lightgbm,capacity_headroom,253.0,253.0,positive
+matcher_lightgbm,tenure_difficulty,236.0,236.0,positive
+matcher_lightgbm,sat_baseline,566.0,566.0,positive

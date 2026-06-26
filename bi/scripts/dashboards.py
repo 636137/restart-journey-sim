@@ -518,6 +518,49 @@ def matching_definition(account, region):
     return _wrap(account, region, tables, visuals)
 
 
+def models_definition(account, region):
+    tables = ["model_metrics","model_top_features","model_predictions","model_top_picks","predictions_success"]
+    visuals = [
+        # KPIs
+        _kpi("k1", "model_metrics",         "Models fit",                  "n_training_rows", "COUNT",   color="#5B2D8E", subtitle="4 production-shape models"),
+        _kpi("k2", "model_predictions",     "Customers predicted",         "predicted_success_probability","COUNT", color="#00A39A", subtitle="Per-journey scoring"),
+        _kpi("k3", "predictions_success",   "Avg P(success) — trained",    "predicted_success_probability","AVERAGE", color="#42206A", subtitle="Network-wide"),
+        _kpi("k4", "model_predictions",     "Avg P50 weeks-to-placement",  "predicted_p50_weeks",          "AVERAGE", color="#007E77", subtitle="Cox model · trained"),
+        # Model metrics table
+        {"TableVisual": {
+            "VisualId": "tmetrics",
+            "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":"Model metrics · post-fit quality"}},
+            "ChartConfiguration": {
+                "FieldWells": {"TableAggregatedFieldWells": {
+                    "GroupBy": [
+                        {"CategoricalDimensionField":{"FieldId":"tmetrics-n","Column":{"DataSetIdentifier":"model_metrics","ColumnName":"model_name"}}},
+                        {"CategoricalDimensionField":{"FieldId":"tmetrics-k","Column":{"DataSetIdentifier":"model_metrics","ColumnName":"model_kind"}}},
+                        {"CategoricalDimensionField":{"FieldId":"tmetrics-pn","Column":{"DataSetIdentifier":"model_metrics","ColumnName":"primary_metric_name"}}},
+                    ],
+                    "Values": [
+                        {"NumericalMeasureField":{"FieldId":"tmetrics-p","Column":{"DataSetIdentifier":"model_metrics","ColumnName":"primary_metric_value"},"AggregationFunction":{"SimpleNumericalAggregation":"MAX"}}},
+                        {"NumericalMeasureField":{"FieldId":"tmetrics-s","Column":{"DataSetIdentifier":"model_metrics","ColumnName":"secondary_metric_value"},"AggregationFunction":{"SimpleNumericalAggregation":"MAX"}}},
+                        {"NumericalMeasureField":{"FieldId":"tmetrics-r","Column":{"DataSetIdentifier":"model_metrics","ColumnName":"n_training_rows"},"AggregationFunction":{"SimpleNumericalAggregation":"MAX"}}},
+                    ],
+                }},
+            },
+        }},
+        # Distribution of trained P(success) by scenario band
+        _bar_num("ldist", "model_predictions", "Trained P(success) by scenario band", "scenario_band", "predicted_success_probability", "AVERAGE", "VERTICAL"),
+        # Top features for the success classifier (positive)
+        _bar_num("ftp", "model_top_features", "Top positive coefficients · success classifier", "feature", "value", "AVERAGE", "HORIZONTAL", limit=12),
+        # Top features for the survival cox
+        _bar_num("ftn", "model_top_features", "Top negative coefficients · classifier + survival", "feature", "value", "MIN", "HORIZONTAL", limit=12),
+        # Matcher feature importances treemap
+        _treemap("tm1", "model_top_features", "Matcher feature importance (gain) treemap", "feature"),
+        # P(success) by scenario band donut
+        _donut("d1", "model_predictions", "Customers by trained scenario band", "scenario_band"),
+        # P50 distribution by region
+        _bar_num("p50r", "model_predictions", "Avg trained P50 weeks-to-placement by adviser", "adviser_id", "predicted_p50_weeks", "AVERAGE", "VERTICAL", limit=15),
+    ]
+    return _wrap(account, region, tables, visuals)
+
+
 def prediction_definition(account, region):
     tables = ["success_snapshots","feature_contributions","survival_curves","state_transitions","journeys"]
     visuals = [

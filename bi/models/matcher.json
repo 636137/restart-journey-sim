@@ -1,0 +1,27 @@
+{
+  "model_kind": "lightgbm_pairwise_ranker_lambdarank",
+  "feature_columns": [
+    "fit_score",
+    "sector_affinity",
+    "barrier_affinity",
+    "language_match",
+    "region_match",
+    "capacity_headroom",
+    "tenure_difficulty",
+    "sat_baseline"
+  ],
+  "gain_importances": {
+    "fit_score": 980.0,
+    "sector_affinity": 949.0,
+    "barrier_affinity": 596.0,
+    "language_match": 19.0,
+    "region_match": 0.0,
+    "capacity_headroom": 253.0,
+    "tenure_difficulty": 236.0,
+    "sat_baseline": 566.0
+  },
+  "n_pairs": 82296,
+  "n_groups": 10287,
+  "n_positive_groups": 1554,
+  "top1_agreement_with_assigned": 0.0
+}

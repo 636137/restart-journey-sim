@@ -20,7 +20,12 @@
     "survival_curves": 30861,
     "state_transitions": 147,
     "success_snapshots": 82296,
-    "feature_contributions": 61722
+    "feature_contributions": 61722,
+    "model_metrics": 4,
+    "model_top_features": 46,
+    "model_predictions": 10287,
+    "model_top_picks": 10287,
+    "predictions_success": 10287
   },
   "quicksight_data_source": "restart-bi-athena",
   "quicksight_datasets": [
@@ -38,7 +43,12 @@
     "ds-survival-curves",
     "ds-state-transitions",
     "ds-success-snapshots",
-    "ds-feature-contributions"
+    "ds-feature-contributions",
+    "ds-model-metrics",
+    "ds-model-top-features",
+    "ds-model-predictions",
+    "ds-model-top-picks",
+    "ds-predictions-success"
   ],
   "quicksight_console": "https://us-west-2.quicksight.aws.amazon.com/sn/start"
 }

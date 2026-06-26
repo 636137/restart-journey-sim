@@ -1,0 +1,5 @@
+model_name,model_kind,primary_metric_name,primary_metric_value,secondary_metric_name,secondary_metric_value,n_training_rows
+Success classifier (calibrated logistic),logistic_calibrated_isotonic,Top-decile lift,3.767,Positive rate,0.151,10287
+Survival (Cox proportional hazards),cox_proportional_hazards,Concordance index,0.7,Event rate,0.583,10287
+Matcher (LightGBM pairwise ranker),lightgbm_pairwise_ranker_lambdarank,Top-1 agreement vs assigned,0.0,Groups (customers),10287.0,82296
+State transitions (Markov MLE),markov_chain_mle_smoothed,States,7.0,Scenario bands,3.0,10287

@@ -1,0 +1,42 @@
+{
+  "model_kind": "cox_proportional_hazards",
+  "feature_columns": [
+    "barriers_count",
+    "uc_months_at_start",
+    "digital_low",
+    "region_north-london",
+    "region_south-yorkshire",
+    "region_derbyshire-notts",
+    "region_wales",
+    "sector_warehouse_logistics",
+    "sector_retail",
+    "sector_hospitality",
+    "sector_construction"
+  ],
+  "coefficients": {
+    "barriers_count": -0.3939212015690272,
+    "uc_months_at_start": -0.00812795003920027,
+    "digital_low": -0.4625214134296247,
+    "region_north-london": 0.01446494460362254,
+    "region_south-yorkshire": 0.013473692648356433,
+    "region_derbyshire-notts": 0.0473085952907986,
+    "region_wales": -0.024926784460466214,
+    "sector_warehouse_logistics": -0.06455204100382514,
+    "sector_retail": -0.03335108685823815,
+    "sector_hospitality": 0.04027566581754395,
+    "sector_construction": 0.04387789486500315
+  },
+  "baseline_survival_at_week": {
+    "1": 1.0,
+    "2": 1.0,
+    "4": 0.9998848353705296,
+    "8": 0.8758735528096768,
+    "12": 0.7194003211292465,
+    "16": 0.5055847172686535,
+    "20": 0.3896075097738848,
+    "24": 0.2740956060187015
+  },
+  "n_training_rows": 10287,
+  "event_rate": 0.5831632157091474,
+  "concordance_index": 0.7003625610251624
+}

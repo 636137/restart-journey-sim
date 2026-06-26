@@ -1,0 +1,211 @@
+{
+  "model_kind": "markov_chain_mle_smoothed",
+  "states": [
+    "Start",
+    "Progressing",
+    "Paused",
+    "Stalled",
+    "Regressing",
+    "Success",
+    "Failure"
+  ],
+  "matrices_by_scenario_band": {
+    "ontrack": {
+      "Start": {
+        "Start": 0.010989010989010988,
+        "Progressing": 0.010989010989010988,
+        "Paused": 0.010989010989010988,
+        "Stalled": 0.010989010989010988,
+        "Regressing": 0.010989010989010988,
+        "Success": 0.010989010989010988,
+        "Failure": 0.9340659340659341
+      },
+      "Progressing": {
+        "Start": 0.0003946329913180742,
+        "Progressing": 0.9147592738752961,
+        "Paused": 0.0003946329913180742,
+        "Stalled": 0.0003946329913180742,
+        "Regressing": 0.0003946329913180742,
+        "Success": 0.0003946329913180742,
+        "Failure": 0.08326756116811365
+      },
+      "Paused": {
+        "Start": 0.14285714285714285,
+        "Progressing": 0.14285714285714285,
+        "Paused": 0.14285714285714285,
+        "Stalled": 0.14285714285714285,
+        "Regressing": 0.14285714285714285,
+        "Success": 0.14285714285714285,
+        "Failure": 0.14285714285714285
+      },
+      "Stalled": {
+        "Start": 0.14285714285714285,
+        "Progressing": 0.14285714285714285,
+        "Paused": 0.14285714285714285,
+        "Stalled": 0.14285714285714285,
+        "Regressing": 0.14285714285714285,
+        "Success": 0.14285714285714285,
+        "Failure": 0.14285714285714285
+      },
+      "Regressing": {
+        "Start": 0.14285714285714285,
+        "Progressing": 0.14285714285714285,
+        "Paused": 0.14285714285714285,
+        "Stalled": 0.14285714285714285,
+        "Regressing": 0.14285714285714285,
+        "Success": 0.14285714285714285,
+        "Failure": 0.14285714285714285
+      },
+      "Success": {
+        "Start": 0.0,
+        "Progressing": 0.0,
+        "Paused": 0.0,
+        "Stalled": 0.0,
+        "Regressing": 0.0,
+        "Success": 1.0,
+        "Failure": 0.0
+      },
+      "Failure": {
+        "Start": 0.0,
+        "Progressing": 0.0,
+        "Paused": 0.0,
+        "Stalled": 0.0,
+        "Regressing": 0.0,
+        "Success": 0.0,
+        "Failure": 1.0
+      }
+    },
+    "drifting": {
+      "Start": {
+        "Start": 0.0004302925989672977,
+        "Progressing": 0.0004302925989672977,
+        "Paused": 0.0004302925989672977,
+        "Stalled": 0.20223752151462993,
+        "Regressing": 0.0004302925989672977,
+        "Success": 0.0004302925989672977,
+        "Failure": 0.7956110154905336
+      },
+      "Progressing": {
+        "Start": 9.318796011555306e-05,
+        "Progressing": 0.45932345540956104,
+        "Paused": 0.12338085919299226,
+        "Stalled": 0.08098033734041561,
+        "Regressing": 0.12338085919299226,
+        "Success": 9.318796011555306e-05,
+        "Failure": 0.2127481129438077
+      },
+      "Paused": {
+        "Start": 0.14285714285714285,
+        "Progressing": 0.14285714285714285,
+        "Paused": 0.14285714285714285,
+        "Stalled": 0.14285714285714285,
+        "Regressing": 0.14285714285714285,
+        "Success": 0.14285714285714285,
+        "Failure": 0.14285714285714285
+      },
+      "Stalled": {
+        "Start": 0.14285714285714285,
+        "Progressing": 0.14285714285714285,
+        "Paused": 0.14285714285714285,
+        "Stalled": 0.14285714285714285,
+        "Regressing": 0.14285714285714285,
+        "Success": 0.14285714285714285,
+        "Failure": 0.14285714285714285
+      },
+      "Regressing": {
+        "Start": 0.14285714285714285,
+        "Progressing": 0.14285714285714285,
+        "Paused": 0.14285714285714285,
+        "Stalled": 0.14285714285714285,
+        "Regressing": 0.14285714285714285,
+        "Success": 0.14285714285714285,
+        "Failure": 0.14285714285714285
+      },
+      "Success": {
+        "Start": 0.0,
+        "Progressing": 0.0,
+        "Paused": 0.0,
+        "Stalled": 0.0,
+        "Regressing": 0.0,
+        "Success": 1.0,
+        "Failure": 0.0
+      },
+      "Failure": {
+        "Start": 0.0,
+        "Progressing": 0.0,
+        "Paused": 0.0,
+        "Stalled": 0.0,
+        "Regressing": 0.0,
+        "Success": 0.0,
+        "Failure": 1.0
+      }
+    },
+    "atrisk": {
+      "Start": {
+        "Start": 0.00010344470880314471,
+        "Progressing": 0.00010344470880314471,
+        "Paused": 0.00010344470880314471,
+        "Stalled": 0.18330402399917245,
+        "Regressing": 0.00010344470880314471,
+        "Success": 0.00010344470880314471,
+        "Failure": 0.8161787524568118
+      },
+      "Progressing": {
+        "Start": 3.344817205739706e-05,
+        "Progressing": 0.20232799277519484,
+        "Paused": 0.1662708632973208,
+        "Stalled": 0.11780446198615246,
+        "Regressing": 0.11124862026290264,
+        "Success": 3.344817205739706e-05,
+        "Failure": 0.40228116533431446
+      },
+      "Paused": {
+        "Start": 0.14285714285714285,
+        "Progressing": 0.14285714285714285,
+        "Paused": 0.14285714285714285,
+        "Stalled": 0.14285714285714285,
+        "Regressing": 0.14285714285714285,
+        "Success": 0.14285714285714285,
+        "Failure": 0.14285714285714285
+      },
+      "Stalled": {
+        "Start": 0.0006293266205160478,
+        "Progressing": 0.0006293266205160478,
+        "Paused": 0.0006293266205160478,
+        "Stalled": 0.0006293266205160478,
+        "Regressing": 0.9962240402769037,
+        "Success": 0.0006293266205160478,
+        "Failure": 0.0006293266205160478
+      },
+      "Regressing": {
+        "Start": 0.14285714285714285,
+        "Progressing": 0.14285714285714285,
+        "Paused": 0.14285714285714285,
+        "Stalled": 0.14285714285714285,
+        "Regressing": 0.14285714285714285,
+        "Success": 0.14285714285714285,
+        "Failure": 0.14285714285714285
+      },
+      "Success": {
+        "Start": 0.0,
+        "Progressing": 0.0,
+        "Paused": 0.0,
+        "Stalled": 0.0,
+        "Regressing": 0.0,
+        "Success": 1.0,
+        "Failure": 0.0
+      },
+      "Failure": {
+        "Start": 0.0,
+        "Progressing": 0.0,
+        "Paused": 0.0,
+        "Stalled": 0.0,
+        "Regressing": 0.0,
+        "Success": 0.0,
+        "Failure": 1.0
+      }
+    }
+  },
+  "n_training_rows": 10287,
+  "smoothing": "additive_uniform_1_over_K"
+}
