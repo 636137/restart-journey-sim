@@ -2869,34 +2869,97 @@ function closeRouterCheck(){
 }
 
 /* ===================== MATCHING ANIMATION ===================== */
-const MATCH_PAIRS = [
-  { left: '9 months out of work',     right: '12 yrs returners specialist' },
-  { left: 'Forklift / logistics',     right: 'Stratford warehouse network' },
-  { left: 'Stratford E20 · travel 30m', right: 'On-site in Stratford E20' },
-  { left: 'Confidence rebuilding',    right: 'Trauma-informed coaching' },
-  { left: 'Universal Credit · 5+ yrs', right: 'UC taper & benefits expert' },
-];
+// Per-persona attribute pairs: each row is one customer attribute ↔ matching adviser strength.
+// These are the same attributes the trained matcher actually scores against.
+const MATCH_PAIRS_BY_PERSONA = {
+  daniel: [
+    { left: '9 months unemployed',          right: '12 yrs returners specialist' },
+    { left: 'Forklift / logistics',         right: 'Stratford warehouse network' },
+    { left: 'Stratford E20 · 30m radius',   right: 'On-site Stratford office' },
+    { left: 'Confidence rebuilding',        right: 'Trauma-informed coaching' },
+    { left: 'UC claim · 9 months',          right: 'UC taper & benefits expert' },
+  ],
+  amara: [
+    { left: '4-year caring break',          right: 'Returner-after-caring specialist' },
+    { left: 'Admin / office background',    right: 'Healthcare-admin pipeline (NHS)' },
+    { left: 'Childcare cost barrier',       right: 'Childcare grant + voucher fast-track' },
+    { left: 'Confidence dipped',            right: 'CV reframing & school-hours roles' },
+    { left: 'Peckham SE15 · TFL zone 2',    right: 'School-hours admin in south London' },
+  ],
+  wojciech: [
+    { left: '28 yrs UK construction',       right: 'Construction supervisor pipeline' },
+    { left: 'Polish · supervisor-level',    right: 'Live Polish↔English translator' },
+    { left: 'CSCS card lapsed',             right: 'CSCS Gold Card top-up · Restart-funded' },
+    { left: 'Harlesden NW10 · zone 3',      right: 'West London developer network' },
+    { left: 'Redundancy · 7 months out',    right: 'Older-worker advocacy' },
+  ],
+  tomasz: [
+    { left: 'Mental health barrier',        right: 'Trauma-informed + Access to Work MH' },
+    { left: '11 months UC · isolated',      right: 'Same-day welfare-call protocol' },
+    { left: 'Warehouse picker · former',    right: 'Sheffield / Rotherham logistics' },
+    { left: 'App engagement collapsed',     right: 'Paused-push-and-call playbook' },
+    { left: 'Lives alone · 27',             right: 'Wellbeing + plan-reset specialist' },
+  ],
+  fadumo: [
+    { left: 'Refugee · resettled 14mo',     right: 'REP-overlap qualified adviser' },
+    { left: 'Teacher in Mogadishu',         right: 'UK QTS path + school placements' },
+    { left: 'Somali speaker',               right: 'Live Somali↔English translator' },
+    { left: '2 young children',             right: 'Childcare grant · placement weeks' },
+    { left: 'Cardiff Bay · Welsh schools',  right: 'Welsh-speaking adviser · network' },
+  ],
+  mark: [
+    { left: 'Ex-offender · post-release',   right: 'Ban-the-Box employer pipeline' },
+    { left: 'Former HGV driver',            right: 'DVLA reapplication + Class C medical' },
+    { left: '19 months out · frustrated',   right: 'No-hoops direct-employer broker' },
+    { left: 'Nottingham NG7',               right: 'East Midlands logistics network' },
+    { left: 'Age 58 · second chance',       right: 'Older-worker advocacy + UC taper' },
+  ],
+};
 
 let matchRunning = false;
 let matchRainTimer = null;
 
 function startMatchAnim(){
-  // Plays every time sign-in succeeds. No session guard.
   const ov = document.getElementById('matchOverlay');
   if(!ov) return;
   matchRunning = true;
   ov.setAttribute('aria-hidden','false');
   ov.classList.add('show');
+  // Apply persona-specific copy to the overlay before the animation runs.
+  applyMatchAnimPersona();
   buildPairRows();
   startMatrixRain();
   scheduleReveal();
+}
+
+function applyMatchAnimPersona(){
+  const persona = window.ACTIVE_PERSONA;
+  if(!persona) return;
+  // Column header (customer name)
+  const labelEl = document.querySelector('.match-col-label');
+  if(labelEl){
+    labelEl.innerHTML = '<span>CUSTOMER · '+persona.name.toUpperCase()+'</span><span>ADVISER POOL · 247 LIVE</span>';
+  }
+  // Final adviser card
+  const advAvatar = document.querySelector('.match-adviser-avatar');
+  if(advAvatar) advAvatar.textContent = persona.adviser.initials || 'PS';
+  const advName = document.querySelector('.match-adviser-name');
+  if(advName) advName.textContent = persona.adviser.name;
+  const advRole = document.querySelector('.match-adviser-role');
+  if(advRole) advRole.textContent = persona.adviser.title;
+}
+
+// Helper read by buildPairRows() to pick the right pair set.
+function currentMatchPairs(){
+  const personaId = sessionStorage.getItem('personaId') || 'daniel';
+  return MATCH_PAIRS_BY_PERSONA[personaId] || MATCH_PAIRS_BY_PERSONA.daniel;
 }
 
 function buildPairRows(){
   const wrap = document.getElementById('matchPairs');
   // remove any prior rows except the col-label (first child)
   while(wrap.children.length>1) wrap.removeChild(wrap.lastChild);
-  MATCH_PAIRS.forEach((p,i)=>{
+  currentMatchPairs().forEach((p,i)=>{
     const left = document.createElement('div'); left.className='match-cell left'; left.dataset.i=i; left.textContent='— scanning —';
     const link = document.createElement('div'); link.className='match-link'; link.dataset.i=i;
     link.innerHTML='<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#00ff88" stroke-width="1.5" opacity="0.5"/><path d="M14 20 L26 20 M22 16 L26 20 L22 24" fill="none" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -2938,8 +3001,9 @@ function lockPair(i){
   const link = document.querySelector('.match-link[data-i="'+i+'"]');
   const right = document.querySelector('.match-cell:not(.left)[data-i="'+i+'"]');
   if(!left||!right) return;
-  scrambleThenSet(left, MATCH_PAIRS[i].left);
-  scrambleThenSet(right, MATCH_PAIRS[i].right);
+  const pairs = currentMatchPairs();
+  scrambleThenSet(left, pairs[i].left);
+  scrambleThenSet(right, pairs[i].right);
   left.classList.add('locked');
   right.classList.add('locked');
   link.classList.add('locked');
@@ -2964,28 +3028,37 @@ function scrambleThenSet(el, finalText){
 
 function scheduleReveal(){
   // Stagger pair locks
-  MATCH_PAIRS.forEach((_,i)=>{
+  currentMatchPairs().forEach((_,i)=>{
     setTimeout(()=>lockPair(i), 1500 + i*650);
   });
-  // Score climb
+  // Score climb. Target is the persona's trained Max Navigator score when available,
+  // mapped onto the 0..98 compatibility range; default 98 for the original demo.
   setTimeout(()=>{
     document.getElementById('matchScoreWrap').classList.add('show');
+    const persona = window.ACTIVE_PERSONA;
+    // Display the matcher's compatibility for THIS adviser pairing, which we
+    // approximate as 90 + (Max Navigator band lift). Daniel: 98, Wojciech: 96,
+    // Mark: 93, Amara: 88, Fadumo: 85, Tomasz: 79. If runtime missing → 98.
+    const fallback = {daniel:98,wojciech:96,mark:93,amara:88,fadumo:85,tomasz:79};
+    const personaId = sessionStorage.getItem('personaId') || 'daniel';
+    const target = persona && persona.max_navigator
+      ? Math.min(98, Math.max(72, Math.round(persona.max_navigator.score * 0.85 + 18)))
+      : (fallback[personaId] || 98);
     let pct = 0;
-    const target = 98;
     const el = document.getElementById('matchScore');
     const climb = setInterval(()=>{
       pct += Math.max(1, Math.floor((target-pct)/6));
       if(pct >= target){ pct = target; clearInterval(climb); }
       el.textContent = pct + '%';
     }, 50);
-  }, 1500 + MATCH_PAIRS.length*650 + 200);
+  }, 1500 + currentMatchPairs().length*650 + 200);
   // Reveal adviser card + CTA
   setTimeout(()=>{
     document.getElementById('matchAdviser').classList.add('show');
-  }, 1500 + MATCH_PAIRS.length*650 + 1400);
+  }, 1500 + currentMatchPairs().length*650 + 1400);
   setTimeout(()=>{
     document.getElementById('matchCtaRow').classList.add('show');
-  }, 1500 + MATCH_PAIRS.length*650 + 2200);
+  }, 1500 + currentMatchPairs().length*650 + 2200);
 }
 
 function endMatchAnim(){
