@@ -9,8 +9,8 @@
     "customers": 10287,
     "advisers": 247,
     "journeys": 10287,
-    "journey_stages": 122615,
-    "router_scores": 16310,
+    "journey_stages": 122994,
+    "router_scores": 16286,
     "outcomes_kpis": 2199
   },
   "quicksight_data_source": "restart-bi-athena",

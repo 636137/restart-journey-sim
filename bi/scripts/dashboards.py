@@ -443,6 +443,88 @@ def adviser_definition(account, region):
     return _wrap(account, region, tables, visuals)
 
 
+def _sankey(vid, ds, title, source_col, target_col, weight_col=None):
+    """Sankey flow Source → Target."""
+    fw = {"SankeyDiagramAggregatedFieldWells": {
+        "Source": [{"CategoricalDimensionField":{"FieldId":f"{vid}-s","Column":{"DataSetIdentifier":ds,"ColumnName":source_col}}}],
+        "Destination": [{"CategoricalDimensionField":{"FieldId":f"{vid}-d","Column":{"DataSetIdentifier":ds,"ColumnName":target_col}}}],
+    }}
+    if weight_col:
+        fw["SankeyDiagramAggregatedFieldWells"]["Weight"] = [{"NumericalMeasureField":{"FieldId":f"{vid}-w","Column":{"DataSetIdentifier":ds,"ColumnName":weight_col},"AggregationFunction":{"SimpleNumericalAggregation":"SUM"}}}]
+    else:
+        fw["SankeyDiagramAggregatedFieldWells"]["Weight"] = [{"CategoricalMeasureField":{"FieldId":f"{vid}-w","Column":{"DataSetIdentifier":ds,"ColumnName":source_col},"AggregationFunction":"COUNT"}}]
+    return {"SankeyDiagramVisual": {
+        "VisualId": vid,
+        "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":title}},
+        "ChartConfiguration": {
+            "FieldWells": fw,
+            "DataLabels": {"Visibility":"VISIBLE"},
+        },
+    }}
+
+
+def _pivot(vid, ds, title, row_col, col_col, val_col, val_agg="AVERAGE"):
+    return {"PivotTableVisual": {
+        "VisualId": vid,
+        "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":title}},
+        "ChartConfiguration": {
+            "FieldWells": {"PivotTableAggregatedFieldWells": {
+                "Rows":    [{"CategoricalDimensionField":{"FieldId":f"{vid}-r","Column":{"DataSetIdentifier":ds,"ColumnName":row_col}}}],
+                "Columns": [{"CategoricalDimensionField":{"FieldId":f"{vid}-c","Column":{"DataSetIdentifier":ds,"ColumnName":col_col}}}],
+                "Values":  [{"NumericalMeasureField":{"FieldId":f"{vid}-v","Column":{"DataSetIdentifier":ds,"ColumnName":val_col},"AggregationFunction":{"SimpleNumericalAggregation":val_agg}}}],
+            }},
+        },
+    }}
+
+
+def _stacked_area(vid, ds, title, time_col, y_col, color_col, y_agg="COUNT"):
+    return {"LineChartVisual": {
+        "VisualId": vid,
+        "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":title}},
+        "ChartConfiguration": {
+            "FieldWells": {"LineChartAggregatedFieldWells": {
+                "Category": [{"DateDimensionField":{"FieldId":f"{vid}-x","Column":{"DataSetIdentifier":ds,"ColumnName":time_col},"DateGranularity":"MONTH"}}],
+                "Values":   [{"CategoricalMeasureField":{"FieldId":f"{vid}-y","Column":{"DataSetIdentifier":ds,"ColumnName":y_col},"AggregationFunction":"COUNT"}}] if y_agg=="COUNT" else [{"NumericalMeasureField":{"FieldId":f"{vid}-y","Column":{"DataSetIdentifier":ds,"ColumnName":y_col},"AggregationFunction":{"SimpleNumericalAggregation":y_agg}}}],
+                "Colors":   [{"CategoricalDimensionField":{"FieldId":f"{vid}-c","Column":{"DataSetIdentifier":ds,"ColumnName":color_col}}}],
+            }},
+            "Type": "STACKED_AREA",
+            "DataLabels": {"Visibility":"HIDDEN"},
+        },
+    }}
+
+
+def progress_definition(account, region):
+    tables = ["journeys","router_scores","journey_stages","advisers"]
+    visuals = [
+        # KPI strip: state counts with trend
+        _kpi("k1", "journeys", "Active journeys",        "sustainability_pct",  "COUNT",   color="#5B2D8E", subtitle="All states · all regions",   trend_col="started_date"),
+        _kpi("k2", "journeys", "Success probability",    "success_probability", "AVERAGE", color="#00A39A", subtitle="Network avg · live model"),
+        _kpi("k3", "journeys", "Avg days to placement",  "days_to_placement",   "AVERAGE", color="#42206A", subtitle="Cohort median: 92",          trend_col="started_date"),
+        _kpi("k4", "router_scores", "Network Max Router score", "score",        "AVERAGE", color="#007E77", subtitle="0–100 deterministic",        trend_col="score_date"),
+        # 1. Gauge — overall success likelihood
+        _gauge("g1", "journeys", "Network success probability gauge", "success_probability", "AVERAGE"),
+        # 2. Donut — journey state breakdown
+        _donut("d1", "journeys", "Journeys by state · Start → Success", "journey_state"),
+        # 3. Sankey — current_stage → journey_state, the headline flow visual
+        _sankey("sk1", "journeys", "Flow · current stage → journey state", "current_stage", "journey_state"),
+        # 4. Treemap — where customers are concentrated by state
+        _treemap("tm1", "journeys", "Journey state · volume treemap", "journey_state"),
+        # 5. Stacked area — state composition over time
+        _stacked_area("sa1", "journeys", "State composition over time · monthly mix", "started_date", "journey_state", "journey_state", "COUNT"),
+        # 6. Heatmap — current_stage × journey_state with avg probability
+        _heatmap("h1", "journeys", "Probability heatmap · stage × state", "current_stage", "journey_state", "success_probability", "AVERAGE"),
+        # 7. Small-multiples — per-region success probability trend
+        _small_multiples_line("sm1", "journeys", "Success probability · monthly trend by region", "started_date", "success_probability", "region_key", "AVERAGE"),
+        # 8. Pivot — region × state showing avg probability
+        _pivot("pv1", "journeys", "Region × state · avg success probability", "region_key", "journey_state", "success_probability", "AVERAGE"),
+        # 9. Funnel — 12-stage with current state distribution
+        _funnel("f1", "journey_stages", "Stage completion funnel · all journeys", "stage_key"),
+        # 10. Radar — state distribution by region
+        _radar("r1", "journeys", "Avg success probability by region · radar", "region_key", "success_probability", "AVERAGE"),
+    ]
+    return _wrap(account, region, tables, visuals)
+
+
 def customer_definition(account, region):
     tables = ["customers","journeys","journey_stages","router_scores","advisers"]
     visuals = [

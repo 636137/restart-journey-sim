@@ -218,6 +218,28 @@ def scenario_for(customer):
     return "atrisk"
 
 
+def derive_state(scenario, outcome, days_to_placement):
+    """Deterministic mapping (scenario, outcome) -> journey_state + success_probability."""
+    if outcome == "Sustained 6mo+":
+        return "Success", round(random.uniform(95, 99), 1)
+    if outcome.startswith("Placed - in progress"):
+        return "Progressing", round(random.uniform(70, 92), 1)
+    if outcome == "Placed - dropped":
+        return "Failure", round(random.uniform(15, 35), 1)
+    if outcome == "Withdrawn":
+        return "Failure", round(random.uniform(5, 18), 1)
+    if outcome == "Sanctioned referral":
+        return "Failure", round(random.uniform(2, 12), 1)
+    # Ongoing: pick by scenario
+    if scenario == "ontrack":
+        return "Progressing", round(random.uniform(72, 90), 1)
+    if scenario == "drifting":
+        # Some drifting are paused, some stalled
+        return random.choice(["Paused","Stalled","Regressing"]), round(random.uniform(35, 60), 1)
+    # atrisk
+    return random.choice(["Stalled","Regressing","Paused"]), round(random.uniform(12, 38), 1)
+
+
 def journey_for(customer, scenario):
     sms, push, plan, cv, vacs, sess, open_b = compute_signals(customer, scenario)
     # Final outcome by scenario
@@ -236,6 +258,20 @@ def journey_for(customer, scenario):
 
     referred = date.fromisoformat(customer["referred_date"])
     placed_at = referred + timedelta(days=days_to_placement) if outcome != "Ongoing" else None
+    state, success_prob = derive_state(scenario, outcome, days_to_placement)
+    # Current stage now correlated with state so the journey looks coherent
+    if state == "Success":
+        current_stage = "insupport"
+    elif state == "Progressing":
+        current_stage = random.choice(["jobmatch","interview","offer","nudgeFirstDay"])
+    elif state == "Paused":
+        current_stage = random.choice(["actionplan","skills"])
+    elif state == "Stalled":
+        current_stage = random.choice(["diagnostic","actionplan","skills"])
+    elif state == "Regressing":
+        current_stage = random.choice(["routerCheck","skills","jobmatch"])
+    else:  # Failure
+        current_stage = random.choice(["referral","diagnostic","actionplan","skills","jobmatch"])
 
     j = {
         "journey_id": "JNY-" + customer["customer_id"].split("-")[1],
@@ -243,7 +279,9 @@ def journey_for(customer, scenario):
         "adviser_id": customer["adviser_id"],
         "region_key": customer["region_key"],
         "started_date": referred.isoformat(),
-        "current_stage": "insupport" if outcome.startswith("Placed") or outcome=="Sustained 6mo+" else random.choice(["skills","jobmatch","interview","offer"]),
+        "current_stage": current_stage,
+        "journey_state": state,
+        "success_probability": success_prob,
         "scenario_band": scenario,
         "outcome": outcome,
         "days_to_placement": days_to_placement if placed_at else 0,
