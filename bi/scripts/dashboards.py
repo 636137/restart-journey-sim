@@ -404,16 +404,16 @@ def executive_definition(account, region):
     tables = ["journeys","outcomes_kpis","customers","router_scores","advisers"]
     visuals = [
         # KPIs all have monthly sparkline trends → historical + current together
-        _kpi("k1", "journeys",      "Total journeys",         "sustainability_pct",     "COUNT",   color="#5B2D8E", subtitle="Active across 5 UK regions",   trend_col="started_date"),
-        _kpi("k2", "outcomes_kpis", "Avg days to placement",  "avg_days_to_placement",  "AVERAGE", color="#00A39A", subtitle="Cohort median: 92 days",        trend_col="month"),
-        _kpi("k3", "outcomes_kpis", "Placement rate %",        "placement_rate_pct",     "AVERAGE", color="#42206A", subtitle="Target: 68%",                   trend_col="month"),
-        _kpi("k4", "outcomes_kpis", "Avg sustainability %",    "avg_sustainability_pct", "AVERAGE", color="#007E77", subtitle="6-month in-work retention",     trend_col="month"),
+        _kpi("k1", "journeys",  "Total journeys",         "sustainability_pct",     "COUNT",   color="#5B2D8E", subtitle="Active across 5 UK regions", trend_col="started_date"),
+        _kpi("k2", "journeys",  "Avg days to placement",  "days_to_placement",      "AVERAGE", color="#00A39A", subtitle="Cohort median: 92 days",      trend_col="started_date"),
+        _kpi("k3", "journeys",  "Sustainability % avg",   "sustainability_pct",     "AVERAGE", color="#42206A", subtitle="6-mo in-work retention",      trend_col="started_date"),
+        _kpi("k4", "journeys",  "Open barriers avg",      "open_barriers",          "AVERAGE", color="#007E77", subtitle="Lower is better",             trend_col="started_date"),
         # Donuts for outcome + scenario distribution
         _donut("d1", "journeys", "Outcomes mix · journeys by final status", "outcome"),
         _donut("d2", "journeys", "Max Router scenario band distribution",   "scenario_band"),
         # Small-multiples line → one panel per region, sustainability over time
-        _small_multiples_line("sm1", "outcomes_kpis", "Sustainability % by region · monthly trend", "month", "avg_sustainability_pct", "region_key", "AVERAGE"),
-        # Heatmap region × month sustainability
+        _small_multiples_line("sm1", "journeys", "Sustainability % by region · monthly trend", "started_date", "sustainability_pct", "region_key", "AVERAGE"),
+        # Heatmap region × month sustainability (month is string in outcomes_kpis - OK as categorical)
         _heatmap("h1", "outcomes_kpis", "Sustainability % heatmap · region × month", "region_key", "month", "avg_sustainability_pct"),
         # Treemap of journey volume by region (replaces dull horizontal bar)
         _treemap("t1", "journeys", "Active journey volume by region", "region_key"),
@@ -427,14 +427,14 @@ def adviser_definition(account, region):
         # KPI strip with monthly trend behind each
         _kpi("k1", "advisers",       "Active advisers",      "caseload_current",      "COUNT",   color="#5B2D8E", subtitle="Across 5 regions"),
         _kpi("k2", "advisers",       "Customer satisfaction","customer_satisfaction", "AVERAGE", color="#00A39A", subtitle="Out of 5.00"),
-        _kpi("k3", "outcomes_kpis",  "Avg caseload",         "journeys",              "AVERAGE", color="#42206A", subtitle="Target: 50",                  trend_col="month"),
-        _kpi("k4", "outcomes_kpis",  "Avg placements / mo",  "placements",            "AVERAGE", color="#007E77", subtitle="Per adviser-month",          trend_col="month"),
+        _kpi("k3", "advisers",       "Avg caseload",         "caseload_current",      "AVERAGE", color="#42206A", subtitle="Target: 50"),
+        _kpi("k4", "journeys",       "Placements (total)",   "sustainability_pct",    "COUNT",   color="#007E77", subtitle="All-time placed cohort",     trend_col="started_date"),
         # Top-N table (keeps; bar would be ugly with 247 advisers)
         _table_top("t1", "outcomes_kpis", "Top 12 advisers · total placements", "adviser_id", "placements", "SUM", limit=12),
         # Scatter: real signal here — satisfaction vs caseload, no bar substitute
         _scatter("s1", "advisers", "Satisfaction × caseload · spot overloaded advisers", "caseload_current", "customer_satisfaction"),
         # Small-multiples: each region's monthly sustainability
-        _small_multiples_line("sm1", "outcomes_kpis", "Sustainability by region · monthly small-multiples", "month", "avg_sustainability_pct", "region_key", "AVERAGE"),
+        _small_multiples_line("sm1", "journeys", "Sustainability by region · monthly small-multiples", "started_date", "sustainability_pct", "region_key", "AVERAGE"),
         # Radar: per-region average across 4 KPIs (just placements here; QS radars are per-measure)
         _radar("r1", "outcomes_kpis", "Placements by region · radar", "region_key", "placements", "SUM"),
         # Treemap: where the network is — headcount tiles

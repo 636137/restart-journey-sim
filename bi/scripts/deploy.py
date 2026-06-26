@@ -458,8 +458,20 @@ def upsert_dashboard(user_arn, dashboard_id, name, definition, theme_arn=None):
         update_kwargs = dict(AwsAccountId=ACCOUNT, DashboardId=dashboard_id, Name=name, Definition=definition)
         if theme_arn:
             update_kwargs["ThemeArn"] = theme_arn
-        qs.update_dashboard(**update_kwargs)
-        log(f"updated dashboard {dashboard_id}")
+        resp = qs.update_dashboard(**update_kwargs)
+        new_version = int(resp.get("VersionArn", "").rsplit("/", 1)[-1] or 0)
+        log(f"updated dashboard {dashboard_id} -> version {new_version}")
+        # Wait for the new version to be CREATION_SUCCESSFUL before publishing
+        for _ in range(30):
+            time.sleep(2)
+            v = qs.describe_dashboard(AwsAccountId=ACCOUNT, DashboardId=dashboard_id, VersionNumber=new_version)["Dashboard"]["Version"]
+            if v["Status"] == "CREATION_SUCCESSFUL":
+                break
+            if v["Status"] in ("CREATION_FAILED","UPDATE_FAILED"):
+                log(f"  dashboard {dashboard_id} new version failed: {v.get('Errors')}")
+                return
+        qs.update_dashboard_published_version(AwsAccountId=ACCOUNT, DashboardId=dashboard_id, VersionNumber=new_version)
+        log(f"published dashboard {dashboard_id} version {new_version}")
     except qs.exceptions.ResourceNotFoundException:
         qs.create_dashboard(**body)
         log(f"created dashboard {dashboard_id}")
