@@ -493,6 +493,70 @@ def _stacked_area(vid, ds, title, time_col, y_col, color_col, y_agg="COUNT"):
     }}
 
 
+def scenarios_definition(account, region):
+    tables = ["personas","scenarios","journeys"]
+    visuals = [
+        # KPI strip
+        _kpi("k1", "personas", "Personas in library",         "age",                 "COUNT",   color="#5B2D8E", subtitle="One per realistic archetype"),
+        _kpi("k2", "personas", "Avg success probability",     "success_probability", "AVERAGE", color="#00A39A", subtitle="Live model · per persona"),
+        _kpi("k3", "personas", "Avg days to placement",       "days_to_placement",   "AVERAGE", color="#42206A", subtitle="Across the persona library"),
+        _kpi("k4", "personas", "Avg sustainability %",        "sustainability_pct",  "AVERAGE", color="#007E77", subtitle="6-mo retention forecast"),
+        # 1. Persona detail table - the headline (each row a persona)
+        {"TableVisual": {
+            "VisualId": "tperson",
+            "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":"Persona library · 6 realistic Restart customers"}},
+            "ChartConfiguration": {
+                "FieldWells": {"TableAggregatedFieldWells": {
+                    "GroupBy": [
+                        {"CategoricalDimensionField":{"FieldId":"tperson-n","Column":{"DataSetIdentifier":"personas","ColumnName":"name"}}},
+                        {"CategoricalDimensionField":{"FieldId":"tperson-a","Column":{"DataSetIdentifier":"personas","ColumnName":"archetype"}}},
+                        {"CategoricalDimensionField":{"FieldId":"tperson-r","Column":{"DataSetIdentifier":"personas","ColumnName":"region"}}},
+                        {"CategoricalDimensionField":{"FieldId":"tperson-st","Column":{"DataSetIdentifier":"personas","ColumnName":"journey_state"}}},
+                    ],
+                    "Values": [
+                        {"NumericalMeasureField":{"FieldId":"tperson-p","Column":{"DataSetIdentifier":"personas","ColumnName":"success_probability"},"AggregationFunction":{"SimpleNumericalAggregation":"AVERAGE"}}},
+                        {"NumericalMeasureField":{"FieldId":"tperson-d","Column":{"DataSetIdentifier":"personas","ColumnName":"days_to_placement"},"AggregationFunction":{"SimpleNumericalAggregation":"AVERAGE"}}},
+                        {"NumericalMeasureField":{"FieldId":"tperson-s","Column":{"DataSetIdentifier":"personas","ColumnName":"sustainability_pct"},"AggregationFunction":{"SimpleNumericalAggregation":"AVERAGE"}}},
+                    ],
+                }},
+                "SortConfiguration": {"RowSort": [{"FieldSort":{"FieldId":"tperson-p","Direction":"DESC"}}]},
+            },
+        }},
+        # 2. Donut - personas by journey state
+        _donut("d1", "personas", "Persona library · by journey state", "journey_state"),
+        # 3. Donut - personas by scenario band
+        _donut("d2", "personas", "Persona library · by Max Router band", "scenario_band"),
+        # 4. Radar - per-persona success probability
+        _radar("r1", "personas", "Per-persona success probability · radar", "name", "success_probability", "AVERAGE"),
+        # 5. Bar (only here: comparing 6 named personas head-to-head is the right shape)
+        _bar_num("b1", "personas", "Persona success probability ranking", "name", "success_probability", "MAX", "HORIZONTAL", limit=10),
+        # 6. Bar - days to placement ranking
+        _bar_num("b2", "personas", "Persona days-to-placement ranking · lower is better", "name", "days_to_placement", "MAX", "HORIZONTAL", limit=10),
+        # 7. Treemap by region
+        _treemap("tm1", "personas", "Persona regional spread", "region"),
+        # 8. Scenarios table for the what-ifs
+        {"TableVisual": {
+            "VisualId": "tscen",
+            "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":"Network what-if scenarios · multipliers applied to KPIs"}},
+            "ChartConfiguration": {
+                "FieldWells": {"TableAggregatedFieldWells": {
+                    "GroupBy": [
+                        {"CategoricalDimensionField":{"FieldId":"tscen-n","Column":{"DataSetIdentifier":"scenarios","ColumnName":"name"}}},
+                        {"CategoricalDimensionField":{"FieldId":"tscen-d","Column":{"DataSetIdentifier":"scenarios","ColumnName":"description"}}},
+                    ],
+                    "Values": [
+                        {"NumericalMeasureField":{"FieldId":"tscen-p","Column":{"DataSetIdentifier":"scenarios","ColumnName":"placement_rate_mult"},"AggregationFunction":{"SimpleNumericalAggregation":"MAX"}}},
+                        {"NumericalMeasureField":{"FieldId":"tscen-dp","Column":{"DataSetIdentifier":"scenarios","ColumnName":"days_to_placement_mult"},"AggregationFunction":{"SimpleNumericalAggregation":"MAX"}}},
+                        {"NumericalMeasureField":{"FieldId":"tscen-s","Column":{"DataSetIdentifier":"scenarios","ColumnName":"sustainability_mult"},"AggregationFunction":{"SimpleNumericalAggregation":"MAX"}}},
+                        {"NumericalMeasureField":{"FieldId":"tscen-a","Column":{"DataSetIdentifier":"scenarios","ColumnName":"atrisk_share_mult"},"AggregationFunction":{"SimpleNumericalAggregation":"MAX"}}},
+                    ],
+                }},
+            },
+        }},
+    ]
+    return _wrap(account, region, tables, visuals)
+
+
 def progress_definition(account, region):
     tables = ["journeys","router_scores","journey_stages","advisers"]
     visuals = [

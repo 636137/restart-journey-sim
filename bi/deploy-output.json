@@ -11,7 +11,9 @@
     "journeys": 10287,
     "journey_stages": 122994,
     "router_scores": 16286,
-    "outcomes_kpis": 2199
+    "outcomes_kpis": 2199,
+    "personas": 6,
+    "scenarios": 3
   },
   "quicksight_data_source": "restart-bi-athena",
   "quicksight_datasets": [
@@ -20,7 +22,9 @@
     "ds-journeys",
     "ds-journey-stages",
     "ds-router-scores",
-    "ds-outcomes-kpis"
+    "ds-outcomes-kpis",
+    "ds-personas",
+    "ds-scenarios"
   ],
   "quicksight_console": "https://us-west-2.quicksight.aws.amazon.com/sn/start"
 }

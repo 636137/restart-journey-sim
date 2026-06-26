@@ -1,0 +1,4 @@
+scenario_id,name,description,placement_rate_mult,days_to_placement_mult,sustainability_mult,atrisk_share_mult,atrisk_share_pp,color
+baseline,Baseline · current state,Today's network. Used by all dashboards by default.,1.0,1.0,1.0,1.0,0,#5B2D8E
+hiring_boom,Hiring boom · 2030 UK labour market tightens,"Vacancy:applicant ratio rises 25%, advisers refer faster, placement rate up, drop-out down.",1.18,0.78,1.06,0.72,-8,#00A39A
+recession,Recession · 2027 hiring freeze in logistics & retail,"Vacancies in restart's strongest sectors thin out, days-to-placement rises 35%, at-risk share grows.",0.78,1.35,0.88,1.45,11,#FF453A

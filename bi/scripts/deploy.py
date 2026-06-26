@@ -188,7 +188,7 @@ def ensure_workgroup():
 def athena_sanity():
     """Run a SELECT count(*) on each table to confirm Athena can read."""
     out_counts = {}
-    for table in ["customers","advisers","journeys","journey_stages","router_scores","outcomes_kpis"]:
+    for table in ["customers","advisers","journeys","journey_stages","router_scores","outcomes_kpis","personas","scenarios"]:
         qid = athena.start_query_execution(
             QueryString=f'SELECT count(*) AS n FROM {DB}.{table}',
             WorkGroup=WG,
@@ -483,13 +483,14 @@ def _ds_arn(dsid):
 
 def build_dashboards(user_arn, dataset_ids):
     """Polished three-dashboard build via the dashboards module."""
-    from dashboards import executive_definition, adviser_definition, customer_definition, progress_definition
+    from dashboards import executive_definition, adviser_definition, customer_definition, progress_definition, scenarios_definition
     theme_arn = upsert_theme(user_arn)
     DASH = [
         ("dash-executive", "Restart · Executive Overview", executive_definition(ACCOUNT, REGION)),
         ("dash-adviser",   "Restart · Adviser Performance", adviser_definition(ACCOUNT, REGION)),
         ("dash-customer",  "Restart · Customer Outcomes", customer_definition(ACCOUNT, REGION)),
         ("dash-progress",  "Restart · Journey Progress", progress_definition(ACCOUNT, REGION)),
+        ("dash-scenarios", "Restart · Realistic Scenarios", scenarios_definition(ACCOUNT, REGION)),
     ]
     for dash_id, name, definition in DASH:
         try:
@@ -564,7 +565,7 @@ def main():
     ensure_athena_data_source(user_arn)
 
     dataset_ids = []
-    for table in ["customers","advisers","journeys","journey_stages","router_scores","outcomes_kpis"]:
+    for table in ["customers","advisers","journeys","journey_stages","router_scores","outcomes_kpis","personas","scenarios"]:
         dataset_ids.append(upsert_dataset(user_arn, table))
 
     # Dashboards via lightweight inline definitions

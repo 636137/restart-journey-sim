@@ -238,6 +238,39 @@ body {
   .training-title { font-size:14px; letter-spacing:3px; }
 }
 
+/* ============ PERSONA PICKER ============ */
+.persona-overlay { position:fixed; inset:0; z-index:9050; background:linear-gradient(135deg,#42206a 0%,#5b2d8e 50%,#007e77 100%); display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity .4s; }
+.persona-overlay.show { opacity:1; pointer-events:auto; }
+.persona-overlay.fading { opacity:0; }
+.persona-card-wrap { background:#fff; border-radius:18px; box-shadow:0 30px 80px rgba(0,0,0,0.4); width:100%; max-width:880px; max-height:90vh; overflow:hidden; display:flex; flex-direction:column; }
+.persona-head { padding:20px 28px 6px; border-bottom:1px solid #f0ebf7; }
+.persona-head h1 { font-size:20px; color:#1c1c1e; letter-spacing:-0.3px; margin-bottom:4px; }
+.persona-head p { font-size:13px; color:#666; }
+.persona-list { padding:14px 14px 6px; overflow-y:auto; display:grid; grid-template-columns:repeat(auto-fill, minmax(252px, 1fr)); gap:12px; }
+.persona-tile { background:#fff; border:1.5px solid #e6e0f0; border-radius:14px; padding:14px 14px 12px; cursor:pointer; transition:transform .12s, box-shadow .15s, border-color .15s; }
+.persona-tile:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(91,45,142,0.15); border-color:#5b2d8e; }
+.persona-tile:active { transform:translateY(0); }
+.persona-tile-head { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.persona-avatar { width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-size:14px; flex-shrink:0; }
+.persona-avatar.ontrack { background:linear-gradient(135deg,#00a39a,#007e77); }
+.persona-avatar.drifting { background:linear-gradient(135deg,#ffb400,#e69100); }
+.persona-avatar.atrisk { background:linear-gradient(135deg,#ff5e5e,#d61f1f); }
+.persona-name { font-size:14px; font-weight:700; color:#1c1c1e; letter-spacing:-0.2px; }
+.persona-meta { font-size:11.5px; color:#8a8a96; }
+.persona-arch { font-size:11.5px; color:#42206a; font-weight:600; margin-bottom:6px; }
+.persona-summary { font-size:12.5px; color:#5b5b66; line-height:1.45; height:67px; overflow:hidden; }
+.persona-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:8px; }
+.persona-tag { font-size:10.5px; padding:2px 8px; border-radius:10px; background:#f1eef7; color:#42206a; font-weight:600; }
+.persona-tag.lang { background:#e6f7f5; color:#007e77; }
+.persona-tag.band { font-weight:700; }
+.persona-tag.band.ontrack { background:rgba(0,163,154,0.14); color:#007e77; }
+.persona-tag.band.drifting { background:rgba(255,180,0,0.14); color:#a36a00; }
+.persona-tag.band.atrisk { background:rgba(255,69,58,0.14); color:#c01a14; }
+.persona-foot { padding:12px 24px 18px; border-top:1px solid #f0ebf7; display:flex; justify-content:space-between; align-items:center; }
+.persona-foot-text { font-size:11.5px; color:#8a8a96; }
+.persona-skip { background:transparent; border:none; color:#5b2d8e; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; padding:8px 12px; }
+.persona-skip:hover { text-decoration:underline; }
+
 /* ============ MAX ROUTER IN-PERSON VISIT ============ */
 .visit-overlay { position:fixed; inset:0; z-index:9150; background:linear-gradient(140deg,#0a0a0a 0%,#1a0d1f 50%,#2a1010 100%); color:#fff; font-family:'SF Mono',Menlo,monospace; overflow:hidden; opacity:0; transition:opacity .5s; pointer-events:none; }
 .visit-overlay.show { opacity:1; pointer-events:auto; }
@@ -637,6 +670,21 @@ body {
       <button class="training-cta" type="button" id="trainingRestart">REPLAY JOURNEY</button>
     </div>
     <div class="training-meta">Model v1.0.1 · weight delta applied · auditable · provenance hash: <span id="trainingHash"></span></div>
+  </div>
+</div>
+
+<!-- PERSONA PICKER OVERLAY -->
+<div class="persona-overlay" id="personaOverlay" aria-hidden="true">
+  <div class="persona-card-wrap">
+    <div class="persona-head">
+      <h1>Pick a customer for this demo</h1>
+      <p>Six realistic Restart customers, hand-scripted with paired Max Router scores, adviser, and outcome. Choose one and the iPhone runs their journey.</p>
+    </div>
+    <div class="persona-list" id="personaList"></div>
+    <div class="persona-foot">
+      <div class="persona-foot-text">Pick "Daniel" if you want the default ON-TRACK happy-path demo.</div>
+      <button class="persona-skip" id="personaSkip" type="button">SKIP · use Daniel ▸</button>
+    </div>
   </div>
 </div>
 
@@ -1575,7 +1623,7 @@ async function doSignIn(ev){
     }
     signedIn = true;
     document.getElementById('signinOverlay').classList.add('signin-hidden');
-    setTimeout(startMatchAnim, 100);
+    setTimeout(openPersonaPicker, 100);
   }catch(e){
     const msg = (e && (e.message || e.name)) || String(e);
     err.textContent = /NotAuthorized|UserNotFound|Incorrect/i.test(msg)
@@ -1972,6 +2020,71 @@ function closeTrainingUpdate(){
     ov.setAttribute('aria-hidden','true');
   }, 600);
 }
+
+/* ===================== PERSONA PICKER =====================
+   Six realistic Restart customer personas. Picked persona sets the
+   routerSeed (which drives Max Router scenarios) and is stored in
+   sessionStorage for the rest of the demo.
+==============================================================*/
+const PERSONA_LIBRARY = [
+  { id:"daniel",    name:"Daniel Okafor",    initials:"DO", age:38, postcode:"E20 1EJ",     archetype:"Long-term UC claimant",         summary:"Forklift driver, 9 months out of work. Confident, ready to move. The default ON-TRACK Restart success story.",                                          band:"ontrack",  language:"English", barriers:"Transport, confidence" },
+  { id:"amara",     name:"Amara Adekoya",    initials:"AA", age:34, postcode:"SE15 4QD",    archetype:"Returner after caring break",   summary:"Out 4 years caring for her mother. Childcare cost for her 6-year-old is the live barrier. Drifting until in-person re-engagement.",                       band:"drifting", language:"English", barriers:"Childcare, confidence, digital" },
+  { id:"wojciech",  name:"Wojciech Nowak",   initials:"WN", age:52, postcode:"NW10 5BT",    archetype:"Older worker · Polish ESOL",    summary:"28 years on UK construction sites, redundant. Polish-preferred, wants supervisor-level work. Live translator at every meeting.",                            band:"ontrack",  language:"Polish",  barriers:"English, digital" },
+  { id:"tomasz",    name:"Tomasz Iwanski",   initials:"TI", age:27, postcode:"S60 2QP",     archetype:"Mental-health-led drift",        summary:"Anxiety and sleep have got worse. Has not opened the app for 3 weeks. AT-RISK on Max Router. Same-day call + Access to Work MH referral.",               band:"atrisk",   language:"English", barriers:"Mental health, confidence, digital" },
+  { id:"fadumo",    name:"Fadumo Hassan",    initials:"FH", age:31, postcode:"CF24 4RU",    archetype:"Refugee · resettled · Cardiff", summary:"Granted refugee status 14 months ago. Was a teacher in Mogadishu. Husband, 2 children. Wants to teach again via UK QTS path.",                          band:"drifting", language:"Somali",  barriers:"English, housing, childcare" },
+  { id:"mark",      name:"Mark Wright",      initials:"MW", age:58, postcode:"NG7 5JL",     archetype:"Older worker · ex-offender",    summary:"Former HGV driver, 19 months out since release. Frustrated, motivated, low patience for hoops. Ban-the-Box employer pathway.",                             band:"ontrack",  language:"English", barriers:"Criminal record, digital, transport" },
+];
+
+const PERSONA_SCENARIO_MAP = { ontrack:"ontrack", drifting:"drifting", atrisk:"atrisk" };
+
+function openPersonaPicker(){
+  const ov = document.getElementById('personaOverlay');
+  if(!ov) { startMatchAnim(); return; }
+  const list = document.getElementById('personaList');
+  list.innerHTML = '';
+  PERSONA_LIBRARY.forEach(p=>{
+    const tile = document.createElement('div');
+    tile.className = 'persona-tile';
+    tile.onclick = ()=> pickPersona(p.id);
+    tile.innerHTML = `
+      <div class="persona-tile-head">
+        <div class="persona-avatar ${p.band}">${p.initials}</div>
+        <div>
+          <div class="persona-name">${p.name}</div>
+          <div class="persona-meta">${p.age} · ${p.postcode}</div>
+        </div>
+      </div>
+      <div class="persona-arch">${p.archetype}</div>
+      <div class="persona-summary">${p.summary}</div>
+      <div class="persona-tags">
+        <span class="persona-tag band ${p.band}">${p.band.toUpperCase()}</span>
+        <span class="persona-tag lang">${p.language}</span>
+        <span class="persona-tag">${p.barriers}</span>
+      </div>
+    `;
+    list.appendChild(tile);
+  });
+  ov.setAttribute('aria-hidden','false');
+  ov.classList.add('show');
+}
+
+function pickPersona(personaId){
+  const p = PERSONA_LIBRARY.find(x=>x.id===personaId) || PERSONA_LIBRARY[0];
+  sessionStorage.setItem('personaId', p.id);
+  sessionStorage.setItem('routerSeed', PERSONA_SCENARIO_MAP[p.band] || 'ontrack');
+  const ov = document.getElementById('personaOverlay');
+  ov.classList.add('fading');
+  setTimeout(()=>{
+    ov.classList.remove('show'); ov.classList.remove('fading');
+    ov.setAttribute('aria-hidden','true');
+    startMatchAnim();
+  }, 400);
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  const skip = document.getElementById('personaSkip');
+  if(skip) skip.addEventListener('click', ()=>pickPersona('daniel'));
+});
 
 /* ===================== MAX ROUTER IN-PERSON VISIT =====================
    Two flavours: 'start' (policy-mandated diagnostic) and 'escalation'
