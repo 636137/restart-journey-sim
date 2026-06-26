@@ -3,7 +3,7 @@
 Three executive-grade dashboards built via the QuickSight API:
   - dash-executive  : leadership KPIs, outcomes, regional view, trend
   - dash-adviser    : adviser ranking, satisfaction vs caseload, regional KPIs
-  - dash-customer   : journey funnel, barrier prevalence, Max Router bands
+  - dash-customer   : journey funnel, barrier prevalence, Max Navigator bands
 
 Design rules:
   - Custom Maximus theme (purple/teal, white sheet, Lato).
@@ -410,7 +410,7 @@ def executive_definition(account, region):
         _kpi("k4", "journeys",  "Open barriers avg",      "open_barriers",          "AVERAGE", color="#007E77", subtitle="Lower is better",             trend_col="started_date"),
         # Donuts for outcome + scenario distribution
         _donut("d1", "journeys", "Outcomes mix · journeys by final status", "outcome"),
-        _donut("d2", "journeys", "Max Router scenario band distribution",   "scenario_band"),
+        _donut("d2", "journeys", "Max Navigator scenario band distribution",   "scenario_band"),
         # Small-multiples line → one panel per region, sustainability over time
         _small_multiples_line("sm1", "journeys", "Sustainability % by region · monthly trend", "started_date", "sustainability_pct", "region_key", "AVERAGE"),
         # Heatmap region × month sustainability (month is string in outcomes_kpis - OK as categorical)
@@ -525,7 +525,7 @@ def scenarios_definition(account, region):
         # 2. Donut - personas by journey state
         _donut("d1", "personas", "Persona library · by journey state", "journey_state"),
         # 3. Donut - personas by scenario band
-        _donut("d2", "personas", "Persona library · by Max Router band", "scenario_band"),
+        _donut("d2", "personas", "Persona library · by Max Navigator band", "scenario_band"),
         # 4. Radar - per-persona success probability
         _radar("r1", "personas", "Per-persona success probability · radar", "name", "success_probability", "AVERAGE"),
         # 5. Bar (only here: comparing 6 named personas head-to-head is the right shape)
@@ -564,7 +564,7 @@ def progress_definition(account, region):
         _kpi("k1", "journeys", "Active journeys",        "sustainability_pct",  "COUNT",   color="#5B2D8E", subtitle="All states · all regions",   trend_col="started_date"),
         _kpi("k2", "journeys", "Success probability",    "success_probability", "AVERAGE", color="#00A39A", subtitle="Network avg · live model"),
         _kpi("k3", "journeys", "Avg days to placement",  "days_to_placement",   "AVERAGE", color="#42206A", subtitle="Cohort median: 92",          trend_col="started_date"),
-        _kpi("k4", "router_scores", "Network Max Router score", "score",        "AVERAGE", color="#007E77", subtitle="0–100 deterministic",        trend_col="score_date"),
+        _kpi("k4", "router_scores", "Network Max Navigator score", "score",        "AVERAGE", color="#007E77", subtitle="0–100 deterministic",        trend_col="score_date"),
         # 1. Gauge — overall success likelihood
         _gauge("g1", "journeys", "Network success probability gauge", "success_probability", "AVERAGE"),
         # 2. Donut — journey state breakdown
@@ -593,13 +593,13 @@ def customer_definition(account, region):
     tables = ["customers","journeys","journey_stages","router_scores","advisers"]
     visuals = [
         _kpi("k1", "customers",     "Customers",                "age",                "COUNT",   color="#5B2D8E", subtitle="In Restart caseload"),
-        _kpi("k2", "router_scores", "Network Max Router score", "score",              "AVERAGE", color="#00A39A", subtitle="0-100 deterministic", trend_col="score_date"),
+        _kpi("k2", "router_scores", "Network Max Navigator score", "score",              "AVERAGE", color="#00A39A", subtitle="0-100 deterministic", trend_col="score_date"),
         _kpi("k3", "customers",     "Avg customer age",         "age",                "AVERAGE", color="#42206A", subtitle="Range: 19-64"),
         _kpi("k4", "customers",     "Avg UC duration",          "uc_months_at_start", "AVERAGE", color="#007E77", subtitle="Months on UC at start"),
         # Funnel = the right shape for stage completion
         _funnel("f1", "journey_stages", "12-stage journey funnel · completion at each gate", "stage_key"),
         # Donut for band distribution
-        _donut("d1", "router_scores", "Max Router band distribution", "band"),
+        _donut("d1", "router_scores", "Max Navigator band distribution", "band"),
         # Gauge for the network score
         _gauge("g1", "router_scores", "Network engagement gauge · weekly", "score", "AVERAGE"),
         # Treemap of customers by region (replaces dull bar)

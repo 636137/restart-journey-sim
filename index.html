@@ -193,7 +193,7 @@ body {
   .call-line { font-size:13.5px; }
 }
 
-/* ============ MAX ROUTER TRAINING UPDATE (end-of-journey) ============ */
+/* ============ MAX NAVIGATOR TRAINING UPDATE (end-of-journey) ============ */
 .training-overlay { position:fixed; inset:0; z-index:9200; background:#000; color:#00ff88; font-family:'SF Mono',Menlo,monospace; overflow:hidden; opacity:0; transition:opacity .6s; pointer-events:none; }
 .training-overlay.show { opacity:1; pointer-events:auto; }
 .training-overlay.fading { opacity:0; }
@@ -271,7 +271,7 @@ body {
 .persona-skip { background:transparent; border:none; color:#5b2d8e; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; padding:8px 12px; }
 .persona-skip:hover { text-decoration:underline; }
 
-/* ============ MAX ROUTER IN-PERSON VISIT ============ */
+/* ============ MAX NAVIGATOR IN-PERSON VISIT ============ */
 .visit-overlay { position:fixed; inset:0; z-index:9150; background:linear-gradient(140deg,#0a0a0a 0%,#1a0d1f 50%,#2a1010 100%); color:#fff; font-family:'SF Mono',Menlo,monospace; overflow:hidden; opacity:0; transition:opacity .5s; pointer-events:none; }
 .visit-overlay.show { opacity:1; pointer-events:auto; }
 .visit-overlay.fading { opacity:0; }
@@ -314,7 +314,7 @@ body {
   .visit-card .what { font-size:13px; }
 }
 
-/* ============ MAX ROUTER CHECK ============ */
+/* ============ MAX NAVIGATOR CHECK ============ */
 .router-overlay { position:fixed; inset:0; z-index:9100; background:#000; color:#00ff88; font-family:'SF Mono',Menlo,monospace; overflow:hidden; opacity:0; transition:opacity .5s; pointer-events:none; }
 .router-overlay.show { opacity:1; pointer-events:auto; }
 .router-overlay.fading { opacity:0; }
@@ -641,13 +641,13 @@ body {
   <audio id="callAudio" preload="auto"></audio>
 </div>
 
-<!-- MAX ROUTER TRAINING UPDATE OVERLAY (post-journey) -->
+<!-- MAX NAVIGATOR TRAINING UPDATE OVERLAY (post-journey) -->
 <div class="training-overlay" id="trainingOverlay" aria-hidden="true">
   <canvas class="training-canvas" id="trainingCanvas"></canvas>
   <div class="training-content">
     <div class="training-head">
       <div class="training-badge">DETERMINISTIC · TRAINING UPDATE · NOT AN LLM</div>
-      <div class="training-title">MAX ROUTER · v1.0 → v1.0.1</div>
+      <div class="training-title">MAX NAVIGATOR · v1.0 → v1.0.1</div>
       <div class="training-subtitle">JOURNEY COMPLETE · INTEGRATING ANALYTICS INTO ROUTING WEIGHTS</div>
     </div>
     <div class="training-grid">
@@ -678,7 +678,7 @@ body {
   <div class="persona-card-wrap">
     <div class="persona-head">
       <h1>Pick a customer for this demo</h1>
-      <p>Six realistic Restart customers, hand-scripted with paired Max Router scores, adviser, and outcome. Choose one and the iPhone runs their journey.</p>
+      <p>Six realistic Restart customers, hand-scripted with paired Max Navigator scores, adviser, and outcome. Choose one and the iPhone runs their journey.</p>
     </div>
     <div class="persona-list" id="personaList"></div>
     <div class="persona-foot">
@@ -688,13 +688,13 @@ body {
   </div>
 </div>
 
-<!-- MAX ROUTER IN-PERSON VISIT OVERLAY (policy start + escalation) -->
+<!-- MAX NAVIGATOR IN-PERSON VISIT OVERLAY (policy start + escalation) -->
 <div class="visit-overlay" id="visitOverlay" aria-hidden="true">
   <canvas class="visit-canvas" id="visitCanvas"></canvas>
   <div class="visit-content">
     <div class="visit-badge policy" id="visitBadge">DETERMINISTIC · PROGRAM POLICY · NOT AN LLM</div>
     <div class="visit-title" id="visitTitle">IN-PERSON VISIT REQUIRED</div>
-    <div class="visit-subtitle" id="visitSubtitle">MAX ROUTER · POLICY ROUTING ENGINE · v1.0</div>
+    <div class="visit-subtitle" id="visitSubtitle">MAX NAVIGATOR · POLICY ROUTING ENGINE · v1.0</div>
     <div class="visit-card" id="visitCardWhy">
       <h4 id="visitWhyTitle">WHY THIS VISIT</h4>
       <div class="what" id="visitWhat"></div>
@@ -734,13 +734,13 @@ body {
   </div>
 </div>
 
-<!-- MAX ROUTER MID-JOURNEY CHECK OVERLAY -->
+<!-- MAX NAVIGATOR MID-JOURNEY CHECK OVERLAY -->
 <div class="router-overlay" id="routerOverlay" aria-hidden="true">
   <canvas class="router-canvas" id="routerCanvas"></canvas>
   <div class="router-content">
     <div class="router-head">
       <div class="router-badge">DETERMINISTIC · RULE-BASED · NOT AN LLM</div>
-      <div class="router-title">MAX ROUTER</div>
+      <div class="router-title">MAX NAVIGATOR</div>
       <div class="router-subtitle">MID-JOURNEY ALGORITHMIC CHECK · STAGE 6 OF 12</div>
     </div>
     <div class="router-card">
@@ -1014,9 +1014,9 @@ const JOURNEY = [
     progress:8
   },
   {
-    id:'routerInPersonStart', channel:'system', railTitle:'Max Router · in-person visit required',
+    id:'routerInPersonStart', channel:'system', railTitle:'Max Navigator · in-person visit required',
     railDesc:'Program policy: every new participant attends one in-person diagnostic at a Maximus office. Free real-time two-way speech-to-speech translation available on request.',
-    notif:{app:'MAX ROUTER', sender:'Max Router', ts:'now',
+    notif:{app:'MAX NAVIGATOR', sender:'Max Navigator', ts:'now',
       text:'Policy check: 1 in-person visit required. Free real-time speech-to-speech translation available — tap for details.'},
     progress:15, routerVisit:'start'
   },
@@ -1049,16 +1049,16 @@ const JOURNEY = [
     progress:55
   },
   {
-    id:'routerCheck', channel:'system', railTitle:'Max Router algorithmic check',
+    id:'routerCheck', channel:'system', railTitle:'Max Navigator algorithmic check',
     railDesc:'Deterministic mid-journey scorecard. Computes engagement signals and recommends an action band.',
-    notif:{app:'MAX ROUTER', sender:'Max Router', ts:'now',
+    notif:{app:'MAX NAVIGATOR', sender:'Max Navigator', ts:'now',
       text:'Algorithmic check ready — tap to review your engagement score and next action.'},
     progress:62, router:true
   },
   {
-    id:'routerInPersonEscalation', channel:'system', railTitle:'Max Router · escalation in-person',
-    railDesc:'Triggered when Max Router band is DRIFTING or AT-RISK. Mandatory in-person re-engagement at Priya\'s office. Free real-time two-way speech-to-speech translation offered.',
-    notif:{app:'MAX ROUTER', sender:'Max Router', ts:'now',
+    id:'routerInPersonEscalation', channel:'system', railTitle:'Max Navigator · escalation in-person',
+    railDesc:'Triggered when Max Navigator band is DRIFTING or AT-RISK. Mandatory in-person re-engagement at Priya\'s office. Free real-time two-way speech-to-speech translation offered.',
+    notif:{app:'MAX NAVIGATOR', sender:'Max Navigator', ts:'now',
       text:'Escalation: in-person visit booked within 48h. Free real-time speech-to-speech translation available — tap for details.'},
     progress:66, routerVisit:'escalation'
   },
@@ -1296,7 +1296,7 @@ function renderRail(){
     const isRouter = !!s.router;
     const isVisit = !!s.routerVisit;
     const chanClass = isVisit ? 'chan-router' : (isRouter ? 'chan-router' : (isNudge ? 'chan-nudge' : ({sms:'chan-sms',push:'chan-push',email:'chan-email',call:'chan-call'}[s.channel])));
-    const chanLabel = isVisit ? (s.routerVisit==='start' ? 'Max Router · Visit' : 'Max Router · Escalation') : (isRouter ? 'Max Router' : (isNudge ? 'Nudge' : ({sms:'SMS',push:'App push',email:'Email'}[s.channel] || s.channel)));
+    const chanLabel = isVisit ? (s.routerVisit==='start' ? 'Max Navigator · Visit' : 'Max Navigator · Escalation') : (isRouter ? 'Max Navigator' : (isNudge ? 'Nudge' : ({sms:'SMS',push:'App push',email:'Email'}[s.channel] || s.channel)));
     const el = document.createElement('div');
     el.className='rail-step'+(active?' is-active':'')+(!done&&!active?' is-todo':'');
     el.onclick = ()=>jumpTo(i);
@@ -1694,7 +1694,7 @@ function callPriya(){
 }
 
 /* ===================== ELEVENLABS CALL OVERLAY =====================
-   After Max Router ACK, plays the matching scenario audio (full.mp3) with
+   After Max Navigator ACK, plays the matching scenario audio (full.mp3) with
    live captions driven by timeline.json. In-person scenario uses different
    framing copy. Skippable.
 =========================================================================*/
@@ -1797,7 +1797,7 @@ function closeScenarioCall(){
   }, 500);
 }
 
-/* ===================== MAX ROUTER TRAINING UPDATE (end-of-journey) =====================
+/* ===================== MAX NAVIGATOR TRAINING UPDATE (end-of-journey) =====================
    Deterministic post-journey analytics + cohort comparison + node-graph reveal.
    Fires after stage 12 (insupport) completes. Same Matrix look.
    No LLM. Numbers are computed from journey state + the mid-journey scenario.
@@ -1899,7 +1899,7 @@ function trainingStreamLog(raw){
     'feature: stratford-warehouse-restart-veteran → +0.04 routing weight',
     'feature: priya/long-term-uc-claimant pairing → +0.06 pairing affinity',
     'feature: nudge-night-before-interview → +0.02 conversion lift (n=412)',
-    'feature: max-router-scenario='+raw.scenario+' → updated band threshold ±0.5',
+    'feature: max-navigator-scenario='+raw.scenario+' → updated band threshold ±0.5',
     'committing weight delta v1.0 → v1.0.1 · '+trainingHash(raw),
   ];
   lines.forEach((t,i)=>{
@@ -2023,14 +2023,14 @@ function closeTrainingUpdate(){
 
 /* ===================== PERSONA PICKER =====================
    Six realistic Restart customer personas. Picked persona sets the
-   routerSeed (which drives Max Router scenarios) and is stored in
+   routerSeed (which drives Max Navigator scenarios) and is stored in
    sessionStorage for the rest of the demo.
 ==============================================================*/
 const PERSONA_LIBRARY = [
   { id:"daniel",    name:"Daniel Okafor",    initials:"DO", age:38, postcode:"E20 1EJ",     archetype:"Long-term UC claimant",         summary:"Forklift driver, 9 months out of work. Confident, ready to move. The default ON-TRACK Restart success story.",                                          band:"ontrack",  language:"English", barriers:"Transport, confidence" },
   { id:"amara",     name:"Amara Adekoya",    initials:"AA", age:34, postcode:"SE15 4QD",    archetype:"Returner after caring break",   summary:"Out 4 years caring for her mother. Childcare cost for her 6-year-old is the live barrier. Drifting until in-person re-engagement.",                       band:"drifting", language:"English", barriers:"Childcare, confidence, digital" },
   { id:"wojciech",  name:"Wojciech Nowak",   initials:"WN", age:52, postcode:"NW10 5BT",    archetype:"Older worker · Polish ESOL",    summary:"28 years on UK construction sites, redundant. Polish-preferred, wants supervisor-level work. Live translator at every meeting.",                            band:"ontrack",  language:"Polish",  barriers:"English, digital" },
-  { id:"tomasz",    name:"Tomasz Iwanski",   initials:"TI", age:27, postcode:"S60 2QP",     archetype:"Mental-health-led drift",        summary:"Anxiety and sleep have got worse. Has not opened the app for 3 weeks. AT-RISK on Max Router. Same-day call + Access to Work MH referral.",               band:"atrisk",   language:"English", barriers:"Mental health, confidence, digital" },
+  { id:"tomasz",    name:"Tomasz Iwanski",   initials:"TI", age:27, postcode:"S60 2QP",     archetype:"Mental-health-led drift",        summary:"Anxiety and sleep have got worse. Has not opened the app for 3 weeks. AT-RISK on Max Navigator. Same-day call + Access to Work MH referral.",               band:"atrisk",   language:"English", barriers:"Mental health, confidence, digital" },
   { id:"fadumo",    name:"Fadumo Hassan",    initials:"FH", age:31, postcode:"CF24 4RU",    archetype:"Refugee · resettled · Cardiff", summary:"Granted refugee status 14 months ago. Was a teacher in Mogadishu. Husband, 2 children. Wants to teach again via UK QTS path.",                          band:"drifting", language:"Somali",  barriers:"English, housing, childcare" },
   { id:"mark",      name:"Mark Wright",      initials:"MW", age:58, postcode:"NG7 5JL",     archetype:"Older worker · ex-offender",    summary:"Former HGV driver, 19 months out since release. Frustrated, motivated, low patience for hoops. Ban-the-Box employer pathway.",                             band:"ontrack",  language:"English", barriers:"Criminal record, digital, transport" },
 ];
@@ -2086,7 +2086,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if(skip) skip.addEventListener('click', ()=>pickPersona('daniel'));
 });
 
-/* ===================== MAX ROUTER IN-PERSON VISIT =====================
+/* ===================== MAX NAVIGATOR IN-PERSON VISIT =====================
    Two flavours: 'start' (policy-mandated diagnostic) and 'escalation'
    (band=drifting/atrisk → in-person re-engagement within 48h).
 =========================================================================*/
@@ -2095,7 +2095,7 @@ const VISIT_CONFIGS = {
     badgeClass: "policy",
     badgeText: "DETERMINISTIC · PROGRAM POLICY · NOT AN LLM",
     title: "IN-PERSON VISIT REQUIRED",
-    subtitle: "MAX ROUTER · POLICY RULE V1 · DIAGNOSTIC",
+    subtitle: "MAX NAVIGATOR · POLICY RULE V1 · DIAGNOSTIC",
     whyTitle: "WHY THIS VISIT",
     what: "Per DWP Restart program policy, every newly-referred participant attends one in-person diagnostic at their local Maximus office before the action plan is finalised.",
     why: "The in-person diagnostic captures barriers and confidence signals that are hard to read over text, and lets Priya complete the safeguarding check the policy requires within the first 14 days.",
@@ -2110,9 +2110,9 @@ const VISIT_CONFIGS = {
     badgeClass: "escalation",
     badgeText: "DETERMINISTIC · ESCALATION RULE · NOT AN LLM",
     title: "ESCALATION · IN-PERSON VISIT",
-    subtitle: "MAX ROUTER · BAND DRIFTING OR AT RISK",
+    subtitle: "MAX NAVIGATOR · BAND DRIFTING OR AT RISK",
     whyTitle: "WHY THIS VISIT",
-    what: "Your Max Router engagement band dropped below the policy threshold. The system has booked an in-person re-engagement with Priya within 48 hours, before the band moves to At-Risk.",
+    what: "Your Max Navigator engagement band dropped below the policy threshold. The system has booked an in-person re-engagement with Priya within 48 hours, before the band moves to At-Risk.",
     why: "Drifting bands recover 3.2× faster after one in-person session than after additional remote contact (cohort N=3,847). A travel voucher has been pre-issued. No-show triggers a wellbeing call, not a sanction.",
     where: "Maximus, 2 Stratford Pl, E20 1EJ",
     when: "Within 48 hours · Priya will text two slots",
@@ -2192,7 +2192,7 @@ function closeVisitOverlay(){
   if(pb && current < JOURNEY.length-1){ pb.disabled = false; pb.style.opacity = 1; }
 }
 
-/* ===================== MAX ROUTER MID-JOURNEY CHECK =====================
+/* ===================== MAX NAVIGATOR MID-JOURNEY CHECK =====================
    Deterministic, rule-based engagement score. Not an LLM call.
    Six weighted signals -> single score 0-100 -> band -> action.
    Signals are observed by the Restart adviser tooling in the real world

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate 10,287 synthetic Restart Scheme records spread across six tables.
 
-Matches the Max Router data parameters used in the sim:
+Matches the Max Navigator data parameters used in the sim:
   - 7 weighted engagement signals (sms_reply_pct, push_open_pct, plan_progress,
     cv_progress_pct, vacancies_saved, sessions_attended, open_barriers).
   - 3 scenario bands (ontrack >=75, drifting 50-74, atrisk <50).

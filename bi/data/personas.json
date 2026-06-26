@@ -23,8 +23,8 @@
       "sustainability_pct": 88,
       "journey_state": "Success",
       "success_probability": 96,
-      "max_router_mid": 88,
-      "max_router_end": 94,
+      "max_navigator_mid": 88,
+      "max_navigator_end": 94,
       "headline_moment": "Lands Warehouse Team Member at Sundown Logistics, Stratford. UC tapers, +£3 200/yr take-home.",
       "stages_progression": ["referral","diagnostic","nudgeDiagnostic","actionplan","skills","routerCheck","jobmatch","interview","nudgeNightBefore","nudgeMorningOf","offer","nudgeFirstDay","insupport"]
     },
@@ -51,8 +51,8 @@
       "sustainability_pct": 72,
       "journey_state": "Progressing",
       "success_probability": 78,
-      "max_router_mid": 61,
-      "max_router_end": 79,
+      "max_navigator_mid": 61,
+      "max_navigator_end": 79,
       "headline_moment": "After in-person re-engagement and a £30/wk childcare grant, lands a school-hours admin role at a local NHS GP surgery.",
       "stages_progression": ["referral","diagnostic","nudgeDiagnostic","actionplan","skills","routerCheck","routerInPersonEscalation","jobmatch","interview","nudgeNightBefore","offer","insupport"]
     },
@@ -79,8 +79,8 @@
       "sustainability_pct": 86,
       "journey_state": "Success",
       "success_probability": 92,
-      "max_router_mid": 81,
-      "max_router_end": 90,
+      "max_navigator_mid": 81,
+      "max_navigator_end": 90,
       "headline_moment": "Live Polish-English translator added to every Priya meeting. Lands Site Supervisor role at Brent Park Developments via Restart's CSCS Gold Card top-up.",
       "stages_progression": ["referral","diagnostic","nudgeDiagnostic","actionplan","skills","routerCheck","jobmatch","interview","nudgeNightBefore","nudgeMorningOf","offer","nudgeFirstDay","insupport"]
     },
@@ -107,9 +107,9 @@
       "sustainability_pct": 0,
       "journey_state": "Stalled",
       "success_probability": 31,
-      "max_router_mid": 34,
-      "max_router_end": null,
-      "headline_moment": "Max Router AT-RISK score triggers same-day call. Warm-referred to Access to Work Mental Health Support. Plan reset to 3 small tasks per week.",
+      "max_navigator_mid": 34,
+      "max_navigator_end": null,
+      "headline_moment": "Max Navigator AT-RISK score triggers same-day call. Warm-referred to Access to Work Mental Health Support. Plan reset to 3 small tasks per week.",
       "stages_progression": ["referral","diagnostic","nudgeDiagnostic","actionplan","skills","routerCheck"]
     },
     {
@@ -135,8 +135,8 @@
       "sustainability_pct": 76,
       "journey_state": "Progressing",
       "success_probability": 81,
-      "max_router_mid": 58,
-      "max_router_end": 82,
+      "max_navigator_mid": 58,
+      "max_navigator_end": 82,
       "headline_moment": "Free Somali-English translation at every adviser meeting. Lands a Teaching Assistant role at Riverside Primary, Cardiff, with a path to UK QTS via Adult Skills Fund.",
       "stages_progression": ["referral","diagnostic","nudgeDiagnostic","actionplan","skills","routerCheck","routerInPersonEscalation","jobmatch","interview","offer","insupport"]
     },
@@ -163,8 +163,8 @@
       "sustainability_pct": 79,
       "journey_state": "Progressing",
       "success_probability": 84,
-      "max_router_mid": 72,
-      "max_router_end": 86,
+      "max_navigator_mid": 72,
+      "max_navigator_end": 86,
       "headline_moment": "Restart funds HGV licence reapplication + Class C medical. Ban-the-Box employer Bardon Aggregates offers a 12-month yard role with HGV when reinstated.",
       "stages_progression": ["referral","diagnostic","nudgeDiagnostic","actionplan","skills","routerCheck","jobmatch","interview","nudgeNightBefore","offer","insupport"]
     }

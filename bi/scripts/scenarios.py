@@ -22,7 +22,7 @@ fields = [
     "prior_sector","uc_months_at_start","barriers","barriers_count",
     "disability_or_health","digital_skills","preferred_language","adviser",
     "scenario_band","days_to_placement","final_outcome","sustainability_pct",
-    "journey_state","success_probability","max_router_mid","max_router_end",
+    "journey_state","success_probability","max_navigator_mid","max_navigator_end",
     "headline_moment","stages_count","stages_progression"
 ]
 with (DATA / "personas.csv").open("w", newline="") as f:
@@ -52,8 +52,8 @@ with (DATA / "personas.csv").open("w", newline="") as f:
             "sustainability_pct": p["sustainability_pct"],
             "journey_state": p["journey_state"],
             "success_probability": p["success_probability"],
-            "max_router_mid": p["max_router_mid"],
-            "max_router_end": p["max_router_end"] if p["max_router_end"] is not None else 0,
+            "max_navigator_mid": p["max_navigator_mid"],
+            "max_navigator_end": p["max_navigator_end"] if p["max_navigator_end"] is not None else 0,
             "headline_moment": p["headline_moment"],
             "stages_count": len(p["stages_progression"]),
             "stages_progression": ";".join(p["stages_progression"]),

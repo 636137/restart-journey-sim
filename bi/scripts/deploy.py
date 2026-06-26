@@ -538,7 +538,7 @@ def upsert_topic(user_arn, datasets):
         })
     topic = {
         "Name": "Restart Programme",
-        "Description": "Ask anything about Restart Scheme outcomes, advisers, customers, journeys, and Max Router scoring.",
+        "Description": "Ask anything about Restart Scheme outcomes, advisers, customers, journeys, and Max Navigator scoring.",
         "DataSets": ds_blocks,
     }
     try:
