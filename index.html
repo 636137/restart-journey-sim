@@ -157,6 +157,53 @@ body {
 .typing-dot:nth-child(2){animation-delay:.22s;} .typing-dot:nth-child(3){animation-delay:.44s;}
 @keyframes typingPulse { 0%,60%,100%{transform:scale(1);opacity:.45;} 30%{transform:scale(1.35);opacity:1;} }
 
+/* ============ MAX ROUTER CHECK ============ */
+.router-overlay { position:fixed; inset:0; z-index:9100; background:#000; color:#00ff88; font-family:'SF Mono',Menlo,monospace; overflow:hidden; opacity:0; transition:opacity .5s; pointer-events:none; }
+.router-overlay.show { opacity:1; pointer-events:auto; }
+.router-overlay.fading { opacity:0; }
+.router-canvas { position:absolute; inset:0; }
+.router-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:54px 20px 26px; gap:14px; z-index:2; overflow-y:auto; }
+.router-content::-webkit-scrollbar { display:none; }
+.router-head { display:flex; flex-direction:column; align-items:center; gap:6px; }
+.router-badge { font-size:10px; letter-spacing:3px; padding:5px 12px; border:1px solid rgba(0,255,136,0.55); border-radius:20px; background:rgba(0,255,136,0.08); color:#00ff88; }
+.router-title { font-size:18px; letter-spacing:6px; font-weight:600; text-shadow:0 0 12px rgba(0,255,136,0.6); }
+.router-subtitle { font-size:11px; letter-spacing:3px; color:rgba(0,255,136,0.55); }
+.router-card { background:rgba(0,0,0,0.55); border:1px solid rgba(0,255,136,0.3); border-radius:14px; padding:14px 18px; width:100%; max-width:680px; backdrop-filter: blur(2px); }
+.router-card h4 { font-size:11px; letter-spacing:2px; color:rgba(0,255,136,0.7); margin-bottom:10px; font-weight:600; }
+.router-scorecard { display:grid; grid-template-columns: 1fr auto auto auto; gap:7px 14px; font-size:13px; align-items:center; }
+.router-scorecard .label { color:rgba(0,255,136,0.85); }
+.router-scorecard .val { text-align:right; color:#fff; font-variant-numeric: tabular-nums; opacity:0; }
+.router-scorecard .val.show { animation: matchFadeIn .35s forwards; }
+.router-scorecard .weight { color:rgba(0,255,136,0.55); font-size:11px; }
+.router-scorecard .contrib { color:#00ff88; font-weight:700; text-align:right; min-width:55px; opacity:0; }
+.router-scorecard .contrib.show { animation: matchFadeIn .35s forwards; }
+.router-formula { margin-top:10px; padding-top:10px; border-top:1px dashed rgba(0,255,136,0.25); font-size:11.5px; color:rgba(0,255,136,0.65); letter-spacing:0.5px; }
+.router-score-wrap { display:flex; flex-direction:column; align-items:center; gap:6px; }
+.router-score { font-size:80px; font-weight:800; letter-spacing:-2px; color:#00ff88; text-shadow:0 0 30px rgba(0,255,136,0.8); font-variant-numeric: tabular-nums; line-height:1; }
+.router-band { font-size:13px; letter-spacing:5px; padding:5px 14px; border-radius:6px; font-weight:700; }
+.router-band.good { background:rgba(0,255,136,0.15); color:#00ff88; border:1px solid #00ff88; }
+.router-band.warn { background:rgba(255,180,0,0.15); color:#ffb400; border:1px solid #ffb400; }
+.router-band.risk { background:rgba(255,80,80,0.15); color:#ff5050; border:1px solid #ff5050; }
+.router-action { width:100%; max-width:680px; }
+.router-action h4 .pulse { display:inline-block; width:8px; height:8px; border-radius:50%; background:currentColor; margin-right:8px; animation: pulseDot 1.4s ease-in-out infinite; vertical-align:middle; }
+@keyframes pulseDot { 0%,100%{opacity:0.4;} 50%{opacity:1;} }
+.router-action .head { display:flex; align-items:center; gap:10px; font-size:14px; color:#fff; margin-bottom:8px; }
+.router-steps { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+.router-steps li { display:flex; gap:10px; align-items:flex-start; font-size:13px; color:rgba(255,255,255,0.92); line-height:1.4; }
+.router-steps li .num { width:22px; height:22px; flex-shrink:0; border-radius:50%; background:rgba(0,255,136,0.18); color:#00ff88; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; }
+.router-cta-row { display:flex; gap:10px; margin-top:6px; }
+.router-cta { background:transparent; border:1px solid #00ff88; color:#00ff88; border-radius:8px; padding:10px 22px; font-family:inherit; font-size:13px; letter-spacing:2px; cursor:pointer; transition:background .15s, color .15s; }
+.router-cta.primary { background:#00ff88; color:#000; font-weight:700; }
+.router-cta:hover { background:#00ff88; color:#000; }
+.router-cta.primary:hover { filter:brightness(1.08); }
+.router-meta { font-size:10.5px; letter-spacing:2px; color:rgba(0,255,136,0.45); text-align:center; margin-top:4px; }
+
+@media (max-width: 720px) {
+  .router-title { font-size:14px; letter-spacing:3px; }
+  .router-score { font-size:56px; }
+  .router-scorecard { font-size:12px; }
+}
+
 /* ============ MATCHING ANIMATION ============ */
 .match-overlay { position:fixed; inset:0; z-index:9000; background:#000; color:#00ff88; font-family: 'SF Mono', Menlo, monospace; overflow:hidden; opacity:0; transition:opacity .6s; pointer-events:none; }
 .match-overlay.show { opacity:1; pointer-events:auto; }
@@ -283,6 +330,7 @@ body {
 .ra-checklist .check.on::after{ content:''; position:absolute; left:5px; top:1px; width:5px; height:10px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg); }
 
 .rail-chan.chan-nudge{ background:rgba(255,159,10,0.18); color:#b86e00; }
+.rail-chan.chan-router{ background:rgba(0,180,100,0.16); color:#007e3d; }
 
 .ra-job{ display:flex; gap:12px; align-items:flex-start; }
 .ra-job-logo{ width:44px; height:44px; border-radius:11px; background:linear-gradient(145deg,#ffb84d,#f08c00); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
@@ -413,6 +461,36 @@ body {
     <div class="match-cta-row" id="matchCtaRow">
       <button class="match-cta" type="button" id="matchBegin">BEGIN JOURNEY ▸</button>
     </div>
+  </div>
+</div>
+
+<!-- MAX ROUTER MID-JOURNEY CHECK OVERLAY -->
+<div class="router-overlay" id="routerOverlay" aria-hidden="true">
+  <canvas class="router-canvas" id="routerCanvas"></canvas>
+  <div class="router-content">
+    <div class="router-head">
+      <div class="router-badge">DETERMINISTIC · RULE-BASED · NOT AN LLM</div>
+      <div class="router-title">MAX ROUTER</div>
+      <div class="router-subtitle">MID-JOURNEY ALGORITHMIC CHECK · STAGE 6 OF 12</div>
+    </div>
+    <div class="router-card">
+      <h4>ENGAGEMENT SCORECARD · DANIEL OKAFOR · STRATFORD E20</h4>
+      <div class="router-scorecard" id="routerScorecard"></div>
+      <div class="router-formula" id="routerFormula"></div>
+    </div>
+    <div class="router-score-wrap">
+      <div class="router-score" id="routerScore">0</div>
+      <div class="router-band" id="routerBand">CALCULATING…</div>
+    </div>
+    <div class="router-card router-action" id="routerAction" style="display:none;">
+      <h4><span class="pulse"></span><span id="routerActionTitle">RECOMMENDED NEXT ACTION</span></h4>
+      <div class="head" id="routerActionHead"></div>
+      <ol class="router-steps" id="routerActionSteps"></ol>
+    </div>
+    <div class="router-cta-row" id="routerCtaRow" style="display:none;">
+      <button class="router-cta primary" type="button" id="routerAck">ACKNOWLEDGE &amp; CONTINUE ▸</button>
+    </div>
+    <div class="router-meta">Score formula deterministic · auditable · v1.0 · seed <span id="routerSeed"></span></div>
   </div>
 </div>
 
@@ -642,7 +720,8 @@ body {
 const ICONS = {
   sms:   {bg:'linear-gradient(160deg,#5bf675,#22c93d)', svg:'<svg viewBox="0 0 40 40" width="26" height="26"><path fill="#fff" d="M20 9c-6.3 0-11.3 4-11.3 9 0 2.8 1.6 5.3 4.1 6.9-.3 1.1-1 2.6-2 3.5-.2.2 0 .5.2.5 1.9-.1 3.7-.8 5-1.6 1.3.3 2.6.6 4 .6 6.3 0 11.3-4 11.3-9S26.3 9 20 9z"/></svg>'},
   push:  {bg:'linear-gradient(150deg,#6d3aa6,#42206a)', svg:'<svg viewBox="0 0 40 40" width="24" height="24"><path fill="#fff" d="M20 10a9 9 0 1 0 8.6 6.2l-2.4.9A6.5 6.5 0 1 1 20 13.5v3.2l6-4.3L20 8z"/></svg>'},
-  email: {bg:'linear-gradient(170deg,#41b3ff,#0a78e6)', svg:'<svg viewBox="0 0 40 40" width="26" height="26"><path fill="#fff" d="M9 14h22a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 31 26H9a1.5 1.5 0 0 1-1.5-1.5v-9A1.5 1.5 0 0 1 9 14zm0 2.4v.4L20 23l11-6.2v-.4L20 22z"/></svg>'}
+  email: {bg:'linear-gradient(170deg,#41b3ff,#0a78e6)', svg:'<svg viewBox="0 0 40 40" width="26" height="26"><path fill="#fff" d="M9 14h22a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 31 26H9a1.5 1.5 0 0 1-1.5-1.5v-9A1.5 1.5 0 0 1 9 14zm0 2.4v.4L20 23l11-6.2v-.4L20 22z"/></svg>'},
+  system:{bg:'linear-gradient(160deg,#00ff88,#007e77)', svg:'<svg viewBox="0 0 40 40" width="24" height="24"><path fill="#000" d="M20 10l3 6 6 1-4 5 1 6-6-3-6 3 1-6-4-5 6-1z"/></svg>'}
 };
 
 /* ---- The lifecycle ---- */
@@ -681,6 +760,13 @@ const JOURNEY = [
     notif:{app:'RESTART', sender:'Restart', ts:'now',
       text:'Your CV is ready to review ✨ Plus a funded Warehouse Operations course near you — 2 places left.'},
     progress:55
+  },
+  {
+    id:'routerCheck', channel:'system', railTitle:'Max Router algorithmic check',
+    railDesc:'Deterministic mid-journey scorecard. Computes engagement signals and recommends an action band.',
+    notif:{app:'MAX ROUTER', sender:'Max Router', ts:'now',
+      text:'Algorithmic check ready — tap to review your engagement score and next action.'},
+    progress:62, router:true
   },
   {
     id:'jobmatch', channel:'push', railTitle:'Job match',
@@ -911,8 +997,9 @@ function renderRail(){
     const active = i===current;
     const last = i===JOURNEY.length-1;
     const isNudge = !!s.nudge;
-    const chanClass = isNudge ? 'chan-nudge' : ({sms:'chan-sms',push:'chan-push',email:'chan-email',call:'chan-call'}[s.channel]);
-    const chanLabel = isNudge ? 'Nudge' : ({sms:'SMS',push:'App push',email:'Email'}[s.channel] || s.channel);
+    const isRouter = !!s.router;
+    const chanClass = isRouter ? 'chan-router' : (isNudge ? 'chan-nudge' : ({sms:'chan-sms',push:'chan-push',email:'chan-email',call:'chan-call'}[s.channel]));
+    const chanLabel = isRouter ? 'Max Router' : (isNudge ? 'Nudge' : ({sms:'SMS',push:'App push',email:'Email'}[s.channel] || s.channel));
     const el = document.createElement('div');
     el.className='rail-step'+(active?' is-active':'')+(!done&&!active?' is-todo':'');
     el.onclick = ()=>jumpTo(i);
@@ -943,8 +1030,16 @@ function fireStage(i){
   current = Math.max(current,i);
   fired.add(i);
 
+  // Router stage: fire iOS-style notif AND open algorithmic check overlay.
+  // Disable playNext until acknowledged.
+  if(s.router){
+    routerOpened = false; // allow re-entry on jumpTo
+    setTimeout(openRouterCheck, 350);
+    $('playBtn').disabled = true; $('playBtn').style.opacity = .5;
+  }
+
   // build banner
-  const icon = ICONS[s.channel];
+  const icon = ICONS[s.channel] || ICONS.system;
   $('notifIcon').style.background = icon.bg;
   $('notifIcon').innerHTML = icon.svg;
   $('notifApp').textContent = s.notif.app;
@@ -969,6 +1064,7 @@ function tapNotif(){
   if(raw==='__live__'){ setTimeout(()=>openLiveChat(),260); return; }
   const i = parseInt(raw,10);
   const s = JOURNEY[i];
+  if(s && s.router){ setTimeout(()=>{ routerOpened = false; openRouterCheck(); }, 260); return; }
   setTimeout(()=>{
     if(s.notif.app==='MESSAGES') openMessages(s.id);
     else if(s.notif.app==='MAIL') openMail(s.id);
@@ -1237,7 +1333,233 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if(skip) skip.addEventListener('click', endMatchAnim);
   const begin = document.getElementById('matchBegin');
   if(begin) begin.addEventListener('click', endMatchAnim);
+  const ack = document.getElementById('routerAck');
+  if(ack) ack.addEventListener('click', ()=>{
+    closeRouterCheck();
+    // re-enable the play button so the demo can continue
+    const pb = document.getElementById('playBtn');
+    if(pb && current < JOURNEY.length-1){ pb.disabled = false; pb.style.opacity = 1; }
+    renderRail();
+  });
 });
+
+/* ===================== MAX ROUTER MID-JOURNEY CHECK =====================
+   Deterministic, rule-based engagement score. Not an LLM call.
+   Six weighted signals -> single score 0-100 -> band -> action.
+   Signals are observed by the Restart adviser tooling in the real world
+   (SMS replies, push opens, action-plan ticks, etc).
+=========================================================================*/
+const ROUTER_SIGNALS = [
+  { key:'smsReply',    label:'SMS reply rate (last 14 days)',      unit:'%',  max:100, weight:0.20 },
+  { key:'pushOpen',    label:'Push notification open rate',         unit:'%',  max:100, weight:0.15 },
+  { key:'planProgress',label:'Action-plan completion this week',   unit:'/3', max:3,   weight:0.15 },
+  { key:'cvProgress',  label:'CV review progress',                 unit:'%',  max:100, weight:0.15 },
+  { key:'savedJobs',   label:'Vacancies saved or viewed',          unit:'',   max:6,   weight:0.10 },
+  { key:'attendance',  label:'Adviser sessions attended',          unit:'/3', max:3,   weight:0.15 },
+  { key:'barriers',    label:'Open barriers (lower is better)',    unit:'',   max:4,   weight:0.10, inverse:true },
+];
+
+const ROUTER_SCENARIOS = {
+  ontrack: {
+    name:'ON TRACK',
+    band:'good',
+    inputs: { smsReply:92, pushOpen:88, planProgress:3, cvProgress:90, savedJobs:5, attendance:3, barriers:0 },
+    action: {
+      title:'STAY THE COURSE · LIGHT-TOUCH',
+      head:'Daniel is in the top quartile of his cohort. Maintain weekly cadence and surface one stretch goal.',
+      steps:[
+        'Keep weekly Tuesday text check-in with Priya.',
+        'Surface one stretch role above current target (Senior Warehouse Op, +£3k).',
+        'Schedule next interview-prep slot in 7 days if no offer by then.',
+      ],
+    },
+  },
+  drifting: {
+    name:'DRIFTING',
+    band:'warn',
+    inputs: { smsReply:55, pushOpen:48, planProgress:1, cvProgress:60, savedJobs:2, attendance:2, barriers:2 },
+    action: {
+      title:'IN-PERSON RE-ENGAGEMENT · 48H',
+      head:'Engagement softening. Daniel risks falling out of the top half. Move from remote to in-person within 48 hours.',
+      steps:[
+        'Auto-book in-person session with Priya in next 48 hours at Stratford office.',
+        'Issue £20 travel voucher to remove the transport friction we detected.',
+        'CV re-review focused on warehouse experience (rate dropped after first draft).',
+        'Pause non-essential push notifications for 7 days to reduce noise.',
+      ],
+    },
+  },
+  atrisk: {
+    name:'AT RISK',
+    band:'risk',
+    inputs: { smsReply:28, pushOpen:22, planProgress:0, cvProgress:35, savedJobs:1, attendance:1, barriers:3 },
+    action: {
+      title:'IMMEDIATE PHONE CALL · TODAY',
+      head:'Daniel is disengaging. Three open barriers detected. Priya to call today; pause automated nudges; offer wellbeing referral.',
+      steps:[
+        'Priya calls Daniel today before 5pm on +44 7700 900111.',
+        'Pause all automated job-match push notifications for 14 days.',
+        'Warm-refer to Access to Work Mental Health Support Service (Maximus, free).',
+        'Reset action plan with Priya — fewer items, smaller wins.',
+        'Schedule next in-person session within 5 working days.',
+      ],
+    },
+  },
+};
+
+function routerSeedFromSession(){
+  let s = sessionStorage.getItem('routerSeed');
+  if(!s){
+    // Cheap PRNG-friendly seed: 0..2 picks scenario
+    const arr = ['ontrack','drifting','atrisk'];
+    s = arr[Math.floor(Math.random()*arr.length)];
+    sessionStorage.setItem('routerSeed', s);
+  }
+  return s;
+}
+
+function routerComputeScore(inputs){
+  // Deterministic weighted sum. Each signal -> normalized 0-1 -> *100 -> *weight.
+  // Inverse signals (barriers) score = 1 - (value/max).
+  let total = 0, breakdown=[];
+  ROUTER_SIGNALS.forEach(sig=>{
+    const v = inputs[sig.key];
+    const norm = sig.inverse ? Math.max(0, 1 - v/sig.max) : Math.min(1, v/sig.max);
+    const contrib = norm * 100 * sig.weight;
+    total += contrib;
+    breakdown.push({...sig, value:v, norm, contrib});
+  });
+  return { score: Math.round(total), breakdown };
+}
+
+let routerOpened = false;
+function openRouterCheck(){
+  if(routerOpened) return;
+  routerOpened = true;
+  const scenarioKey = routerSeedFromSession();
+  const scenario = ROUTER_SCENARIOS[scenarioKey];
+  const { score, breakdown } = routerComputeScore(scenario.inputs);
+
+  const ov = document.getElementById('routerOverlay');
+  ov.setAttribute('aria-hidden','false');
+  ov.classList.add('show');
+  document.getElementById('routerSeed').textContent = scenarioKey.toUpperCase();
+  routerStartRain();
+  routerRenderScorecard(breakdown, score, scenario);
+}
+
+function routerStartRain(){
+  const c = document.getElementById('routerCanvas');
+  const ctx = c.getContext('2d');
+  function resize(){ c.width=window.innerWidth; c.height=window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const glyphs='0123456789ABCDEF+-=*/<>%';
+  const fontSize=14;
+  const cols=Math.ceil(c.width/fontSize);
+  const drops=new Array(cols).fill(0).map(()=>Math.random()*-50);
+  ctx.font=fontSize+'px monospace';
+  routerRainTimer = setInterval(()=>{
+    ctx.fillStyle='rgba(0,0,0,0.09)';
+    ctx.fillRect(0,0,c.width,c.height);
+    for(let i=0;i<drops.length;i++){
+      const ch=glyphs.charAt(Math.floor(Math.random()*glyphs.length));
+      ctx.fillStyle = Math.random()>0.96 ? '#ccffe5' : 'rgba(0,255,136,0.45)';
+      ctx.fillText(ch, i*fontSize, drops[i]*fontSize);
+      if(drops[i]*fontSize > c.height && Math.random()>0.975) drops[i]=0;
+      drops[i]++;
+    }
+  }, 60);
+}
+let routerRainTimer = null;
+
+function routerRenderScorecard(breakdown, finalScore, scenario){
+  const wrap = document.getElementById('routerScorecard');
+  wrap.innerHTML='';
+  // header
+  ['Signal','Value','Weight','Contribution'].forEach((h,i)=>{
+    const cell = document.createElement('div');
+    cell.style.fontSize='10.5px'; cell.style.letterSpacing='2px'; cell.style.color='rgba(0,255,136,0.55)';
+    cell.style.borderBottom='1px solid rgba(0,255,136,0.18)'; cell.style.paddingBottom='5px'; cell.style.marginBottom='3px';
+    cell.style.textAlign = i===0 ? 'left' : 'right';
+    cell.textContent = h;
+    wrap.appendChild(cell);
+  });
+  breakdown.forEach((b,idx)=>{
+    const label=document.createElement('div'); label.className='label'; label.textContent=b.label; wrap.appendChild(label);
+    const val=document.createElement('div'); val.className='val'; val.dataset.idx=idx;
+    val.textContent = (b.unit==='/3' || b.unit==='') ? (b.value+(b.unit||'')) : (b.value+b.unit);
+    wrap.appendChild(val);
+    const wt=document.createElement('div'); wt.className='weight val'; wt.dataset.idx=idx;
+    wt.textContent = '× '+(b.weight*100).toFixed(0)+'%';
+    wrap.appendChild(wt);
+    const c=document.createElement('div'); c.className='contrib'; c.dataset.idx=idx;
+    c.textContent = b.contrib.toFixed(1);
+    wrap.appendChild(c);
+  });
+  document.getElementById('routerFormula').textContent =
+    'score = Σ (normalised signal × weight) × 100   |   bands: ≥75 ON TRACK · 50–74 DRIFTING · <50 AT RISK';
+
+  // staggered reveal
+  const vals = wrap.querySelectorAll('.val:not(.weight)');
+  const wts = wrap.querySelectorAll('.weight');
+  const contribs = wrap.querySelectorAll('.contrib');
+  let i=0;
+  function step(){
+    if(i>=breakdown.length){ routerAnimateScore(finalScore, scenario); return; }
+    const idx = i;
+    vals[idx].classList.add('show');
+    wts[idx].classList.add('show');
+    setTimeout(()=>{ contribs[idx].classList.add('show'); }, 180);
+    i++;
+    setTimeout(step, 280);
+  }
+  setTimeout(step, 700);
+}
+
+function routerAnimateScore(target, scenario){
+  let cur = 0;
+  const el = document.getElementById('routerScore');
+  const bandEl = document.getElementById('routerBand');
+  bandEl.textContent = 'COMPUTING…';
+  const t = setInterval(()=>{
+    cur += Math.max(1, Math.floor((target-cur)/5));
+    if(cur>=target){ cur=target; clearInterval(t); routerShowAction(scenario, target, bandEl); }
+    el.textContent = cur;
+  }, 45);
+}
+
+function routerShowAction(scenario, score, bandEl){
+  // Band by score, not scenario, so the on-screen verdict matches the score.
+  let bandKey = score>=75 ? 'good' : score>=50 ? 'warn' : 'risk';
+  let bandLabel = bandKey==='good' ? 'ON TRACK' : bandKey==='warn' ? 'DRIFTING' : 'AT RISK';
+  bandEl.className = 'router-band '+bandKey;
+  bandEl.textContent = bandLabel + ' · ' + score + '/100';
+
+  const card = document.getElementById('routerAction');
+  card.style.display = 'block';
+  document.getElementById('routerActionTitle').textContent = scenario.action.title;
+  document.getElementById('routerActionHead').textContent = scenario.action.head;
+  const ol = document.getElementById('routerActionSteps');
+  ol.innerHTML='';
+  scenario.action.steps.forEach((s,i)=>{
+    const li=document.createElement('li');
+    li.innerHTML = '<span class="num">'+(i+1)+'</span><span>'+s+'</span>';
+    ol.appendChild(li);
+  });
+  document.getElementById('routerCtaRow').style.display='flex';
+}
+
+function closeRouterCheck(){
+  const ov = document.getElementById('routerOverlay');
+  ov.classList.add('fading');
+  if(routerRainTimer){ clearInterval(routerRainTimer); routerRainTimer=null; }
+  setTimeout(()=>{
+    ov.classList.remove('show');
+    ov.classList.remove('fading');
+    ov.setAttribute('aria-hidden','true');
+  }, 500);
+}
 
 /* ===================== MATCHING ANIMATION ===================== */
 const MATCH_PAIRS = [
