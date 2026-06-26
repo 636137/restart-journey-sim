@@ -40,6 +40,11 @@ FILES_TO_UPLOAD = [
     "adviser-config.js",
 ]
 
+# Subdirectories whose contents are uploaded with their original relative paths.
+DIRS_TO_UPLOAD = [
+    "audio",
+]
+
 s3 = boto3.client("s3", region_name=REGION)
 cf = boto3.client("cloudfront")
 cog = boto3.client("cognito-idp", region_name=REGION)
@@ -110,18 +115,34 @@ def ensure_bucket():
 
 
 def upload_files():
+    def push(rel, path):
+        ctype, _ = mimetypes.guess_type(rel)
+        ctype = ctype or "application/octet-stream"
+        cache = "no-cache, no-store, must-revalidate" if rel.endswith(".html") or rel.endswith("config.js") else "public, max-age=86400"
+        s3.put_object(
+            Bucket=BUCKET, Key=rel, Body=path.read_bytes(),
+            ContentType=ctype, CacheControl=cache,
+        )
+        log(f"uploaded s3://{BUCKET}/{rel} ({ctype}, {path.stat().st_size} bytes)")
+
     for fname in FILES_TO_UPLOAD:
         path = ROOT / fname
         if not path.exists():
             raise SystemExit(f"missing {path}")
-        ctype, _ = mimetypes.guess_type(fname)
-        ctype = ctype or "application/octet-stream"
-        cache = "no-cache, no-store, must-revalidate" if fname.endswith(".html") or fname.endswith("config.js") else "public, max-age=86400"
-        s3.put_object(
-            Bucket=BUCKET, Key=fname, Body=path.read_bytes(),
-            ContentType=ctype, CacheControl=cache,
-        )
-        log(f"uploaded s3://{BUCKET}/{fname} ({ctype}, {path.stat().st_size} bytes)")
+        push(fname, path)
+    # walk dirs
+    for d in DIRS_TO_UPLOAD:
+        root = ROOT / d
+        if not root.exists():
+            continue
+        for path in root.rglob("*"):
+            if not path.is_file():
+                continue
+            # skip the python generator + scripts
+            if path.suffix in (".py",):
+                continue
+            rel = str(path.relative_to(ROOT))
+            push(rel, path)
 
 
 def ensure_oac():

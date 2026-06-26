@@ -36,3 +36,8 @@ walkthrough/audio/
 walkthrough/video/
 walkthrough/*.mp4
 walkthrough/package-lock.json
+
+# elevenlabs generated audio (regenerate with audio/generate.py)
+audio/ontrack/*.mp3
+audio/drifting/*.mp3
+audio/atrisk/*.mp3

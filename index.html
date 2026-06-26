@@ -157,6 +157,42 @@ body {
 .typing-dot:nth-child(2){animation-delay:.22s;} .typing-dot:nth-child(3){animation-delay:.44s;}
 @keyframes typingPulse { 0%,60%,100%{transform:scale(1);opacity:.45;} 30%{transform:scale(1.35);opacity:1;} }
 
+/* ============ ELEVENLABS CALL OVERLAY ============ */
+.call-overlay { position:fixed; inset:0; z-index:9300; background:linear-gradient(180deg,#0a1a14 0%, #0d2a23 60%, #042b27 100%); color:#fff; font-family:'-apple-system', 'SF Pro Text', system-ui, sans-serif; overflow:hidden; opacity:0; transition:opacity .5s; pointer-events:none; }
+.call-overlay.show { opacity:1; pointer-events:auto; }
+.call-overlay.fading { opacity:0; }
+.call-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; padding:54px 22px 30px; gap:14px; }
+.call-meta { font-size:11px; letter-spacing:3px; color:rgba(255,255,255,0.55); text-transform:uppercase; }
+.call-status { font-size:13px; color:rgba(255,255,255,0.7); }
+.call-avatar { width:130px; height:130px; border-radius:50%; background:linear-gradient(135deg,#5b2d8e,#42206a); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:42px; color:#fff; letter-spacing:-1.5px; box-shadow:0 0 0 6px rgba(255,255,255,0.08), 0 30px 60px rgba(0,0,0,0.45); animation: callPulse 3.2s ease-in-out infinite; }
+@keyframes callPulse { 0%,100%{ box-shadow:0 0 0 6px rgba(255,255,255,0.08), 0 30px 60px rgba(0,0,0,0.45); } 50%{ box-shadow:0 0 0 14px rgba(255,255,255,0.14), 0 30px 60px rgba(0,0,0,0.45); } }
+.call-name { font-size:28px; font-weight:600; letter-spacing:-0.3px; }
+.call-sub { font-size:13px; color:rgba(255,255,255,0.55); margin-top:-6px; }
+.call-timer { font-size:14px; color:rgba(255,255,255,0.55); font-variant-numeric: tabular-nums; }
+.call-scenario { font-size:11px; letter-spacing:2px; padding:5px 10px; border:1px solid rgba(0,255,136,0.5); border-radius:14px; color:#00ff88; text-transform:uppercase; }
+.call-caption-wrap { flex:1; width:100%; max-width:680px; display:flex; flex-direction:column; gap:8px; overflow-y:auto; padding:6px 4px; }
+.call-caption-wrap::-webkit-scrollbar { display:none; }
+.call-line { background:rgba(255,255,255,0.07); border-radius:14px; padding:9px 14px; font-size:14.5px; line-height:1.45; max-width:88%; opacity:0; transform:translateY(6px); transition: opacity .3s, transform .3s; border-left:3px solid transparent; }
+.call-line.visible { opacity:1; transform:translateY(0); }
+.call-line.priya  { align-self:flex-start; background:rgba(91,45,142,0.28); border-left-color:#a06fd6; }
+.call-line.daniel { align-self:flex-end; background:rgba(0,140,255,0.2); border-left-color:#3eaaff; }
+.call-line.active { background:rgba(255,255,255,0.18); transform:translateY(0) scale(1.02); }
+.call-line .who { font-size:10.5px; letter-spacing:2px; color:rgba(255,255,255,0.6); text-transform:uppercase; margin-bottom:2px; }
+.call-actions { display:flex; gap:18px; align-items:center; justify-content:center; padding:6px 0; }
+.call-btn { width:54px; height:54px; border-radius:50%; border:none; background:rgba(255,255,255,0.12); color:#fff; cursor:pointer; font-size:20px; display:flex; align-items:center; justify-content:center; transition:background .15s, transform .1s; }
+.call-btn:hover { background:rgba(255,255,255,0.2); }
+.call-btn:active { transform:scale(0.94); }
+.call-btn.end { background:#ff453a; }
+.call-btn.end:hover { background:#ff6157; }
+.call-skip { background:transparent; color:rgba(255,255,255,0.65); border:1px solid rgba(255,255,255,0.25); border-radius:18px; padding:7px 14px; font-size:11px; letter-spacing:2px; cursor:pointer; }
+.call-skip:hover { background:rgba(255,255,255,0.08); color:#fff; }
+
+@media (max-width:720px){
+  .call-avatar { width:96px; height:96px; font-size:32px; }
+  .call-name { font-size:22px; }
+  .call-line { font-size:13.5px; }
+}
+
 /* ============ MAX ROUTER TRAINING UPDATE (end-of-journey) ============ */
 .training-overlay { position:fixed; inset:0; z-index:9200; background:#000; color:#00ff88; font-family:'SF Mono',Menlo,monospace; overflow:hidden; opacity:0; transition:opacity .6s; pointer-events:none; }
 .training-overlay.show { opacity:1; pointer-events:auto; }
@@ -507,6 +543,26 @@ body {
       <button class="match-cta" type="button" id="matchBegin">BEGIN JOURNEY ▸</button>
     </div>
   </div>
+</div>
+
+<!-- LIVE CALL OVERLAY (ElevenLabs scenario audio) -->
+<div class="call-overlay" id="callOverlay" aria-hidden="true">
+  <div class="call-content">
+    <div class="call-meta" id="callMeta">CALL · PRIYA SHARMA · MAXIMUS RESTART</div>
+    <div class="call-status" id="callStatus">connecting…</div>
+    <div class="call-avatar">PS</div>
+    <div class="call-name">Priya Sharma</div>
+    <div class="call-sub" id="callSub">Senior Restart Adviser · Stratford</div>
+    <div class="call-timer" id="callTimer">00:00</div>
+    <div class="call-scenario" id="callScenario">SCENARIO</div>
+    <div class="call-caption-wrap" id="callCaptions"></div>
+    <div class="call-actions">
+      <button class="call-btn" id="callMute" title="Mute (audio only)">🔇</button>
+      <button class="call-btn end" id="callEnd" title="End call">📞</button>
+      <button class="call-skip" id="callSkip">SKIP ▸</button>
+    </div>
+  </div>
+  <audio id="callAudio" preload="auto"></audio>
 </div>
 
 <!-- MAX ROUTER TRAINING UPDATE OVERLAY (post-journey) -->
@@ -1419,9 +1475,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const ack = document.getElementById('routerAck');
   if(ack) ack.addEventListener('click', ()=>{
     closeRouterCheck();
+    setTimeout(openScenarioCall, 650);
     const pb = document.getElementById('playBtn');
     if(pb && current < JOURNEY.length-1){ pb.disabled = false; pb.style.opacity = 1; }
     renderRail();
+  });
+  const callEnd = document.getElementById('callEnd');
+  if(callEnd) callEnd.addEventListener('click', closeScenarioCall);
+  const callSkip = document.getElementById('callSkip');
+  if(callSkip) callSkip.addEventListener('click', closeScenarioCall);
+  const callMute = document.getElementById('callMute');
+  if(callMute) callMute.addEventListener('click', ()=>{
+    const a = document.getElementById('callAudio');
+    a.muted = !a.muted;
+    callMute.style.opacity = a.muted ? 0.55 : 1;
   });
   const trClose = document.getElementById('trainingClose');
   if(trClose) trClose.addEventListener('click', closeTrainingUpdate);
@@ -1431,6 +1498,110 @@ document.addEventListener('DOMContentLoaded', ()=>{
     setTimeout(()=>{ resetJourney(); }, 700);
   });
 });
+
+/* ===================== ELEVENLABS CALL OVERLAY =====================
+   After Max Router ACK, plays the matching scenario audio (full.mp3) with
+   live captions driven by timeline.json. In-person scenario uses different
+   framing copy. Skippable.
+=========================================================================*/
+const CALL_SCENARIO_META = {
+  ontrack:  { kind:'PHONE', tagline:'Tuesday check-in · routine', sub:'Senior Restart Adviser · Stratford', scenarioLabel:'ON TRACK · CHECK-IN' },
+  drifting: { kind:'IN-PERSON', tagline:'Stratford office · 48h re-engagement', sub:'Senior Restart Adviser · in person', scenarioLabel:'DRIFTING · IN-PERSON RE-ENGAGEMENT' },
+  atrisk:   { kind:'PHONE',    tagline:'Same-day welfare call', sub:'Senior Restart Adviser · welfare call', scenarioLabel:'AT RISK · SAME-DAY CALL' },
+};
+
+let callOpen = false;
+let callTimerHandle = null;
+let callLineHandle = null;
+
+async function openScenarioCall(){
+  if(callOpen) return;
+  const scenarioKey = sessionStorage.getItem('routerSeed') || 'ontrack';
+  let timeline;
+  try{
+    const r = await fetch('audio/'+scenarioKey+'/timeline.json?cb='+Date.now());
+    if(!r.ok) throw new Error('no timeline');
+    timeline = await r.json();
+  }catch(e){
+    console.warn('[call] no timeline for', scenarioKey, e);
+    return;
+  }
+  callOpen = true;
+  const ov = document.getElementById('callOverlay');
+  ov.setAttribute('aria-hidden','false');
+  ov.classList.add('show');
+  const meta = CALL_SCENARIO_META[scenarioKey];
+  document.getElementById('callMeta').textContent = meta.kind + ' · PRIYA SHARMA · MAXIMUS RESTART';
+  document.getElementById('callSub').textContent = meta.sub;
+  document.getElementById('callScenario').textContent = meta.scenarioLabel;
+  document.getElementById('callStatus').textContent = meta.kind==='PHONE' ? 'connecting…' : 'in person · transcript live';
+
+  // Build hidden caption bubbles
+  const wrap = document.getElementById('callCaptions'); wrap.innerHTML='';
+  timeline.lines.forEach(ln=>{
+    const div = document.createElement('div');
+    div.className = 'call-line ' + ln.speaker;
+    div.dataset.start = ln.start_ms;
+    div.dataset.dur = ln.duration_ms;
+    div.innerHTML = '<div class="who">'+(ln.speaker==='priya'?'PRIYA':'DANIEL')+'</div>'+ln.text;
+    wrap.appendChild(div);
+  });
+
+  // Audio
+  const audio = document.getElementById('callAudio');
+  audio.src = 'audio/'+scenarioKey+'/full.mp3?cb='+Date.now();
+  audio.muted = false;
+  audio.currentTime = 0;
+  audio.play().then(()=>{
+    document.getElementById('callStatus').textContent = meta.kind==='PHONE' ? 'on call · '+meta.tagline : meta.tagline;
+  }).catch(err=>{
+    document.getElementById('callStatus').textContent = 'tap anywhere to play (autoplay blocked)';
+    ov.addEventListener('click', function once(){ ov.removeEventListener('click', once); audio.play(); }, {once:true});
+  });
+
+  // Timer + caption sync
+  const tEl = document.getElementById('callTimer');
+  callTimerHandle = setInterval(()=>{
+    const s = Math.floor(audio.currentTime);
+    tEl.textContent = String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+  }, 250);
+  callLineHandle = setInterval(()=>{
+    const ms = audio.currentTime * 1000;
+    let activeIdx = -1;
+    const lines = wrap.querySelectorAll('.call-line');
+    lines.forEach((el,idx)=>{
+      const start = +el.dataset.start;
+      const end = start + (+el.dataset.dur);
+      if(ms >= start){ el.classList.add('visible'); }
+      if(ms >= start && ms < end){ activeIdx = idx; }
+    });
+    lines.forEach((el,idx)=>{
+      el.classList.toggle('active', idx===activeIdx);
+    });
+    if(activeIdx>=0){ lines[activeIdx].scrollIntoView({behavior:'smooth', block:'center'}); }
+  }, 120);
+
+  audio.addEventListener('ended', ()=>{
+    document.getElementById('callStatus').textContent = 'call ended';
+    setTimeout(closeScenarioCall, 1400);
+  }, {once:true});
+}
+
+function closeScenarioCall(){
+  if(!callOpen) return;
+  callOpen = false;
+  const ov = document.getElementById('callOverlay');
+  const audio = document.getElementById('callAudio');
+  try{ audio.pause(); }catch(_){}
+  audio.removeAttribute('src'); audio.load();
+  if(callTimerHandle) clearInterval(callTimerHandle); callTimerHandle=null;
+  if(callLineHandle) clearInterval(callLineHandle); callLineHandle=null;
+  ov.classList.add('fading');
+  setTimeout(()=>{
+    ov.classList.remove('show'); ov.classList.remove('fading');
+    ov.setAttribute('aria-hidden','true');
+  }, 500);
+}
 
 /* ===================== MAX ROUTER TRAINING UPDATE (end-of-journey) =====================
    Deterministic post-journey analytics + cohort comparison + node-graph reveal.

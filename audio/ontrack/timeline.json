@@ -1,0 +1,81 @@
+{
+  "scenario": "ontrack",
+  "label": "ON TRACK \u00b7 weekly check-in call",
+  "framing": "Phone call. Priya leads, Daniel is engaged and confident. Light-touch, surfaces a stretch goal.",
+  "total_ms": 54952,
+  "gap_ms": 350,
+  "lines": [
+    {
+      "i": 1,
+      "speaker": "priya",
+      "text": "Hi Daniel, it's Priya. Just my Tuesday check-in, are you alright to talk for two minutes?",
+      "file": "line_01_priya.mp3",
+      "duration_ms": 4365,
+      "start_ms": 0
+    },
+    {
+      "i": 2,
+      "speaker": "daniel",
+      "text": "Yeah, fine. Just on my way back from the gym.",
+      "file": "line_02_daniel.mp3",
+      "duration_ms": 2229,
+      "start_ms": 4715
+    },
+    {
+      "i": 3,
+      "speaker": "priya",
+      "text": "Brilliant. Right, your numbers are properly strong. Top quartile in your cohort. CV is signed off, you've saved nine vacancies, and the Level 2 course is locked in for the first of July.",
+      "file": "line_03_priya.mp3",
+      "duration_ms": 10959,
+      "start_ms": 7294
+    },
+    {
+      "i": 4,
+      "speaker": "daniel",
+      "text": "Yeah it's been alright, actually. I feel like I'm getting somewhere.",
+      "file": "line_04_daniel.mp3",
+      "duration_ms": 3111,
+      "start_ms": 18603
+    },
+    {
+      "i": 5,
+      "speaker": "priya",
+      "text": "I want to push you a little. Sundown Logistics is your match-of-the-week, but there's a Senior Warehouse Operative slot at Bow Distribution. Three grand more, same commute. Want me to send it across?",
+      "file": "line_05_priya.mp3",
+      "duration_ms": 10820,
+      "start_ms": 22064
+    },
+    {
+      "i": 6,
+      "speaker": "daniel",
+      "text": "Senior, though? I haven't done senior before.",
+      "file": "line_06_daniel.mp3",
+      "duration_ms": 1996,
+      "start_ms": 33234
+    },
+    {
+      "i": 7,
+      "speaker": "priya",
+      "text": "You have, you just didn't call it that. Two years team-leading at Hackney was supervising six people. I'll pull it out on the CV and send you the link tonight.",
+      "file": "line_07_priya.mp3",
+      "duration_ms": 8870,
+      "start_ms": 35580
+    },
+    {
+      "i": 8,
+      "speaker": "daniel",
+      "text": "Alright. Yeah, send it. Worst case I learn something at the interview.",
+      "file": "line_08_daniel.mp3",
+      "duration_ms": 4040,
+      "start_ms": 44800
+    },
+    {
+      "i": 9,
+      "speaker": "priya",
+      "text": "That's exactly the right attitude. Same time next Tuesday, and well done this week Daniel, properly well done.",
+      "file": "line_09_priya.mp3",
+      "duration_ms": 5758,
+      "start_ms": 49190
+    }
+  ]
+}
