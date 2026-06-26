@@ -41,10 +41,12 @@ SIGNALS_BY_PERSONA = {
 
 # Adviser metadata
 ADVISERS = {
-    "Priya Sharma":   {"initials": "PS", "title": "Senior Restart Adviser · Stratford",     "voice_key": "priya"},
-    "Hannah Brennan": {"initials": "HB", "title": "Senior Restart Adviser · Rotherham",     "voice_key": "hannah"},
-    "Eleri Davies":   {"initials": "ED", "title": "Senior Restart Adviser · Cardiff",       "voice_key": "eleri"},
-    "Karen Mensah":   {"initials": "KM", "title": "Senior Restart Adviser · Nottingham",    "voice_key": "karen"},
+    "Priya Sharma":    {"initials": "PS", "title": "Senior Restart Adviser · Stratford office · Logistics specialism",     "voice_key": "priya"},
+    "Aisha Khatun":    {"initials": "AK", "title": "Restart Adviser · Lewisham office · Returner-after-caring",            "voice_key": "aisha"},
+    "Tomasz Kowalski": {"initials": "TK", "title": "Restart Adviser · Harlesden office · Polish ESOL + Construction",      "voice_key": "tomasz_kowalski"},
+    "Hannah Brennan":  {"initials": "HB", "title": "Restart Adviser · Sheffield office · Mental Health protocol",          "voice_key": "hannah"},
+    "Eleri Davies":    {"initials": "ED", "title": "Restart Adviser · Cardiff office · REP overlap + Welsh schools",       "voice_key": "eleri"},
+    "Karen Mensah":    {"initials": "KM", "title": "Restart Adviser · Nottingham office · Ban-the-Box + HGV pipeline",     "voice_key": "karen"},
 }
 
 

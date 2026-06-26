@@ -3,11 +3,13 @@
   "voices": {
     "daniel":    "zOzKXdLgsgWMld5cH9Be",
     "amara":     "1YfmfuouRyRwVbpAZP7R",
-    "wojciech":  "ofMPN3qFIoaLyL5P87YZ",
+    "wojciech":  "0eNfhIaWmmTRBCR4uMbx",
     "tomasz":    "595nqIjDxh5arb72YzTy",
     "fadumo":    "nRQT5qZlz63KgulRymWq",
     "mark":      "toS3mg6T1oxAZSZH2IFL",
     "priya":     "EKTy9yXGjtpPEKGRXAro",
+    "aisha":     "AUreiY9HCmokpRxhQOFs",
+    "tomasz_kowalski": "ofMPN3qFIoaLyL5P87YZ",
     "hannah":    "a6OoKAwvzwXQnycUy3lb",
     "eleri":     "73fZMjboCm1aBVyxTbBp",
     "karen":     "dVoi15NNDJligFBwnVO0"
@@ -31,30 +33,30 @@
       ]
     },
     "amara": {
-      "label": "AMARA × PRIYA · DRIFTING · in-person re-engagement",
-      "framing": "Amara Adekoya, 34, returner after caring break. Childcare cost is real; CV anxiety. Priya in person.",
+      "label": "AMARA × AISHA · DRIFTING · in-person re-engagement",
+      "framing": "Amara Adekoya, 34, returner after caring break. Childcare cost is real; CV anxiety. Aisha Khatun in person.",
       "voice_customer": "amara",
-      "voice_adviser":  "priya",
+      "voice_adviser":  "aisha",
       "lines": [
-        { "speaker": "adviser",  "text": "Amara, lovely to see you. Sit down. The system flagged that your text replies have dropped off this week. I'd rather get you in than guess what's going on." },
+        { "speaker": "adviser",  "text": "Amara, lovely to see you. Sit down. I'm Aisha, your re-engagement adviser. The system flagged that your text replies have dropped off this week. I'd rather get you in than guess what's going on." },
         { "speaker": "customer", "text": "Sorry. I know I've been quiet. The bus fare keeps adding up and I'm not sure I'm getting anywhere." },
         { "speaker": "adviser",  "text": "Right. Two things. I'm putting a thirty-pound travel voucher on your account today. That covers a fortnight, no questions, no paperwork." },
         { "speaker": "customer", "text": "Honestly that helps more than you think." },
         { "speaker": "adviser",  "text": "Second, your CV. You've rewritten it three times and lost your voice in it. We're going back to the original draft and I'll tidy it up myself. You sign it off. Twenty minutes, before you leave today." },
         { "speaker": "customer", "text": "That actually sounds better than starting again." },
         { "speaker": "adviser",  "text": "Last thing. The four years caring for your mum isn't a gap. It is leadership and reliability and being the calm in a crisis. Employers will see it that way if we frame it that way." },
-        { "speaker": "customer", "text": "Thanks Priya. I was starting to think I was the problem." },
+        { "speaker": "customer", "text": "Thanks Aisha. I was starting to think I was the problem." },
         { "speaker": "adviser",  "text": "You are not the problem. The plan was a bit too busy. We're going to make it smaller and you and I will keep going." }
       ]
     },
     "wojciech": {
-      "label": "WOJCIECH × PRIYA · ON TRACK · with Polish translator",
-      "framing": "Wojciech, 52, Polish-speaking site supervisor, ON-TRACK. Live translator on the call. Wants supervisor-level work.",
+      "label": "WOJCIECH × TOMASZ KOWALSKI · ON TRACK · in Polish",
+      "framing": "Wojciech, 52, Polish-speaking site supervisor, ON-TRACK. Paired with Tomasz Kowalski, Polish-speaking adviser at Harlesden. They speak in English on this call (translator nearby) but Tomasz can switch to Polish anytime.",
       "voice_customer": "wojciech",
-      "voice_adviser":  "priya",
+      "voice_adviser":  "tomasz_kowalski",
       "lines": [
-        { "speaker": "adviser",  "text": "Wojciech, hello. Our translator is on the line so please speak in Polish if it's easier. I'll get the English version through my earpiece." },
-        { "speaker": "customer", "text": "Thank you Priya. That helps. My English is fine for everyday, but for the supervisor interview I would like to be sure I am saying exactly what I mean." },
+        { "speaker": "adviser",  "text": "Wojciech, this is Tomasz Kowalski calling. We can speak in Polish or English, whatever is easier. I am here for the supervisor interview prep." },
+        { "speaker": "customer", "text": "Thank you Tomasz. English is fine for everyday, but for the supervisor interview I would like to be sure I am saying exactly what I mean." },
         { "speaker": "adviser",  "text": "Sensible. So, Brent Park Developments. Site Supervisor, twenty-eight days from now. They've shortlisted you. Twenty-eight years on UK sites and a Polish-English fluent supervisor is genuinely rare for them." },
         { "speaker": "customer", "text": "I am ready for this. I want to ask them about safety procedures and the team they have currently. I will not just answer their questions, I will ask my own." },
         { "speaker": "adviser",  "text": "Good, that's exactly the move. One thing. Your CSCS Gold Card top-up has been approved this morning. Free to you. The certificate will arrive by Friday." },

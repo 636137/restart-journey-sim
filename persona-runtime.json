@@ -18,7 +18,7 @@
       "adviser": {
         "name": "Priya Sharma",
         "initials": "PS",
-        "title": "Senior Restart Adviser \u00b7 Stratford",
+        "title": "Senior Restart Adviser \u00b7 Stratford office \u00b7 Logistics specialism",
         "voice_key": "priya"
       },
       "max_navigator": {
@@ -202,10 +202,10 @@
       "barriers_count": 3,
       "preferred_language": "English",
       "adviser": {
-        "name": "Priya Sharma",
-        "initials": "PS",
-        "title": "Senior Restart Adviser \u00b7 Stratford",
-        "voice_key": "priya"
+        "name": "Aisha Khatun",
+        "initials": "AK",
+        "title": "Restart Adviser \u00b7 Lewisham office \u00b7 Returner-after-caring",
+        "voice_key": "aisha"
       },
       "max_navigator": {
         "signals": {
@@ -368,7 +368,7 @@
       "audio": {
         "scenario_dir": "amara",
         "voice_customer": "amara",
-        "voice_adviser": "priya"
+        "voice_adviser": "aisha"
       }
     },
     "wojciech": {
@@ -387,10 +387,10 @@
       "barriers_count": 2,
       "preferred_language": "Polish",
       "adviser": {
-        "name": "Priya Sharma",
-        "initials": "PS",
-        "title": "Senior Restart Adviser \u00b7 Stratford",
-        "voice_key": "priya"
+        "name": "Tomasz Kowalski",
+        "initials": "TK",
+        "title": "Restart Adviser \u00b7 Harlesden office \u00b7 Polish ESOL + Construction",
+        "voice_key": "tomasz_kowalski"
       },
       "max_navigator": {
         "signals": {
@@ -553,7 +553,7 @@
       "audio": {
         "scenario_dir": "wojciech",
         "voice_customer": "wojciech",
-        "voice_adviser": "priya"
+        "voice_adviser": "tomasz_kowalski"
       }
     },
     "tomasz": {
@@ -575,7 +575,7 @@
       "adviser": {
         "name": "Hannah Brennan",
         "initials": "HB",
-        "title": "Senior Restart Adviser \u00b7 Rotherham",
+        "title": "Restart Adviser \u00b7 Sheffield office \u00b7 Mental Health protocol",
         "voice_key": "hannah"
       },
       "max_navigator": {
@@ -761,7 +761,7 @@
       "adviser": {
         "name": "Eleri Davies",
         "initials": "ED",
-        "title": "Senior Restart Adviser \u00b7 Cardiff",
+        "title": "Restart Adviser \u00b7 Cardiff office \u00b7 REP overlap + Welsh schools",
         "voice_key": "eleri"
       },
       "max_navigator": {
@@ -947,7 +947,7 @@
       "adviser": {
         "name": "Karen Mensah",
         "initials": "KM",
-        "title": "Senior Restart Adviser \u00b7 Nottingham",
+        "title": "Restart Adviser \u00b7 Nottingham office \u00b7 Ban-the-Box + HGV pipeline",
         "voice_key": "karen"
       },
       "max_navigator": {

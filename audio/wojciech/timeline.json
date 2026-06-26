@@ -1,38 +1,38 @@
 {
   "scenario": "wojciech",
-  "label": "WOJCIECH \u00d7 PRIYA \u00b7 ON TRACK \u00b7 with Polish translator",
-  "framing": "Wojciech, 52, Polish-speaking site supervisor, ON-TRACK. Live translator on the call. Wants supervisor-level work.",
+  "label": "WOJCIECH \u00d7 TOMASZ KOWALSKI \u00b7 ON TRACK \u00b7 in Polish",
+  "framing": "Wojciech, 52, Polish-speaking site supervisor, ON-TRACK. Paired with Tomasz Kowalski, Polish-speaking adviser at Harlesden. They speak in English on this call (translator nearby) but Tomasz can switch to Polish anytime.",
   "voice_customer": "wojciech",
-  "voice_adviser": "priya",
-  "total_ms": 96769,
+  "voice_adviser": "tomasz_kowalski",
+  "total_ms": 82280,
   "gap_ms": 350,
   "lines": [
     {
       "i": 1,
       "speaker": "adviser",
-      "voice_key": "priya",
-      "text": "Wojciech, hello. Our translator is on the line so please speak in Polish if it's easier. I'll get the English version through my earpiece.",
-      "file": "line_01_adviser_priya.mp3",
-      "duration_ms": 10031,
+      "voice_key": "tomasz_kowalski",
+      "text": "Wojciech, this is Tomasz Kowalski calling. We can speak in Polish or English, whatever is easier. I am here for the supervisor interview prep.",
+      "file": "line_01_adviser_tomasz_kowalski.mp3",
+      "duration_ms": 12445,
       "start_ms": 0
     },
     {
       "i": 2,
       "speaker": "customer",
       "voice_key": "wojciech",
-      "text": "Thank you Priya. That helps. My English is fine for everyday, but for the supervisor interview I would like to be sure I am saying exactly what I mean.",
+      "text": "Thank you Tomasz. English is fine for everyday, but for the supervisor interview I would like to be sure I am saying exactly what I mean.",
       "file": "line_02_customer_wojciech.mp3",
-      "duration_ms": 12956,
-      "start_ms": 10381
+      "duration_ms": 5990,
+      "start_ms": 12795
     },
     {
       "i": 3,
       "speaker": "adviser",
-      "voice_key": "priya",
+      "voice_key": "tomasz_kowalski",
       "text": "Sensible. So, Brent Park Developments. Site Supervisor, twenty-eight days from now. They've shortlisted you. Twenty-eight years on UK sites and a Polish-English fluent supervisor is genuinely rare for them.",
-      "file": "line_03_adviser_priya.mp3",
-      "duration_ms": 18390,
-      "start_ms": 23687
+      "file": "line_03_adviser_tomasz_kowalski.mp3",
+      "duration_ms": 17786,
+      "start_ms": 19135
     },
     {
       "i": 4,
@@ -40,17 +40,17 @@
       "voice_key": "wojciech",
       "text": "I am ready for this. I want to ask them about safety procedures and the team they have currently. I will not just answer their questions, I will ask my own.",
       "file": "line_04_customer_wojciech.mp3",
-      "duration_ms": 13514,
-      "start_ms": 42427
+      "duration_ms": 7709,
+      "start_ms": 37271
     },
     {
       "i": 5,
       "speaker": "adviser",
-      "voice_key": "priya",
+      "voice_key": "tomasz_kowalski",
       "text": "Good, that's exactly the move. One thing. Your CSCS Gold Card top-up has been approved this morning. Free to you. The certificate will arrive by Friday.",
-      "file": "line_05_adviser_priya.mp3",
-      "duration_ms": 11981,
-      "start_ms": 56291
+      "file": "line_05_adviser_tomasz_kowalski.mp3",
+      "duration_ms": 11935,
+      "start_ms": 45330
     },
     {
       "i": 6,
@@ -58,17 +58,17 @@
       "voice_key": "wojciech",
       "text": "Excellent. With the Gold Card the salary band shifts up.",
       "file": "line_06_customer_wojciech.mp3",
-      "duration_ms": 4551,
-      "start_ms": 68622
+      "duration_ms": 2832,
+      "start_ms": 57615
     },
     {
       "i": 7,
       "speaker": "adviser",
-      "voice_key": "priya",
+      "voice_key": "tomasz_kowalski",
       "text": "It does. And travel costs for the interview are covered. The translator will join the interview as well, on the speaker, if you want one for that day. Many candidates say yes for the safety questions specifically.",
-      "file": "line_07_adviser_priya.mp3",
-      "duration_ms": 16811,
-      "start_ms": 73523
+      "file": "line_07_adviser_tomasz_kowalski.mp3",
+      "duration_ms": 17136,
+      "start_ms": 60797
     },
     {
       "i": 8,
@@ -76,8 +76,8 @@
       "voice_key": "wojciech",
       "text": "Yes please. Let us add the translator. I would rather be precise than fast.",
       "file": "line_08_customer_wojciech.mp3",
-      "duration_ms": 6083,
-      "start_ms": 90684
+      "duration_ms": 3993,
+      "start_ms": 78283
     }
   ]
 }

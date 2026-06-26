@@ -4,7 +4,7 @@
   "framing": "Mark, 58, ex-offender, former HGV driver. Karen Mensah is direct, no hoops, lays out the Ban-the-Box pathway and HGV licence reapplication.",
   "voice_customer": "mark",
   "voice_adviser": "karen",
-  "total_ms": 74667,
+  "total_ms": 74203,
   "gap_ms": 350,
   "lines": [
     {
@@ -13,7 +13,7 @@
       "voice_key": "karen",
       "text": "Mark, it's Karen. Quick one for you. Bardon Aggregates have come back. They want you for the yard role with the HGV class C when your licence is reinstated. Twelve-month contract.",
       "file": "line_01_adviser_karen.mp3",
-      "duration_ms": 10077,
+      "duration_ms": 9845,
       "start_ms": 0
     },
     {
@@ -22,8 +22,8 @@
       "voice_key": "mark",
       "text": "They know about my conviction?",
       "file": "line_02_customer_mark.mp3",
-      "duration_ms": 1578,
-      "start_ms": 10427
+      "duration_ms": 1811,
+      "start_ms": 10195
     },
     {
       "i": 3,
@@ -31,8 +31,8 @@
       "voice_key": "karen",
       "text": "They do. Bardon is a Ban-the-Box employer. Your conviction was on the application. They've already taken the decision. The yard supervisor is named Ravi, he wants to meet you next Tuesday.",
       "file": "line_03_adviser_karen.mp3",
-      "duration_ms": 10170,
-      "start_ms": 12355
+      "duration_ms": 11052,
+      "start_ms": 12356
     },
     {
       "i": 4,
@@ -40,8 +40,8 @@
       "voice_key": "mark",
       "text": "Right. And the licence?",
       "file": "line_04_customer_mark.mp3",
-      "duration_ms": 1439,
-      "start_ms": 22875
+      "duration_ms": 1578,
+      "start_ms": 23758
     },
     {
       "i": 5,
@@ -49,8 +49,8 @@
       "voice_key": "karen",
       "text": "DVLA have your reapplication. Class C medical is booked for Thursday at the Lincoln Centre. Restart pays for it. After the medical it's about six weeks for the licence to come back.",
       "file": "line_05_adviser_karen.mp3",
-      "duration_ms": 10170,
-      "start_ms": 24664
+      "duration_ms": 10216,
+      "start_ms": 25686
     },
     {
       "i": 6,
@@ -58,8 +58,8 @@
       "voice_key": "mark",
       "text": "So I take the yard work first, then I'm back on HGV when the licence is back. That's the deal.",
       "file": "line_06_customer_mark.mp3",
-      "duration_ms": 6083,
-      "start_ms": 35184
+      "duration_ms": 5526,
+      "start_ms": 36252
     },
     {
       "i": 7,
@@ -67,8 +67,8 @@
       "voice_key": "karen",
       "text": "That's exactly the deal. The yard is forty hours, twenty-six thousand a year. When you move to HGV in six weeks the rate goes up to thirty-one. Bardon have agreed it in writing.",
       "file": "line_07_adviser_karen.mp3",
-      "duration_ms": 10123,
-      "start_ms": 41617
+      "duration_ms": 10448,
+      "start_ms": 42128
     },
     {
       "i": 8,
@@ -76,8 +76,8 @@
       "voice_key": "mark",
       "text": "Good. Send me the appointment details for Tuesday and I will be there. None of the run-around.",
       "file": "line_08_customer_mark.mp3",
-      "duration_ms": 5015,
-      "start_ms": 52090
+      "duration_ms": 5804,
+      "start_ms": 52926
     },
     {
       "i": 9,
@@ -85,8 +85,8 @@
       "voice_key": "karen",
       "text": "No run-around. Email is in your inbox. One last thing. Universal Credit tapers off as your wages come in, not all at once. We'll do the better-off-in-work numbers with you before the Bardon start date. So you know.",
       "file": "line_09_adviser_karen.mp3",
-      "duration_ms": 13978,
-      "start_ms": 57455
+      "duration_ms": 12306,
+      "start_ms": 59080
     },
     {
       "i": 10,
@@ -94,8 +94,8 @@
       "voice_key": "mark",
       "text": "Sensible. Thanks Karen. I'll see you Tuesday.",
       "file": "line_10_customer_mark.mp3",
-      "duration_ms": 2879,
-      "start_ms": 71783
+      "duration_ms": 2461,
+      "start_ms": 71736
     }
   ]
 }

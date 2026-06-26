@@ -4,7 +4,7 @@
   "framing": "Tomasz, 27, AT-RISK with mental health barriers. Hannah Brennan calls same-day. Warm, slow, no pressure.",
   "voice_customer": "tomasz",
   "voice_adviser": "hannah",
-  "total_ms": 95829,
+  "total_ms": 95736,
   "gap_ms": 350,
   "lines": [
     {
@@ -13,7 +13,7 @@
       "voice_key": "hannah",
       "text": "Tomasz, it's Hannah. I know we weren't scheduled today but I wanted to hear your voice. Have you got a minute?",
       "file": "line_01_adviser_hannah.mp3",
-      "duration_ms": 5990,
+      "duration_ms": 6083,
       "start_ms": 0
     },
     {
@@ -22,8 +22,8 @@
       "voice_key": "tomasz",
       "text": "Yeah. Sorry, I haven't been picking up much this week.",
       "file": "line_02_customer_tomasz.mp3",
-      "duration_ms": 2647,
-      "start_ms": 6340
+      "duration_ms": 2600,
+      "start_ms": 6433
     },
     {
       "i": 3,
@@ -31,8 +31,8 @@
       "voice_key": "hannah",
       "text": "It's alright. How are you actually doing, not the work bit, just generally?",
       "file": "line_03_adviser_hannah.mp3",
-      "duration_ms": 4318,
-      "start_ms": 9337
+      "duration_ms": 4458,
+      "start_ms": 9383
     },
     {
       "i": 4,
@@ -40,8 +40,8 @@
       "voice_key": "tomasz",
       "text": "Not great if I'm honest. I'm not sleeping. The interview stuff has been spinning in my head and I keep thinking I'm going to mess it up and end up back where I was.",
       "file": "line_04_customer_tomasz.mp3",
-      "duration_ms": 8126,
-      "start_ms": 14005
+      "duration_ms": 8080,
+      "start_ms": 14191
     },
     {
       "i": 5,
@@ -49,8 +49,8 @@
       "voice_key": "hannah",
       "text": "Thank you for telling me. That takes guts to say out loud, and none of what you just described means you're failing. It means you're carrying a lot.",
       "file": "line_05_adviser_hannah.mp3",
-      "duration_ms": 8126,
-      "start_ms": 22481
+      "duration_ms": 8173,
+      "start_ms": 22621
     },
     {
       "i": 6,
@@ -58,8 +58,8 @@
       "voice_key": "tomasz",
       "text": "Feels like I'm letting everyone down though.",
       "file": "line_06_customer_tomasz.mp3",
-      "duration_ms": 1950,
-      "start_ms": 30957
+      "duration_ms": 1996,
+      "start_ms": 31144
     },
     {
       "i": 7,
@@ -67,8 +67,8 @@
       "voice_key": "hannah",
       "text": "You are not letting anyone down. Here's what we do today. First, I'm pausing the job-match notifications for two weeks. No more new ones popping up. We're not adding pressure.",
       "file": "line_07_adviser_hannah.mp3",
-      "duration_ms": 10402,
-      "start_ms": 33257
+      "duration_ms": 10123,
+      "start_ms": 33490
     },
     {
       "i": 8,
@@ -76,8 +76,8 @@
       "voice_key": "tomasz",
       "text": "Okay, yeah, that would help.",
       "file": "line_08_customer_tomasz.mp3",
-      "duration_ms": 1486,
-      "start_ms": 44009
+      "duration_ms": 1346,
+      "start_ms": 43963
     },
     {
       "i": 9,
@@ -85,8 +85,8 @@
       "voice_key": "hannah",
       "text": "Second, there's a Maximus service called Access to Work Mental Health Support. It's free, confidential, and a specialist will talk you through the sleep and anxiety side, separately from me. I'd like to refer you today, with your permission.",
       "file": "line_09_adviser_hannah.mp3",
-      "duration_ms": 16161,
-      "start_ms": 45845
+      "duration_ms": 15975,
+      "start_ms": 45659
     },
     {
       "i": 10,
@@ -94,8 +94,8 @@
       "voice_key": "tomasz",
       "text": "It's free, yeah? I haven't got money for therapy.",
       "file": "line_10_customer_tomasz.mp3",
-      "duration_ms": 2739,
-      "start_ms": 62356
+      "duration_ms": 2647,
+      "start_ms": 61984
     },
     {
       "i": 11,
@@ -103,8 +103,8 @@
       "voice_key": "hannah",
       "text": "Completely free, run by the same team I'm in. Nine months of support if you want it, you can stop whenever. Shall I make the call this afternoon?",
       "file": "line_11_adviser_hannah.mp3",
-      "duration_ms": 8591,
-      "start_ms": 65445
+      "duration_ms": 8405,
+      "start_ms": 64981
     },
     {
       "i": 12,
@@ -112,8 +112,8 @@
       "voice_key": "tomasz",
       "text": "Yeah. Yeah, do it. Thanks Hannah.",
       "file": "line_12_customer_tomasz.mp3",
-      "duration_ms": 1857,
-      "start_ms": 74386
+      "duration_ms": 1950,
+      "start_ms": 73736
     },
     {
       "i": 13,
@@ -121,8 +121,8 @@
       "voice_key": "hannah",
       "text": "Last thing. I'm coming off the auto-plan and writing you a smaller one. Three things this week, not ten. We slow it down, we keep the door open, and we keep going. Alright?",
       "file": "line_13_adviser_hannah.mp3",
-      "duration_ms": 10774,
-      "start_ms": 76593
+      "duration_ms": 10727,
+      "start_ms": 76036
     },
     {
       "i": 14,
@@ -130,8 +130,8 @@
       "voice_key": "tomasz",
       "text": "Alright. Thanks for ringing.",
       "file": "line_14_customer_tomasz.mp3",
-      "duration_ms": 1439,
-      "start_ms": 87717
+      "duration_ms": 1578,
+      "start_ms": 87113
     },
     {
       "i": 15,
@@ -139,8 +139,8 @@
       "voice_key": "hannah",
       "text": "Always. I'll text you when the referral is in. Get some food and try to sleep tonight, Tomasz. We've got this.",
       "file": "line_15_adviser_hannah.mp3",
-      "duration_ms": 6315,
-      "start_ms": 89506
+      "duration_ms": 6687,
+      "start_ms": 89041
     }
   ]
 }
