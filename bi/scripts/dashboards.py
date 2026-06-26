@@ -203,7 +203,41 @@ def _donut(vid, ds, title, dim_col):
     }}
 
 
-def _line_over_time(vid, ds, title, time_col, y_col, y_agg="COUNT", granularity="MONTH"):
+def _line_over_time(vid, ds, title, time_col, y_col, y_agg="COUNT", granularity="MONTH", color_col=None, type_="AREA"):
+    fw = {"LineChartAggregatedFieldWells": {
+        "Category": [{"DateDimensionField": {
+            "FieldId": f"{vid}-x",
+            "Column": {"DataSetIdentifier": ds, "ColumnName": time_col},
+            "DateGranularity": granularity,
+        }}],
+        "Values": [{"NumericalMeasureField": {
+            "FieldId": f"{vid}-y",
+            "Column": {"DataSetIdentifier": ds, "ColumnName": y_col},
+            "AggregationFunction": {"SimpleNumericalAggregation": y_agg},
+        }} if y_agg in ("SUM","AVERAGE","MIN","MAX") else {"CategoricalMeasureField": {
+            "FieldId": f"{vid}-y",
+            "Column": {"DataSetIdentifier": ds, "ColumnName": y_col},
+            "AggregationFunction": "COUNT",
+        }}],
+        "Colors": [],
+    }}
+    if color_col:
+        fw["LineChartAggregatedFieldWells"]["Colors"] = [{"CategoricalDimensionField": {
+            "FieldId": f"{vid}-c",
+            "Column": {"DataSetIdentifier": ds, "ColumnName": color_col},
+        }}]
+    return {"LineChartVisual": {
+        "VisualId": vid,
+        "Title": {"Visibility": "VISIBLE", "FormatText": {"PlainText": title}},
+        "ChartConfiguration": {
+            "FieldWells": fw,
+            "Type": type_,
+            "DataLabels": {"Visibility": "HIDDEN"},
+        },
+    }}
+
+
+def _small_multiples_line(vid, ds, title, time_col, y_col, panels_col, y_agg="AVERAGE"):
     return {"LineChartVisual": {
         "VisualId": vid,
         "Title": {"Visibility": "VISIBLE", "FormatText": {"PlainText": title}},
@@ -212,21 +246,63 @@ def _line_over_time(vid, ds, title, time_col, y_col, y_agg="COUNT", granularity=
                 "Category": [{"DateDimensionField": {
                     "FieldId": f"{vid}-x",
                     "Column": {"DataSetIdentifier": ds, "ColumnName": time_col},
-                    "DateGranularity": granularity,
+                    "DateGranularity": "MONTH",
                 }}],
                 "Values": [{"NumericalMeasureField": {
                     "FieldId": f"{vid}-y",
                     "Column": {"DataSetIdentifier": ds, "ColumnName": y_col},
                     "AggregationFunction": {"SimpleNumericalAggregation": y_agg},
-                }} if y_agg in ("SUM","AVERAGE","MIN","MAX") else {"CategoricalMeasureField": {
-                    "FieldId": f"{vid}-y",
-                    "Column": {"DataSetIdentifier": ds, "ColumnName": y_col},
-                    "AggregationFunction": "COUNT",
                 }}],
-                "Colors": [],
+                "SmallMultiples": [{"CategoricalDimensionField": {
+                    "FieldId": f"{vid}-sm",
+                    "Column": {"DataSetIdentifier": ds, "ColumnName": panels_col},
+                }}],
             }},
-            "Type": "AREA",
-            "DataLabels": {"Visibility": "HIDDEN"},
+            "Type": "LINE",
+        },
+    }}
+
+
+def _treemap(vid, ds, title, group_col, size_col=None, size_agg="COUNT"):
+    fw = {"TreeMapAggregatedFieldWells": {
+        "Groups": [{"CategoricalDimensionField":{"FieldId":f"{vid}-g","Column":{"DataSetIdentifier":ds,"ColumnName":group_col}}}],
+    }}
+    if size_col and size_agg != "COUNT":
+        fw["TreeMapAggregatedFieldWells"]["Sizes"] = [{"NumericalMeasureField":{"FieldId":f"{vid}-s","Column":{"DataSetIdentifier":ds,"ColumnName":size_col},"AggregationFunction":{"SimpleNumericalAggregation":size_agg}}}]
+    else:
+        fw["TreeMapAggregatedFieldWells"]["Sizes"] = [{"CategoricalMeasureField":{"FieldId":f"{vid}-s","Column":{"DataSetIdentifier":ds,"ColumnName":group_col},"AggregationFunction":"COUNT"}}]
+    return {"TreeMapVisual": {
+        "VisualId": vid,
+        "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":title}},
+        "ChartConfiguration": {
+            "FieldWells": fw,
+            "DataLabels": {"Visibility":"VISIBLE"},
+        },
+    }}
+
+
+def _waterfall(vid, ds, title, cat_col, val_col, val_agg="SUM"):
+    return {"WaterfallVisual": {
+        "VisualId": vid,
+        "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":title}},
+        "ChartConfiguration": {
+            "FieldWells": {"WaterfallChartAggregatedFieldWells": {
+                "Categories": [{"CategoricalDimensionField":{"FieldId":f"{vid}-x","Column":{"DataSetIdentifier":ds,"ColumnName":cat_col}}}],
+                "Values": [{"NumericalMeasureField":{"FieldId":f"{vid}-y","Column":{"DataSetIdentifier":ds,"ColumnName":val_col},"AggregationFunction":{"SimpleNumericalAggregation":val_agg}}}],
+            }},
+        },
+    }}
+
+
+def _radar(vid, ds, title, cat_col, val_col, val_agg="AVERAGE"):
+    return {"RadarChartVisual": {
+        "VisualId": vid,
+        "Title": {"Visibility":"VISIBLE","FormatText":{"PlainText":title}},
+        "ChartConfiguration": {
+            "FieldWells": {"RadarChartAggregatedFieldWells": {
+                "Category": [{"CategoricalDimensionField":{"FieldId":f"{vid}-c","Column":{"DataSetIdentifier":ds,"ColumnName":cat_col}}}],
+                "Values": [{"NumericalMeasureField":{"FieldId":f"{vid}-v","Column":{"DataSetIdentifier":ds,"ColumnName":val_col},"AggregationFunction":{"SimpleNumericalAggregation":val_agg}}}],
+            }},
         },
     }}
 
@@ -327,15 +403,20 @@ def _text(vid, html):
 def executive_definition(account, region):
     tables = ["journeys","outcomes_kpis","customers","router_scores","advisers"]
     visuals = [
-        _kpi("k1", "journeys", "Total journeys", "sustainability_pct", "COUNT", color="#5B2D8E", subtitle="Active across 5 UK regions", trend_col="started_date"),
-        _kpi("k2", "outcomes_kpis", "Avg days to placement", "avg_days_to_placement", "AVERAGE", color="#00A39A", subtitle="Cohort median: 92 days"),
-        _kpi("k3", "outcomes_kpis", "Placement rate %", "placement_rate_pct", "AVERAGE", color="#42206A", subtitle="Target: 68%"),
-        _kpi("k4", "outcomes_kpis", "Avg sustainability %", "avg_sustainability_pct", "AVERAGE", color="#007E77", subtitle="6-month in-work retention"),
+        # KPIs all have monthly sparkline trends → historical + current together
+        _kpi("k1", "journeys",      "Total journeys",         "sustainability_pct",     "COUNT",   color="#5B2D8E", subtitle="Active across 5 UK regions",   trend_col="started_date"),
+        _kpi("k2", "outcomes_kpis", "Avg days to placement",  "avg_days_to_placement",  "AVERAGE", color="#00A39A", subtitle="Cohort median: 92 days",        trend_col="month"),
+        _kpi("k3", "outcomes_kpis", "Placement rate %",        "placement_rate_pct",     "AVERAGE", color="#42206A", subtitle="Target: 68%",                   trend_col="month"),
+        _kpi("k4", "outcomes_kpis", "Avg sustainability %",    "avg_sustainability_pct", "AVERAGE", color="#007E77", subtitle="6-month in-work retention",     trend_col="month"),
+        # Donuts for outcome + scenario distribution
         _donut("d1", "journeys", "Outcomes mix · journeys by final status", "outcome"),
-        _bar_count("b1", "journeys", "Journeys by delivery region", "region_key"),
-        _line_over_time("l1", "journeys", "Monthly journey starts · trend", "started_date", "journey_id", "COUNT"),
+        _donut("d2", "journeys", "Max Router scenario band distribution",   "scenario_band"),
+        # Small-multiples line → one panel per region, sustainability over time
+        _small_multiples_line("sm1", "outcomes_kpis", "Sustainability % by region · monthly trend", "month", "avg_sustainability_pct", "region_key", "AVERAGE"),
+        # Heatmap region × month sustainability
         _heatmap("h1", "outcomes_kpis", "Sustainability % heatmap · region × month", "region_key", "month", "avg_sustainability_pct"),
-        _donut("d2", "journeys", "Max Router scenario band distribution", "scenario_band"),
+        # Treemap of journey volume by region (replaces dull horizontal bar)
+        _treemap("t1", "journeys", "Active journey volume by region", "region_key"),
     ]
     return _wrap(account, region, tables, visuals)
 
@@ -343,15 +424,21 @@ def executive_definition(account, region):
 def adviser_definition(account, region):
     tables = ["advisers","outcomes_kpis","journeys"]
     visuals = [
-        _kpi("k1", "advisers", "Active advisers", "caseload_current", "COUNT", color="#5B2D8E", subtitle="Across 5 regions"),
-        _kpi("k2", "advisers", "Customer satisfaction", "customer_satisfaction", "AVERAGE", color="#00A39A", subtitle="Out of 5.00"),
-        _kpi("k3", "advisers", "Avg caseload", "caseload_current", "AVERAGE", color="#42206A", subtitle="Target: 50"),
-        _kpi("k4", "advisers", "Avg tenure", "years_at_maximus", "AVERAGE", color="#007E77", subtitle="Years at Maximus"),
+        # KPI strip with monthly trend behind each
+        _kpi("k1", "advisers",       "Active advisers",      "caseload_current",      "COUNT",   color="#5B2D8E", subtitle="Across 5 regions"),
+        _kpi("k2", "advisers",       "Customer satisfaction","customer_satisfaction", "AVERAGE", color="#00A39A", subtitle="Out of 5.00"),
+        _kpi("k3", "outcomes_kpis",  "Avg caseload",         "journeys",              "AVERAGE", color="#42206A", subtitle="Target: 50",                  trend_col="month"),
+        _kpi("k4", "outcomes_kpis",  "Avg placements / mo",  "placements",            "AVERAGE", color="#007E77", subtitle="Per adviser-month",          trend_col="month"),
+        # Top-N table (keeps; bar would be ugly with 247 advisers)
         _table_top("t1", "outcomes_kpis", "Top 12 advisers · total placements", "adviser_id", "placements", "SUM", limit=12),
-        _bar_num("b1", "outcomes_kpis", "Sustainability % by region · 6mo retention", "region_key", "avg_sustainability_pct", "AVERAGE", "HORIZONTAL"),
-        _bar_num("b2", "outcomes_kpis", "Days-to-placement by region · lower is better", "region_key", "avg_days_to_placement", "AVERAGE", "HORIZONTAL"),
-        _scatter("s1", "advisers", "Adviser satisfaction × caseload · spot overloaded advisers", "caseload_current", "customer_satisfaction"),
-        _bar_count("b3", "advisers", "Adviser headcount by region", "region_key"),
+        # Scatter: real signal here — satisfaction vs caseload, no bar substitute
+        _scatter("s1", "advisers", "Satisfaction × caseload · spot overloaded advisers", "caseload_current", "customer_satisfaction"),
+        # Small-multiples: each region's monthly sustainability
+        _small_multiples_line("sm1", "outcomes_kpis", "Sustainability by region · monthly small-multiples", "month", "avg_sustainability_pct", "region_key", "AVERAGE"),
+        # Radar: per-region average across 4 KPIs (just placements here; QS radars are per-measure)
+        _radar("r1", "outcomes_kpis", "Placements by region · radar", "region_key", "placements", "SUM"),
+        # Treemap: where the network is — headcount tiles
+        _treemap("tm1", "advisers", "Adviser headcount · region treemap", "region_key"),
     ]
     return _wrap(account, region, tables, visuals)
 
@@ -359,16 +446,22 @@ def adviser_definition(account, region):
 def customer_definition(account, region):
     tables = ["customers","journeys","journey_stages","router_scores","advisers"]
     visuals = [
-        _kpi("k1", "customers", "Customers", "age", "COUNT", color="#5B2D8E", subtitle="Currently in Restart caseload"),
-        _kpi("k2", "router_scores", "Network Max Router score", "score", "AVERAGE", color="#00A39A", subtitle="0-100 deterministic"),
-        _kpi("k3", "customers", "Avg customer age", "age", "AVERAGE", color="#42206A", subtitle="Range: 19-64"),
-        _kpi("k4", "customers", "Avg UC duration", "uc_months_at_start", "AVERAGE", color="#007E77", subtitle="Months on UC at start"),
-        _funnel("f1", "journey_stages", "12-stage Restart journey funnel · stage completion", "stage_key"),
+        _kpi("k1", "customers",     "Customers",                "age",                "COUNT",   color="#5B2D8E", subtitle="In Restart caseload"),
+        _kpi("k2", "router_scores", "Network Max Router score", "score",              "AVERAGE", color="#00A39A", subtitle="0-100 deterministic", trend_col="score_date"),
+        _kpi("k3", "customers",     "Avg customer age",         "age",                "AVERAGE", color="#42206A", subtitle="Range: 19-64"),
+        _kpi("k4", "customers",     "Avg UC duration",          "uc_months_at_start", "AVERAGE", color="#007E77", subtitle="Months on UC at start"),
+        # Funnel = the right shape for stage completion
+        _funnel("f1", "journey_stages", "12-stage journey funnel · completion at each gate", "stage_key"),
+        # Donut for band distribution
         _donut("d1", "router_scores", "Max Router band distribution", "band"),
-        _gauge("g1", "router_scores", "Network engagement score · weekly", "score", "AVERAGE"),
-        _bar_count("b1", "customers", "Customer headcount by region", "region_key"),
-        _bar_num("b2", "journeys", "Sustainability % by Max Router scenario", "scenario_band", "sustainability_pct", "AVERAGE"),
-        _bar_num("b3", "journeys", "Open barriers by scenario · lower is better", "scenario_band", "open_barriers", "AVERAGE"),
+        # Gauge for the network score
+        _gauge("g1", "router_scores", "Network engagement gauge · weekly", "score", "AVERAGE"),
+        # Treemap of customers by region (replaces dull bar)
+        _treemap("t1", "customers", "Customer headcount · region treemap", "region_key"),
+        # Heatmap of barrier prevalence by region (much better than two bars)
+        _heatmap("h1", "journeys", "Open barriers · scenario × region heatmap", "scenario_band", "region_key", "open_barriers"),
+        # Sustainability trend over time, colored by scenario band
+        _line_over_time("l1", "journeys", "Sustainability % over time · by scenario band", "started_date", "sustainability_pct", "AVERAGE", "MONTH", color_col="scenario_band", type_="LINE"),
     ]
     return _wrap(account, region, tables, visuals)
 
