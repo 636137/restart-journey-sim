@@ -1574,7 +1574,7 @@ let matchRunning = false;
 let matchRainTimer = null;
 
 function startMatchAnim(){
-  if(sessionStorage.getItem('matchPlayed')==='1'){ return; }
+  // Plays every time sign-in succeeds. No session guard.
   const ov = document.getElementById('matchOverlay');
   if(!ov) return;
   matchRunning = true;
@@ -1684,7 +1684,6 @@ function scheduleReveal(){
 function endMatchAnim(){
   if(!matchRunning) return;
   matchRunning = false;
-  sessionStorage.setItem('matchPlayed','1');
   if(matchRainTimer) clearInterval(matchRainTimer);
   const ov = document.getElementById('matchOverlay');
   ov.classList.add('fading');
