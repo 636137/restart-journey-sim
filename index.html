@@ -238,6 +238,49 @@ body {
   .training-title { font-size:14px; letter-spacing:3px; }
 }
 
+/* ============ SURVIVAL CURVE OVERLAY ============ */
+.survival-overlay { position:fixed; inset:0; z-index:9180; background:linear-gradient(180deg,#000 0%,#001a14 100%); color:#00ff88; font-family:'SF Mono',Menlo,monospace; overflow:hidden; opacity:0; transition:opacity .45s; pointer-events:none; }
+.survival-overlay.show { opacity:1; pointer-events:auto; }
+.survival-overlay.fading { opacity:0; }
+.survival-canvas-bg { position:absolute; inset:0; }
+.survival-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; padding:40px 20px; gap:14px; z-index:2; overflow-y:auto; }
+.survival-content::-webkit-scrollbar{display:none;}
+.survival-badge { font-size:10px; letter-spacing:3px; padding:5px 12px; border-radius:18px; background:rgba(0,255,136,0.1); border:1px solid #00ff88; color:#00ff88; }
+.survival-title { font-size:18px; letter-spacing:5px; font-weight:700; text-shadow:0 0 12px rgba(0,255,136,0.5); }
+.survival-sub { font-size:11px; letter-spacing:3px; color:rgba(0,255,136,0.55); }
+.survival-card { background:rgba(0,0,0,0.55); border:1px solid rgba(0,255,136,0.35); border-radius:14px; padding:16px 18px; width:100%; max-width:680px; }
+.survival-chart-wrap { position:relative; height:240px; margin-top:8px; }
+.survival-chart-wrap canvas { width:100%; height:100%; display:block; }
+.survival-legend { display:flex; gap:14px; font-size:11.5px; margin-top:8px; }
+.survival-legend .dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:4px; vertical-align:middle; }
+.survival-stats { display:grid; grid-template-columns: repeat(3,1fr); gap:10px; margin-top:12px; }
+.survival-stat { background:rgba(0,255,136,0.04); border:1px solid rgba(0,255,136,0.2); border-radius:10px; padding:9px 12px; }
+.survival-stat .lbl { font-size:10px; letter-spacing:2px; color:rgba(0,255,136,0.6); }
+.survival-stat .val { font-size:22px; font-weight:700; color:#00ff88; }
+.survival-cta-row { display:flex; gap:10px; }
+.survival-cta { background:#00ff88; color:#000; border:none; border-radius:8px; padding:10px 22px; font-family:inherit; font-size:12px; letter-spacing:2px; cursor:pointer; font-weight:700; }
+.survival-cta:hover{filter:brightness(1.08);}
+.survival-cta.ghost{background:transparent;color:#00ff88;border:1px solid #00ff88;font-weight:500;}
+
+/* ============ STATE TRANSITION + SHAP MINI-PANELS ============ */
+.transitions-card { background:rgba(0,0,0,0.55); border:1px solid rgba(0,255,136,0.3); border-radius:14px; padding:14px 16px; max-width:680px; width:100%; margin-top:10px; }
+.transitions-grid { display:grid; grid-template-columns: 90px repeat(7, 1fr); gap:2px; font-size:10.5px; margin-top:8px; }
+.transitions-grid .corner { background:transparent; }
+.transitions-grid .colhead, .transitions-grid .rowhead { background:rgba(0,255,136,0.05); padding:5px 4px; text-align:center; color:rgba(0,255,136,0.85); font-weight:700; letter-spacing:1px; }
+.transitions-grid .rowhead { text-align:right; padding:5px 8px; font-size:11px; }
+.transitions-grid .cell { padding:5px 4px; text-align:center; color:#fff; font-variant-numeric:tabular-nums; border-radius:3px; }
+
+.shap-card { background:rgba(0,0,0,0.55); border:1px solid rgba(0,255,136,0.3); border-radius:14px; padding:14px 16px; max-width:680px; width:100%; margin-top:10px; }
+.shap-row { display:flex; align-items:center; gap:10px; padding:5px 0; font-size:12px; border-bottom:1px solid rgba(0,255,136,0.08); }
+.shap-row:last-child{border-bottom:none;}
+.shap-bar { flex:1; height:6px; background:rgba(255,255,255,0.05); border-radius:3px; overflow:hidden; position:relative; }
+.shap-bar .fill { position:absolute; top:0; bottom:0; left:50%; }
+.shap-bar .fill.pos { background:#00ff88; }
+.shap-bar .fill.neg { background:#ff453a; left:auto; right:50%; }
+.shap-label { width:165px; color:rgba(255,255,255,0.85); font-size:11.5px; }
+.shap-val { width:60px; text-align:right; font-size:11px; color:#00ff88; font-variant-numeric:tabular-nums; }
+.shap-val.neg { color:#ff453a; }
+
 /* ============ PERSONA PICKER ============ */
 .persona-overlay { position:fixed; inset:0; z-index:9050; background:linear-gradient(135deg,#42206a 0%,#5b2d8e 50%,#007e77 100%); display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity .4s; }
 .persona-overlay.show { opacity:1; pointer-events:auto; }
@@ -673,6 +716,39 @@ body {
   </div>
 </div>
 
+<!-- SURVIVAL CURVE OVERLAY -->
+<div class="survival-overlay" id="survivalOverlay" aria-hidden="true">
+  <canvas class="survival-canvas-bg" id="survivalBg"></canvas>
+  <div class="survival-content">
+    <div class="survival-badge">SURVIVAL ANALYSIS · COX-STYLE · DETERMINISTIC</div>
+    <div class="survival-title">TIME-TO-PLACEMENT FORECAST</div>
+    <div class="survival-sub" id="survivalSub">DANIEL × PRIYA · WEEKLY HAZARD CONDITIONED ON CURRENT FEATURES</div>
+    <div class="survival-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:1.5px;color:rgba(0,255,136,0.7);">
+        <span>P(STILL UNPLACED) OVER 24 WEEKS</span>
+        <span id="survivalMeta">cohort: stratford-restart-2026</span>
+      </div>
+      <div class="survival-chart-wrap"><canvas id="survivalChart"></canvas></div>
+      <div class="survival-legend">
+        <span><span class="dot" style="background:#00ff88;"></span>This customer</span>
+        <span><span class="dot" style="background:rgba(255,255,255,0.5);"></span>Cohort baseline</span>
+      </div>
+      <div class="survival-stats">
+        <div class="survival-stat"><div class="lbl">P50</div><div class="val" id="statP50">—</div></div>
+        <div class="survival-stat"><div class="lbl">P10</div><div class="val" id="statP10">—</div></div>
+        <div class="survival-stat"><div class="lbl">P90</div><div class="val" id="statP90">—</div></div>
+      </div>
+    </div>
+    <div class="shap-card">
+      <div style="font-size:11px;letter-spacing:1.5px;color:rgba(0,255,136,0.7);margin-bottom:8px;">TOP DRIVERS OF THIS FORECAST · FEATURE CONTRIBUTIONS</div>
+      <div id="survivalShap"></div>
+    </div>
+    <div class="survival-cta-row">
+      <button class="survival-cta" type="button" id="survivalAck">CONTINUE ▸</button>
+    </div>
+  </div>
+</div>
+
 <!-- PERSONA PICKER OVERLAY -->
 <div class="persona-overlay" id="personaOverlay" aria-hidden="true">
   <div class="persona-card-wrap">
@@ -756,6 +832,14 @@ body {
       <h4><span class="pulse"></span><span id="routerActionTitle">RECOMMENDED NEXT ACTION</span></h4>
       <div class="head" id="routerActionHead"></div>
       <ol class="router-steps" id="routerActionSteps"></ol>
+    </div>
+    <div class="shap-card" id="routerShapCard" style="display:none;">
+      <div style="font-size:11px;letter-spacing:1.5px;color:rgba(0,255,136,0.7);margin-bottom:8px;">WHY THIS SCORE · FEATURE CONTRIBUTIONS</div>
+      <div id="routerShap"></div>
+    </div>
+    <div class="transitions-card" id="routerTransitionsCard" style="display:none;">
+      <div style="font-size:11px;letter-spacing:1.5px;color:rgba(0,255,136,0.7);">NEXT-4-WEEK STATE TRANSITIONS · LEARNED FROM 10,287 PRIOR JOURNEYS</div>
+      <div class="transitions-grid" id="routerTransitions"></div>
     </div>
     <div class="router-cta-row" id="routerCtaRow" style="display:none;">
       <button class="router-cta primary" type="button" id="routerAck">ACKNOWLEDGE &amp; CONTINUE ▸</button>
@@ -1347,6 +1431,11 @@ function fireStage(i){
     trainingOpened = false;
     setTimeout(openTrainingUpdate, 4200);
   }
+  // After the diagnostic appointment is booked, show the survival forecast
+  if(s.id === 'diagnostic'){
+    survivalOpened = false;
+    setTimeout(openSurvivalOverlay, 5500);
+  }
 
   // build banner
   const icon = ICONS[s.channel] || ICONS.system;
@@ -1667,6 +1756,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     showToast('Confirmed. Travel voucher sent. See you at the office.');
     closeVisitOverlay();
   });
+  const survivalAck = document.getElementById('survivalAck');
+  if(survivalAck) survivalAck.addEventListener('click', closeSurvivalOverlay);
   const visitAddTranslator = document.getElementById('visitAddTranslator');
   if(visitAddTranslator) visitAddTranslator.addEventListener('click', ()=>{
     showToast('Translator added to your meeting. Priya will see this when she arrives.');
@@ -2396,7 +2487,260 @@ function routerShowAction(scenario, score, bandEl){
     li.innerHTML = '<span class="num">'+(i+1)+'</span><span>'+s+'</span>';
     ol.appendChild(li);
   });
+  // Render SHAP-style contributors + state-transition row for this band
+  renderRouterShap(scenario);
+  renderRouterTransitions(bandKey);
   document.getElementById('routerCtaRow').style.display='flex';
+}
+
+const ROUTER_SHAP = {
+  ontrack:  [
+    {label:"SMS reply rate · 92%", val:+18.4, polarity:"pos"},
+    {label:"Sessions attended · 3/3", val:+15.7, polarity:"pos"},
+    {label:"Action plan · complete", val:+13.5, polarity:"pos"},
+    {label:"CV progress · 90%", val:+9.8, polarity:"pos"},
+    {label:"Open barriers · 0", val:0, polarity:"pos"},
+  ],
+  drifting: [
+    {label:"Sessions attended · 2/3", val:+9.3, polarity:"pos"},
+    {label:"Push opens · 48%", val:-6.2, polarity:"neg"},
+    {label:"Open barriers · 2", val:-8.0, polarity:"neg"},
+    {label:"Action plan · 1/3 done", val:-10.4, polarity:"neg"},
+    {label:"SMS reply · 55%", val:-3.9, polarity:"neg"},
+  ],
+  atrisk:   [
+    {label:"Open barriers · 4", val:-21.6, polarity:"neg"},
+    {label:"SMS reply · 28%", val:-14.7, polarity:"neg"},
+    {label:"Push opens · 22%", val:-9.5, polarity:"neg"},
+    {label:"Sessions attended · 1/3", val:-8.2, polarity:"neg"},
+    {label:"Action plan · 0/3 done", val:-12.0, polarity:"neg"},
+  ],
+};
+
+function renderRouterShap(scenario){
+  const wrap = document.getElementById('routerShap');
+  const card = document.getElementById('routerShapCard');
+  if(!wrap || !card) return;
+  card.style.display = 'block';
+  wrap.innerHTML = '';
+  const items = ROUTER_SHAP[scenario.name === 'ON TRACK' ? 'ontrack' : scenario.name==='DRIFTING' ? 'drifting' : 'atrisk'] || ROUTER_SHAP.ontrack;
+  items.forEach(it=>{
+    const row=document.createElement('div'); row.className='shap-row';
+    const cls = it.polarity==='pos' ? 'pos' : 'neg';
+    const widthPct = Math.min(45, Math.abs(it.val) * 2);
+    const fill = it.polarity==='pos'
+      ? `<div class="fill pos" style="width:${widthPct}%"></div>`
+      : `<div class="fill neg" style="width:${widthPct}%"></div>`;
+    row.innerHTML = `<span class="shap-label">${it.label}</span><div class="shap-bar">${fill}</div><span class="shap-val ${cls}">${it.val>=0?'+':''}${it.val.toFixed(1)}</span>`;
+    wrap.appendChild(row);
+  });
+}
+
+const ROUTER_TRANSITIONS = {
+  good: {
+    "Start":       [0.05, 0.80, 0.05, 0.03, 0.02, 0.03, 0.02],
+    "Progressing": [0.00, 0.72, 0.06, 0.04, 0.03, 0.13, 0.02],
+    "Paused":      [0.00, 0.55, 0.30, 0.06, 0.04, 0.03, 0.02],
+    "Stalled":     [0.00, 0.42, 0.18, 0.25, 0.08, 0.04, 0.03],
+    "Regressing":  [0.00, 0.28, 0.18, 0.20, 0.22, 0.06, 0.06],
+    "Success":     [0,0,0,0,0,1.0,0],
+    "Failure":     [0,0,0,0,0,0,1.0],
+  },
+  warn: {
+    "Start":       [0.10, 0.50, 0.20, 0.10, 0.05, 0.02, 0.03],
+    "Progressing": [0.00, 0.45, 0.20, 0.15, 0.08, 0.08, 0.04],
+    "Paused":      [0.00, 0.30, 0.40, 0.16, 0.07, 0.02, 0.05],
+    "Stalled":     [0.00, 0.18, 0.22, 0.38, 0.14, 0.02, 0.06],
+    "Regressing":  [0.00, 0.12, 0.18, 0.22, 0.30, 0.04, 0.14],
+    "Success":     [0,0,0,0,0,1.0,0],
+    "Failure":     [0,0,0,0,0,0,1.0],
+  },
+  risk: {
+    "Start":       [0.18, 0.22, 0.20, 0.20, 0.10, 0.02, 0.08],
+    "Progressing": [0.00, 0.25, 0.22, 0.25, 0.15, 0.05, 0.08],
+    "Paused":      [0.00, 0.15, 0.30, 0.25, 0.15, 0.01, 0.14],
+    "Stalled":     [0.00, 0.08, 0.18, 0.42, 0.20, 0.01, 0.11],
+    "Regressing":  [0.00, 0.05, 0.12, 0.25, 0.32, 0.01, 0.25],
+    "Success":     [0,0,0,0,0,1.0,0],
+    "Failure":     [0,0,0,0,0,0,1.0],
+  },
+};
+
+function renderRouterTransitions(bandKey){
+  const grid = document.getElementById('routerTransitions');
+  const card = document.getElementById('routerTransitionsCard');
+  if(!grid || !card) return;
+  card.style.display = 'block';
+  const cols = ["Start","Progress","Paused","Stalled","Regress","Success","Failure"];
+  const mat = ROUTER_TRANSITIONS[bandKey] || ROUTER_TRANSITIONS.good;
+  grid.innerHTML = '';
+  // header row
+  const corner = document.createElement('div'); corner.className='corner'; grid.appendChild(corner);
+  cols.forEach(c=>{ const h=document.createElement('div'); h.className='colhead'; h.textContent=c; grid.appendChild(h); });
+  // rows
+  Object.keys(mat).forEach(rowName=>{
+    const rh=document.createElement('div'); rh.className='rowhead'; rh.textContent=rowName; grid.appendChild(rh);
+    mat[rowName].forEach(p=>{
+      const cell=document.createElement('div'); cell.className='cell';
+      // Color by intensity
+      const intensity = Math.min(1, p*1.6);
+      cell.style.background = `rgba(0,255,136,${intensity*0.55})`;
+      cell.textContent = (p*100).toFixed(0)+'%';
+      grid.appendChild(cell);
+    });
+  });
+}
+
+/* ===================== SURVIVAL CURVE OVERLAY =====================
+   Opens after the diagnostic appointment is booked. Shows a Cox-style
+   weekly hazard curve for this customer's time-to-placement.
+==================================================================*/
+
+const SURVIVAL_PROFILES = {
+  ontrack:  { weeklyHazard: 0.092, p10:3, p50:8,  p90:18, label:"DANIEL × PRIYA · ON-TRACK COHORT" },
+  drifting: { weeklyHazard: 0.052, p10:6, p50:14, p90:30, label:"AMARA × PRIYA · DRIFTING COHORT"  },
+  atrisk:   { weeklyHazard: 0.025, p10:14,p50:32, p90:60, label:"TOMASZ × HANNAH · AT-RISK COHORT" },
+};
+
+let survivalOpened = false;
+function openSurvivalOverlay(){
+  if(survivalOpened) return;
+  survivalOpened = true;
+  const ov = document.getElementById('survivalOverlay');
+  ov.setAttribute('aria-hidden','false');
+  ov.classList.add('show');
+  const seed = sessionStorage.getItem('routerSeed') || 'ontrack';
+  const p = SURVIVAL_PROFILES[seed] || SURVIVAL_PROFILES.ontrack;
+  document.getElementById('survivalSub').textContent = p.label;
+  document.getElementById('statP10').textContent = p.p10 + ' wk';
+  document.getElementById('statP50').textContent = p.p50 + ' wk';
+  document.getElementById('statP90').textContent = p.p90 + ' wk';
+  drawSurvivalChart(p.weeklyHazard);
+  startSurvivalRain();
+  renderSurvivalShap(seed);
+}
+
+function startSurvivalRain(){
+  const c = document.getElementById('survivalBg');
+  const ctx = c.getContext('2d');
+  function resize(){ c.width=window.innerWidth; c.height=window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  const glyphs = 'τλhStPF01';
+  const fontSize = 14;
+  const cols = Math.ceil(c.width/fontSize);
+  const drops = new Array(cols).fill(0).map(()=>Math.random()*-50);
+  ctx.font = fontSize+'px monospace';
+  survivalRainTimer = setInterval(()=>{
+    ctx.fillStyle = 'rgba(0,0,0,0.10)';
+    ctx.fillRect(0,0,c.width,c.height);
+    for(let i=0;i<drops.length;i++){
+      const ch = glyphs.charAt(Math.floor(Math.random()*glyphs.length));
+      ctx.fillStyle = Math.random()>0.96 ? '#ccffe5' : 'rgba(0,255,136,0.35)';
+      ctx.fillText(ch, i*fontSize, drops[i]*fontSize);
+      if(drops[i]*fontSize > c.height && Math.random()>0.975) drops[i]=0;
+      drops[i]++;
+    }
+  }, 65);
+}
+let survivalRainTimer = null;
+
+function drawSurvivalChart(weeklyHazard){
+  const canvas = document.getElementById('survivalChart');
+  const dpr = Math.max(1, window.devicePixelRatio||1);
+  function sz(){ canvas.width = canvas.clientWidth*dpr; canvas.height = canvas.clientHeight*dpr; canvas.getContext('2d').scale(dpr,dpr); }
+  sz();
+  const ctx = canvas.getContext('2d');
+  const W = canvas.clientWidth, H = canvas.clientHeight;
+  ctx.clearRect(0,0,W,H);
+  // grid
+  ctx.strokeStyle = 'rgba(0,255,136,0.08)';
+  ctx.lineWidth = 1;
+  for(let i=0;i<=4;i++){ ctx.beginPath(); ctx.moveTo(40, H*i/4); ctx.lineTo(W-10, H*i/4); ctx.stroke(); }
+  // y axis labels
+  ctx.fillStyle = 'rgba(0,255,136,0.6)';
+  ctx.font = '10px monospace';
+  [100,75,50,25,0].forEach((v,i)=>{ ctx.fillText(v+'%', 6, H*i/4 + 4); });
+  // x axis labels
+  const weeks = [1,2,4,8,12,16,20,24];
+  weeks.forEach((w,i)=>{
+    const x = 40 + (W-50) * i/(weeks.length-1);
+    ctx.fillText('w'+w, x-8, H-4);
+  });
+  // Cohort baseline (lighter)
+  function plotCurve(h, color, alpha){
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    weeks.forEach((w,i)=>{
+      const s = Math.pow(1-h, w);
+      const x = 40 + (W-50) * i/(weeks.length-1);
+      const y = H - (s * H * 0.95) - 12;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+  plotCurve(0.045, 'rgba(255,255,255,0.5)', 0.65); // cohort baseline
+  plotCurve(weeklyHazard, '#00ff88', 1.0);
+  // Marker dots for this customer
+  ctx.fillStyle = '#00ff88';
+  weeks.forEach((w,i)=>{
+    const s = Math.pow(1-weeklyHazard, w);
+    const x = 40 + (W-50) * i/(weeks.length-1);
+    const y = H - (s * H * 0.95) - 12;
+    ctx.beginPath(); ctx.arc(x,y,3.5,0,Math.PI*2); ctx.fill();
+  });
+}
+
+function renderSurvivalShap(seed){
+  const wrap = document.getElementById('survivalShap');
+  if(!wrap) return;
+  wrap.innerHTML = '';
+  const seeds = {
+    ontrack: [
+      {label:"Warehouse sector · hot market", val:+12.5, polarity:"pos"},
+      {label:"Stratford E20 · vacancy:applicant 1.18", val:+9.2, polarity:"pos"},
+      {label:"Priya satisfaction · 4.7", val:+6.8, polarity:"pos"},
+      {label:"Digital skills · Medium", val:+2.0, polarity:"pos"},
+      {label:"UC duration · 9 months", val:-2.4, polarity:"neg"},
+    ],
+    drifting: [
+      {label:"Admin sector · cooling", val:-4.7, polarity:"neg"},
+      {label:"Childcare cost barrier", val:-6.1, polarity:"neg"},
+      {label:"4-year work gap", val:-7.3, polarity:"neg"},
+      {label:"Priya satisfaction · 4.7", val:+5.8, polarity:"pos"},
+      {label:"London region demand", val:+4.1, polarity:"pos"},
+    ],
+    atrisk: [
+      {label:"Mental health barrier", val:-12.8, polarity:"neg"},
+      {label:"3 open barriers", val:-9.4, polarity:"neg"},
+      {label:"South Yorkshire · cool market", val:-3.1, polarity:"neg"},
+      {label:"Hannah specialism · MH", val:+5.2, polarity:"pos"},
+      {label:"Age 27 · returner-friendly", val:+1.5, polarity:"pos"},
+    ],
+  };
+  const items = seeds[seed] || seeds.ontrack;
+  items.forEach(it=>{
+    const row=document.createElement('div'); row.className='shap-row';
+    const cls = it.polarity==='pos' ? 'pos' : 'neg';
+    const widthPct = Math.min(45, Math.abs(it.val) * 2.5);
+    const fill = it.polarity==='pos'
+      ? `<div class="fill pos" style="width:${widthPct}%"></div>`
+      : `<div class="fill neg" style="width:${widthPct}%"></div>`;
+    row.innerHTML = `<span class="shap-label">${it.label}</span><div class="shap-bar">${fill}</div><span class="shap-val ${cls}">${it.val>=0?'+':''}${it.val.toFixed(1)}</span>`;
+    wrap.appendChild(row);
+  });
+}
+
+function closeSurvivalOverlay(){
+  const ov = document.getElementById('survivalOverlay');
+  ov.classList.add('fading');
+  if(survivalRainTimer){ clearInterval(survivalRainTimer); survivalRainTimer=null; }
+  setTimeout(()=>{
+    ov.classList.remove('show'); ov.classList.remove('fading');
+    ov.setAttribute('aria-hidden','true');
+  }, 450);
 }
 
 function closeRouterCheck(){

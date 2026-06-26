@@ -493,6 +493,57 @@ def _stacked_area(vid, ds, title, time_col, y_col, color_col, y_agg="COUNT"):
     }}
 
 
+def matching_definition(account, region):
+    tables = ["match_quality","adviser_experience","advisers"]
+    visuals = [
+        _kpi("k1", "match_quality", "Customer-adviser pairings scored", "fit_score",       "COUNT",   color="#5B2D8E", subtitle="8 candidates per customer"),
+        _kpi("k2", "match_quality", "Avg assigned fit score",            "fit_score",       "AVERAGE", color="#00A39A", subtitle="Across all assignments"),
+        _kpi("k3", "match_quality", "Avg fit score (top match)",         "fit_score",       "MAX",     color="#42206A", subtitle="Best-of-8 per customer"),
+        _kpi("k4", "adviser_experience", "Adviser-skill cells modelled", "success_rate",    "COUNT",   color="#007E77", subtitle="247 advisers × 11 sectors × 10 barriers"),
+        # Histogram-ish bar of assigned-rank distribution
+        _bar_num("d1", "match_quality", "Distribution of assigned-adviser rank · 1 = best fit", "rank", "fit_score", "AVERAGE", "VERTICAL", limit=8),
+        # Heatmap of sector × barrier success rate
+        _heatmap("h1", "adviser_experience", "Network-wide success rate · sector × barrier heatmap", "sector", "barrier", "success_rate", "AVERAGE"),
+        # Pivot of fit components by adviser_id × is_assigned
+        _pivot("pv1", "match_quality", "Avg fit score · adviser × is-assigned", "adviser_id", "is_assigned", "fit_score", "AVERAGE"),
+        # Scatter of fit_score components: sector vs barrier
+        _scatter("s1", "match_quality", "Sector affinity × barrier affinity · per pair", "sector_affinity", "barrier_affinity"),
+        # Top 12 best matches (rank 1, highest fit)
+        _table_top("t1", "match_quality", "Top adviser-customer pairings by fit", "adviser_id", "fit_score", "MAX", limit=12),
+        # Treemap adviser experience by tier
+        _treemap("tm1", "adviser_experience", "Adviser experience tiers · veteran/mid/early", "tier"),
+        # Radar by tier
+        _radar("r1", "adviser_experience", "Avg success rate by experience tier", "tier", "success_rate", "AVERAGE"),
+    ]
+    return _wrap(account, region, tables, visuals)
+
+
+def prediction_definition(account, region):
+    tables = ["success_snapshots","feature_contributions","survival_curves","state_transitions","journeys"]
+    visuals = [
+        _kpi("k1", "success_snapshots", "Daily P(success) snapshots",  "success_probability", "COUNT",   color="#5B2D8E", subtitle="8 weekly checkpoints / journey"),
+        _kpi("k2", "success_snapshots", "Avg P(success) at week 12",   "success_probability", "AVERAGE", color="#00A39A", subtitle="Network mid-cohort"),
+        _kpi("k3", "survival_curves",   "Median weeks to placement",   "median_weeks_to_placement", "AVERAGE", color="#42206A", subtitle="Across top-3 adviser matches"),
+        _kpi("k4", "feature_contributions", "Feature contributions logged", "contribution",    "COUNT",   color="#007E77", subtitle="Top-3 pos + top-3 neg per journey"),
+        # P(success) by week (week is integer; use bar to avoid date cast)
+        _bar_num("l1", "success_snapshots", "P(success) trajectory · network avg across the 8 checkpoints", "week", "success_probability", "AVERAGE", "VERTICAL", limit=8),
+        # Heatmap of state-transition probabilities (scenario_band on rows, transitions on cols)
+        _heatmap("h1", "state_transitions", "State transition probability · from × to (ON-TRACK band)", "from_state", "to_state", "probability", "AVERAGE"),
+        # Pivot: state-transition full matrix
+        _pivot("pv1", "state_transitions", "Transition probabilities · scenario_band × from_state × to_state", "from_state", "to_state", "probability", "AVERAGE"),
+        # Feature contributions: positive drivers
+        _bar_num("b1", "feature_contributions", "Positive contributors to P(success)", "feature", "contribution", "AVERAGE", "HORIZONTAL", limit=10),
+        # Negative drivers
+        _bar_num("b2", "feature_contributions", "Negative contributors to P(success)", "feature", "contribution", "AVERAGE", "HORIZONTAL", limit=10),
+        # Survival curve at key weeks
+        _bar_num("sv1", "survival_curves", "Median weeks to placement · across top-3 adviser ranks", "rank", "median_weeks_to_placement", "AVERAGE"),
+        _bar_num("sv2", "survival_curves", "Avg survival % at week 12 · per adviser rank", "rank", "survival_w12", "AVERAGE"),
+        # P(success) by region via small-multiples — week is int, so use journey scenario_band as panels instead
+        _bar_num("sm1", "success_snapshots", "Avg P(success) by region", "region_key", "success_probability", "AVERAGE", "HORIZONTAL"),
+    ]
+    return _wrap(account, region, tables, visuals)
+
+
 def scenarios_definition(account, region):
     tables = ["personas","scenarios","journeys"]
     visuals = [

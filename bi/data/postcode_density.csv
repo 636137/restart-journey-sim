@@ -1,0 +1,40 @@
+region_key,postcode_area,vacancy_applicant_ratio,median_wage_gbp,live_vacancies,sector_demand_top
+derbyshire-notts,DE1,1.043,23462,101,Care / health
+derbyshire-notts,DE22,0.888,23599,209,Care / health
+derbyshire-notts,NG1,0.992,24777,187,Warehouse / logistics
+derbyshire-notts,NG18,0.972,25446,109,Care / health
+derbyshire-notts,NG7,0.799,23581,282,Care / health
+derbyshire-notts,S40,0.863,23423,143,Care / health
+derbyshire-notts,S81,0.998,25827,120,Warehouse / logistics
+north-london,HA1,1.098,27213,126,Warehouse / logistics
+north-london,HA9,1.245,26334,265,Warehouse / logistics
+north-london,N1,1.224,26930,404,Warehouse / logistics
+north-london,N17,1.053,26182,398,Care / health
+north-london,NW1,1.16,27677,287,Warehouse / logistics
+north-london,NW10,1.293,27761,266,Warehouse / logistics
+north-london,NW3,1.021,26325,165,Warehouse / logistics
+north-london,UB1,1.207,26130,351,Warehouse / logistics
+south-east-london,E13,1.216,30590,250,Warehouse / logistics
+south-east-london,E15,1.081,26643,167,Warehouse / logistics
+south-east-london,E2,1.15,28905,303,Warehouse / logistics
+south-east-london,E20,1.028,28847,327,Care / health
+south-east-london,E3,1.318,30777,527,Warehouse / logistics
+south-east-london,E6,1.294,27713,361,Care / health
+south-east-london,SE1,1.019,29464,340,Warehouse / logistics
+south-east-london,SE10,1.237,29484,175,Care / health
+south-east-london,SE15,1.329,30779,261,Driving
+south-yorkshire,DN1,1.002,24418,176,Warehouse / logistics
+south-yorkshire,DN4,0.915,25666,180,Warehouse / logistics
+south-yorkshire,LS9,0.95,26092,200,Warehouse / logistics
+south-yorkshire,S1,0.869,25998,207,Warehouse / logistics
+south-yorkshire,S10,0.999,25975,273,Driving
+south-yorkshire,S6,0.983,26239,245,Care / health
+south-yorkshire,S60,0.815,26657,76,Care / health
+south-yorkshire,WF1,0.815,26159,223,Warehouse / logistics
+wales,CF10,0.917,24222,224,Care / health
+wales,CF24,0.758,24879,111,Warehouse / logistics
+wales,LL11,0.798,21899,72,Warehouse / logistics
+wales,LL57,0.931,22538,207,Warehouse / logistics
+wales,NP19,1.014,22946,246,Warehouse / logistics
+wales,NP20,0.986,24904,255,Warehouse / logistics
+wales,SA1,1.005,23672,250,Warehouse / logistics

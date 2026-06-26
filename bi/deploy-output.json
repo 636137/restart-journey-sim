@@ -13,7 +13,14 @@
     "router_scores": 16286,
     "outcomes_kpis": 2199,
     "personas": 6,
-    "scenarios": 3
+    "scenarios": 3,
+    "postcode_density": 39,
+    "adviser_experience": 27170,
+    "match_quality": 82296,
+    "survival_curves": 30861,
+    "state_transitions": 147,
+    "success_snapshots": 82296,
+    "feature_contributions": 61722
   },
   "quicksight_data_source": "restart-bi-athena",
   "quicksight_datasets": [
@@ -24,7 +31,14 @@
     "ds-router-scores",
     "ds-outcomes-kpis",
     "ds-personas",
-    "ds-scenarios"
+    "ds-scenarios",
+    "ds-postcode-density",
+    "ds-adviser-experience",
+    "ds-match-quality",
+    "ds-survival-curves",
+    "ds-state-transitions",
+    "ds-success-snapshots",
+    "ds-feature-contributions"
   ],
   "quicksight_console": "https://us-west-2.quicksight.aws.amazon.com/sn/start"
 }

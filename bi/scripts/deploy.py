@@ -188,7 +188,7 @@ def ensure_workgroup():
 def athena_sanity():
     """Run a SELECT count(*) on each table to confirm Athena can read."""
     out_counts = {}
-    for table in ["customers","advisers","journeys","journey_stages","router_scores","outcomes_kpis","personas","scenarios"]:
+    for table in ["customers","advisers","journeys","journey_stages","router_scores","outcomes_kpis","personas","scenarios","postcode_density","adviser_experience","match_quality","survival_curves","state_transitions","success_snapshots","feature_contributions"]:
         qid = athena.start_query_execution(
             QueryString=f'SELECT count(*) AS n FROM {DB}.{table}',
             WorkGroup=WG,
@@ -322,8 +322,13 @@ def upsert_dataset(user_arn, table):
             "InputColumns": [{"Name": c["Name"], "Type": "STRING"} for c in inferred],
         }
     }
+    # Columns that need to stay STRING for QuickSight CategoricalDimension use,
+    # even though they look numeric in CSV.
+    KEEP_STRING = {"rank", "week", "barriers_count", "stages_count"}
     cast_columns = []
     for c in inferred:
+        if c["Name"] in KEEP_STRING:
+            continue  # leave as STRING
         if c["Type"] in ("bigint","int","double","date"):
             cast_columns.append({
                 "ColumnName": c["Name"],
@@ -483,14 +488,16 @@ def _ds_arn(dsid):
 
 def build_dashboards(user_arn, dataset_ids):
     """Polished three-dashboard build via the dashboards module."""
-    from dashboards import executive_definition, adviser_definition, customer_definition, progress_definition, scenarios_definition
+    from dashboards import executive_definition, adviser_definition, customer_definition, progress_definition, scenarios_definition, matching_definition, prediction_definition
     theme_arn = upsert_theme(user_arn)
     DASH = [
-        ("dash-executive", "Restart · Executive Overview", executive_definition(ACCOUNT, REGION)),
-        ("dash-adviser",   "Restart · Adviser Performance", adviser_definition(ACCOUNT, REGION)),
-        ("dash-customer",  "Restart · Customer Outcomes", customer_definition(ACCOUNT, REGION)),
-        ("dash-progress",  "Restart · Journey Progress", progress_definition(ACCOUNT, REGION)),
-        ("dash-scenarios", "Restart · Realistic Scenarios", scenarios_definition(ACCOUNT, REGION)),
+        ("dash-executive",   "Restart · Executive Overview",     executive_definition(ACCOUNT, REGION)),
+        ("dash-adviser",     "Restart · Adviser Performance",     adviser_definition(ACCOUNT, REGION)),
+        ("dash-customer",    "Restart · Customer Outcomes",       customer_definition(ACCOUNT, REGION)),
+        ("dash-progress",    "Restart · Journey Progress",        progress_definition(ACCOUNT, REGION)),
+        ("dash-scenarios",   "Restart · Realistic Scenarios",     scenarios_definition(ACCOUNT, REGION)),
+        ("dash-matching",    "Restart · Max Navigator Matching",  matching_definition(ACCOUNT, REGION)),
+        ("dash-prediction",  "Restart · Success Prediction & Survival", prediction_definition(ACCOUNT, REGION)),
     ]
     for dash_id, name, definition in DASH:
         try:
@@ -565,7 +572,7 @@ def main():
     ensure_athena_data_source(user_arn)
 
     dataset_ids = []
-    for table in ["customers","advisers","journeys","journey_stages","router_scores","outcomes_kpis","personas","scenarios"]:
+    for table in ["customers","advisers","journeys","journey_stages","router_scores","outcomes_kpis","personas","scenarios","postcode_density","adviser_experience","match_quality","survival_curves","state_transitions","success_snapshots","feature_contributions"]:
         dataset_ids.append(upsert_dataset(user_arn, table))
 
     # Dashboards via lightweight inline definitions
