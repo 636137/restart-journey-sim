@@ -4,7 +4,7 @@
   "framing": "Fadumo, 31, Somali-speaking refugee, was a teacher in Mogadishu. Eleri (Welsh adviser) lays out the UK QTS path and short-term income.",
   "voice_customer": "fadumo",
   "voice_adviser": "eleri",
-  "total_ms": 95611,
+  "total_ms": 94450,
   "gap_ms": 350,
   "lines": [
     {
@@ -13,7 +13,7 @@
       "voice_key": "eleri",
       "text": "Fadumo, it's Eleri. The translator is on the call. Today I want to talk through two paths for you. A teaching assistant role we can start next month, and the longer route to UK Qualified Teacher Status.",
       "file": "line_01_adviser_eleri.mp3",
-      "duration_ms": 16253,
+      "duration_ms": 15557,
       "start_ms": 0
     },
     {
@@ -22,8 +22,8 @@
       "voice_key": "fadumo",
       "text": "Thank you. I am ready. I worry that taking a teaching assistant job means I am stepping back from being a teacher.",
       "file": "line_02_customer_fadumo.mp3",
-      "duration_ms": 6594,
-      "start_ms": 16603
+      "duration_ms": 7198,
+      "start_ms": 15907
     },
     {
       "i": 3,
@@ -31,8 +31,8 @@
       "voice_key": "eleri",
       "text": "It's a fair worry. Let me be honest with you. UK QTS for an internationally trained teacher takes twelve to eighteen months. The teaching assistant role is paid work in a school, your foot in the door, and your hours count toward the QTS school experience requirement.",
       "file": "line_03_adviser_eleri.mp3",
-      "duration_ms": 19876,
-      "start_ms": 23547
+      "duration_ms": 20572,
+      "start_ms": 23455
     },
     {
       "i": 4,
@@ -40,8 +40,8 @@
       "voice_key": "fadumo",
       "text": "So it is not a step back. It is the first step.",
       "file": "line_04_customer_fadumo.mp3",
-      "duration_ms": 2647,
-      "start_ms": 43773
+      "duration_ms": 2600,
+      "start_ms": 44377
     },
     {
       "i": 5,
@@ -49,8 +49,8 @@
       "voice_key": "eleri",
       "text": "Exactly. Riverside Primary in Cardiff have shortlisted you. They know you were a primary teacher in Mogadishu. The head teacher specifically asked for your CV.",
       "file": "line_05_adviser_eleri.mp3",
-      "duration_ms": 11609,
-      "start_ms": 46770
+      "duration_ms": 10356,
+      "start_ms": 47327
     },
     {
       "i": 6,
@@ -58,8 +58,8 @@
       "voice_key": "fadumo",
       "text": "That is very encouraging.",
       "file": "line_06_customer_fadumo.mp3",
-      "duration_ms": 1486,
-      "start_ms": 58729
+      "duration_ms": 1439,
+      "start_ms": 58033
     },
     {
       "i": 7,
@@ -67,8 +67,8 @@
       "voice_key": "eleri",
       "text": "Now the practical side. The Adult Skills Fund will pay for your English for Academic Purposes course, which you'll need before the QTS application. No cost to you. The travel pass for school placement weeks is also covered.",
       "file": "line_07_adviser_eleri.mp3",
-      "duration_ms": 13978,
-      "start_ms": 60565
+      "duration_ms": 14675,
+      "start_ms": 59822
     },
     {
       "i": 8,
@@ -76,8 +76,8 @@
       "voice_key": "fadumo",
       "text": "And for childcare for the youngest two during the days I am at school?",
       "file": "line_08_customer_fadumo.mp3",
-      "duration_ms": 3761,
-      "start_ms": 74893
+      "duration_ms": 3808,
+      "start_ms": 74847
     },
     {
       "i": 9,
@@ -85,8 +85,8 @@
       "voice_key": "eleri",
       "text": "I asked the same. Restart has a childcare grant of forty pounds per child per day for the placement weeks. We will set that up this week. The translator will help you fill in the forms today if you would like.",
       "file": "line_09_adviser_eleri.mp3",
-      "duration_ms": 13931,
-      "start_ms": 79004
+      "duration_ms": 12817,
+      "start_ms": 79005
     },
     {
       "i": 10,
@@ -94,8 +94,8 @@
       "voice_key": "fadumo",
       "text": "Yes please. Today is good. Thank you Eleri.",
       "file": "line_10_customer_fadumo.mp3",
-      "duration_ms": 2321,
-      "start_ms": 93285
+      "duration_ms": 2275,
+      "start_ms": 92172
     }
   ]
 }

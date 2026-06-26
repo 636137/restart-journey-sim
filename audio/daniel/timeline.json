@@ -4,7 +4,7 @@
   "framing": "Daniel Okafor, 38, ex-warehouse, ON-TRACK. Confident, ready. Priya does the Tuesday check-in.",
   "voice_customer": "daniel",
   "voice_adviser": "priya",
-  "total_ms": 56159,
+  "total_ms": 71995,
   "gap_ms": 350,
   "lines": [
     {
@@ -13,7 +13,7 @@
       "voice_key": "priya",
       "text": "Hi Daniel, it's Priya. Just my Tuesday check-in, are you alright to talk for two minutes?",
       "file": "line_01_adviser_priya.mp3",
-      "duration_ms": 4690,
+      "duration_ms": 6130,
       "start_ms": 0
     },
     {
@@ -22,8 +22,8 @@
       "voice_key": "daniel",
       "text": "Yeah, fine. Just on my way back from the gym.",
       "file": "line_02_customer_daniel.mp3",
-      "duration_ms": 2043,
-      "start_ms": 5040
+      "duration_ms": 1996,
+      "start_ms": 6480
     },
     {
       "i": 3,
@@ -31,8 +31,8 @@
       "voice_key": "priya",
       "text": "Brilliant. Right, your numbers are properly strong. Top quartile in your cohort. CV is signed off, you've saved nine vacancies, and the Level 2 course is locked in for the first of July.",
       "file": "line_03_adviser_priya.mp3",
-      "duration_ms": 10402,
-      "start_ms": 7433
+      "duration_ms": 14953,
+      "start_ms": 8826
     },
     {
       "i": 4,
@@ -40,8 +40,8 @@
       "voice_key": "daniel",
       "text": "Yeah it's been alright, actually. I feel like I'm getting somewhere.",
       "file": "line_04_customer_daniel.mp3",
-      "duration_ms": 3297,
-      "start_ms": 18185
+      "duration_ms": 2925,
+      "start_ms": 24129
     },
     {
       "i": 5,
@@ -49,8 +49,8 @@
       "voice_key": "priya",
       "text": "I want to push you a little. Sundown Logistics is your match-of-the-week, but there's a Senior Warehouse Operative slot at Bow Distribution. Three grand more, same commute. Want me to send it across?",
       "file": "line_05_adviser_priya.mp3",
-      "duration_ms": 11470,
-      "start_ms": 21832
+      "duration_ms": 15418,
+      "start_ms": 27404
     },
     {
       "i": 6,
@@ -58,8 +58,8 @@
       "voice_key": "daniel",
       "text": "Senior, though? I haven't done senior before.",
       "file": "line_06_customer_daniel.mp3",
-      "duration_ms": 2229,
-      "start_ms": 33652
+      "duration_ms": 2507,
+      "start_ms": 43172
     },
     {
       "i": 7,
@@ -67,8 +67,8 @@
       "voice_key": "priya",
       "text": "You have, you just didn't call it that. Two years team-leading at Hackney was supervising six people. I'll pull it out on the CV and send you the link tonight.",
       "file": "line_07_adviser_priya.mp3",
-      "duration_ms": 9195,
-      "start_ms": 36231
+      "duration_ms": 11981,
+      "start_ms": 46029
     },
     {
       "i": 8,
@@ -76,8 +76,8 @@
       "voice_key": "daniel",
       "text": "Alright. Yeah, send it. Worst case I learn something at the interview.",
       "file": "line_08_customer_daniel.mp3",
-      "duration_ms": 4318,
-      "start_ms": 45776
+      "duration_ms": 3715,
+      "start_ms": 58360
     },
     {
       "i": 9,
@@ -85,8 +85,8 @@
       "voice_key": "priya",
       "text": "That's exactly the right attitude. Same time next Tuesday, and well done this week Daniel, properly well done.",
       "file": "line_09_adviser_priya.mp3",
-      "duration_ms": 5712,
-      "start_ms": 50444
+      "duration_ms": 9566,
+      "start_ms": 62425
     }
   ]
 }
