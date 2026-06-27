@@ -240,7 +240,7 @@ def invalidate(dist_id):
     r = cf.create_invalidation(
         DistributionId=dist_id,
         InvalidationBatch={
-            "Paths": {"Quantity": 3, "Items": ["/index.html", "/adviser-bundle.js", "/adviser-config.js"]},
+            "Paths": {"Quantity": 5, "Items": ["/index.html", "/adviser-bundle.js", "/adviser-config.js", "/persona-runtime.json", "/graph-neighbours.json"]},
             "CallerReference": str(int(time.time())),
         },
     )
