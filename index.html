@@ -816,14 +816,14 @@ body {
     </div>
     <div class="visit-meet">
       <div class="visit-meet-row"><span class="lbl">Where</span><span class="val" id="visitWhere">Maximus, 2 Stratford Pl, E20 1EJ</span></div>
-      <div class="visit-meet-row"><span class="lbl">With</span><span class="val">Priya Sharma · Senior Restart Adviser</span></div>
+      <div class="visit-meet-row"><span class="lbl">With</span><span class="val" id="visitWith">Priya Sharma · Senior Restart Adviser</span></div>
       <div class="visit-meet-row"><span class="lbl">When</span><span class="val" id="visitWhen">Thu 26 Jun · 10:30am · 60 min</span></div>
       <div class="visit-meet-row"><span class="lbl">Cost</span><span class="val">Free. Travel reimbursed.</span></div>
     </div>
     <div class="visit-translate">
       <div class="visit-translate-head">🎙 Free real-time language translation</div>
-      <div class="visit-translate-body">
-        We can provide <strong>two-way speech-to-speech translation</strong> live during your meeting with Priya at no cost to you. You speak in your preferred language, Priya replies in English, and you each hear it in your own language with no awkward pauses.
+      <div class="visit-translate-body" id="visitTranslateBody">
+        We can provide <strong>two-way speech-to-speech translation</strong> live during your meeting with your adviser at no cost to you. You speak in your preferred language, your adviser replies in English, and you each hear it in your own language with no awkward pauses.
         Confidential. Just reply <strong>TRANSLATE</strong> to the SMS, or tap the "Add translator" button below.
         <div class="visit-langs">
           <span class="visit-lang-chip">Bengali</span>
@@ -2748,6 +2748,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
    Two flavours: 'start' (policy-mandated diagnostic) and 'escalation'
    (band=drifting/atrisk → in-person re-engagement within 48h).
 =========================================================================*/
+// Office address per adviser (matches the assignment in persona-runtime.json)
+const ADVISER_OFFICES = {
+  "Priya Sharma":    "Maximus, 2 Stratford Pl, E20 1EJ",
+  "Aisha Khatun":    "Maximus, 36 Catford Rd, Lewisham, SE6 4RT",
+  "Tomasz Kowalski": "Maximus, 18 Manor Park Rd, Harlesden, NW10 4JP",
+  "Hannah Brennan":  "Maximus, 4 Effingham St, Rotherham, S65 1AJ",
+  "Eleri Davies":    "Maximus, 22 Mount Stuart Sq, Cardiff Bay, CF10 5DQ",
+  "Karen Mensah":    "Maximus, 12 Castle Quay, Nottingham, NG7 1FW",
+};
+
 const VISIT_CONFIGS = {
   start: {
     badgeClass: "policy",
@@ -2756,8 +2766,7 @@ const VISIT_CONFIGS = {
     subtitle: "MAX NAVIGATOR · POLICY RULE V1 · DIAGNOSTIC",
     whyTitle: "WHY THIS VISIT",
     what: "Per DWP Restart program policy, every newly-referred participant attends one in-person diagnostic at their local Maximus office before the action plan is finalised.",
-    why: "The in-person diagnostic captures barriers and confidence signals that are hard to read over text, and lets Priya complete the safeguarding check the policy requires within the first 14 days.",
-    where: "Maximus, 2 Stratford Pl, E20 1EJ",
+    whyTemplate: "The in-person diagnostic captures barriers and confidence signals that are hard to read over text, and lets {ADVISER_FIRST} complete the safeguarding check the policy requires within the first 14 days.",
     when: "Thu 26 Jun · 10:30am · 60 min",
     meta: "Policy rule: every new participant attends ≥1 in-person diagnostic · auditable",
     cardClass: "",
@@ -2770,10 +2779,9 @@ const VISIT_CONFIGS = {
     title: "ESCALATION · IN-PERSON VISIT",
     subtitle: "MAX NAVIGATOR · BAND DRIFTING OR AT RISK",
     whyTitle: "WHY THIS VISIT",
-    what: "Your Max Navigator engagement band dropped below the policy threshold. The system has booked an in-person re-engagement with Priya within 48 hours, before the band moves to At-Risk.",
+    whatTemplate: "Your Max Navigator engagement band dropped below the policy threshold. The system has booked an in-person re-engagement with {ADVISER_FIRST} within 48 hours, before the band moves to At-Risk.",
     why: "Drifting bands recover 3.2× faster after one in-person session than after additional remote contact (cohort N=3,847). A travel voucher has been pre-issued. No-show triggers a wellbeing call, not a sanction.",
-    where: "Maximus, 2 Stratford Pl, E20 1EJ",
-    when: "Within 48 hours · Priya will text two slots",
+    whenTemplate: "Within 48 hours · {ADVISER_FIRST} will text two slots",
     meta: "Escalation rule fired automatically · seed " + (sessionStorage.getItem('routerSeed') || 'pending'),
     cardClass: "escalation",
     ctaClass: "escalation",
@@ -2792,6 +2800,12 @@ function openVisitOverlay(kind){
   const ov = document.getElementById('visitOverlay');
   ov.setAttribute('aria-hidden','false');
   ov.classList.add('show');
+  // Resolve persona-specific adviser, office, first name.
+  const persona = window.ACTIVE_PERSONA;
+  const adviser = persona ? persona.adviser : { name: "Priya Sharma", title: "Senior Restart Adviser · Stratford" };
+  const adviserFirst = adviser.name.split(' ')[0];
+  const officeAddress = ADVISER_OFFICES[adviser.name] || ADVISER_OFFICES["Priya Sharma"];
+  const fill = (s) => (s || "").replace(/\{ADVISER_FIRST\}/g, adviserFirst).replace(/\{ADVISER\}/g, adviser.name);
   // Apply copy
   const badge = document.getElementById('visitBadge');
   badge.className = 'visit-badge ' + cfg.badgeClass;
@@ -2799,15 +2813,24 @@ function openVisitOverlay(kind){
   document.getElementById('visitTitle').textContent = cfg.title;
   document.getElementById('visitSubtitle').textContent = cfg.subtitle;
   document.getElementById('visitWhyTitle').textContent = cfg.whyTitle;
-  document.getElementById('visitWhat').textContent = cfg.what;
-  document.getElementById('visitWhy').textContent = cfg.why;
-  document.getElementById('visitWhere').textContent = cfg.where;
-  document.getElementById('visitWhen').textContent = cfg.when;
+  document.getElementById('visitWhat').textContent = fill(cfg.whatTemplate || cfg.what);
+  document.getElementById('visitWhy').textContent = fill(cfg.whyTemplate || cfg.why);
+  document.getElementById('visitWhere').textContent = officeAddress;
+  document.getElementById('visitWith').textContent = `${adviser.name} · ${adviser.title}`;
+  document.getElementById('visitWhen').textContent = fill(cfg.whenTemplate || cfg.when);
   document.getElementById('visitMeta').textContent = cfg.meta;
   document.getElementById('visitCardWhy').className = 'visit-card ' + cfg.cardClass;
   const cta = document.getElementById('visitConfirm');
   cta.className = 'visit-cta ' + cfg.ctaClass;
   cta.textContent = cfg.ctaText;
+  // Translator paragraph: name the actual adviser
+  const tb = document.getElementById('visitTranslateBody');
+  if(tb){
+    tb.innerHTML = `We can provide <strong>two-way speech-to-speech translation</strong> live during your meeting with ${adviser.name} at no cost to you. You speak in your preferred language, ${adviserFirst} replies in English, and you each hear it in your own language with no awkward pauses. Confidential. Just reply <strong>TRANSLATE</strong> to the SMS, or tap the "Add translator" button below.
+      <div class="visit-langs">
+        <span class="visit-lang-chip">Bengali</span><span class="visit-lang-chip">Polish</span><span class="visit-lang-chip">Urdu</span><span class="visit-lang-chip">Romanian</span><span class="visit-lang-chip">Somali</span><span class="visit-lang-chip">Punjabi</span><span class="visit-lang-chip">Yoruba</span><span class="visit-lang-chip">Tigrinya</span><span class="visit-lang-chip">Welsh</span><span class="visit-lang-chip">Arabic</span><span class="visit-lang-chip">+ 23 more</span>
+      </div>`;
+  }
   startVisitRain();
 }
 
