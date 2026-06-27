@@ -371,6 +371,23 @@ body {
 .visit-meet-row:last-child { border-bottom:none; }
 .visit-meet-row .lbl { width:90px; color:rgba(255,255,255,0.55); font-size:11px; letter-spacing:1.5px; text-transform:uppercase; }
 .visit-meet-row .val { flex:1; color:#fff; font-weight:600; }
+/* AI TRANSLATION LANGUAGE PICKER */
+.lang-overlay { position:fixed; inset:0; z-index:9700; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity .25s; }
+.lang-overlay.show { opacity:1; pointer-events:auto; }
+.lang-card { background:linear-gradient(135deg,#1a0d2e,#0d2316); border:1px solid rgba(0,255,136,0.4); border-radius:18px; padding:22px 24px; max-width:560px; width:100%; box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+.lang-head { margin-bottom:14px; }
+.lang-title { font-size:14px; letter-spacing:3px; font-weight:700; color:#a06fd6; margin-bottom:6px; }
+.lang-sub { font-size:13px; line-height:1.55; color:#fff; }
+.lang-chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.lang-chip { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); color:#fff; border-radius:18px; padding:8px 14px; font-size:13px; cursor:pointer; transition:background .15s, border-color .15s, transform .1s; font-family:inherit; }
+.lang-chip:hover { background:rgba(160,111,214,0.2); border-color:#a06fd6; }
+.lang-chip.selected { background:#00a39a; border-color:#00a39a; color:#001a14; font-weight:700; }
+.lang-chip:active { transform:scale(0.97); }
+.lang-foot { display:flex; justify-content:flex-end; gap:10px; }
+.lang-cta { background:#00a39a; color:#001a14; border:none; border-radius:8px; padding:9px 18px; font-family:inherit; font-size:13px; letter-spacing:1px; font-weight:700; cursor:pointer; }
+.lang-cta.ghost { background:transparent; color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.25); font-weight:500; }
+.lang-cta.ghost:hover { background:rgba(255,255,255,0.08); color:#fff; }
+
 .visit-translate { background:linear-gradient(135deg,rgba(91,45,142,0.3),rgba(0,163,154,0.3)); border:1px solid rgba(160,111,214,0.55); border-radius:14px; padding:14px 18px; width:100%; max-width:680px; }
 .visit-translate-head { display:flex; align-items:center; gap:10px; font-size:13px; color:#a06fd6; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; }
 .visit-translate-body { font-size:13.5px; line-height:1.55; color:#fff; }
@@ -845,6 +862,20 @@ body {
       <button class="visit-cta ghost" id="visitAddTranslator" type="button">🤖 ENABLE AI TRANSLATION</button>
     </div>
     <div class="visit-meta" id="visitMeta">Policy rule: every new participant attends ≥1 in-person diagnostic · auditable</div>
+  </div>
+</div>
+
+<!-- AI TRANSLATION LANGUAGE PICKER -->
+<div class="lang-overlay" id="langOverlay" aria-hidden="true">
+  <div class="lang-card">
+    <div class="lang-head">
+      <div class="lang-title">🤖 ENABLE AI TRANSLATION</div>
+      <div class="lang-sub">Pick your preferred language. Your AI adviser (Priya), the Live Chat, and the call widget will all respond in this language for the rest of the session.</div>
+    </div>
+    <div class="lang-chips" id="langChips"></div>
+    <div class="lang-foot">
+      <button class="lang-cta ghost" id="langCancel" type="button">CANCEL</button>
+    </div>
   </div>
 </div>
 
@@ -1797,10 +1828,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const survivalAck = document.getElementById('survivalAck');
   if(survivalAck) survivalAck.addEventListener('click', closeSurvivalOverlay);
   const visitAddTranslator = document.getElementById('visitAddTranslator');
-  if(visitAddTranslator) visitAddTranslator.addEventListener('click', ()=>{
-    const adv = window.ACTIVE_PERSONA && window.ACTIVE_PERSONA.adviser ? window.ACTIVE_PERSONA.adviser.name.split(' ')[0] : 'your adviser';
-    showToast(`AI translation enabled. Your phone and ${adv}'s tablet will run it live during the meeting.`);
-  });
+  if(visitAddTranslator) visitAddTranslator.addEventListener('click', openLanguagePicker);
+  const langCancel = document.getElementById('langCancel');
+  if(langCancel) langCancel.addEventListener('click', closeLanguagePicker);
   const trClose = document.getElementById('trainingClose');
   if(trClose) trClose.addEventListener('click', closeTrainingUpdate);
   const trReplay = document.getElementById('trainingRestart');
@@ -1813,6 +1843,102 @@ document.addEventListener('DOMContentLoaded', ()=>{
 /* ===================== CALL PRIYA (ElevenLabs ConvAI) =====================
    Opens the ElevenLabs voice widget that's pinned bottom-right.
 =========================================================================*/
+/* ===================== AI TRANSLATION LANGUAGE PICKER =====================
+   When the customer taps ENABLE AI TRANSLATION on the visit overlay we open
+   a chip picker. Selecting a language:
+     - stores sessionStorage.preferredLanguage + preferredLanguageLabel
+     - swaps the <elevenlabs-convai agent-id="..."> to the language-matched
+       Priya agent (one per language created by agent-priya/create_multilingual.py)
+     - prepends a language instruction to subsequent Sarah text-chat turns
+       (window.SARAH_LANGUAGE_PREFIX)
+     - updates the home-screen Call Priya label
+     - toasts confirmation
+========================================================================*/
+async function ensurePriyaAgentsLoaded(){
+  if(window.PRIYA_AGENTS) return window.PRIYA_AGENTS;
+  try{
+    const r = await fetch('priya-agents.json?cb='+Date.now());
+    if(r.ok){ window.PRIYA_AGENTS = await r.json(); }
+  }catch(e){ console.warn('[lang] could not load priya-agents.json', e); }
+  return window.PRIYA_AGENTS;
+}
+
+const LANG_DISPLAY = [
+  {code:"en",label:"English"},
+  {code:"pl",label:"Polish"},
+  {code:"so",label:"Somali"},
+  {code:"cy",label:"Welsh"},
+  {code:"bn",label:"Bengali"},
+  {code:"ur",label:"Urdu"},
+  {code:"ar",label:"Arabic"},
+  {code:"ti",label:"Tigrinya"},
+  {code:"yo",label:"Yoruba"},
+  {code:"pa",label:"Punjabi"},
+  {code:"ro",label:"Romanian"},
+  {code:"fr",label:"French"},
+  {code:"de",label:"German"},
+  {code:"es",label:"Spanish"},
+];
+
+async function openLanguagePicker(){
+  await ensurePriyaAgentsLoaded();
+  const ov = document.getElementById('langOverlay');
+  if(!ov) return;
+  const wrap = document.getElementById('langChips');
+  wrap.innerHTML = '';
+  const current = sessionStorage.getItem('preferredLanguage') || 'en';
+  LANG_DISPLAY.forEach(l=>{
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'lang-chip' + (l.code === current ? ' selected' : '');
+    chip.textContent = l.label;
+    chip.dataset.code = l.code;
+    chip.onclick = ()=> selectLanguage(l.code, l.label);
+    wrap.appendChild(chip);
+  });
+  ov.classList.add('show');
+  ov.setAttribute('aria-hidden','false');
+}
+
+function closeLanguagePicker(){
+  const ov = document.getElementById('langOverlay');
+  if(!ov) return;
+  ov.classList.remove('show');
+  ov.setAttribute('aria-hidden','true');
+}
+
+function selectLanguage(code, label){
+  sessionStorage.setItem('preferredLanguage', code);
+  sessionStorage.setItem('preferredLanguageLabel', label);
+  // 1. Swap the ElevenLabs voice-call widget agent
+  const agentsMap = window.PRIYA_AGENTS && window.PRIYA_AGENTS.agents ? window.PRIYA_AGENTS.agents : {};
+  const newAgent = (agentsMap[code] && agentsMap[code].agent_id);
+  const widget = document.querySelector('elevenlabs-convai');
+  if(widget && newAgent){
+    widget.setAttribute('agent-id', newAgent);
+    // Re-create the widget so the embed script picks up the new agent id.
+    const parent = widget.parentNode;
+    const fresh = document.createElement('elevenlabs-convai');
+    fresh.setAttribute('agent-id', newAgent);
+    parent.replaceChild(fresh, widget);
+  }
+  // 2. Set the Sarah text-agent language prefix used by callAdviser()
+  window.SARAH_LANGUAGE_PREFIX = code === 'en' ? null : `[Customer prefers ${label}. Respond exclusively in ${label}.] `;
+  // 3. Update Call Priya home-screen label
+  const callLabel = document.querySelector('#iconCallPriya')?.parentElement?.querySelector('.app-label');
+  if(callLabel) callLabel.textContent = code === 'en' ? 'Call Priya' : `Call Priya · ${label}`;
+  // 4. Toast
+  const adv = window.ACTIVE_PERSONA && window.ACTIVE_PERSONA.adviser ? window.ACTIVE_PERSONA.adviser.name.split(' ')[0] : 'your adviser';
+  showToast(code === 'en'
+    ? `AI translation off · default English.`
+    : `AI translation enabled · ${label}. The Call widget, Live Chat, and ${adv}'s tablet will all run in ${label}.`);
+  // 5. Update the selected chip visual + close
+  document.querySelectorAll('.lang-chip').forEach(c=>{
+    c.classList.toggle('selected', c.dataset.code === code);
+  });
+  setTimeout(closeLanguagePicker, 350);
+}
+
 function callPriya(){
   const widget = document.querySelector('elevenlabs-convai');
   if(!widget){
@@ -1820,7 +1946,8 @@ function callPriya(){
     return;
   }
   try{ widget.click(); }catch(e){}
-  showToast('Calling Priya…');
+  const lbl = sessionStorage.getItem('preferredLanguageLabel');
+  showToast(lbl && lbl !== 'English' ? `Calling Priya in ${lbl}…` : 'Calling Priya…');
 }
 
 /* ===================== ELEVENLABS CALL OVERLAY =====================
@@ -2743,6 +2870,22 @@ function applyPersonaRuntimeOverrides(bundle){
 document.addEventListener('DOMContentLoaded', ()=>{
   const skip = document.getElementById('personaSkip');
   if(skip) skip.addEventListener('click', ()=>pickPersona('daniel'));
+  // Restore previously-picked language (sessionStorage) on page load.
+  const code = sessionStorage.getItem('preferredLanguage');
+  const label = sessionStorage.getItem('preferredLanguageLabel');
+  if(code && code !== 'en' && label){
+    ensurePriyaAgentsLoaded().then(()=>{
+      const agentsMap = window.PRIYA_AGENTS && window.PRIYA_AGENTS.agents ? window.PRIYA_AGENTS.agents : {};
+      const aid = agentsMap[code] && agentsMap[code].agent_id;
+      if(aid){
+        const widget = document.querySelector('elevenlabs-convai');
+        if(widget) widget.setAttribute('agent-id', aid);
+      }
+      window.SARAH_LANGUAGE_PREFIX = `[Customer prefers ${label}. Respond exclusively in ${label}.] `;
+      const callLabel = document.querySelector('#iconCallPriya')?.parentElement?.querySelector('.app-label');
+      if(callLabel) callLabel.textContent = `Call Priya · ${label}`;
+    });
+  }
 });
 
 /* ===================== MAX NAVIGATOR IN-PERSON VISIT =====================
@@ -3597,14 +3740,16 @@ function openLiveChat(){
 }
 
 async function callAdviser(message){
+  const langPrefix = window.SARAH_LANGUAGE_PREFIX || '';
+  const wrappedMessage = langPrefix ? langPrefix + message : message;
   if(lcMode==='agentcore'){
     if(!lcSessionId) lcSessionId = 'rs-'+Math.random().toString(36).slice(2)+Math.random().toString(36).slice(2);
-    const data = await window.RestartAdviser.invoke(message, lcSessionId);
+    const data = await window.RestartAdviser.invoke(wrappedMessage, lcSessionId);
     return data.reply || data;
   } else {
     const res = await fetch(AGENT_URL+'/chat',{
       method:'POST', headers:{'content-type':'application/json'},
-      body: JSON.stringify({message, session_id:lcSessionId})
+      body: JSON.stringify({message: wrappedMessage, session_id:lcSessionId})
     });
     if(!res.ok) throw new Error('http '+res.status);
     const data = await res.json();

@@ -40,6 +40,7 @@ FILES_TO_UPLOAD = [
     "adviser-config.js",
     "persona-runtime.json",
     "graph-neighbours.json",
+    "priya-agents.json",
 ]
 
 # Subdirectories whose contents are uploaded with their original relative paths.
@@ -240,7 +241,7 @@ def invalidate(dist_id):
     r = cf.create_invalidation(
         DistributionId=dist_id,
         InvalidationBatch={
-            "Paths": {"Quantity": 5, "Items": ["/index.html", "/adviser-bundle.js", "/adviser-config.js", "/persona-runtime.json", "/graph-neighbours.json"]},
+            "Paths": {"Quantity": 6, "Items": ["/index.html", "/adviser-bundle.js", "/adviser-config.js", "/persona-runtime.json", "/graph-neighbours.json", "/priya-agents.json"]},
             "CallerReference": str(int(time.time())),
         },
     )

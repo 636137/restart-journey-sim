@@ -1,0 +1,76 @@
+{
+  "voice_id": "EKTy9yXGjtpPEKGRXAro",
+  "transfer_number": "+14029732385",
+  "agents": {
+    "en": {
+      "agent_id": "agent_9101kw3zamdmeckbvv1y7eytt6kk",
+      "label": "English",
+      "first_message_preview": "Hi, this is Priya from Maximus Restart. How can I help you today?"
+    },
+    "pl": {
+      "agent_id": "agent_0801kw3zbr53f2esraca2w69g2d9",
+      "label": "Polish",
+      "first_message_preview": "Witam, tu Priya z Maximus Restart. W czym mog\u0119 pom\u00f3c?"
+    },
+    "so": {
+      "agent_id": "agent_0701kw3zap77fzjsbbfwks9jzh4q",
+      "label": "Somali",
+      "first_message_preview": "Salaan, waxaan ahay Priya oo ka socota Maximus Restart. Sideen kuu caawin karaa?"
+    },
+    "cy": {
+      "agent_id": "agent_3901kw3zaqq4eq7bv8p077kv04te",
+      "label": "Welsh",
+      "first_message_preview": "Helo, Priya o Maximus Restart sydd yma. Sut alla i helpu heddiw?"
+    },
+    "bn": {
+      "agent_id": "agent_1901kw3zasryfgas6ccm609pe3da",
+      "label": "Bengali",
+      "first_message_preview": "\u09a8\u09ae\u09b8\u09cd\u0995\u09be\u09b0, \u0986\u09ae\u09bf Maximus Restart \u09a5\u09c7\u0995\u09c7 \u09aa\u09cd\u09b0\u09bf\u09af\u09bc\u09be\u0964 \u0986\u09ae\u09bf \u0986\u09aa\u09a8\u09be\u0995\u09c7 \u0995\u09c0\u09ad\u09be\u09ac\u09c7 \u09b8\u09be\u09b9\u09be\u09af\u09cd\u09af \u0995\u09b0\u09a4\u09c7 \u09aa\u09be\u09b0\u09bf?"
+    },
+    "ur": {
+      "agent_id": "agent_2301kw3zav84ezz991vje34cxswj",
+      "label": "Urdu",
+      "first_message_preview": "\u0627\u0644\u0633\u0644\u0627\u0645 \u0639\u0644\u06cc\u06a9\u0645\u060c \u0645\u06cc\u06ba Maximus Restart \u0633\u06d2 \u067e\u0631\u06cc\u0627 \u06c1\u0648\u06ba\u06d4 \u0645\u06cc\u06ba \u0622\u067e \u06a9\u06cc \u06a9\u06cc\u0633\u06d2 \u0645\u062f\u062f \u06a9\u0631 \u0633\u06a9\u062a\u06cc \u06c1\u0648\u06ba\u061f"
+    },
+    "ar": {
+      "agent_id": "agent_1201kw3zbtyaey3rb6512dnsjv5v",
+      "label": "Arabic",
+      "first_message_preview": "\u0645\u0631\u062d\u0628\u064b\u0627\u060c \u0623\u0646\u0627 \u0628\u0631\u064a\u0627 \u0645\u0646 Maximus Restart. \u0643\u064a\u0641 \u064a\u0645\u0643\u0646\u0646\u064a \u0645\u0633\u0627\u0639\u062f\u062a\u0643 \u0627\u0644\u064a\u0648\u0645\u061f"
+    },
+    "ti": {
+      "agent_id": "agent_0701kw3zaxmbeszb4eq9yhbhxadr",
+      "label": "Tigrinya",
+      "first_message_preview": "\u1230\u120b\u121d\u1361 \u12a3\u1290 \u1355\u122a\u12eb \u12ab\u1265 Maximus Restart \u12a5\u12e8\u1362 \u1265\u12b8\u1218\u12ed \u12ad\u1215\u130d\u12d8\u12ab \u12a5\u12bd\u12a5\u120d?"
+    },
+    "yo": {
+      "agent_id": "agent_6401kw3zb0gme6xrbn3cvkxpbgn3",
+      "label": "Yoruba",
+      "first_message_preview": "P\u1eb9l\u1eb9 o, Priya ni m\u00ed l\u00e1ti Maximus Restart. B\u00e1wo ni mo \u1e63e l\u00e8 r\u00e0n y\u00edn l\u1ecd\u0301w\u1ecd\u0301?"
+    },
+    "pa": {
+      "agent_id": "agent_1801kw3zb2b7fktv3z9n7hrqvnzh",
+      "label": "Punjabi",
+      "first_message_preview": "\u0a38\u0a24 \u0a38\u0a4d\u0a30\u0a40 \u0a05\u0a15\u0a3e\u0a32, \u0a2e\u0a48\u0a02 Maximus Restart \u0a24\u0a4b\u0a02 \u0a2a\u0a4d\u0a30\u0a3f\u0a2f\u0a3e \u0a39\u0a3e\u0a02\u0964 \u0a2e\u0a48\u0a02 \u0a24\u0a41\u0a39\u0a3e\u0a21\u0a40 \u0a15\u0a3f\u0a35\u0a47\u0a02 \u0a2e\u0a26\u0a26 \u0a15\u0a30 \u0a38\u0a15\u0a26\u0a40 \u0a39"
+    },
+    "ro": {
+      "agent_id": "agent_7201kw3zby40eww9ga2kxcjj9qym",
+      "label": "Romanian",
+      "first_message_preview": "Bun\u0103, sunt Priya de la Maximus Restart. Cu ce v\u0103 pot ajuta ast\u0103zi?"
+    },
+    "fr": {
+      "agent_id": "agent_6401kw3zbzhde5m9jq0dxv3nd49d",
+      "label": "French",
+      "first_message_preview": "Bonjour, je suis Priya de Maximus Restart. Comment puis-je vous aider aujourd'hu"
+    },
+    "de": {
+      "agent_id": "agent_4601kw3zc15pebarrjkcm4e8q26v",
+      "label": "German",
+      "first_message_preview": "Hallo, ich bin Priya von Maximus Restart. Wie kann ich Ihnen heute helfen?"
+    },
+    "es": {
+      "agent_id": "agent_5801kw3zc2kae8a8x38hzwxp4v08",
+      "label": "Spanish",
+      "first_message_preview": "Hola, soy Priya de Maximus Restart. \u00bfEn qu\u00e9 puedo ayudarle hoy?"
+    }
+  }
+}
