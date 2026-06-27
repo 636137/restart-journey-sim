@@ -1,0 +1,7 @@
+node_modules/
+**/screen.webm
+**/*.mp4
+**/scene_*.mp3
+**/narration.mp3
+music.mp3
+**/timeline.json

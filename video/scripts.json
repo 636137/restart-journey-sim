@@ -1,0 +1,73 @@
+{
+  "voice": {
+    "voice_id": "xtENCNNHEgtE8xBjLMt0",
+    "voice_name": "Chad - Clear, Mature and Professional",
+    "model_id": "eleven_multilingual_v2",
+    "language_code": "en",
+    "voice_settings": {
+      "stability": 0.55,
+      "similarity_boost": 0.85,
+      "style": 0.30,
+      "use_speaker_boost": true
+    },
+    "accent_prompt_prefix": ""
+  },
+  "music": {
+    "prompt": "Upbeat, light, optimistic corporate-positive instrumental, modern indie-pop with subtle electronic textures, no vocals, motivational and forward-moving, suitable for a product demo voiceover at low volume. Steady tempo around 100 BPM, warm piano and soft synth pads, hint of strings, smooth and unintrusive, ambient yet engaging.",
+    "duration_sec": 320,
+    "volume_db": -20
+  },
+  "videos": {
+    "sizzle": {
+      "label": "Sizzle reel · ~90 sec",
+      "target_url": "https://d359kxb9ewfhy0.cloudfront.net/index.html",
+      "scenes": [
+        { "id": "siz_open",      "dur_sec": 5, "narration": "This is Restart. A reimagined customer journey for the UK Department for Work and Pensions, powered by Max Navigator and live AI." },
+        { "id": "siz_personas",  "dur_sec": 6, "narration": "Six real customer personas. Each one has a unique story, a tailored adviser, and a journey designed around their barriers." },
+        { "id": "siz_matrix",    "dur_sec": 6, "narration": "Max Navigator decodes the customer's profile and matches them to the right Restart adviser in seconds." },
+        { "id": "siz_nudge",     "dur_sec": 5, "narration": "Smart nudges arrive at exactly the right moment. Before a meeting. Before an interview. Before the first shift." },
+        { "id": "siz_check",     "dur_sec": 7, "narration": "A mid-journey algorithmic check scores engagement against seven signals. The bands are deterministic and auditable. No black box." },
+        { "id": "siz_survival",  "dur_sec": 6, "narration": "A trained Cox survival model forecasts time to placement for this customer with this adviser, against the cohort baseline." },
+        { "id": "siz_voice",     "dur_sec": 7, "narration": "Live AI voice support. Pick any of fourteen languages and the adviser responds in that language instantly." },
+        { "id": "siz_close",     "dur_sec": 6, "narration": "Restart. AI that respects the customer, the adviser, and the outcome. This is the future of welfare-to-work." }
+      ]
+    },
+    "exec": {
+      "label": "Executive cut · ~3 min",
+      "target_url": "https://d359kxb9ewfhy0.cloudfront.net/index.html",
+      "scenes": [
+        { "id": "exe_signin",   "dur_sec": 8,  "narration": "Welcome to Restart, a reimagined customer journey for the UK Department for Work and Pensions, delivered by Maximus and powered by AWS. Let me walk you through how it works." },
+        { "id": "exe_personas", "dur_sec": 14, "narration": "We start with six realistic customer personas. Daniel, a forklift driver returning after nine months out. Amara, a returner from a four-year caring break. Wojciech, an older Polish-speaking construction supervisor. Tomasz, a young man with mental-health-led drift. Fadumo, a resettled refugee and former teacher. And Mark, an ex-offender working toward his HGV licence." },
+        { "id": "exe_matrix",   "dur_sec": 14, "narration": "Each persona kicks off the Max Navigator matching engine. In a Matrix-style decoding animation, the system pairs the customer to the best-fit adviser from a pool of two hundred and forty-seven. The pairing is deterministic, auditable, and built from seven real engagement signals." },
+        { "id": "exe_match",    "dur_sec": 9,  "narration": "Daniel is matched to Priya Sharma at the Stratford office. Amara to Aisha Khatun in Lewisham. Mark to Karen Mensah in Nottingham. Every adviser, every customer, every pairing is unique." },
+        { "id": "exe_journey",  "dur_sec": 12, "narration": "From there, the journey runs across SMS, push notifications, email, and the in-app Restart hub. Each touchpoint nudges the customer toward the next step, at the right time, with the right tone." },
+        { "id": "exe_check",    "dur_sec": 14, "narration": "Mid-journey, Max Navigator runs an algorithmic check. Seven weighted signals: SMS reply rate, push opens, action plan completion, CV progress, vacancies saved, sessions attended, open barriers. The result is one of three bands: on track, drifting, or at risk. The action that follows is automatic and deterministic." },
+        { "id": "exe_survival", "dur_sec": 12, "narration": "We then show a trained Cox proportional hazards survival forecast. This customer's probability of placement at every week, against the cohort baseline. Concordance index zero point seven. Real model, real numbers." },
+        { "id": "exe_voicecall","dur_sec": 12, "narration": "When the customer needs a human voice, the demo plays a scripted scenario call between the customer and their assigned adviser. Real ElevenLabs voices, matched by age, sex, and accent. Mark hears Karen. Wojciech hears a Polish-speaking adviser." },
+        { "id": "exe_translation","dur_sec": 12, "narration": "If the customer prefers a different language, our AI translation feature switches everything. Tap a language chip and the voice agent, the live chat, and the on-tablet AI all flip to that language. No human translator, just real-time speech-to-speech, on-device." },
+        { "id": "exe_graph",    "dur_sec": 14, "narration": "At the end of the journey, a node-graph training update shows how this customer's outcome cascades. Click the adviser to see her other twelve customers. Click the journey to see the sixteen nearest neighbours and their outcomes. Click the customer for the fifteen most similar profiles, with real correlation lift versus the network baseline." },
+        { "id": "exe_close",    "dur_sec": 10, "narration": "Restart. Realistic data, trained models, deterministic decisions, multilingual AI support. This is welfare-to-work re-engineered for the AI era. Thank you." }
+      ]
+    },
+    "full": {
+      "label": "Full walkthrough · ~5 min",
+      "target_url": "https://d359kxb9ewfhy0.cloudfront.net/index.html",
+      "scenes": [
+        { "id": "full_signin",     "dur_sec": 10, "narration": "Welcome to Restart, the next-generation customer journey for the UK Department for Work and Pensions, delivered by Maximus and powered by AWS. In this walkthrough I'll show you the customer experience, the AI under the hood, and the data layer that makes it all auditable." },
+        { "id": "full_personas",   "dur_sec": 16, "narration": "Restart is built around real people. Six personas illustrate the breadth of who we serve. Daniel, a forklift driver. Amara, a returner after caring. Wojciech, an older Polish-speaking supervisor. Tomasz, a young man with mental-health barriers. Fadumo, a refugee and former teacher. And Mark, an older worker rebuilding after a conviction. Each persona drives a unique journey." },
+        { "id": "full_matrix",     "dur_sec": 16, "narration": "Pick a persona. The Max Navigator matching engine kicks in. A Matrix-style decoder runs through the customer's profile and the adviser pool in parallel. Two hundred and forty-seven advisers, scored on seven dimensions: sector affinity, barrier affinity, language match, region, capacity, tenure-difficulty fit, and historical satisfaction." },
+        { "id": "full_match_done", "dur_sec": 10, "narration": "The match locks in. For Mark, it's Karen Mensah, Nottingham office, Ban-the-Box specialist. For Amara, it's Aisha Khatun in Lewisham, returner-after-caring specialist. Every match is unique and shown to the customer." },
+        { "id": "full_journey",    "dur_sec": 14, "narration": "The journey runs across SMS, push notifications, email, and the Restart in-app hub. Each touchpoint nudges the customer toward the next milestone. Each milestone updates Max Navigator's view of engagement." },
+        { "id": "full_nudge",      "dur_sec": 11, "narration": "Smart nudges arrive when they matter. The night before the first meeting, a checklist of what to bring. The morning of the interview, a five-minute prep. The night before the first shift, alarm settings and travel pass." },
+        { "id": "full_check",     "dur_sec": 16, "narration": "At the midpoint, Max Navigator runs the algorithmic check. Seven signals, weighted, deterministic. The score maps to one of three bands. On track means stay the course. Drifting means in-person re-engagement within forty-eight hours. At risk means call today, refer to Access to Work Mental Health, and reset the plan." },
+        { "id": "full_check_action","dur_sec": 11, "narration": "The action attached to each band isn't a suggestion. It's auditable, logged, and triggered automatically. Every signal, every weight, every decision is visible to the adviser." },
+        { "id": "full_survival",   "dur_sec": 16, "narration": "Behind every customer is a trained Cox proportional hazards survival model. It forecasts time-to-placement at every week between one and twenty-four, using barriers, UC duration, sector demand, digital skills, region, and adviser quality. Concordance index zero point seven, fit on ten thousand journeys." },
+        { "id": "full_voicecall",  "dur_sec": 16, "narration": "When the customer needs a human voice, Restart plays a scripted scenario call. Real ElevenLabs voices, matched by age, sex, accent, and persona. Mark hears Karen with the right warmth. Wojciech hears a Polish-speaking adviser with the right cadence. Tomasz hears Hannah Brennan with the slow, careful pacing of a mental-health welfare call." },
+        { "id": "full_translation","dur_sec": 17, "narration": "If the customer prefers a different language, AI translation is one tap away. Fourteen languages: English, Polish, Somali, Welsh, Bengali, Urdu, Arabic, Tigrinya, Yoruba, Punjabi, Romanian, French, German, Spanish. Pick one and the voice agent, live chat, and the office tablet all switch instantly. No human translator. AI handles the entire conversation." },
+        { "id": "full_graph",      "dur_sec": 16, "narration": "At the end of the journey, the system shows a node-graph training update. The customer, the adviser, and this journey are pinned. Click any node to expand. The adviser's caseload, the sixteen nearest journeys in embedding space, the fifteen most similar customers. Each list shows real records with real correlation lift against the network baseline." },
+        { "id": "full_dashboards", "dur_sec": 18, "narration": "Behind the customer experience, eight live QuickSight Enterprise dashboards drive the operations team. Executive overview. Adviser performance. Customer outcomes. Journey progress. Realistic scenarios. Max Navigator matching. Success prediction and survival. And trained model diagnostics. Ten thousand two hundred and eighty-seven customers, two hundred and forty-seven advisers, all queryable through Amazon Q natural language." },
+        { "id": "full_close",      "dur_sec": 13, "narration": "Restart. Real personas. Trained models. Deterministic decisions. Multilingual AI support. End-to-end auditability. This is welfare-to-work re-engineered for the AI era. Thank you for watching." }
+      ]
+    }
+  }
+}
