@@ -821,10 +821,10 @@ body {
       <div class="visit-meet-row"><span class="lbl">Cost</span><span class="val">Free. Travel reimbursed.</span></div>
     </div>
     <div class="visit-translate">
-      <div class="visit-translate-head">🎙 Free real-time language translation</div>
+      <div class="visit-translate-head">🤖 AI real-time translation · on-device, no human translator</div>
       <div class="visit-translate-body" id="visitTranslateBody">
-        We can provide <strong>two-way speech-to-speech translation</strong> live during your meeting with your adviser at no cost to you. You speak in your preferred language, your adviser replies in English, and you each hear it in your own language with no awkward pauses.
-        Confidential. Just reply <strong>TRANSLATE</strong> to the SMS, or tap the "Add translator" button below.
+        Our <strong>AI translation assistant</strong> runs on your phone (Restart app) or the office tablet and provides <strong>two-way speech-to-speech translation</strong> live during your meeting. You speak in your preferred language, your adviser replies in English, and you each hear it instantly in your own language. No human translator. Confidential on-device processing.
+        Just reply <strong>TRANSLATE</strong> to the SMS, or tap the "Enable AI translation" button below.
         <div class="visit-langs">
           <span class="visit-lang-chip">Bengali</span>
           <span class="visit-lang-chip">Polish</span>
@@ -842,7 +842,7 @@ body {
     </div>
     <div class="visit-cta-row">
       <button class="visit-cta" id="visitConfirm" type="button">CONFIRM ATTENDANCE ▸</button>
-      <button class="visit-cta ghost" id="visitAddTranslator" type="button">+ ADD TRANSLATOR</button>
+      <button class="visit-cta ghost" id="visitAddTranslator" type="button">🤖 ENABLE AI TRANSLATION</button>
     </div>
     <div class="visit-meta" id="visitMeta">Policy rule: every new participant attends ≥1 in-person diagnostic · auditable</div>
   </div>
@@ -1242,7 +1242,7 @@ const SMS_THREADS = {
     {side:'recv', text:'Hi Daniel, welcome to the Restart Scheme. I\'m here to support you back into work — no pressure, we go at your pace.'},
     {side:'recv', text:'Your dedicated adviser is Priya Sharma. Would you like to book your first appointment? Reply YES and I\'ll find a slot near you 👋'},
     {side:'recv', text:'You also have access to other free Maximus services across London while you\'re on Restart:\n• Adult Skills Fund (London): fully funded qualifications — skills.maximusuk.co.uk/london\n• Access to Work Mental Health Support: free, confidential help if anxiety or stress is in the way — atw.maximusuk.co.uk\nReply INFO if you want more details on either.'},
-    {side:'recv', text:'And one more: if English is not your first language, we offer FREE real-time two-way speech-to-speech translation during your meetings with Priya. 33 languages including Bengali, Polish, Urdu, Welsh, Somali, Arabic. Reply TRANSLATE to add a translator to your first meeting 🎙'}
+    {side:'recv', text:'And one more: if English is not your first language, our AI translation assistant gives you FREE real-time two-way speech-to-speech translation during your adviser meetings. 33 languages including Bengali, Polish, Urdu, Welsh, Somali, Arabic. Runs on your phone or our office tablet — no human translator, confidential on-device. Reply TRANSLATE to switch it on for your first meeting 🤖'}
   ],
   diagnostic:[
     {date:'Today'},
@@ -1268,7 +1268,7 @@ const SMS_AUTO = {
     'YES, book it':'Brilliant! 🎉 I\'ll text you appointment options shortly. Welcome aboard, Daniel.',
     'Tell me more':'Of course. Restart is voluntary support for up to 12 months: a personal adviser, CV help, training, and direct links to local employers. No cost to you.',
     'INFO on other support':'Two we think will fit you:\n📚 Adult Skills Fund (London) — fully funded qualifications, no cost to you. skills.maximusuk.co.uk/london\n💜 Access to Work Mental Health Support — 9 months of free, confidential 1:1 help, including for stress and low mood. atw.maximusuk.co.uk\nBoth are run by Maximus too, so Priya can refer you in one step.',
-    'TRANSLATE me':'Brilliant. Which language would be easiest for you? Reply with the language name (e.g. BENGALI, POLISH, URDU) and we\'ll add a live translator to your first meeting at no cost. You speak in your language, Priya replies in English, you each hear it instantly in your own language.',
+    'TRANSLATE me':'Brilliant. Which language would be easiest for you? Reply with the language name (e.g. BENGALI, POLISH, URDU) and our AI translation assistant will be enabled on your Restart app and your adviser\'s office tablet for your first meeting at no cost. You speak in your language, your adviser replies in English, you each hear it instantly in your own language. No human translator. Confidential on-device processing.',
     'Not right now':'No problem at all — take your time. I\'m here whenever you\'re ready. Just reply BOOK any time.',
     _default:'Thanks Daniel — Priya will be in touch shortly. 👍'
   },
@@ -1798,7 +1798,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if(survivalAck) survivalAck.addEventListener('click', closeSurvivalOverlay);
   const visitAddTranslator = document.getElementById('visitAddTranslator');
   if(visitAddTranslator) visitAddTranslator.addEventListener('click', ()=>{
-    showToast('Translator added to your meeting. Priya will see this when she arrives.');
+    const adv = window.ACTIVE_PERSONA && window.ACTIVE_PERSONA.adviser ? window.ACTIVE_PERSONA.adviser.name.split(' ')[0] : 'your adviser';
+    showToast(`AI translation enabled. Your phone and ${adv}'s tablet will run it live during the meeting.`);
   });
   const trClose = document.getElementById('trainingClose');
   if(trClose) trClose.addEventListener('click', closeTrainingUpdate);
@@ -2611,7 +2612,7 @@ function closeTrainingUpdate(){
 const PERSONA_LIBRARY = [
   { id:"daniel",    name:"Daniel Okafor",    initials:"DO", age:38, postcode:"E20 1EJ",     archetype:"Long-term UC claimant",         summary:"Forklift driver, 9 months out of work. Confident, ready to move. The default ON-TRACK Restart success story.",                                          band:"ontrack",  language:"English", barriers:"Transport, confidence" },
   { id:"amara",     name:"Amara Adekoya",    initials:"AA", age:34, postcode:"SE15 4QD",    archetype:"Returner after caring break",   summary:"Out 4 years caring for her mother. Childcare cost for her 6-year-old is the live barrier. Drifting until in-person re-engagement.",                       band:"drifting", language:"English", barriers:"Childcare, confidence, digital" },
-  { id:"wojciech",  name:"Wojciech Nowak",   initials:"WN", age:52, postcode:"NW10 5BT",    archetype:"Older worker · Polish ESOL",    summary:"28 years on UK construction sites, redundant. Polish-preferred, wants supervisor-level work. Live translator at every meeting.",                            band:"ontrack",  language:"Polish",  barriers:"English, digital" },
+  { id:"wojciech",  name:"Wojciech Nowak",   initials:"WN", age:52, postcode:"NW10 5BT",    archetype:"Older worker · Polish ESOL",    summary:"28 years on UK construction sites, redundant. Polish-preferred, wants supervisor-level work. AI translation assistant enabled.",                          band:"ontrack",  language:"Polish",  barriers:"English, digital" },
   { id:"tomasz",    name:"Tomasz Iwanski",   initials:"TI", age:27, postcode:"S60 2QP",     archetype:"Mental-health-led drift",        summary:"Anxiety and sleep have got worse. Has not opened the app for 3 weeks. AT-RISK on Max Navigator. Same-day call + Access to Work MH referral.",               band:"atrisk",   language:"English", barriers:"Mental health, confidence, digital" },
   { id:"fadumo",    name:"Fadumo Hassan",    initials:"FH", age:31, postcode:"CF24 4RU",    archetype:"Refugee · resettled · Cardiff", summary:"Granted refugee status 14 months ago. Was a teacher in Mogadishu. Husband, 2 children. Wants to teach again via UK QTS path.",                          band:"drifting", language:"Somali",  barriers:"English, housing, childcare" },
   { id:"mark",      name:"Mark Wright",      initials:"MW", age:58, postcode:"NG7 5JL",     archetype:"Older worker · ex-offender",    summary:"Former HGV driver, 19 months out since release. Frustrated, motivated, low patience for hoops. Ban-the-Box employer pathway.",                             band:"ontrack",  language:"English", barriers:"Criminal record, digital, transport" },
@@ -2826,7 +2827,7 @@ function openVisitOverlay(kind){
   // Translator paragraph: name the actual adviser
   const tb = document.getElementById('visitTranslateBody');
   if(tb){
-    tb.innerHTML = `We can provide <strong>two-way speech-to-speech translation</strong> live during your meeting with ${adviser.name} at no cost to you. You speak in your preferred language, ${adviserFirst} replies in English, and you each hear it in your own language with no awkward pauses. Confidential. Just reply <strong>TRANSLATE</strong> to the SMS, or tap the "Add translator" button below.
+    tb.innerHTML = `Our <strong>AI translation assistant</strong> runs on your phone (Restart app) and ${adviserFirst}'s office tablet, providing <strong>two-way speech-to-speech translation</strong> live during your meeting with ${adviser.name}. You speak in your preferred language, ${adviserFirst} replies in English, and you each hear it instantly in your own language. No human translator. Confidential on-device processing. Reply <strong>TRANSLATE</strong> to the SMS, or tap "Enable AI translation" below.
       <div class="visit-langs">
         <span class="visit-lang-chip">Bengali</span><span class="visit-lang-chip">Polish</span><span class="visit-lang-chip">Urdu</span><span class="visit-lang-chip">Romanian</span><span class="visit-lang-chip">Somali</span><span class="visit-lang-chip">Punjabi</span><span class="visit-lang-chip">Yoruba</span><span class="visit-lang-chip">Tigrinya</span><span class="visit-lang-chip">Welsh</span><span class="visit-lang-chip">Arabic</span><span class="visit-lang-chip">+ 23 more</span>
       </div>`;
@@ -3390,7 +3391,7 @@ const MATCH_PAIRS_BY_PERSONA = {
   ],
   wojciech: [
     { left: '28 yrs UK construction',       right: 'Tomasz Kowalski · Polish ESOL adviser' },
-    { left: 'Polish · supervisor-level',    right: 'Native Polish speaker · no translator needed' },
+    { left: 'Polish · supervisor-level',    right: 'AI translation assistant + native Polish-speaking adviser' },
     { left: 'CSCS card lapsed',             right: 'CSCS Gold Card top-up · Restart-funded' },
     { left: 'Harlesden NW10 · zone 3',      right: 'Harlesden office · West London' },
     { left: 'Redundancy · 7 months out',    right: 'Older-worker advocacy' },
@@ -3405,7 +3406,7 @@ const MATCH_PAIRS_BY_PERSONA = {
   fadumo: [
     { left: 'Refugee · resettled 14mo',     right: 'Eleri Davies · REP-overlap qualified' },
     { left: 'Teacher in Mogadishu',         right: 'UK QTS path + school placements' },
-    { left: 'Somali speaker',               right: 'Live Somali↔English translator' },
+    { left: 'Somali speaker',               right: 'AI translation assistant · Somali↔English on-device' },
     { left: '2 young children',             right: 'Childcare grant · placement weeks' },
     { left: 'Cardiff Bay · Welsh schools',  right: 'Cardiff office · Welsh schools network' },
   ],

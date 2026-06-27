@@ -4,16 +4,16 @@
   "framing": "Fadumo, 31, Somali-speaking refugee, was a teacher in Mogadishu. Eleri (Welsh adviser) lays out the UK QTS path and short-term income.",
   "voice_customer": "fadumo",
   "voice_adviser": "eleri",
-  "total_ms": 97608,
+  "total_ms": 109915,
   "gap_ms": 350,
   "lines": [
     {
       "i": 1,
       "speaker": "adviser",
       "voice_key": "eleri",
-      "text": "Fadumo, it's Eleri. The translator is on the call. Today I want to talk through two paths for you. A teaching assistant role we can start next month, and the longer route to UK Qualified Teacher Status.",
+      "text": "Fadumo, it's Eleri. Our AI translation assistant is running between us, so speak Somali whenever it's easier and I'll hear it in English on my end. Today I want to talk through two paths for you. A teaching assistant role we can start next month, and the longer route to UK Qualified Teacher Status.",
       "file": "line_01_adviser_eleri.mp3",
-      "duration_ms": 16068,
+      "duration_ms": 24659,
       "start_ms": 0
     },
     {
@@ -22,8 +22,8 @@
       "voice_key": "fadumo",
       "text": "Thank you. I am ready. I worry that taking a teaching assistant job means I am stepping back from being a teacher.",
       "file": "line_02_customer_fadumo.mp3",
-      "duration_ms": 7105,
-      "start_ms": 16418
+      "duration_ms": 6408,
+      "start_ms": 25009
     },
     {
       "i": 3,
@@ -31,8 +31,8 @@
       "voice_key": "eleri",
       "text": "It's a fair worry. Let me be honest with you. UK QTS for an internationally trained teacher takes twelve to eighteen months. The teaching assistant role is paid work in a school, your foot in the door, and your hours count toward the QTS school experience requirement.",
       "file": "line_03_adviser_eleri.mp3",
-      "duration_ms": 20247,
-      "start_ms": 23873
+      "duration_ms": 18947,
+      "start_ms": 31767
     },
     {
       "i": 4,
@@ -40,8 +40,8 @@
       "voice_key": "fadumo",
       "text": "So it is not a step back. It is the first step.",
       "file": "line_04_customer_fadumo.mp3",
-      "duration_ms": 2647,
-      "start_ms": 44470
+      "duration_ms": 2554,
+      "start_ms": 51064
     },
     {
       "i": 5,
@@ -49,8 +49,8 @@
       "voice_key": "eleri",
       "text": "Exactly. Riverside Primary in Cardiff have shortlisted you. They know you were a primary teacher in Mogadishu. The head teacher specifically asked for your CV.",
       "file": "line_05_adviser_eleri.mp3",
-      "duration_ms": 11284,
-      "start_ms": 47467
+      "duration_ms": 12120,
+      "start_ms": 53968
     },
     {
       "i": 6,
@@ -58,8 +58,8 @@
       "voice_key": "fadumo",
       "text": "That is very encouraging.",
       "file": "line_06_customer_fadumo.mp3",
-      "duration_ms": 1439,
-      "start_ms": 59101
+      "duration_ms": 1532,
+      "start_ms": 66438
     },
     {
       "i": 7,
@@ -67,8 +67,8 @@
       "voice_key": "eleri",
       "text": "Now the practical side. The Adult Skills Fund will pay for your English for Academic Purposes course, which you'll need before the QTS application. No cost to you. The travel pass for school placement weeks is also covered.",
       "file": "line_07_adviser_eleri.mp3",
-      "duration_ms": 15743,
-      "start_ms": 60890
+      "duration_ms": 14303,
+      "start_ms": 68320
     },
     {
       "i": 8,
@@ -76,17 +76,17 @@
       "voice_key": "fadumo",
       "text": "And for childcare for the youngest two during the days I am at school?",
       "file": "line_08_customer_fadumo.mp3",
-      "duration_ms": 3668,
-      "start_ms": 76983
+      "duration_ms": 3854,
+      "start_ms": 82973
     },
     {
       "i": 9,
       "speaker": "adviser",
       "voice_key": "eleri",
-      "text": "I asked the same. Restart has a childcare grant of forty pounds per child per day for the placement weeks. We will set that up this week. The translator will help you fill in the forms today if you would like.",
+      "text": "I asked the same. Restart has a childcare grant of forty pounds per child per day for the placement weeks. We will set that up this week. The AI translation assistant will walk you through the forms in Somali today if you would like \u2014 you read in Somali, it fills the English in for you.",
       "file": "line_09_adviser_eleri.mp3",
-      "duration_ms": 13978,
-      "start_ms": 81001
+      "duration_ms": 20015,
+      "start_ms": 87177
     },
     {
       "i": 10,
@@ -94,8 +94,8 @@
       "voice_key": "fadumo",
       "text": "Yes please. Today is good. Thank you Eleri.",
       "file": "line_10_customer_fadumo.mp3",
-      "duration_ms": 2275,
-      "start_ms": 95329
+      "duration_ms": 2368,
+      "start_ms": 107542
     }
   ]
 }

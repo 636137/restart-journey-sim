@@ -51,7 +51,7 @@
     },
     "wojciech": {
       "label": "WOJCIECH × TOMASZ KOWALSKI · ON TRACK · in Polish",
-      "framing": "Wojciech, 52, Polish-speaking site supervisor, ON-TRACK. Paired with Tomasz Kowalski, Polish-speaking adviser at Harlesden. They speak in English on this call (translator nearby) but Tomasz can switch to Polish anytime.",
+      "framing": "Wojciech, 52, Polish-speaking site supervisor, ON-TRACK. Paired with Tomasz Kowalski, Polish-speaking adviser at Harlesden. They speak English on this call with AI translation assistant running in the background on both phones; Tomasz can also switch directly to Polish anytime.",
       "voice_customer": "wojciech",
       "voice_adviser":  "tomasz_kowalski",
       "lines": [
@@ -61,8 +61,8 @@
         { "speaker": "customer", "text": "I am ready for this. I want to ask them about safety procedures and the team they have currently. I will not just answer their questions, I will ask my own." },
         { "speaker": "adviser",  "text": "Good, that's exactly the move. One thing. Your CSCS Gold Card top-up has been approved this morning. Free to you. The certificate will arrive by Friday." },
         { "speaker": "customer", "text": "Excellent. With the Gold Card the salary band shifts up." },
-        { "speaker": "adviser",  "text": "It does. And travel costs for the interview are covered. The translator will join the interview as well, on the speaker, if you want one for that day. Many candidates say yes for the safety questions specifically." },
-        { "speaker": "customer", "text": "Yes please. Let us add the translator. I would rather be precise than fast." }
+        { "speaker": "adviser",  "text": "It does. And travel costs for the interview are covered. The AI translation assistant will run on your phone in the interview as well if you want it that day. Many candidates use it for the safety questions specifically, so they can answer in Polish and the answer plays back in English instantly." },
+        { "speaker": "customer", "text": "Yes please. Let us enable it. I would rather be precise than fast." }
       ]
     },
     "tomasz": {
@@ -94,7 +94,7 @@
       "voice_customer": "fadumo",
       "voice_adviser":  "eleri",
       "lines": [
-        { "speaker": "adviser",  "text": "Fadumo, it's Eleri. The translator is on the call. Today I want to talk through two paths for you. A teaching assistant role we can start next month, and the longer route to UK Qualified Teacher Status." },
+        { "speaker": "adviser",  "text": "Fadumo, it's Eleri. Our AI translation assistant is running between us, so speak Somali whenever it's easier and I'll hear it in English on my end. Today I want to talk through two paths for you. A teaching assistant role we can start next month, and the longer route to UK Qualified Teacher Status." },
         { "speaker": "customer", "text": "Thank you. I am ready. I worry that taking a teaching assistant job means I am stepping back from being a teacher." },
         { "speaker": "adviser",  "text": "It's a fair worry. Let me be honest with you. UK QTS for an internationally trained teacher takes twelve to eighteen months. The teaching assistant role is paid work in a school, your foot in the door, and your hours count toward the QTS school experience requirement." },
         { "speaker": "customer", "text": "So it is not a step back. It is the first step." },
@@ -102,7 +102,7 @@
         { "speaker": "customer", "text": "That is very encouraging." },
         { "speaker": "adviser",  "text": "Now the practical side. The Adult Skills Fund will pay for your English for Academic Purposes course, which you'll need before the QTS application. No cost to you. The travel pass for school placement weeks is also covered." },
         { "speaker": "customer", "text": "And for childcare for the youngest two during the days I am at school?" },
-        { "speaker": "adviser",  "text": "I asked the same. Restart has a childcare grant of forty pounds per child per day for the placement weeks. We will set that up this week. The translator will help you fill in the forms today if you would like." },
+        { "speaker": "adviser",  "text": "I asked the same. Restart has a childcare grant of forty pounds per child per day for the placement weeks. We will set that up this week. The AI translation assistant will walk you through the forms in Somali today if you would like — you read in Somali, it fills the English in for you." },
         { "speaker": "customer", "text": "Yes please. Today is good. Thank you Eleri." }
       ]
     },
